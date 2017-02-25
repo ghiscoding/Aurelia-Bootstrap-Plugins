@@ -3,6 +3,7 @@ import '../styles/styles.css';
 import 'font-awesome/css/font-awesome.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-tagsinput/dist/bootstrap-tagsinput.css';
+import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css';
 import 'bootstrap';
 
 // comment out if you don't want a Promise polyfill (remove also from webpack.config.babel.js)
@@ -12,6 +13,7 @@ Bluebird.config({ warnings: false });
 export async function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
+    .plugin('aurelia-bootstrap-datetimepicker')
     .plugin('aurelia-bootstrap-tagsinput')
     .developmentLogging();
 

@@ -13,7 +13,8 @@ Promise.config({
 export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
-    .plugin('aurelia-bootstrap-tagsinput')
+    .plugin('aurelia-bootstrap-datetimepicker')
+    .plugin('aurelia-bootstrap-tagsinput');
 
   if (environment.debug) {
     aurelia.use.developmentLogging();

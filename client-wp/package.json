@@ -60,6 +60,7 @@
     }
   },
   "dependencies": {
+    "aurelia-bootstrap-datetimepicker": "^0.1.0",
     "aurelia-bootstrap-tagsinput": "^0.1.0",
     "aurelia-bootstrapper-webpack": "^1.1.0",
     "aurelia-event-aggregator": "^1.0.0",
@@ -79,6 +80,7 @@
     "babel-polyfill": "^6.20.0",
     "bluebird": "^3.4.6",
     "bootstrap": "^3.3.7",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.46",
     "font-awesome": "^4.7.0",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^3.1.1"

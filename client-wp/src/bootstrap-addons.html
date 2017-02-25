@@ -2,8 +2,7 @@
   <div class="container">
         <form class="form-horizontal" validate.bind="validation">
             <h3>Input Tags Input</h3>
-        <div class="row">
-            <div class="col-md-6">
+            <div class="row">
                 <div class="form-group">
                     <label class="control-label">Post Categories</label>
                     <div class="">
@@ -24,8 +23,14 @@
                     Remove All Tag
                 </div>
             </div>
-        </div>
 
+            <h3>Eonasdan - Date Time Picker</h3>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label">Date Entered ${post.dateEntered}</label>
+                    <aba-datetime-picker element.bind="picker" model.bind="post.dateEntered" format="YYYY-MM-DD" icon-set="font-awesome"></aba-datetime-picker>
+                </div>
+            </div>
     </form>
   </div>
 </template>

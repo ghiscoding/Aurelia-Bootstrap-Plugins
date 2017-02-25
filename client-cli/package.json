@@ -20,11 +20,13 @@
     "url": "http://github.com/ghiscoding/aurelia-slickgrid"
   },
   "dependencies": {
+    "aurelia-bootstrap-datetimepicker": "^0.1.0",
     "aurelia-bootstrap-tagsinput": "^0.1.0",
     "aurelia-bootstrapper": "^1.0.0",
     "aurelia-http-client": "^1.0.4",
     "bluebird": "^3.4.1",
     "bootstrap": "^3.3.7",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.46",
     "font-awesome": "^4.7.0",
     "jquery": "^3.1.0",
     "moment": "^2.17.1"

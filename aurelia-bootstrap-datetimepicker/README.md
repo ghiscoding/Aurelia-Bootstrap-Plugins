@@ -100,7 +100,7 @@ For `CLI` you will need to add (`aurelia-bootstrap-datetimepicker`) to your `aur
 },
 {
   "name": "aurelia-bootstrap-datetimepicker",
-  "path": "../node_modules/aurelia-bootstrap-tagsinput/dist/amd",
+  "path": "../node_modules/aurelia-bootstrap-datetimepicker/dist/amd",
   "main": "index",
   "resources": ["**/*.{css,html}"]
 },
@@ -110,6 +110,48 @@ _index.html_
 ```html
 <link rel="stylesheet" type="text/css" 
 href="../node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
+```
+
+#### Aurelia-Webpack
+`Bootstrap-Datetimepicker` and possibly others require to have the same `jQuery` accross the bundle. You will need to modify your `webpack.config.babel.js` for this to work correctly.
+
+
+```javascript
+const ENV...
+// add the following 
+const ProvidePlugin = require('webpack/lib/ProvidePlugin')
+const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin')
+
+...
+let config = generateConfig(
+{
+  entry: {
+    'app': ['./src/main' /* this is filled by the aurelia-webpack-plugin */],
+    'aurelia-bootstrap': coreBundles.bootstrap,
+    'aurelia': coreBundles.aurelia.filter(pkg => coreBundles.bootstrap.indexOf(pkg) === -1)
+  },
+  output: {
+    path: outDir
+  },
+  // ADD THE FOLLOWING (start)
+  plugins: [
+    new ContextReplacementPlugin(/moment[\/\\]locale$/, /en|fr/),
+    new ProvidePlugin({
+      $: "jquery",
+      jQuery: "jquery",
+      'window.jQuery': 'jquery',
+      'window.Tether': 'tether',
+      Tether: 'tether'
+    })
+  ],
+  resolve: {
+      alias: {
+          // Force all modules to use the same jquery version.
+          'jquery': path.join(__dirname, 'node_modules/jquery/src/jquery')
+      }
+  }
+  // ADD THE FOLLOWING (end)
+},
 ```
 
 #### Aurelia (main)

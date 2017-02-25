@@ -7,32 +7,22 @@ export class Edit {
 
   pickerOptions = {allowInputToggle: true};
   dateEntered = null;
-  bill = {};
+  post = {};
   picker;
   tag;
   isEditing = false;
-  typeaheadEmptyTemplate = `<div class="empty-message">No matches from Controller.</div>`;
-  //typeaheadEmptyTemplateUrl = "src/templates/typeahead-empty-template.html";
-  typeaheadRemoteUrl = "./api/yahoo/quote/%QUERY";
-  typeaheadTemplateUrl = "src/templates/typeahead-symbol-template.html";
-  typeaheadTemplate = `<div>
-    <div class="typeahead-ne">e: {{exchDisp}}</div>
-    <div class="typeahead-nw">s: {{symbol}}</div>
-    <div class="typeahead-sw">n: {{name}}</div>
-  </div>
-  `;
 
   constructor() {
   }
 
   attached() {
-    this.bill = {
+    this.post = {
       dateEntered: moment().format("YYYY-MM-DD")
     };
   }
 
   cancel() {
-    return this._loadCustomer(this.bill.id);
+    return this._loadCustomer(this.post.id);
   }
 
   onBeforeItemRemove(e) {
@@ -55,14 +45,13 @@ export class Edit {
 
   activate(params) {
     this.original = {};
-    this.bill = {};
+    this.post = {};
 
     if (params.id) {
       this.isEditing = true;
       return this._loadCustomer(params.id);
     }
   }
-
 
   addTag() {
     //console.log(this.tag[0].$element);

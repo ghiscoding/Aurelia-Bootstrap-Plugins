@@ -23,6 +23,8 @@ import generateCoverage from '@easy-webpack/config-test-coverage-istanbul'
 
 process.env.BABEL_ENV = 'webpack'
 const ENV = process.env.NODE_ENV && process.env.NODE_ENV.toLowerCase() || (process.env.NODE_ENV = 'development')
+const ProvidePlugin = require('webpack/lib/ProvidePlugin')
+const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin')
 
 // basic configuration:
 const title = 'Aurelia Navigation Skeleton'
@@ -80,6 +82,22 @@ let config = generateConfig(
     },
     output: {
       path: outDir
+    },
+    plugins: [
+      new ContextReplacementPlugin(/moment[\/\\]locale$/, /en|fr/),
+      new ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery",
+        'window.jQuery': 'jquery',
+        'window.Tether': 'tether',
+        Tether: 'tether'
+      })
+    ],
+    resolve: {
+        alias: {
+            // Force all modules to use the same jquery version.
+            'jquery': path.join(__dirname, 'node_modules/jquery/src/jquery')
+        }
     }
   },
 
