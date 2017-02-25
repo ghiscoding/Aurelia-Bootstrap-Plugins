@@ -1,0 +1,31 @@
+<template>
+  <div class="container">
+        <form class="form-horizontal" validate.bind="validation">
+            <h3>Input Tags Input</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="control-label">Post Categories</label>
+                    <div class="">
+                        <aba-tags-input element.bind="tag" model.bind="post.categories" placeholder="enter a category tag"></aba-tags-input>
+                    </div>
+                    <div class="">
+                        list of items: ${post.categories}
+                    </div>
+                    
+                </div>
+                <div class="form-group">
+                    <input type="text" value.bind="tagValue" />
+                    <button class="btn btn-info"
+                    click.delegate="addTag()">
+                    Add Tag
+                    <button class="btn btn-info"
+                    click.delegate="removeAllTag()">
+                    Remove All Tag
+                </div>
+            </div>
+        </div>
+
+    </form>
+  </div>
+</template>

@@ -87,25 +87,41 @@ You can run the examples or build your own by doing the following.
 npm install --save aurelia-bootstrap-tagsinput
 ```
 #### Aurelia-CLI
-For `CLI` you will need to add (`aurelia-bootstrap-tagsinput`) to your `aurelia.json` file. The exported class is `aba-tags-input`.
+For `CLI` you will need to add (`bootstrap-tagsinput` and `aurelia-bootstrap-tagsinput`) to your `aurelia.json` file.
 ```javascript
 {
-  "name": "aba-tags-input",
+  "name": "bootstrap-tagsinput",
+  "path": "../node_modules/bootstrap-tagsinput",
+  "main": "dist/bootstrap-tagsinput.min",
+  "resources": [
+    "dist/bootstrap-tagsinput.css"
+  ]
+},
+{
+  "name": "aurelia-bootstrap-tagsinput",
   "path": "../node_modules/aurelia-bootstrap-tagsinput/dist/amd",
   "main": "index",
   "resources": ["**/*.{css,html}"]
-}
+},
+```
+
+_index.html_
+```html
+<link rel="stylesheet" type="text/css" href="../node_modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
 ```
 
 #### Aurelia (main)
 Make the plugin available globally in your `main.js` file. Please note the exported class is `aba-tags-input` (`aba` stands for `Aurelia-Bootstrap-Addon`)
 
 ```javascript
+// for WebPack only, also import CSS 
+// import 'bootstrap-tagsinput/dist/bootstrap-tagsinput.css';
+
 export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
     .developmentLogging()
-    .plugin('aba-tags-input')
+    .plugin('aurelia-bootstrap-tagsinput')
     .feature('resources');
 
   aurelia.start().then(() => aurelia.setRoot());

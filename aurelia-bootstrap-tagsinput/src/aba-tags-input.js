@@ -1,8 +1,8 @@
 import {inject, bindable, bindingMode} from 'aurelia-framework';
 import $ from 'jquery';
 import 'bootstrap-tagsinput/dist/bootstrap-tagsinput';
-import 'bootstrap-tagsinput/dist/bootstrap-tagsinput.css';
-import 'bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css';
+//import 'bootstrap-tagsinput/dist/bootstrap-tagsinput.css';
+//import 'bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css';
 
 @inject(Element)
 export class AbaTagsInputCustomElement {

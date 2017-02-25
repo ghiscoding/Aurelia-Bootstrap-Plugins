@@ -1,6 +1,6 @@
 'use strict';
 
-System.register(['aurelia-framework', 'jquery', 'bootstrap-tagsinput/dist/bootstrap-tagsinput', 'bootstrap-tagsinput/dist/bootstrap-tagsinput.css', 'bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css'], function (_export, _context) {
+System.register(['aurelia-framework', 'jquery', 'bootstrap-tagsinput/dist/bootstrap-tagsinput'], function (_export, _context) {
   "use strict";
 
   var inject, bindable, bindingMode, $, _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, _descriptor17, _descriptor18, _descriptor19, _descriptor20, AbaTagsInputCustomElement;
@@ -61,7 +61,7 @@ System.register(['aurelia-framework', 'jquery', 'bootstrap-tagsinput/dist/bootst
       bindingMode = _aureliaFramework.bindingMode;
     }, function (_jquery) {
       $ = _jquery.default;
-    }, function (_bootstrapTagsinputDistBootstrapTagsinput) {}, function (_bootstrapTagsinputDistBootstrapTagsinputCss) {}, function (_bootstrapTagsinputDistBootstrapTagsinputTypeaheadCss) {}],
+    }, function (_bootstrapTagsinputDistBootstrapTagsinput) {}],
     execute: function () {
       _export('AbaTagsInputCustomElement', AbaTagsInputCustomElement = (_dec = inject(Element), _dec2 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec3 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = (_class2 = function () {
         function AbaTagsInputCustomElement(elm) {

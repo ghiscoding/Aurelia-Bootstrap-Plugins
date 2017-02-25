@@ -15,10 +15,6 @@ var _jquery2 = _interopRequireDefault(_jquery);
 
 require('bootstrap-tagsinput/dist/bootstrap-tagsinput');
 
-require('bootstrap-tagsinput/dist/bootstrap-tagsinput.css');
-
-require('bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _initDefineProp(target, property, descriptor, context) {

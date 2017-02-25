@@ -46,8 +46,6 @@ function _initializerWarningHelper(descriptor, context) {
 import { inject, bindable, bindingMode } from 'aurelia-framework';
 import $ from 'jquery';
 import 'bootstrap-tagsinput/dist/bootstrap-tagsinput';
-import 'bootstrap-tagsinput/dist/bootstrap-tagsinput.css';
-import 'bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css';
 
 export let AbaTagsInputCustomElement = (_dec = inject(Element), _dec2 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec3 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = (_class2 = class AbaTagsInputCustomElement {
 

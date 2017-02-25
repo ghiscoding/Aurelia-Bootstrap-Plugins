@@ -1,4 +1,4 @@
-define(['exports', 'aurelia-framework', 'jquery', 'bootstrap-tagsinput/dist/bootstrap-tagsinput', 'bootstrap-tagsinput/dist/bootstrap-tagsinput.css', 'bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css'], function (exports, _aureliaFramework, _jquery) {
+define(['exports', 'aurelia-framework', 'jquery', 'bootstrap-tagsinput/dist/bootstrap-tagsinput'], function (exports, _aureliaFramework, _jquery) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
