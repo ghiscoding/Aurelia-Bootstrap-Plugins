@@ -129,4 +129,4 @@ export function configure(aurelia) {
 ```
 
 ### License
-[MIT License](https://github.com/ghiscoding/Aurelia-Bootstrap-Addons/LICENSE)
+[MIT License](https://github.com/ghiscoding/Aurelia-Bootstrap-Addons/blob/master/LICENSE)
