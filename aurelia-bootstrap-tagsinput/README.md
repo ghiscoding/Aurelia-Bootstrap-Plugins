@@ -127,3 +127,6 @@ export function configure(aurelia) {
   aurelia.start().then(() => aurelia.setRoot());
 }
 ```
+
+### License
+[MIT License](https://github.com/ghiscoding/Aurelia-Bootstrap-Addons/LICENSE)

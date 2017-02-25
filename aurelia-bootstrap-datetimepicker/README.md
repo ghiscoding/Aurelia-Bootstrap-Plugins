@@ -6,7 +6,7 @@ An Aurelia Custom Element for the 3rd party addon [Eonasdan Bootstrap Datepicker
 ### Usage
 A quick example of the code in action. Note that the value is available under the `model.bind`.
 ```html
-<aba-datetime-picker model.bind="bill.dateEntered" format="YYYY-MM-DD"></aba-datetime-picker>
+<aba-datetime-picker model.bind="post.dateEntered" format="YYYY-MM-DD"></aba-datetime-picker>
 ```
 
 ### Available Attributes/Options
@@ -171,3 +171,6 @@ export function configure(aurelia) {
   aurelia.start().then(() => aurelia.setRoot());
 }
 ```
+
+### License
+[MIT License](https://github.com/ghiscoding/Aurelia-Bootstrap-Addons/LICENSE)

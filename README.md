@@ -14,5 +14,24 @@ Aurelia-Bootstrap-Addons are Custom Elements made to bridge with a set of common
 ### Planned 3rd party addons
 * Bootstrap Select
 
+### Samples
+A quick Aurelia skeleton was put in place with all the currently available `Aurelia-Bootstrap-Addons`
+
+#### Aurelia-CLI
+```bash
+git clone https://github.com/ghiscoding/Aurelia-Bootstrap-Addons
+cd client-cli
+npm install
+au run --watch
+```
+
+#### Aurelia-Webpack
+```bash
+git clone https://github.com/ghiscoding/Aurelia-Bootstrap-Addons
+cd client-wp
+npm install
+npm start
+```
+
 ### License
-MIT License
+[MIT License](https://github.com/ghiscoding/Aurelia-Bootstrap-Addons/LICENSE)
