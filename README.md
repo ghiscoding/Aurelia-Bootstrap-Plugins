@@ -4,12 +4,10 @@
 Aurelia-Bootstrap-Addons are Custom Elements made to bridge with a set of commonly used 3rd party Bootstrap addons. These Custom Elements are supporting (as much as possible) the entire set of (`options`, `methods` & `events`) of their original 3rd party addons. 
 
 ### Available 3rd party addons
-* [Eonasdan Bootstrap Datepicker](https://eonasdan.github.io/bootstrap-datetimepicker/)
-  * available as [Aurelia-Bootstrap-Datetimepicker](https://github.com/ghiscoding/Aurelia-Bootstrap-Addons/tree/master/aurelia-bootstrap-datetimepicker) on [NPM](https://www.npmjs.com/package/aurelia-bootstrap-datetimepicker)
-* [Bootstrap Tags Input](http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/)
-  * available as [Aurelia-Bootstrap-Tagsinput](https://github.com/ghiscoding/Aurelia-Bootstrap-Addons/tree/master/aurelia-bootstrap-tagsinput) on [NPM](https://www.npmjs.com/package/aurelia-bootstrap-tagsinput)
-* [Typeahead.js](http://twitter.github.io/typeahead.js/examples/) (_working proof of concept with remote/prefetch, addon coming soon_)
-  * will be available soon with the name of `Aurelia-Bootstrap-Typeahead`
+* [Aurelia-Bootstrap-Datetimepicker](https://github.com/ghiscoding/Aurelia-Bootstrap-Addons/tree/master/aurelia-bootstrap-datetimepicker) on [NPM](https://www.npmjs.com/package/aurelia-bootstrap-datetimepicker) / source [Eonasdan Bootstrap Datepicker](https://eonasdan.github.io/bootstrap-datetimepicker/)
+* [Aurelia-Bootstrap-Tagsinput](https://github.com/ghiscoding/Aurelia-Bootstrap-Addons/tree/master/aurelia-bootstrap-tagsinput) on [NPM](https://www.npmjs.com/package/aurelia-bootstrap-tagsinput) / source [Bootstrap Tags Input](http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/)
+* `Aurelia-Bootstrap-Typeahead` / source [Typeahead.js]
+  * will be available soon, got a working proof of concept with remote/prefetch.
 
 ### Planned 3rd party addons
 * Bootstrap Select
