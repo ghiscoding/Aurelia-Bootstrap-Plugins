@@ -72,7 +72,7 @@ var AbaDatetimePickerCustomElement = exports.AbaDatetimePickerCustomElement = (_
 
     _initDefineProp(this, 'element', _descriptor, this);
 
-    _initDefineProp(this, 'model', _descriptor2, this);
+    _initDefineProp(this, 'value', _descriptor2, this);
 
     _initDefineProp(this, 'iconSet', _descriptor3, this);
 
@@ -166,7 +166,7 @@ var AbaDatetimePickerCustomElement = exports.AbaDatetimePickerCustomElement = (_
     this.domElm.datetimepicker(this.options);
 
     this.domElm.on('dp.change', function (e) {
-      _this.model = (0, _moment2.default)(e.date).format(_this.format);
+      _this.value = (0, _moment2.default)(e.date).format(_this.format);
     });
 
     this.element = {
@@ -343,7 +343,7 @@ var AbaDatetimePickerCustomElement = exports.AbaDatetimePickerCustomElement = (_
 }(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'element', [_dec2], {
   enumerable: true,
   initializer: null
-}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'model', [_dec3], {
+}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'value', [_dec3], {
   enumerable: true,
   initializer: null
 }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'iconSet', [_aureliaFramework.bindable], {

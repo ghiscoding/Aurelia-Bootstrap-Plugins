@@ -4,9 +4,9 @@
 An Aurelia Custom Element for the 3rd party addon [Eonasdan Bootstrap Datepicker](https://eonasdan.github.io/bootstrap-datetimepicker/)
 
 ### Usage
-A quick example of the code in action. Note that the value is available under the `model.bind`.
+A quick example of the code in action. Note that the value is available under the `value.bind`.
 ```html
-<aba-datetime-picker model.bind="post.dateEntered" format="YYYY-MM-DD"></aba-datetime-picker>
+<aba-datetime-picker value.bind="post.dateEntered" format="YYYY-MM-DD"></aba-datetime-picker>
 ```
 
 ### Available Attributes/Options
@@ -39,7 +39,7 @@ Example
 
 _View (exposing the element)_
 ```html
-<aba-datetime-picker element.bind="picker" model.bind="user.birthdate" format="YYYY-MM-DD"></aba-datetime-picker>
+<aba-datetime-picker element.bind="picker" value.bind="user.birthdate" format="YYYY-MM-DD"></aba-datetime-picker>
 ```
 
 _ViewModel (calling the method)_
@@ -64,7 +64,7 @@ Example
 
 _View (exposing the element)_
 ```html
-<aba-datetime-picker element.bind="picker" model.bind="user.birthdate" format="YYYY-MM-DD"></aba-datetime-picker>
+<aba-datetime-picker element.bind="picker" value.bind="user.birthdate" format="YYYY-MM-DD"></aba-datetime-picker>
 ```
 
 _ViewModel (calling the onEvent trigger)_

@@ -71,7 +71,7 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
 
           _initDefineProp(this, 'element', _descriptor, this);
 
-          _initDefineProp(this, 'model', _descriptor2, this);
+          _initDefineProp(this, 'value', _descriptor2, this);
 
           _initDefineProp(this, 'iconSet', _descriptor3, this);
 
@@ -165,7 +165,7 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
           this.domElm.datetimepicker(this.options);
 
           this.domElm.on('dp.change', function (e) {
-            _this.model = moment(e.date).format(_this.format);
+            _this.value = moment(e.date).format(_this.format);
           });
 
           this.element = {
@@ -342,7 +342,7 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
       }(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'element', [_dec2], {
         enumerable: true,
         initializer: null
-      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'model', [_dec3], {
+      }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'value', [_dec3], {
         enumerable: true,
         initializer: null
       }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'iconSet', [bindable], {

@@ -7,7 +7,7 @@ import 'eonasdan-bootstrap-datetimepicker';
 @inject(Element)
 export class AbaDatetimePickerCustomElement {
   @bindable({defaultBindingMode: bindingMode.twoWay}) element;
-  @bindable({defaultBindingMode: bindingMode.twoWay}) model;
+  @bindable({defaultBindingMode: bindingMode.twoWay}) value;
 
   // plugin own variables
   @bindable iconSet = 'glyphicon';
@@ -75,7 +75,7 @@ export class AbaDatetimePickerCustomElement {
     this.domElm.datetimepicker(this.options);
 
     this.domElm.on('dp.change', (e) => {
-      this.model = moment(e.date).format(this.format);
+      this.value = moment(e.date).format(this.format);
     });
 
     // expose the element object to the outside

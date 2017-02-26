@@ -13,12 +13,13 @@ export class Edit {
   isEditing = false;
 
   constructor() {
+    this.post = {
+      categories: 'News,Javascript',
+      dateEntered: moment().format("YYYY-MM-DD")
+    }
   }
 
   attached() {
-    this.post = {
-      dateEntered: moment().format("YYYY-MM-DD")
-    };
   }
 
   cancel() {
@@ -36,6 +37,7 @@ export class Edit {
   }
 
   tagChanged() {
+    
     this.tag.events.onBeforeItemAdd = (e) => console.log('onBeforeItemAdd');
     this.tag.events.onBeforeItemRemove = (e) => console.log('onBeforeItemRemove');
     this.tag.events.onItemAdded = (e) => console.log('onItemAdded');
@@ -43,27 +45,16 @@ export class Edit {
     this.tag.events.onItemRemoved = (e) => console.log('onItemRemoved');
   }
 
-  activate(params) {
-    this.original = {};
-    this.post = {};
-
-    if (params.id) {
-      this.isEditing = true;
-      return this._loadCustomer(params.id);
-    }
-  }
-
   addTag() {
-    //console.log(this.tag[0].$element);
-    //this.tag[0].tagsinput('add', "wouf");
-    this.tag.methods.add(this.tagValue);
-    this.tagValue = "";
+    this.tag.methods.add('Tag1');
   }
 
   removeAllTag() {
-    this.tag.methods.add('added');
-    this.tag.methods.remove('jjj');
-    setTimeout(() => this.tag.methods.removeAll(), 3000);
+    setTimeout(() => this.tag.methods.removeAll(), 1000);
+  }
+
+  removeTag(tagName) {
+    this.tag.methods.remove(tagName);
   }
 
   areEqual(obj1, obj2) {

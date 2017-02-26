@@ -5,3 +5,5 @@ screenshots
 client-cli
 client-wp
 npm-debug.log
+yarn-error.log
+yarn.lock

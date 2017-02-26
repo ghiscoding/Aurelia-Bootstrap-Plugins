@@ -53,7 +53,7 @@ export let AbaDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
   constructor(elm) {
     _initDefineProp(this, 'element', _descriptor, this);
 
-    _initDefineProp(this, 'model', _descriptor2, this);
+    _initDefineProp(this, 'value', _descriptor2, this);
 
     _initDefineProp(this, 'iconSet', _descriptor3, this);
 
@@ -145,7 +145,7 @@ export let AbaDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
     this.domElm.datetimepicker(this.options);
 
     this.domElm.on('dp.change', e => {
-      this.model = moment(e.date).format(this.format);
+      this.value = moment(e.date).format(this.format);
     });
 
     this.element = {
@@ -314,7 +314,7 @@ export let AbaDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
 }, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'element', [_dec2], {
   enumerable: true,
   initializer: null
-}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'model', [_dec3], {
+}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'value', [_dec3], {
   enumerable: true,
   initializer: null
 }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'iconSet', [bindable], {

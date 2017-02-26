@@ -7,7 +7,10 @@ import 'bootstrap-tagsinput/dist/bootstrap-tagsinput';
 @inject(Element)
 export class AbaTagsInputCustomElement {
   @bindable({defaultBindingMode: bindingMode.twoWay}) element;
-  @bindable({defaultBindingMode: bindingMode.twoWay}) model;
+  @bindable({defaultBindingMode: bindingMode.twoWay}) value;
+
+  // plugin own variables
+  @bindable placeholder = '';
 
   // options (from the View), with some defaults
   @bindable allowDuplicates = false;
@@ -42,7 +45,7 @@ export class AbaTagsInputCustomElement {
 
   attached() {
     // reference to the DOM element
-    this.domElm = $(this.elm);
+    this.domElm = $(this.elm).find('input');
 
     // create TagsInput
     this.attachOptions();
@@ -117,7 +120,7 @@ export class AbaTagsInputCustomElement {
     });
 
     this.domElm.on('itemAdded', (e) => {
-      this.model = this.domElm.tagsinput('items');
+      this.value = this.domElm.tagsinput('items');
       if (typeof this.onItemAdded === 'function') {
         this.onItemAdded(e);
       }
@@ -136,7 +139,7 @@ export class AbaTagsInputCustomElement {
     });
 
     this.domElm.on('itemRemoved', (e) => {
-      this.model = this.domElm.tagsinput('items');
+      this.value = this.domElm.tagsinput('items');
       if (typeof this.onItemRemoved === 'function') {
         this.onItemRemoved(e);
       }
@@ -157,7 +160,10 @@ export class AbaTagsInputCustomElement {
       input: () => { return this.domElm.tagsinput('input'); },
       refresh: () => this.domElm.tagsinput('refresh'),
       remove: (value) => this.domElm.tagsinput('remove', value),
-      removeAll: () => this.domElm.tagsinput('removeAll')
+      removeAll: () => {
+        this.domElm.tagsinput('removeAll');
+        this.value = this.domElm.tagsinput('items');
+      }
     };
 
     this.methods = methods;

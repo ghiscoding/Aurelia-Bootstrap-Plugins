@@ -4,9 +4,9 @@
 An Aurelia Custom Element for the 3rd party addon [Bootstrap Tags Input](https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/)
 
 ### Usage
-A quick example of the code in action. Note that the value is available under the `model.bind`.
+A quick example of the code in action. Note that the value is available under the `value.bind`.
 ```html
-<aba-tags-input element.bind="tag" model.bind="post.categories"></aba-tags-input>
+<aba-tags-input element.bind="tag" value.bind="post.categories"></aba-tags-input>
 ```
 
 ### Available Attributes/Options
@@ -39,7 +39,7 @@ Example
 
 _View (exposing the element)_
 ```html
-<aba-tags-input element.bind="tag" model.bind="post.categories"></aba-tags-input>
+<aba-tags-input element.bind="tag" value.bind="post.categories"></aba-tags-input>
 ```
 
 _ViewModel (calling the method)_
@@ -63,7 +63,7 @@ Example
 
 _View (exposing the element)_
 ```html
-<aba-tags-input element.bind="tag" model.bind="post.categories"></aba-tags-input>
+<aba-tags-input element.bind="tag" value.bind="post.categories"></aba-tags-input>
 ```
 
 _ViewModel (calling the onEvent trigger)_
