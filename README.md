@@ -1,4 +1,4 @@
-# Aurelia-Bootstrap-Addons (aka ABA)
+# Aurelia-Bootstrap-Addons
 
 ### Introduction
 Aurelia-Bootstrap-Addons are Custom Elements made to bridge with a set of commonly used 3rd party Bootstrap addons. These Custom Elements are supporting (as much as possible) the entire set of (`options`, `methods` & `events`) of their original 3rd party addons. 
