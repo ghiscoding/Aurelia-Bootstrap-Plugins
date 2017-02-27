@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.AbaTagsInputCustomElement = undefined;
+exports.AbpTagsInputCustomElement = undefined;
 
 var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, _descriptor17, _descriptor18, _descriptor19, _descriptor20, _descriptor21;
 
@@ -62,9 +62,9 @@ function _initializerWarningHelper(descriptor, context) {
   throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
 }
 
-var AbaTagsInputCustomElement = exports.AbaTagsInputCustomElement = (_dec = (0, _aureliaFramework.inject)(Element), _dec2 = (0, _aureliaFramework.bindable)({ defaultBindingMode: _aureliaFramework.bindingMode.twoWay }), _dec3 = (0, _aureliaFramework.bindable)({ defaultBindingMode: _aureliaFramework.bindingMode.twoWay }), _dec(_class = (_class2 = function () {
-  function AbaTagsInputCustomElement(elm) {
-    _classCallCheck(this, AbaTagsInputCustomElement);
+var AbpTagsInputCustomElement = exports.AbpTagsInputCustomElement = (_dec = (0, _aureliaFramework.inject)(Element), _dec2 = (0, _aureliaFramework.bindable)({ defaultBindingMode: _aureliaFramework.bindingMode.twoWay }), _dec3 = (0, _aureliaFramework.bindable)({ defaultBindingMode: _aureliaFramework.bindingMode.twoWay }), _dec(_class = (_class2 = function () {
+  function AbpTagsInputCustomElement(elm) {
+    _classCallCheck(this, AbpTagsInputCustomElement);
 
     _initDefineProp(this, 'element', _descriptor, this);
 
@@ -115,7 +115,7 @@ var AbaTagsInputCustomElement = exports.AbaTagsInputCustomElement = (_dec = (0, 
     this.elm = elm;
   }
 
-  AbaTagsInputCustomElement.prototype.attached = function attached() {
+  AbpTagsInputCustomElement.prototype.attached = function attached() {
     this.domElm = (0, _jquery2.default)(this.elm).find('input');
 
     this.attachOptions();
@@ -131,7 +131,7 @@ var AbaTagsInputCustomElement = exports.AbaTagsInputCustomElement = (_dec = (0, 
     };
   };
 
-  AbaTagsInputCustomElement.prototype.attachOptions = function attachOptions() {
+  AbpTagsInputCustomElement.prototype.attachOptions = function attachOptions() {
     var options = {
       allowDuplicates: this.allowDuplicates,
       cancelConfirmKeysOnEmpty: this.cancelConfirmKeysOnEmpty,
@@ -158,7 +158,7 @@ var AbaTagsInputCustomElement = exports.AbaTagsInputCustomElement = (_dec = (0, 
     this.options = options;
   };
 
-  AbaTagsInputCustomElement.prototype.applyExposeEvents = function applyExposeEvents() {
+  AbpTagsInputCustomElement.prototype.applyExposeEvents = function applyExposeEvents() {
     var _this = this;
 
     this.domElm.on('beforeItemAdd', function (e) {
@@ -209,7 +209,7 @@ var AbaTagsInputCustomElement = exports.AbaTagsInputCustomElement = (_dec = (0, 
     });
   };
 
-  AbaTagsInputCustomElement.prototype.exposeMethods = function exposeMethods() {
+  AbpTagsInputCustomElement.prototype.exposeMethods = function exposeMethods() {
     var _this2 = this;
 
     var methods = {
@@ -240,11 +240,11 @@ var AbaTagsInputCustomElement = exports.AbaTagsInputCustomElement = (_dec = (0, 
     this.methods = methods;
   };
 
-  AbaTagsInputCustomElement.prototype.detached = function detached() {
+  AbpTagsInputCustomElement.prototype.detached = function detached() {
     this.domElm.tagsinput('destroy');
   };
 
-  return AbaTagsInputCustomElement;
+  return AbpTagsInputCustomElement;
 }(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'element', [_dec2], {
   enumerable: true,
   initializer: null

@@ -47,7 +47,7 @@ import { inject, bindable, bindingMode } from 'aurelia-framework';
 import $ from 'jquery';
 import 'bootstrap-tagsinput/dist/bootstrap-tagsinput';
 
-export let AbaTagsInputCustomElement = (_dec = inject(Element), _dec2 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec3 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = (_class2 = class AbaTagsInputCustomElement {
+export let AbpTagsInputCustomElement = (_dec = inject(Element), _dec2 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec3 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = (_class2 = class AbpTagsInputCustomElement {
 
   constructor(elm) {
     _initDefineProp(this, 'element', _descriptor, this);

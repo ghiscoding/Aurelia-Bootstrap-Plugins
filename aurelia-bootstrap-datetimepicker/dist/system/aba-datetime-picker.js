@@ -3,7 +3,7 @@
 System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-datetimepicker'], function (_export, _context) {
   "use strict";
 
-  var inject, bindable, bindingMode, moment, $, _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, _descriptor17, _descriptor18, _descriptor19, _descriptor20, _descriptor21, _descriptor22, _descriptor23, _descriptor24, _descriptor25, _descriptor26, _descriptor27, _descriptor28, _descriptor29, _descriptor30, _descriptor31, _descriptor32, _descriptor33, _descriptor34, _descriptor35, _descriptor36, _descriptor37, _descriptor38, AbaDatetimePickerCustomElement;
+  var inject, bindable, bindingMode, moment, $, _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, _descriptor17, _descriptor18, _descriptor19, _descriptor20, _descriptor21, _descriptor22, _descriptor23, _descriptor24, _descriptor25, _descriptor26, _descriptor27, _descriptor28, _descriptor29, _descriptor30, _descriptor31, _descriptor32, _descriptor33, _descriptor34, _descriptor35, _descriptor36, _descriptor37, _descriptor38, AbpDatetimePickerCustomElement;
 
   function _initDefineProp(target, property, descriptor, context) {
     if (!descriptor) return;
@@ -65,9 +65,9 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
       $ = _jquery.default;
     }, function (_eonasdanBootstrapDatetimepicker) {}],
     execute: function () {
-      _export('AbaDatetimePickerCustomElement', AbaDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec3 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = (_class2 = function () {
-        function AbaDatetimePickerCustomElement(elm) {
-          _classCallCheck(this, AbaDatetimePickerCustomElement);
+      _export('AbpDatetimePickerCustomElement', AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec3 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = (_class2 = function () {
+        function AbpDatetimePickerCustomElement(elm) {
+          _classCallCheck(this, AbpDatetimePickerCustomElement);
 
           _initDefineProp(this, 'element', _descriptor, this);
 
@@ -152,7 +152,7 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
           this.elm = elm;
         }
 
-        AbaDatetimePickerCustomElement.prototype.attached = function attached() {
+        AbpDatetimePickerCustomElement.prototype.attached = function attached() {
           var _this = this;
 
           this.domElm = $(this.elm).find('.input-group.date');
@@ -175,7 +175,7 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
           };
         };
 
-        AbaDatetimePickerCustomElement.prototype.attachIconSet = function attachIconSet() {
+        AbpDatetimePickerCustomElement.prototype.attachIconSet = function attachIconSet() {
           if (this.iconSet === 'font-awesome') {
             this.icons = {
               time: 'fa fa-clock-o',
@@ -203,7 +203,7 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
           }
         };
 
-        AbaDatetimePickerCustomElement.prototype.attachOptions = function attachOptions() {
+        AbpDatetimePickerCustomElement.prototype.attachOptions = function attachOptions() {
           var options = {
             allowInputToggle: this.allowInputToggle,
             calendarWeeks: this.calendarWeeks,
@@ -252,7 +252,7 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
           this.options = options;
         };
 
-        AbaDatetimePickerCustomElement.prototype.applyExposeEvents = function applyExposeEvents() {
+        AbpDatetimePickerCustomElement.prototype.applyExposeEvents = function applyExposeEvents() {
           var _this2 = this;
 
           this.domElm.on('dp.hide', function (e) {
@@ -301,7 +301,7 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
           });
         };
 
-        AbaDatetimePickerCustomElement.prototype.constructMethod = function constructMethod(methodType, methodName) {
+        AbpDatetimePickerCustomElement.prototype.constructMethod = function constructMethod(methodType, methodName) {
           var _this3 = this;
 
           switch (methodType) {
@@ -321,7 +321,7 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
           }
         };
 
-        AbaDatetimePickerCustomElement.prototype.exposeMethods = function exposeMethods() {
+        AbpDatetimePickerCustomElement.prototype.exposeMethods = function exposeMethods() {
           var _this4 = this;
 
           var methodList = [{ name: 'allowInputToggle', type: 'getterSetter' }, { name: 'calendarWeeks', type: 'getterSetter' }, { name: 'clear', type: 'caller' }, { name: 'collapse', type: 'getterSetter' }, { name: 'date', type: 'getterSetter' }, { name: 'daysOfWeekDisabled', type: 'getterSetter' }, { name: 'dayViewHeaderFormat', type: 'getterSetter' }, { name: 'defaultDate', type: 'getterSetter' }, { name: 'destroy', type: 'caller' }, { name: 'debug', type: 'caller' }, { name: 'disable', type: 'caller' }, { name: 'disabledDates', type: 'getterSetter' }, { name: 'disabledHours', type: 'getterSetter' }, { name: 'disabledTimeIntervals', type: 'getterSetter' }, { name: 'enable', type: 'caller' }, { name: 'enabledDates', type: 'getterSetter' }, { name: 'enabledHours', type: 'getterSetter' }, { name: 'extraFormats', type: 'getterSetter' }, { name: 'focusOnShow', type: 'getterSetter' }, { name: 'format', type: 'getterSetter' }, { name: 'hide', type: 'caller' }, { name: 'icons', type: 'getterSetter' }, { name: 'ignoreReadonly', type: 'getterSetter' }, { name: 'inline', type: 'getterSetter' }, { name: 'keepInvalid', type: 'getterSetter' }, { name: 'keyBinds', type: 'getterSetter' }, { name: 'locale', type: 'getterSetter' }, { name: 'maxDate', type: 'getterSetter' }, { name: 'minDate', type: 'getterSetter' }, { name: 'options', type: 'getterSetter' }, { name: 'parseInputDate', type: 'getterSetter' }, { name: 'show', type: 'caller' }, { name: 'showClear', type: 'getterSetter' }, { name: 'showClose', type: 'getterSetter' }, { name: 'showTodayButton', type: 'getterSetter' }, { name: 'sideBySide', type: 'getterSetter' }, { name: 'stepping', type: 'getterSetter' }, { name: 'toggle', type: 'caller' }, { name: 'toolbarplacement', type: 'getterSetter' }, { name: 'tooltips', type: 'getterSetter' }, { name: 'useCurrent', type: 'getterSetter' }, { name: 'useStrict', type: 'getterSetter' }, { name: 'viewDate', type: 'getterSetter' }, { name: 'viewMode', type: 'getterSetter' }, { name: 'widgetPositioning', type: 'getterSetter' }];
@@ -334,11 +334,11 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
           this.methods = methods;
         };
 
-        AbaDatetimePickerCustomElement.prototype.detached = function detached() {
+        AbpDatetimePickerCustomElement.prototype.detached = function detached() {
           this.domElm.data('DateTimePicker').destroy();
         };
 
-        return AbaDatetimePickerCustomElement;
+        return AbpDatetimePickerCustomElement;
       }(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'element', [_dec2], {
         enumerable: true,
         initializer: null
@@ -528,7 +528,7 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
         }
       })), _class2)) || _class));
 
-      _export('AbaDatetimePickerCustomElement', AbaDatetimePickerCustomElement);
+      _export('AbpDatetimePickerCustomElement', AbpDatetimePickerCustomElement);
     }
   };
 });

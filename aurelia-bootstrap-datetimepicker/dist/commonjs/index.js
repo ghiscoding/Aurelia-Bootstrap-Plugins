@@ -3,13 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.AbaDatetimePickerCustomElement = undefined;
+exports.AbpDatetimePickerCustomElement = undefined;
 exports.configure = configure;
 
-var _abaDatetimePicker = require('./aba-datetime-picker');
+var _abpDatetimePicker = require('./abp-datetime-picker');
 
 function configure(aurelia) {
-  aurelia.globalResources('./aba-datetime-picker');
+  aurelia.globalResources('./abp-datetime-picker');
 }
 
-exports.AbaDatetimePickerCustomElement = _abaDatetimePicker.AbaDatetimePickerCustomElement;
+exports.AbpDatetimePickerCustomElement = _abpDatetimePicker.AbpDatetimePickerCustomElement;

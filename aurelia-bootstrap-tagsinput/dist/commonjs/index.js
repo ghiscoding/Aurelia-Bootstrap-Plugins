@@ -3,13 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.AbaTagsInputCustomElement = undefined;
+exports.AbpTagsInputCustomElement = undefined;
 exports.configure = configure;
 
-var _abaTagsInput = require('./aba-tags-input');
+var _abpTagsInput = require('./abp-tags-input');
 
 function configure(aurelia) {
-  aurelia.globalResources('./aba-tags-input');
+  aurelia.globalResources('./abp-tags-input');
 }
 
-exports.AbaTagsInputCustomElement = _abaTagsInput.AbaTagsInputCustomElement;
+exports.AbpTagsInputCustomElement = _abpTagsInput.AbpTagsInputCustomElement;

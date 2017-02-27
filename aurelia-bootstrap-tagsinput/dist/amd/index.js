@@ -1,14 +1,14 @@
-define(['exports', './aba-tags-input'], function (exports, _abaTagsInput) {
+define(['exports', './abp-tags-input'], function (exports, _abpTagsInput) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.AbaTagsInputCustomElement = undefined;
+  exports.AbpTagsInputCustomElement = undefined;
   exports.configure = configure;
   function configure(aurelia) {
-    aurelia.globalResources('./aba-tags-input');
+    aurelia.globalResources('./abp-tags-input');
   }
 
-  exports.AbaTagsInputCustomElement = _abaTagsInput.AbaTagsInputCustomElement;
+  exports.AbpTagsInputCustomElement = _abpTagsInput.AbpTagsInputCustomElement;
 });

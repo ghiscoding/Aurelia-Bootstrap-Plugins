@@ -1,21 +1,21 @@
 'use strict';
 
-System.register(['./aba-tags-input'], function (_export, _context) {
+System.register(['./abp-tags-input'], function (_export, _context) {
   "use strict";
 
-  var AbaTagsInputCustomElement;
+  var AbpTagsInputCustomElement;
   function configure(aurelia) {
-    aurelia.globalResources('./aba-tags-input');
+    aurelia.globalResources('./abp-tags-input');
   }
 
   _export('configure', configure);
 
   return {
-    setters: [function (_abaTagsInput) {
-      AbaTagsInputCustomElement = _abaTagsInput.AbaTagsInputCustomElement;
+    setters: [function (_abpTagsInput) {
+      AbpTagsInputCustomElement = _abpTagsInput.AbpTagsInputCustomElement;
     }],
     execute: function () {
-      _export('AbaTagsInputCustomElement', AbaTagsInputCustomElement);
+      _export('AbpTagsInputCustomElement', AbpTagsInputCustomElement);
     }
   };
 });

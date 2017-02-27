@@ -1,14 +1,14 @@
-define(['exports', './aba-datetime-picker'], function (exports, _abaDatetimePicker) {
+define(['exports', './abp-datetime-picker'], function (exports, _abpDatetimePicker) {
   'use strict';
 
   Object.defineProperty(exports, "__esModule", {
     value: true
   });
-  exports.AbaDatetimePickerCustomElement = undefined;
+  exports.AbpDatetimePickerCustomElement = undefined;
   exports.configure = configure;
   function configure(aurelia) {
-    aurelia.globalResources('./aba-datetime-picker');
+    aurelia.globalResources('./abp-datetime-picker');
   }
 
-  exports.AbaDatetimePickerCustomElement = _abaDatetimePicker.AbaDatetimePickerCustomElement;
+  exports.AbpDatetimePickerCustomElement = _abpDatetimePicker.AbpDatetimePickerCustomElement;
 });

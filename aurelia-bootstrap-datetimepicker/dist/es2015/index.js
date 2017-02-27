@@ -1,7 +1,7 @@
-import { AbaDatetimePickerCustomElement } from './aba-datetime-picker';
+import { AbpDatetimePickerCustomElement } from './abp-datetime-picker';
 
 export function configure(aurelia) {
-  aurelia.globalResources('./aba-datetime-picker');
+  aurelia.globalResources('./abp-datetime-picker');
 }
 
-export { AbaDatetimePickerCustomElement };
+export { AbpDatetimePickerCustomElement };
