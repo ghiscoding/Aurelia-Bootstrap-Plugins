@@ -6,7 +6,7 @@ An Aurelia Custom Element for the 3rd party addon [Eonasdan Bootstrap Datepicker
 ### Usage
 A quick example of the code in action. Note that the value is available under the `value.bind`.
 ```html
-<aba-datetime-picker value.bind="post.dateEntered" format="YYYY-MM-DD"></aba-datetime-picker>
+<abp-datetime-picker value.bind="post.dateEntered" format="YYYY-MM-DD"></abp-datetime-picker>
 ```
 
 ### Available Attributes/Options
@@ -17,12 +17,12 @@ Example
 
 _regular attribute (View)_
 ```html
-<aba-datetime-picker format="YYYY-MM-DD"></aba-datetime-picker>
+<abp-datetime-picker format="YYYY-MM-DD"></abp-datetime-picker>
 ```
 
 _bind attribute (View + ViewModel)_
 ```html
-<aba-datetime-picker format.bind="pickerFormat"></aba-datetime-picker>
+<abp-datetime-picker format.bind="pickerFormat"></abp-datetime-picker>
 ```
 ```javascript
 export class Example {
@@ -39,7 +39,7 @@ Example
 
 _View (exposing the element)_
 ```html
-<aba-datetime-picker element.bind="picker" value.bind="user.birthdate" format="YYYY-MM-DD"></aba-datetime-picker>
+<abp-datetime-picker element.bind="picker" value.bind="user.birthdate" format="YYYY-MM-DD"></abp-datetime-picker>
 ```
 
 _ViewModel (calling the method)_
@@ -64,7 +64,7 @@ Example
 
 _View (exposing the element)_
 ```html
-<aba-datetime-picker element.bind="picker" value.bind="user.birthdate" format="YYYY-MM-DD"></aba-datetime-picker>
+<abp-datetime-picker element.bind="picker" value.bind="user.birthdate" format="YYYY-MM-DD"></abp-datetime-picker>
 ```
 
 _ViewModel (calling the onEvent trigger)_
@@ -88,7 +88,7 @@ You can run the examples or build your own by doing the following.
 npm install --save aurelia-bootstrap-datetimepicker
 ```
 #### Aurelia-CLI
-For `CLI` you will need to add (`aurelia-bootstrap-datetimepicker`) to your `aurelia.json` file. The exported class is `aba-datetime-picker`.
+For `CLI` you will need to add (`aurelia-bootstrap-datetimepicker`) to your `aurelia.json` file. The exported class is `abp-datetime-picker`.
 ```javascript
 {
   "name": "eonasdan-bootstrap-datetimepicker",
@@ -155,7 +155,7 @@ let config = generateConfig(
 ```
 
 #### Aurelia (main)
-Make the plugin available globally in your `main.js` file. Please note the exported class is `aba-tags-input` (`aba` stands for `Aurelia-Bootstrap-Addon`)
+Make the plugin available globally in your `main.js` file. Please note the exported class is `abp-tags-input`
 
 ```javascript
 // for WebPack only, also import CSS 
@@ -173,4 +173,4 @@ export function configure(aurelia) {
 ```
 
 ### License
-[MIT License](https://github.com/ghiscoding/Aurelia-Bootstrap-Addons/blob/master/LICENSE)
+[MIT License](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/blob/master/LICENSE)

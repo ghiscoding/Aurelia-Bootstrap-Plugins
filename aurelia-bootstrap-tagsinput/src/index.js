@@ -1,9 +1,9 @@
-import {AbaTagsInputCustomElement} from './aba-tags-input';
+import {AbpTagsInputCustomElement} from './abp-tags-input';
 
 export function configure(aurelia) {
-  aurelia.globalResources('./aba-tags-input');
+  aurelia.globalResources('./abp-tags-input');
 }
 
 export {
-  AbaTagsInputCustomElement
+  AbpTagsInputCustomElement
 };

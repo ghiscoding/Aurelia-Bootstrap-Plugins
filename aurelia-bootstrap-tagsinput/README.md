@@ -6,7 +6,7 @@ An Aurelia Custom Element for the 3rd party addon [Bootstrap Tags Input](https:/
 ### Usage
 A quick example of the code in action. Note that the value is available under the `value.bind`.
 ```html
-<aba-tags-input element.bind="tag" value.bind="post.categories"></aba-tags-input>
+<abp-tags-input element.bind="tag" value.bind="post.categories"></abp-tags-input>
 ```
 
 ### Available Attributes/Options
@@ -17,12 +17,12 @@ Example
 
 _regular attribute (View)_
 ```html
-<aba-tags-input item-value="id" item-text="label"></aba-tags-input>
+<abp-tags-input item-value="id" item-text="label"></abp-tags-input>
 ```
 
 _bind attribute (View + ViewModel)_
 ```html
-<aba-tags-input confirm-keys.bind="tagConfirmKeys"></aba-tags-input>
+<abp-tags-input confirm-keys.bind="tagConfirmKeys"></abp-tags-input>
 ```
 ```javascript
 export class Example {
@@ -39,7 +39,7 @@ Example
 
 _View (exposing the element)_
 ```html
-<aba-tags-input element.bind="tag" value.bind="post.categories"></aba-tags-input>
+<abp-tags-input element.bind="tag" value.bind="post.categories"></abp-tags-input>
 ```
 
 _ViewModel (calling the method)_
@@ -63,7 +63,7 @@ Example
 
 _View (exposing the element)_
 ```html
-<aba-tags-input element.bind="tag" value.bind="post.categories"></aba-tags-input>
+<abp-tags-input element.bind="tag" value.bind="post.categories"></abp-tags-input>
 ```
 
 _ViewModel (calling the onEvent trigger)_
@@ -111,7 +111,7 @@ _index.html_
 ```
 
 #### Aurelia (main)
-Make the plugin available globally in your `main.js` file. Please note the exported class is `aba-tags-input` (`aba` stands for `Aurelia-Bootstrap-Addon`)
+Make the plugin available globally in your `main.js` file. Please note the exported class is `abp-tags-input`
 
 ```javascript
 // for WebPack only, also import CSS 
@@ -129,4 +129,4 @@ export function configure(aurelia) {
 ```
 
 ### License
-[MIT License](https://github.com/ghiscoding/Aurelia-Bootstrap-Addons/blob/master/LICENSE)
+[MIT License](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/blob/master/LICENSE)

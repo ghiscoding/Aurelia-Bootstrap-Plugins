@@ -1,6 +1,6 @@
 {
   "name": "aurelia-bootstrap-tagsinput",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "An Aurelia Custom Element for the 3rd party addon [Bootstrap Tags Input]",
   "keywords": [
     "aurelia",
@@ -14,16 +14,16 @@
       ]
     }
   },
-  "homepage": "https://github.com/ghiscoding/Aurelia-Bootstrap-Addons/aurelia-bootstrap-tagsinput",
+  "homepage": "https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/aurelia-bootstrap-tagsinput",
   "bugs": {
-    "url": "https://github.com/ghiscoding/Aurelia-Bootstrap-Addons/aurelia-bootstrap-tagsinput/issues"
+    "url": "https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/aurelia-bootstrap-tagsinput/issues"
   },
   "license": "MIT",
   "author": "Ghislain B.",
   "main": "dist/commonjs/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ghiscoding/Aurelia-Bootstrap-Addons/aurelia-bootstrap-tagsinput"
+    "url": "https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/aurelia-bootstrap-tagsinput"
   },
   "dependencies": {
     "bootstrap": "^3.3.7",

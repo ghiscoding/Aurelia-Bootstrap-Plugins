@@ -5,7 +5,7 @@ import 'bootstrap-tagsinput/dist/bootstrap-tagsinput';
 //import 'bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css';
 
 @inject(Element)
-export class AbaTagsInputCustomElement {
+export class AbpTagsInputCustomElement {
   @bindable({defaultBindingMode: bindingMode.twoWay}) element;
   @bindable({defaultBindingMode: bindingMode.twoWay}) value;
 

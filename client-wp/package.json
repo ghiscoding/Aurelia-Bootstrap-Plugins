@@ -1,7 +1,13 @@
 {
-  "name": "aurelia-bootstrap-addons",
-  "version": "0.3.1",
-  "description": "Aurelia samples for Aurelia-Bootstrap-Addons",
+  "name": "aurelia-bootstrap-plugins",
+  "version": "0.3.0",
+  "description": "Aurelia samples for Aurelia-Bootstrap-Plugins",
+  "keywords": [
+    "aurelia",
+    "bootstrap",
+    "datetimepicker",
+    "tagsinput"
+  ],
   "main": "dist/commonjs/index.js",
   "scripts": {
     "pretest": "del-cli \"test/coverage\"",
@@ -37,13 +43,7 @@
     "server:prod": "http-server dist --cors",
     "webpack": "cross-env BABEL_ENV=node ./node_modules/.bin/webpack",
     "webpack-dev-server": "cross-env BABEL_ENV=node ./node_modules/.bin/webpack-dev-server"
-  },
-  "keywords": [
-    "aurelia",
-    "bootstrap",
-    "datetimepicker",
-    "tagsinput"
-  ],
+  },  
   "homepage": "https://github.com/ghiscoding/aurelia-slickgrid",
   "bugs": {
     "url": "https://github.com/ghiscoding/aurelia-slickgrid/issues"

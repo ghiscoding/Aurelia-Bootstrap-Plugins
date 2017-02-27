@@ -1,6 +1,6 @@
 # Aurelia-Webpack
 ```bash
-git clone https://github.com/ghiscoding/Aurelia-Bootstrap-Addons
+git clone https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins
 cd client-wp
 npm install
 npm start
@@ -11,7 +11,7 @@ npm start
 ### Usage
 A quick example of the code in action. Note that the value is available under the `value.bind`.
 ```html
-<aba-tags-input element.bind="tag" value.bind="post.categories"></aba-tags-input>
+<abp-tags-input element.bind="tag" value.bind="post.categories"></abp-tags-input>
 ```
 
 ## Aurelia-Bootstrap-Datetimepicker
@@ -19,5 +19,5 @@ A quick example of the code in action. Note that the value is available under th
 ### Usage
 A quick example of the code in action. Note that the value is available under the `value.bind`.
 ```html
-<aba-datetime-picker value.bind="post.dateEntered" format="YYYY-MM-DD"></aba-datetime-picker>
+<abp-datetime-picker value.bind="post.dateEntered" format="YYYY-MM-DD"></abp-datetime-picker>
 ```

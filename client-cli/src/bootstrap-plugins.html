@@ -6,7 +6,7 @@
                 <div class="form-group">
                     <label class="control-label">Post Categories</label>
                     <div class="">
-                        <aba-tags-input element.bind="tag" value.bind="post.categories" placeholder="enter a category tag"></aba-tags-input>
+                        <abp-tags-input element.bind="tag" value.bind="post.categories" placeholder="enter a category tag"></abp-tags-input>
                     </div>
                     <div class="">
                         list of items: ${post.categories}
@@ -33,7 +33,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label class="control-label">Date Entered ${post.dateEntered}</label>
-                    <aba-datetime-picker element.bind="picker" value.bind="post.dateEntered" format="YYYY-MM-DD" icon-set="font-awesome"></aba-datetime-picker>
+                    <abp-datetime-picker element.bind="picker" value.bind="post.dateEntered" format="YYYY-MM-DD" icon-set="font-awesome"></abp-datetime-picker>
                 </div>
             </div>
     </form>

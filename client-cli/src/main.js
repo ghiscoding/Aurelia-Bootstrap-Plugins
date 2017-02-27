@@ -1,6 +1,5 @@
 import 'bootstrap';
 import environment from './environment';
-//import 'aurelia-slickgrid/dist/styles/css/slickgrid-theme-bootstrap.css';
 
 //Configure Bluebird Promises.
 //Note: You may want to use environment-specific configuration.

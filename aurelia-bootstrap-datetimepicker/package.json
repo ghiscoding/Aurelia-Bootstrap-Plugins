@@ -1,6 +1,6 @@
 {
   "name": "aurelia-bootstrap-datetimepicker",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "An Aurelia Custom Element for the 3rd party addon [Eonasdan Bootstrap Datepicker]",
   "keywords": [
     "aurelia",
@@ -15,16 +15,16 @@
       ]
     }
   },
-  "homepage": "https://github.com/ghiscoding/Aurelia-Bootstrap-Addons/aurelia-bootstrap-datetimepicker",
+  "homepage": "https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/aurelia-bootstrap-datetimepicker",
   "bugs": {
-    "url": "https://github.com/ghiscoding/Aurelia-Bootstrap-Addons/aurelia-bootstrap-datetimepicker/issues"
+    "url": "https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/aurelia-bootstrap-datetimepicker/issues"
   },
   "license": "MIT",
   "author": "Ghislain B.",
   "main": "dist/commonjs/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ghiscoding/Aurelia-Bootstrap-Addons/aurelia-bootstrap-datetimepicker"
+    "url": "https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/aurelia-bootstrap-datetimepicker"
   },
   "dependencies": {
     "bootstrap": "^3.3.7",

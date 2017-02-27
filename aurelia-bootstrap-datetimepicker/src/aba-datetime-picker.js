@@ -5,7 +5,7 @@ import 'eonasdan-bootstrap-datetimepicker';
 //import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css';
 
 @inject(Element)
-export class AbaDatetimePickerCustomElement {
+export class AbpDatetimePickerCustomElement {
   @bindable({defaultBindingMode: bindingMode.twoWay}) element;
   @bindable({defaultBindingMode: bindingMode.twoWay}) value;
 
