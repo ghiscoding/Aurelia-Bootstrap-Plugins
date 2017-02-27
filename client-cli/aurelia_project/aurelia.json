@@ -1,5 +1,5 @@
 {
-  "name": "app-contacts",
+  "name": "aurelia-bootstrap-plugins",
   "type": "project:application",
   "platform": {
     "id": "web",
