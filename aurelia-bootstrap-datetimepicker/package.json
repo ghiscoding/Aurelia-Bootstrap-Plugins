@@ -1,6 +1,6 @@
 {
   "name": "aurelia-bootstrap-datetimepicker",
-  "version": "0.3.2",
+  "version": "1.0.0",
   "description": "An Aurelia Custom Element for the 3rd party addon [Eonasdan Bootstrap Datepicker]",
   "keywords": [
     "aurelia",
@@ -11,7 +11,8 @@
   "aurelia": {
     "build": {
       "resources": [
-        "aurelia-bootstrap-datetimepicker/abp-datetime-picker"
+        "aurelia-bootstrap-datetimepicker/abp-datetime-picker",
+        "aurelia-bootstrap-datetimepicker/picker-config"
       ]
     }
   },

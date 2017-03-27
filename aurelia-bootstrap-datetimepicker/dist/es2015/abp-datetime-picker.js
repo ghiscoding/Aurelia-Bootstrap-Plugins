@@ -1,4 +1,4 @@
-var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, _descriptor17, _descriptor18, _descriptor19, _descriptor20, _descriptor21, _descriptor22, _descriptor23, _descriptor24, _descriptor25, _descriptor26, _descriptor27, _descriptor28, _descriptor29, _descriptor30, _descriptor31, _descriptor32, _descriptor33, _descriptor34, _descriptor35, _descriptor36, _descriptor37, _descriptor38;
+var _dec, _dec2, _dec3, _dec4, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12;
 
 function _initDefineProp(target, property, descriptor, context) {
   if (!descriptor) return;
@@ -47,117 +47,77 @@ import { inject, bindable, bindingMode } from 'aurelia-framework';
 import moment from 'moment';
 import $ from 'jquery';
 import 'eonasdan-bootstrap-datetimepicker';
+import { pickerGlobalOptions } from './picker-global-options';
 
-export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec3 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = (_class2 = class AbpDatetimePickerCustomElement {
+const _defaultPickerOptions = {
+  allowInputToggle: true
+};
+
+export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec3 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec4 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = (_class2 = class AbpDatetimePickerCustomElement {
 
   constructor(elm) {
     _initDefineProp(this, 'element', _descriptor, this);
 
-    _initDefineProp(this, 'value', _descriptor2, this);
+    _initDefineProp(this, 'model', _descriptor2, this);
 
-    _initDefineProp(this, 'iconSet', _descriptor3, this);
+    _initDefineProp(this, 'value', _descriptor3, this);
 
-    _initDefineProp(this, 'allowInputToggle', _descriptor4, this);
+    _initDefineProp(this, 'iconBase', _descriptor4, this);
 
-    _initDefineProp(this, 'calendarWeeks', _descriptor5, this);
+    _initDefineProp(this, 'timezone', _descriptor5, this);
 
-    _initDefineProp(this, 'collapse', _descriptor6, this);
+    _initDefineProp(this, 'withDateIcon', _descriptor6, this);
 
-    _initDefineProp(this, 'daysOfWeekDisabled', _descriptor7, this);
+    _initDefineProp(this, 'options', _descriptor7, this);
 
-    _initDefineProp(this, 'dayViewHeaderFormat', _descriptor8, this);
+    _initDefineProp(this, 'onHide', _descriptor8, this);
 
-    _initDefineProp(this, 'debug', _descriptor9, this);
+    _initDefineProp(this, 'onShow', _descriptor9, this);
 
-    _initDefineProp(this, 'defaultDate', _descriptor10, this);
+    _initDefineProp(this, 'onChange', _descriptor10, this);
 
-    _initDefineProp(this, 'disabledDates', _descriptor11, this);
+    _initDefineProp(this, 'onError', _descriptor11, this);
 
-    _initDefineProp(this, 'disabledHours', _descriptor12, this);
+    _initDefineProp(this, 'onUpdate', _descriptor12, this);
 
-    _initDefineProp(this, 'disabledTimeIntervals', _descriptor13, this);
-
-    _initDefineProp(this, 'enabledDates', _descriptor14, this);
-
-    _initDefineProp(this, 'enabledHours', _descriptor15, this);
-
-    _initDefineProp(this, 'extraFormats', _descriptor16, this);
-
-    _initDefineProp(this, 'focusOnShow', _descriptor17, this);
-
-    _initDefineProp(this, 'format', _descriptor18, this);
-
-    _initDefineProp(this, 'icons', _descriptor19, this);
-
-    _initDefineProp(this, 'ignoreReadonly', _descriptor20, this);
-
-    _initDefineProp(this, 'keepInvalid', _descriptor21, this);
-
-    _initDefineProp(this, 'keepOpen', _descriptor22, this);
-
-    _initDefineProp(this, 'inline', _descriptor23, this);
-
-    _initDefineProp(this, 'locale', _descriptor24, this);
-
-    _initDefineProp(this, 'maxDate', _descriptor25, this);
-
-    _initDefineProp(this, 'minDate', _descriptor26, this);
-
-    _initDefineProp(this, 'showClear', _descriptor27, this);
-
-    _initDefineProp(this, 'showClose', _descriptor28, this);
-
-    _initDefineProp(this, 'showTodayButton', _descriptor29, this);
-
-    _initDefineProp(this, 'sideBySide', _descriptor30, this);
-
-    _initDefineProp(this, 'stepping', _descriptor31, this);
-
-    _initDefineProp(this, 'toolbarPlacement', _descriptor32, this);
-
-    _initDefineProp(this, 'useCurrent', _descriptor33, this);
-
-    _initDefineProp(this, 'useStrict', _descriptor34, this);
-
-    _initDefineProp(this, 'viewDate', _descriptor35, this);
-
-    _initDefineProp(this, 'viewMode', _descriptor36, this);
-
-    _initDefineProp(this, 'widgetParent', _descriptor37, this);
-
-    _initDefineProp(this, 'widgetPositioning', _descriptor38, this);
-
-    this.events = {};
-    this.methods = {};
-    this.options = {};
+    this._events = {};
+    this._methods = {};
 
     this.elm = elm;
   }
 
   attached() {
-    this.domElm = $(this.elm).find('.input-group.date');
+    this.domElm = $(this.elm).find('.date');
 
-    this.attachIconSet();
-    this.attachOptions();
+    let pickerOptions = this.options || {};
+    if (!this.options.icons) {
+      pickerOptions.icons = this.attachIconBase();
+    }
+
     this.applyExposeEvents();
     this.exposeMethods();
 
-    this.domElm.datetimepicker(this.options);
+    pickerOptions = Object.assign({}, _defaultPickerOptions, pickerOptions);
+    this.domElm.datetimepicker(pickerOptions);
 
     this.domElm.on('dp.change', e => {
-      this.value = moment(e.date).format(this.format);
+      let format = this.getOption('format');
+      this.model = moment(e.date).toDate();
+      this.value = moment(e.date).format(format);
     });
 
     this.element = {
-      events: this.events,
-      options: this.options,
-      methods: this.methods
+      events: this._events,
+      options: pickerOptions,
+      methods: this._methods
     };
   }
 
-  attachIconSet() {
-    if (this.iconSet === 'font-awesome') {
-      this.icons = {
+  attachIconBase() {
+    let icons;
+
+    if (this.iconBase === 'font-awesome') {
+      icons = {
         time: 'fa fa-clock-o',
         date: 'fa fa-calendar',
         up: 'fa fa-arrow-up',
@@ -169,7 +129,7 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
         close: 'fa fa-window-close'
       };
     } else {
-      this.icons = {
+      icons = {
         time: 'glyphicon glyphicon-time',
         date: 'glyphicon glyphicon-calendar',
         up: 'glyphicon glyphicon-chevron-up',
@@ -181,55 +141,18 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
         close: 'glyphicon glyphicon-remove'
       };
     }
+    return icons;
   }
 
-  attachOptions() {
-    let options = {
-      allowInputToggle: this.allowInputToggle,
-      calendarWeeks: this.calendarWeeks,
-      collapse: this.collapse,
-      daysOfWeekDisabled: this.daysOfWeekDisabled,
-      dayViewHeaderFormat: this.dayViewHeaderFormat,
-      debug: this.debug,
-      defaultDate: this.defaultDate,
-      disabledDates: this.disabledDates,
-      disabledHours: this.disabledHours,
-      disabledTimeIntervals: this.disabledTimeIntervals,
-      enabledDates: this.enabledDates,
-      enabledHours: this.enabledHours,
-      extraFormats: this.extraFormats,
-      focusOnShow: this.focusOnShow,
-      format: this.format,
-      icons: this.icons,
-      ignoreReadonly: this.ignoreReadonly,
-      inline: this.inline,
-      keepInvalid: this.keepInvalid,
-      keepOpen: this.keepOpen,
-      locale: this.locale,
-      maxDate: this.maxDate,
-      minDate: this.minDate,
-      showClear: this.showClear,
-      showClose: this.showClose,
-      showTodayButton: this.showTodayButton,
-      sideBySide: this.sideBySide,
-      stepping: this.stepping,
-      useCurrent: this.useCurrent,
-      useStrict: this.useStrict,
-      toolbarPlacement: this.toolbarPlacement,
-      viewDate: this.viewDate,
-      viewMode: this.viewMode,
-      widgetParent: this.widgetParent,
-      widgetPositioning: this.widgetPositioning
-    };
+  bind() {
+    this._originalValue = this.value || this.elm.getAttribute('value');
+    this._originalDateObject = moment(this.model).toDate() || this.elm.getAttribute('model');
+    let options = this.options || this.elm.getAttribute('options');
+    let value = this._originalValue || this._originalDateObject;
+    let format = this._originalDateFormat = options.hasOwnProperty('format') ? options.format : null;
 
-    if (this.keyBinds) {
-      options.keyBinds = this.keyBinds;
-    }
-    if (this.tooltips) {
-      options.tooltips = this.tooltips;
-    }
-
-    this.options = options;
+    this.model = moment(value).toDate();
+    this.value = moment(value).format(format);
   }
 
   applyExposeEvents() {
@@ -237,8 +160,8 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
       if (typeof this.onHide === 'function') {
         this.onHide(e);
       }
-      if (typeof this.events.onHide === 'function') {
-        this.events.onHide(e);
+      if (typeof this._events.onHide === 'function') {
+        this._events.onHide(e);
       }
     });
 
@@ -246,8 +169,8 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
       if (typeof this.onShow === 'function') {
         this.onShow(e);
       }
-      if (typeof this.events.onShow === 'function') {
-        this.events.onShow(e);
+      if (typeof this._events.onShow === 'function') {
+        this._events.onShow(e);
       }
     });
 
@@ -255,8 +178,8 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
       if (typeof this.onChange === 'function') {
         this.onChange(e);
       }
-      if (typeof this.events.onChange === 'function') {
-        this.events.onChange(e);
+      if (typeof this._events.onChange === 'function') {
+        this._events.onChange(e);
       }
     });
 
@@ -264,8 +187,8 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
       if (typeof this.onError === 'function') {
         this.onError(e);
       }
-      if (typeof this.events.onError === 'function') {
-        this.events.onError(e);
+      if (typeof this._events.onError === 'function') {
+        this._events.onError(e);
       }
     });
 
@@ -273,8 +196,8 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
       if (typeof this.onUpdate === 'function') {
         this.onUpdate(e);
       }
-      if (typeof this.events.onUpdate === 'function') {
-        this.events.onUpdate(e);
+      if (typeof this._events.onUpdate === 'function') {
+        this._events.onUpdate(e);
       }
     });
   }
@@ -305,197 +228,82 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
       methods[method.name] = this.constructMethod(method.type, method.name);
     });
 
-    this.methods = methods;
+    this._methods = methods;
   }
 
   detached() {
     this.domElm.data('DateTimePicker').destroy();
   }
+
+  getOption(optionName) {
+    let domElm = $(this.elm).find('.input-group.date');
+    if (domElm && typeof domElm.data === 'function' && domElm.data('DateTimePicker')) {
+      let options = domElm.data('DateTimePicker').options();
+      return options.hasOwnProperty(optionName) ? options[optionName] : null;
+    }
+    return null;
+  }
+
+  modelChanged(newValue, oldValue) {
+    if (typeof newValue.getMonth !== 'function') {
+      throw new Error('Datetimepicker, model.bind must be of type Date');
+    }
+    if (newValue !== oldValue) {
+      let format = this.getOption('format') || this._originalDateFormat;
+      this.value = moment(newValue).format(format);
+    }
+  }
+
+  valueChanged(newValue, oldValue) {
+    if (newValue !== oldValue) {
+      this.model = moment(newValue).toDate();
+    }
+  }
+
+  parseBool(value) {
+    return (/^(true|1)$/i.test(value)
+    );
+  }
 }, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'element', [_dec2], {
   enumerable: true,
   initializer: null
-}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'value', [_dec3], {
+}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'model', [_dec3], {
   enumerable: true,
   initializer: null
-}), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'iconSet', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return 'glyphicon';
-  }
-}), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'allowInputToggle', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return true;
-  }
-}), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'calendarWeeks', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return false;
-  }
-}), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'collapse', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return true;
-  }
-}), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, 'daysOfWeekDisabled', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return [];
-  }
-}), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, 'dayViewHeaderFormat', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return 'MMMM YYYY';
-  }
-}), _descriptor9 = _applyDecoratedDescriptor(_class2.prototype, 'debug', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return false;
-  }
-}), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, 'defaultDate', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return false;
-  }
-}), _descriptor11 = _applyDecoratedDescriptor(_class2.prototype, 'disabledDates', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return false;
-  }
-}), _descriptor12 = _applyDecoratedDescriptor(_class2.prototype, 'disabledHours', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return false;
-  }
-}), _descriptor13 = _applyDecoratedDescriptor(_class2.prototype, 'disabledTimeIntervals', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return false;
-  }
-}), _descriptor14 = _applyDecoratedDescriptor(_class2.prototype, 'enabledDates', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return false;
-  }
-}), _descriptor15 = _applyDecoratedDescriptor(_class2.prototype, 'enabledHours', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return false;
-  }
-}), _descriptor16 = _applyDecoratedDescriptor(_class2.prototype, 'extraFormats', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return false;
-  }
-}), _descriptor17 = _applyDecoratedDescriptor(_class2.prototype, 'focusOnShow', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return true;
-  }
-}), _descriptor18 = _applyDecoratedDescriptor(_class2.prototype, 'format', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return 'YYYY-MM-DD';
-  }
-}), _descriptor19 = _applyDecoratedDescriptor(_class2.prototype, 'icons', [bindable], {
+}), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'value', [_dec4], {
   enumerable: true,
   initializer: null
-}), _descriptor20 = _applyDecoratedDescriptor(_class2.prototype, 'ignoreReadonly', [bindable], {
+}), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'iconBase', [bindable], {
   enumerable: true,
   initializer: function () {
-    return false;
+    return pickerGlobalOptions.iconBase;
   }
-}), _descriptor21 = _applyDecoratedDescriptor(_class2.prototype, 'keepInvalid', [bindable], {
+}), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'timezone', [bindable], {
   enumerable: true,
   initializer: function () {
-    return false;
+    return pickerGlobalOptions.timezone;
   }
-}), _descriptor22 = _applyDecoratedDescriptor(_class2.prototype, 'keepOpen', [bindable], {
+}), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'withDateIcon', [bindable], {
   enumerable: true,
   initializer: function () {
-    return false;
+    return pickerGlobalOptions.withDateIcon;
   }
-}), _descriptor23 = _applyDecoratedDescriptor(_class2.prototype, 'inline', [bindable], {
+}), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, 'options', [bindable], {
   enumerable: true,
-  initializer: function () {
-    return false;
-  }
-}), _descriptor24 = _applyDecoratedDescriptor(_class2.prototype, 'locale', [bindable], {
+  initializer: null
+}), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, 'onHide', [bindable], {
   enumerable: true,
-  initializer: function () {
-    return moment.locale();
-  }
-}), _descriptor25 = _applyDecoratedDescriptor(_class2.prototype, 'maxDate', [bindable], {
+  initializer: null
+}), _descriptor9 = _applyDecoratedDescriptor(_class2.prototype, 'onShow', [bindable], {
   enumerable: true,
-  initializer: function () {
-    return false;
-  }
-}), _descriptor26 = _applyDecoratedDescriptor(_class2.prototype, 'minDate', [bindable], {
+  initializer: null
+}), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, 'onChange', [bindable], {
   enumerable: true,
-  initializer: function () {
-    return false;
-  }
-}), _descriptor27 = _applyDecoratedDescriptor(_class2.prototype, 'showClear', [bindable], {
+  initializer: null
+}), _descriptor11 = _applyDecoratedDescriptor(_class2.prototype, 'onError', [bindable], {
   enumerable: true,
-  initializer: function () {
-    return false;
-  }
-}), _descriptor28 = _applyDecoratedDescriptor(_class2.prototype, 'showClose', [bindable], {
+  initializer: null
+}), _descriptor12 = _applyDecoratedDescriptor(_class2.prototype, 'onUpdate', [bindable], {
   enumerable: true,
-  initializer: function () {
-    return false;
-  }
-}), _descriptor29 = _applyDecoratedDescriptor(_class2.prototype, 'showTodayButton', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return true;
-  }
-}), _descriptor30 = _applyDecoratedDescriptor(_class2.prototype, 'sideBySide', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return false;
-  }
-}), _descriptor31 = _applyDecoratedDescriptor(_class2.prototype, 'stepping', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return 1;
-  }
-}), _descriptor32 = _applyDecoratedDescriptor(_class2.prototype, 'toolbarPlacement', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return 'default';
-  }
-}), _descriptor33 = _applyDecoratedDescriptor(_class2.prototype, 'useCurrent', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return true;
-  }
-}), _descriptor34 = _applyDecoratedDescriptor(_class2.prototype, 'useStrict', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return false;
-  }
-}), _descriptor35 = _applyDecoratedDescriptor(_class2.prototype, 'viewDate', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return false;
-  }
-}), _descriptor36 = _applyDecoratedDescriptor(_class2.prototype, 'viewMode', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return 'days';
-  }
-}), _descriptor37 = _applyDecoratedDescriptor(_class2.prototype, 'widgetParent', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return null;
-  }
-}), _descriptor38 = _applyDecoratedDescriptor(_class2.prototype, 'widgetPositioning', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return {
-      horizontal: 'auto',
-      vertical: 'auto'
-    };
-  }
+  initializer: null
 })), _class2)) || _class);

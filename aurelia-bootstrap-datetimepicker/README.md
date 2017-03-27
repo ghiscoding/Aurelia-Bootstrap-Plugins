@@ -6,29 +6,71 @@ An Aurelia Custom Element for the 3rd party addon [Eonasdan Bootstrap Datepicker
 ### Usage
 A quick example of the code in action. Note that the value is available under the `value.bind`.
 ```html
-<abp-datetime-picker value.bind="post.dateEntered" format="YYYY-MM-DD"></abp-datetime-picker>
+<abp-datetime-picker value.bind="post.dateEntered" options.bind="{ format: 'YYYY-MM-DD' }"></abp-datetime-picker>
 ```
 
-### Available Attributes/Options
-Every single options that are part of `Bootstrap Datepicker` are available as bindable or as regular attributes. For the complete list, please visit the official site [Bootstrap Datepicker - Options](http://eonasdan.github.io/bootstrap-datetimepicker/Options/).
-There is 2 ways to call options (with a `bind` attribute or as a regular attribute).
+<a name="date"></a>
 
-Example
+### Formatted Date / Date Object
+For conveniencies, we provide 2 bindable attributes (both are also `two-way` binding as well). The first is for the formatted date which is called with `value.bind`, while the second is called via `model.bind` to deal with a standard Date Object.
 
-_regular attribute (View)_
+**Note:** since both attributes (`value.bind`,`model.bind`) are two-way binding, it also means that both can change the output.
+
+Example:
+
 ```html
-<abp-datetime-picker format="YYYY-MM-DD"></abp-datetime-picker>
+<abp-datetime-picker value.bind="dateEntered" model.bind="dateObject" options.bind="{ format: 'YYYY-MM-DD' }"></abp-datetime-picker>
 ```
 
-_bind attribute (View + ViewModel)_
+_if we use the date string '2005-05-05 10:00', the output will be:_
+
+```javascript
+value.bind="dateEntered" // output --> 2005-05-05 10:00
+model.bind="dateObject"  // output --> Thu May 05 2005 10:00:00 GMT-0400 (Eastern Daylight Time)
+```
+
+<a name="options"></a>
+
+### Available Options
+Every options of `Bootstrap Datepicker` can be call through `options.bind=""`. For the complete list, please visit the official site [Bootstrap Datepicker - Options](http://eonasdan.github.io/bootstrap-datetimepicker/Options/).
+
+
+Examples
+
+_from the View_
 ```html
-<abp-datetime-picker format.bind="pickerFormat"></abp-datetime-picker>
+<abp-datetime-picker options.bind="{ format: 'YYYY-MM-DD' }"></abp-datetime-picker>
+```
+
+_from the ViewModel_
+```html
+<abp-datetime-picker options.bind="pickerOptions"></abp-datetime-picker>
 ```
 ```javascript
 export class Example {
-    pickerFormat = "YYYY-MM-DD";
+    pickerOptions = { 
+      format: 'YYYY-MM-DD'
+    };
 }
 ```
+
+<a name="extra"></a>
+
+### Extra Attributes (bindable)
+Some extra bindable attributes were added to the Custom Element to add extra flexibility. The way to call them is through an attribute call in the View. The list of these extras is the following
+* iconBase (`font-awesome` or `glyphicon`), (default: 'glyphicon')
+* withDateIcon (default: true)
+
+Example
+
+_from the View_
+```html
+<abp-datetime-picker icon-base="font-awesome" with-date-icon="false"></abp-datetime-picker>
+```
+
+**NOTE:** 
+The extra attributes can be changed globally through `main.js` configuration, see [Global Options](#globaloption)
+
 
 ### Available Methods/Functions
 Again every single methods which comes with `Bootstrap Datepicker` are available. For the complete list, please visit the official site [Bootstrap Datepicker - Functions](http://eonasdan.github.io/bootstrap-datetimepicker/Functions/). 
@@ -39,18 +81,22 @@ Example
 
 _View (exposing the element)_
 ```html
-<abp-datetime-picker element.bind="picker" value.bind="user.birthdate" format="YYYY-MM-DD"></abp-datetime-picker>
+<abp-datetime-picker element.bind="picker" value.bind="user.birthdate"></abp-datetime-picker>
 ```
 
 _ViewModel (calling the method)_
 ```javascript
 export class Example {
+  @bindable picker;
+
   pickerChanged() {
     // disable Sunday & Saturday
     this.picker.methods.daysOfWeekDisabled([0,6]);
   }
 }
 ```
+
+<a name="events"></a>
 
 ### Available Events
 Every events of `Bootstrap Datepicker` are, as no surprises, available as well. For the complete list, please visit the official site [Bootstrap Datepicker - Events](http://eonasdan.github.io/bootstrap-datetimepicker/Events/). 
@@ -64,7 +110,7 @@ Example
 
 _View (exposing the element)_
 ```html
-<abp-datetime-picker element.bind="picker" value.bind="user.birthdate" format="YYYY-MM-DD"></abp-datetime-picker>
+<abp-datetime-picker element.bind="picker" value.bind="user.birthdate"></abp-datetime-picker>
 ```
 
 _ViewModel (calling the onEvent trigger)_
@@ -87,6 +133,9 @@ You can run the examples or build your own by doing the following.
 ```bash
 npm install --save aurelia-bootstrap-datetimepicker
 ```
+
+<a name="cli"></a>
+
 #### Aurelia-CLI
 For `CLI` you will need to add (`aurelia-bootstrap-datetimepicker`) to your `aurelia.json` file. The exported class is `abp-datetime-picker`.
 ```javascript
@@ -111,6 +160,8 @@ _index.html_
 <link rel="stylesheet" type="text/css" 
 href="../node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
 ```
+
+<a name="webpack"></a>
 
 #### Aurelia-Webpack
 `Bootstrap-Datetimepicker` and possibly others require to have the same `jQuery` accross the bundle. You will need to modify your `webpack.config.babel.js` for this to work correctly.
@@ -154,6 +205,8 @@ let config = generateConfig(
 },
 ```
 
+<a name="mainjs"></a>
+
 #### Aurelia (main)
 Make the plugin available globally in your `main.js` file. Please note the exported class is `abp-tags-input`
 
@@ -165,8 +218,29 @@ export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
     .developmentLogging()
-    .plugin('aurelia-bootstrap-datetimepicker')
-    .feature('resources');
+    .plugin('aurelia-bootstrap-datetimepicker');
+
+  aurelia.start().then(() => aurelia.setRoot());
+}
+```
+
+<a name="globaloption"></a>
+
+### Global Options
+You can change any of the global options directly in the your `main.js` through a `config` as shown below:
+
+```javascript
+// for WebPack only, also import CSS 
+// import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css';
+
+export function configure(aurelia) {
+  aurelia.use
+    .standardConfiguration()
+    .developmentLogging()
+    .plugin('aurelia-bootstrap-datetimepicker', config => {
+      config.options.iconBase = 'glyphicon';
+      config.options.iconBase = true;
+    });
 
   aurelia.start().then(() => aurelia.setRoot());
 }
@@ -174,3 +248,6 @@ export function configure(aurelia) {
 
 ### License
 [MIT License](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/blob/master/LICENSE)
+
+### Contributions/Comments
+Contributions are welcome. This plugin was created to help the community and myself, if you wish to suggest something and/or want to make a PR (Pull Request), please feel free to do so. Also, please be respectful. Finally, if you like and use this Aurelia-Bootstrap-Plugin, please click on the :star: and add it as a favorite.
