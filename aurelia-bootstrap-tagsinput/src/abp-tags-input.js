@@ -1,8 +1,7 @@
 import {inject, bindable, bindingMode} from 'aurelia-framework';
 import $ from 'jquery';
 import 'bootstrap-tagsinput/dist/bootstrap-tagsinput';
-//import 'bootstrap-tagsinput/dist/bootstrap-tagsinput.css';
-//import 'bootstrap-tagsinput/dist/bootstrap-tagsinput-typeahead.css';
+import {globalExtraOptions, globalPickerOptions} from './picker-global-options';
 
 @inject(Element)
 export class AbpTagsInputCustomElement {
@@ -10,22 +9,11 @@ export class AbpTagsInputCustomElement {
   @bindable({defaultBindingMode: bindingMode.twoWay}) value;
 
   // plugin own variables
+  @bindable bootstrapVersion = globalExtraOptions.bootstrapVersion;
   @bindable placeholder = '';
 
-  // options (from the View), with some defaults
-  @bindable allowDuplicates = false;
-  @bindable cancelConfirmKeysOnEmpty = false;
-  @bindable confirmKeys = [13, 44];
-  @bindable focusClass = 'focus';
-  @bindable freeInput = true;
-  @bindable itemValue;
-  @bindable itemText;
-  @bindable maxTags;
-  @bindable maxChars;
-  @bindable onTagExists;
-  @bindable tagClass = 'label label-info';
-  @bindable trimValue = false;
-  @bindable typeahead = null;
+  // picker options
+  @bindable options;
 
   // events (from the View)
   @bindable onBeforeItemAdd;
@@ -47,13 +35,20 @@ export class AbpTagsInputCustomElement {
     // reference to the DOM element
     this.domElm = $(this.elm).find('input');
 
+    // Bootstrap 3 & 4 have different class names
+    //if tagClass isn't yet configured we will define the tagClass depending on the version
+    let pickerOptions = this.options || {};
+    if (!this.options.tagClass) {
+      pickerOptions.tagClass = this.bootstrapVersion === 3 ? 'label label-info' : 'badge badge-info';
+    }
+
     // create TagsInput
-    this.attachOptions();
     this.applyExposeEvents();
     this.exposeMethods();
 
     // finally create the tagsinput with all options
-    this.domElm.tagsinput(this.options);
+    pickerOptions = Object.assign({}, globalPickerOptions, pickerOptions);
+    this.domElm.tagsinput(pickerOptions);
 
     // expose the element object to the outside
     // this will be useful for calling events/methods/options from the outside
@@ -62,38 +57,6 @@ export class AbpTagsInputCustomElement {
       options: this.options,
       methods: this.methods
     };
-  }
-
-  /**
-   * Initialize tagsinput options
-   */
-  attachOptions() {
-    let options = {
-      allowDuplicates: this.allowDuplicates,
-      cancelConfirmKeysOnEmpty: this.cancelConfirmKeysOnEmpty,
-      confirmKeys: this.confirmKeys,
-      focusClass: this.focusClass,
-      freeInput: this.freeInput,
-      maxChars: this.maxChars,
-      maxTags: this.maxTags,
-      tagClass: this.tagClass,
-      trimValue: this.trimValue,
-      typeahead: this.typeahead
-    };
-
-    // some of the options that have functions don't work well with defaults
-    // so we will instantiate them only if they are defined by the user
-    if (this.itemValue) {
-      options.itemValue = this.itemValue;
-    }
-    if (this.itemText) {
-      options.itemText = this.itemText;
-    }
-    if (this.onTagExists) {
-      options.onTagExists = this.onTagExists;
-    }
-
-    this.options = options;
   }
 
   /**

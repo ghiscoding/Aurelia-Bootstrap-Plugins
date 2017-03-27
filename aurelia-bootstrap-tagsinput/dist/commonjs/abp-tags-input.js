@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.AbpTagsInputCustomElement = undefined;
 
-var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, _descriptor17, _descriptor18, _descriptor19, _descriptor20, _descriptor21;
+var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10;
 
 var _aureliaFramework = require('aurelia-framework');
 
@@ -14,6 +14,8 @@ var _jquery = require('jquery');
 var _jquery2 = _interopRequireDefault(_jquery);
 
 require('bootstrap-tagsinput/dist/bootstrap-tagsinput');
+
+var _pickerGlobalOptions = require('./picker-global-options');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -70,43 +72,21 @@ var AbpTagsInputCustomElement = exports.AbpTagsInputCustomElement = (_dec = (0, 
 
     _initDefineProp(this, 'value', _descriptor2, this);
 
-    _initDefineProp(this, 'placeholder', _descriptor3, this);
+    _initDefineProp(this, 'bootstrapVersion', _descriptor3, this);
 
-    _initDefineProp(this, 'allowDuplicates', _descriptor4, this);
+    _initDefineProp(this, 'placeholder', _descriptor4, this);
 
-    _initDefineProp(this, 'cancelConfirmKeysOnEmpty', _descriptor5, this);
+    _initDefineProp(this, 'options', _descriptor5, this);
 
-    _initDefineProp(this, 'confirmKeys', _descriptor6, this);
+    _initDefineProp(this, 'onBeforeItemAdd', _descriptor6, this);
 
-    _initDefineProp(this, 'focusClass', _descriptor7, this);
+    _initDefineProp(this, 'onBeforeItemRemove', _descriptor7, this);
 
-    _initDefineProp(this, 'freeInput', _descriptor8, this);
+    _initDefineProp(this, 'onItemAdded', _descriptor8, this);
 
-    _initDefineProp(this, 'itemValue', _descriptor9, this);
+    _initDefineProp(this, 'onItemAddedOnInit', _descriptor9, this);
 
-    _initDefineProp(this, 'itemText', _descriptor10, this);
-
-    _initDefineProp(this, 'maxTags', _descriptor11, this);
-
-    _initDefineProp(this, 'maxChars', _descriptor12, this);
-
-    _initDefineProp(this, 'onTagExists', _descriptor13, this);
-
-    _initDefineProp(this, 'tagClass', _descriptor14, this);
-
-    _initDefineProp(this, 'trimValue', _descriptor15, this);
-
-    _initDefineProp(this, 'typeahead', _descriptor16, this);
-
-    _initDefineProp(this, 'onBeforeItemAdd', _descriptor17, this);
-
-    _initDefineProp(this, 'onBeforeItemRemove', _descriptor18, this);
-
-    _initDefineProp(this, 'onItemAdded', _descriptor19, this);
-
-    _initDefineProp(this, 'onItemAddedOnInit', _descriptor20, this);
-
-    _initDefineProp(this, 'onItemRemoved', _descriptor21, this);
+    _initDefineProp(this, 'onItemRemoved', _descriptor10, this);
 
     this.events = {};
     this.methods = {};
@@ -118,44 +98,22 @@ var AbpTagsInputCustomElement = exports.AbpTagsInputCustomElement = (_dec = (0, 
   AbpTagsInputCustomElement.prototype.attached = function attached() {
     this.domElm = (0, _jquery2.default)(this.elm).find('input');
 
-    this.attachOptions();
+    var pickerOptions = this.options || {};
+    if (!this.options.tagClass) {
+      pickerOptions.tagClass = this.bootstrapVersion === 3 ? 'label label-info' : 'badge badge-info';
+    }
+
     this.applyExposeEvents();
     this.exposeMethods();
 
-    this.domElm.tagsinput(this.options);
+    pickerOptions = Object.assign({}, _pickerGlobalOptions.globalPickerOptions, pickerOptions);
+    this.domElm.tagsinput(pickerOptions);
 
     this.element = {
       events: this.events,
       options: this.options,
       methods: this.methods
     };
-  };
-
-  AbpTagsInputCustomElement.prototype.attachOptions = function attachOptions() {
-    var options = {
-      allowDuplicates: this.allowDuplicates,
-      cancelConfirmKeysOnEmpty: this.cancelConfirmKeysOnEmpty,
-      confirmKeys: this.confirmKeys,
-      focusClass: this.focusClass,
-      freeInput: this.freeInput,
-      maxChars: this.maxChars,
-      maxTags: this.maxTags,
-      tagClass: this.tagClass,
-      trimValue: this.trimValue,
-      typeahead: this.typeahead
-    };
-
-    if (this.itemValue) {
-      options.itemValue = this.itemValue;
-    }
-    if (this.itemText) {
-      options.itemText = this.itemText;
-    }
-    if (this.onTagExists) {
-      options.onTagExists = this.onTagExists;
-    }
-
-    this.options = options;
   };
 
   AbpTagsInputCustomElement.prototype.applyExposeEvents = function applyExposeEvents() {
@@ -251,79 +209,32 @@ var AbpTagsInputCustomElement = exports.AbpTagsInputCustomElement = (_dec = (0, 
 }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'value', [_dec3], {
   enumerable: true,
   initializer: null
-}), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'placeholder', [_aureliaFramework.bindable], {
+}), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'bootstrapVersion', [_aureliaFramework.bindable], {
+  enumerable: true,
+  initializer: function initializer() {
+    return _pickerGlobalOptions.globalExtraOptions.bootstrapVersion;
+  }
+}), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'placeholder', [_aureliaFramework.bindable], {
   enumerable: true,
   initializer: function initializer() {
     return '';
   }
-}), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'allowDuplicates', [_aureliaFramework.bindable], {
-  enumerable: true,
-  initializer: function initializer() {
-    return false;
-  }
-}), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'cancelConfirmKeysOnEmpty', [_aureliaFramework.bindable], {
-  enumerable: true,
-  initializer: function initializer() {
-    return false;
-  }
-}), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'confirmKeys', [_aureliaFramework.bindable], {
-  enumerable: true,
-  initializer: function initializer() {
-    return [13, 44];
-  }
-}), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, 'focusClass', [_aureliaFramework.bindable], {
-  enumerable: true,
-  initializer: function initializer() {
-    return 'focus';
-  }
-}), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, 'freeInput', [_aureliaFramework.bindable], {
-  enumerable: true,
-  initializer: function initializer() {
-    return true;
-  }
-}), _descriptor9 = _applyDecoratedDescriptor(_class2.prototype, 'itemValue', [_aureliaFramework.bindable], {
+}), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'options', [_aureliaFramework.bindable], {
   enumerable: true,
   initializer: null
-}), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, 'itemText', [_aureliaFramework.bindable], {
+}), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'onBeforeItemAdd', [_aureliaFramework.bindable], {
   enumerable: true,
   initializer: null
-}), _descriptor11 = _applyDecoratedDescriptor(_class2.prototype, 'maxTags', [_aureliaFramework.bindable], {
+}), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, 'onBeforeItemRemove', [_aureliaFramework.bindable], {
   enumerable: true,
   initializer: null
-}), _descriptor12 = _applyDecoratedDescriptor(_class2.prototype, 'maxChars', [_aureliaFramework.bindable], {
+}), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, 'onItemAdded', [_aureliaFramework.bindable], {
   enumerable: true,
   initializer: null
-}), _descriptor13 = _applyDecoratedDescriptor(_class2.prototype, 'onTagExists', [_aureliaFramework.bindable], {
+}), _descriptor9 = _applyDecoratedDescriptor(_class2.prototype, 'onItemAddedOnInit', [_aureliaFramework.bindable], {
   enumerable: true,
   initializer: null
-}), _descriptor14 = _applyDecoratedDescriptor(_class2.prototype, 'tagClass', [_aureliaFramework.bindable], {
-  enumerable: true,
-  initializer: function initializer() {
-    return 'label label-info';
-  }
-}), _descriptor15 = _applyDecoratedDescriptor(_class2.prototype, 'trimValue', [_aureliaFramework.bindable], {
-  enumerable: true,
-  initializer: function initializer() {
-    return false;
-  }
-}), _descriptor16 = _applyDecoratedDescriptor(_class2.prototype, 'typeahead', [_aureliaFramework.bindable], {
-  enumerable: true,
-  initializer: function initializer() {
-    return null;
-  }
-}), _descriptor17 = _applyDecoratedDescriptor(_class2.prototype, 'onBeforeItemAdd', [_aureliaFramework.bindable], {
-  enumerable: true,
-  initializer: null
-}), _descriptor18 = _applyDecoratedDescriptor(_class2.prototype, 'onBeforeItemRemove', [_aureliaFramework.bindable], {
-  enumerable: true,
-  initializer: null
-}), _descriptor19 = _applyDecoratedDescriptor(_class2.prototype, 'onItemAdded', [_aureliaFramework.bindable], {
-  enumerable: true,
-  initializer: null
-}), _descriptor20 = _applyDecoratedDescriptor(_class2.prototype, 'onItemAddedOnInit', [_aureliaFramework.bindable], {
-  enumerable: true,
-  initializer: null
-}), _descriptor21 = _applyDecoratedDescriptor(_class2.prototype, 'onItemRemoved', [_aureliaFramework.bindable], {
+}), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, 'onItemRemoved', [_aureliaFramework.bindable], {
   enumerable: true,
   initializer: null
 })), _class2)) || _class);

@@ -1,4 +1,4 @@
-var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, _descriptor17, _descriptor18, _descriptor19, _descriptor20, _descriptor21;
+var _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10;
 
 function _initDefineProp(target, property, descriptor, context) {
   if (!descriptor) return;
@@ -46,6 +46,7 @@ function _initializerWarningHelper(descriptor, context) {
 import { inject, bindable, bindingMode } from 'aurelia-framework';
 import $ from 'jquery';
 import 'bootstrap-tagsinput/dist/bootstrap-tagsinput';
+import { globalExtraOptions, globalPickerOptions } from './picker-global-options';
 
 export let AbpTagsInputCustomElement = (_dec = inject(Element), _dec2 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec3 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = (_class2 = class AbpTagsInputCustomElement {
 
@@ -54,43 +55,21 @@ export let AbpTagsInputCustomElement = (_dec = inject(Element), _dec2 = bindable
 
     _initDefineProp(this, 'value', _descriptor2, this);
 
-    _initDefineProp(this, 'placeholder', _descriptor3, this);
+    _initDefineProp(this, 'bootstrapVersion', _descriptor3, this);
 
-    _initDefineProp(this, 'allowDuplicates', _descriptor4, this);
+    _initDefineProp(this, 'placeholder', _descriptor4, this);
 
-    _initDefineProp(this, 'cancelConfirmKeysOnEmpty', _descriptor5, this);
+    _initDefineProp(this, 'options', _descriptor5, this);
 
-    _initDefineProp(this, 'confirmKeys', _descriptor6, this);
+    _initDefineProp(this, 'onBeforeItemAdd', _descriptor6, this);
 
-    _initDefineProp(this, 'focusClass', _descriptor7, this);
+    _initDefineProp(this, 'onBeforeItemRemove', _descriptor7, this);
 
-    _initDefineProp(this, 'freeInput', _descriptor8, this);
+    _initDefineProp(this, 'onItemAdded', _descriptor8, this);
 
-    _initDefineProp(this, 'itemValue', _descriptor9, this);
+    _initDefineProp(this, 'onItemAddedOnInit', _descriptor9, this);
 
-    _initDefineProp(this, 'itemText', _descriptor10, this);
-
-    _initDefineProp(this, 'maxTags', _descriptor11, this);
-
-    _initDefineProp(this, 'maxChars', _descriptor12, this);
-
-    _initDefineProp(this, 'onTagExists', _descriptor13, this);
-
-    _initDefineProp(this, 'tagClass', _descriptor14, this);
-
-    _initDefineProp(this, 'trimValue', _descriptor15, this);
-
-    _initDefineProp(this, 'typeahead', _descriptor16, this);
-
-    _initDefineProp(this, 'onBeforeItemAdd', _descriptor17, this);
-
-    _initDefineProp(this, 'onBeforeItemRemove', _descriptor18, this);
-
-    _initDefineProp(this, 'onItemAdded', _descriptor19, this);
-
-    _initDefineProp(this, 'onItemAddedOnInit', _descriptor20, this);
-
-    _initDefineProp(this, 'onItemRemoved', _descriptor21, this);
+    _initDefineProp(this, 'onItemRemoved', _descriptor10, this);
 
     this.events = {};
     this.methods = {};
@@ -102,44 +81,22 @@ export let AbpTagsInputCustomElement = (_dec = inject(Element), _dec2 = bindable
   attached() {
     this.domElm = $(this.elm).find('input');
 
-    this.attachOptions();
+    let pickerOptions = this.options || {};
+    if (!this.options.tagClass) {
+      pickerOptions.tagClass = this.bootstrapVersion === 3 ? 'label label-info' : 'badge badge-info';
+    }
+
     this.applyExposeEvents();
     this.exposeMethods();
 
-    this.domElm.tagsinput(this.options);
+    pickerOptions = Object.assign({}, globalPickerOptions, pickerOptions);
+    this.domElm.tagsinput(pickerOptions);
 
     this.element = {
       events: this.events,
       options: this.options,
       methods: this.methods
     };
-  }
-
-  attachOptions() {
-    let options = {
-      allowDuplicates: this.allowDuplicates,
-      cancelConfirmKeysOnEmpty: this.cancelConfirmKeysOnEmpty,
-      confirmKeys: this.confirmKeys,
-      focusClass: this.focusClass,
-      freeInput: this.freeInput,
-      maxChars: this.maxChars,
-      maxTags: this.maxTags,
-      tagClass: this.tagClass,
-      trimValue: this.trimValue,
-      typeahead: this.typeahead
-    };
-
-    if (this.itemValue) {
-      options.itemValue = this.itemValue;
-    }
-    if (this.itemText) {
-      options.itemText = this.itemText;
-    }
-    if (this.onTagExists) {
-      options.onTagExists = this.onTagExists;
-    }
-
-    this.options = options;
   }
 
   applyExposeEvents() {
@@ -219,79 +176,32 @@ export let AbpTagsInputCustomElement = (_dec = inject(Element), _dec2 = bindable
 }), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'value', [_dec3], {
   enumerable: true,
   initializer: null
-}), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'placeholder', [bindable], {
+}), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'bootstrapVersion', [bindable], {
+  enumerable: true,
+  initializer: function () {
+    return globalExtraOptions.bootstrapVersion;
+  }
+}), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'placeholder', [bindable], {
   enumerable: true,
   initializer: function () {
     return '';
   }
-}), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'allowDuplicates', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return false;
-  }
-}), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'cancelConfirmKeysOnEmpty', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return false;
-  }
-}), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'confirmKeys', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return [13, 44];
-  }
-}), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, 'focusClass', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return 'focus';
-  }
-}), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, 'freeInput', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return true;
-  }
-}), _descriptor9 = _applyDecoratedDescriptor(_class2.prototype, 'itemValue', [bindable], {
+}), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'options', [bindable], {
   enumerable: true,
   initializer: null
-}), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, 'itemText', [bindable], {
+}), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'onBeforeItemAdd', [bindable], {
   enumerable: true,
   initializer: null
-}), _descriptor11 = _applyDecoratedDescriptor(_class2.prototype, 'maxTags', [bindable], {
+}), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, 'onBeforeItemRemove', [bindable], {
   enumerable: true,
   initializer: null
-}), _descriptor12 = _applyDecoratedDescriptor(_class2.prototype, 'maxChars', [bindable], {
+}), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, 'onItemAdded', [bindable], {
   enumerable: true,
   initializer: null
-}), _descriptor13 = _applyDecoratedDescriptor(_class2.prototype, 'onTagExists', [bindable], {
+}), _descriptor9 = _applyDecoratedDescriptor(_class2.prototype, 'onItemAddedOnInit', [bindable], {
   enumerable: true,
   initializer: null
-}), _descriptor14 = _applyDecoratedDescriptor(_class2.prototype, 'tagClass', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return 'label label-info';
-  }
-}), _descriptor15 = _applyDecoratedDescriptor(_class2.prototype, 'trimValue', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return false;
-  }
-}), _descriptor16 = _applyDecoratedDescriptor(_class2.prototype, 'typeahead', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return null;
-  }
-}), _descriptor17 = _applyDecoratedDescriptor(_class2.prototype, 'onBeforeItemAdd', [bindable], {
-  enumerable: true,
-  initializer: null
-}), _descriptor18 = _applyDecoratedDescriptor(_class2.prototype, 'onBeforeItemRemove', [bindable], {
-  enumerable: true,
-  initializer: null
-}), _descriptor19 = _applyDecoratedDescriptor(_class2.prototype, 'onItemAdded', [bindable], {
-  enumerable: true,
-  initializer: null
-}), _descriptor20 = _applyDecoratedDescriptor(_class2.prototype, 'onItemAddedOnInit', [bindable], {
-  enumerable: true,
-  initializer: null
-}), _descriptor21 = _applyDecoratedDescriptor(_class2.prototype, 'onItemRemoved', [bindable], {
+}), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, 'onItemRemoved', [bindable], {
   enumerable: true,
   initializer: null
 })), _class2)) || _class);
