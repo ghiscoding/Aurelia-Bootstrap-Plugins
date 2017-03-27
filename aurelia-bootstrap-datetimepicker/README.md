@@ -171,8 +171,6 @@ href="../node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-date
 const ENV...
 + const ProvidePlugin = require('webpack/lib/ProvidePlugin')
 + const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin')
-
-...
 let config = generateConfig(
 {
   entry: {
@@ -183,22 +181,22 @@ let config = generateConfig(
   output: {
     path: outDir
   },
-  + plugins: [
-  +  new ContextReplacementPlugin(/moment[\/\\]locale$/, /en|fr/),
-  +  new ProvidePlugin({
-  +    $: "jquery",
-  +    jQuery: "jquery",
-  +    'window.jQuery': 'jquery',
-  +    'window.Tether': 'tether',
-  +    Tether: 'tether'
-  +  })
-  + ],
-  + resolve: {
-  +    alias: {
-  +        // Force all modules to use the same jquery version.
-  +        'jquery': path.join(__dirname, 'node_modules/jquery/src/jquery')
-  +    }
-  + }
++  plugins: [
++   new ContextReplacementPlugin(/moment[\/\\]locale$/, /en|fr/),
++   new ProvidePlugin({
++     $: "jquery",
++     jQuery: "jquery",
++     'window.jQuery': 'jquery',
++     'window.Tether': 'tether',
++     Tether: 'tether'
++   })
++  ],
++  resolve: {
++     alias: {
++         // Force all modules to use the same jquery version.
++         'jquery': path.join(__dirname, 'node_modules/jquery/src/jquery')
++     }
++  }
 },
 ```
 
