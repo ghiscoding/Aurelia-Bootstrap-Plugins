@@ -226,7 +226,7 @@ export function configure(aurelia) {
 <a name="globaloption"></a>
 
 ### Global Options
-You can change any of the global options directly in the your `main.js` through a `config.options` as shown below:
+You can change any of the global options directly in the `main.js` through a `config.options` as shown below:
 
 ```javascript
 export function configure(aurelia) {
