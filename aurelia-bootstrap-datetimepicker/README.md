@@ -239,7 +239,7 @@ export function configure(aurelia) {
     .developmentLogging()
     .plugin('aurelia-bootstrap-datetimepicker', config => {
       config.options.iconBase = 'glyphicon';
-      config.options.iconBase = true;
+      config.options.withDateIcon = true;
     });
 
   aurelia.start().then(() => aurelia.setRoot());
