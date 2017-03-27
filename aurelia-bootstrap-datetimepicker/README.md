@@ -35,7 +35,7 @@ model.bind="dateObject"  // output --> Thu May 05 2005 10:00:00 GMT-0400 (Easter
 Every options of `Bootstrap Datepicker` can be call through `options.bind=""`. For the complete list, please visit the official site [Bootstrap Datepicker - Options](http://eonasdan.github.io/bootstrap-datetimepicker/Options/).
 
 **NOTE:** 
-The extra attributes can also be defined globally through `main.js` via a `config.options` configuration, see [Global Options](#globaloption)
+The picker options can also be defined globally through `main.js` via a `config.options` configuration, see [Global Options](#globaloption)
 
 Examples
 
