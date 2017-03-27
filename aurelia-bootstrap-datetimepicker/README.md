@@ -12,9 +12,9 @@ A quick example of the code in action. Note that the value is available under th
 <a name="date"></a>
 
 ### Formatted Date / Date Object
-For conveniencies, we provide 2 bindable attributes (both are also `two-way` binding as well). The first is for the formatted date which is called with `value.bind`, while the second is called via `model.bind` to deal with a standard Date Object.
+For conveniencies, we provide 2 bindable attributes (both are also `two-way` binding as well). The first is for the formatted date which is available through `value.bind`, while the second binding is called via `model.bind` to deal with a standard Date Object.
 
-**Note:** since both attributes (`value.bind`,`model.bind`) are two-way binding, it also means that both can change the output.
+**Note:** since both attributes (`value.bind`,`model.bind`) are two-way binding, it also means that both can affect the picker.
 
 Example:
 
@@ -22,7 +22,7 @@ Example:
 <abp-datetime-picker value.bind="dateEntered" model.bind="dateObject" options.bind="{ format: 'YYYY-MM-DD' }"></abp-datetime-picker>
 ```
 
-_if we use the date string '2005-05-05 10:00', the output will be:_
+_if we use the date string '2005-05-05 10:00', the output will be (also note that I'm on the Eastern Timezone):_
 
 ```javascript
 value.bind="dateEntered" // output --> 2005-05-05 10:00
@@ -58,8 +58,8 @@ export class Example {
 
 ### Extra Attributes (bindable)
 Some extra bindable attributes were added to the Custom Element to add extra flexibility. The way to call them is through an attribute call in the View. The list of these extras is the following
-* iconBase (`font-awesome` or `glyphicon`), (default: 'glyphicon')
-* withDateIcon (default: true)
+* iconBase: provide different set of icons (`font-awesome` or `glyphicon`), (default: `'glyphicon'`)
+* withDateIcon: add a Bootstrap `input group` with a Calendar icon on the right of the input (default: `true`)
 
 Example
 
@@ -167,11 +167,10 @@ href="../node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-date
 `Bootstrap-Datetimepicker` and possibly others require to have the same `jQuery` accross the bundle. You will need to modify your `webpack.config.babel.js` for this to work correctly.
 
 
-```javascript
+```diff
 const ENV...
-// add the following 
-const ProvidePlugin = require('webpack/lib/ProvidePlugin')
-const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin')
++ const ProvidePlugin = require('webpack/lib/ProvidePlugin')
++ const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin')
 
 ...
 let config = generateConfig(
@@ -184,24 +183,22 @@ let config = generateConfig(
   output: {
     path: outDir
   },
-  // ADD THE FOLLOWING (start)
-  plugins: [
-    new ContextReplacementPlugin(/moment[\/\\]locale$/, /en|fr/),
-    new ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
-      'window.jQuery': 'jquery',
-      'window.Tether': 'tether',
-      Tether: 'tether'
-    })
-  ],
-  resolve: {
-      alias: {
-          // Force all modules to use the same jquery version.
-          'jquery': path.join(__dirname, 'node_modules/jquery/src/jquery')
-      }
-  }
-  // ADD THE FOLLOWING (end)
+  + plugins: [
+  +  new ContextReplacementPlugin(/moment[\/\\]locale$/, /en|fr/),
+  +  new ProvidePlugin({
+  +    $: "jquery",
+  +    jQuery: "jquery",
+  +    'window.jQuery': 'jquery',
+  +    'window.Tether': 'tether',
+  +    Tether: 'tether'
+  +  })
+  + ],
+  + resolve: {
+  +    alias: {
+  +        // Force all modules to use the same jquery version.
+  +        'jquery': path.join(__dirname, 'node_modules/jquery/src/jquery')
+  +    }
+  + }
 },
 ```
 
