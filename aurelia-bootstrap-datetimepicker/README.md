@@ -69,7 +69,7 @@ _from the View_
 ```
 
 **NOTE:** 
-The extra attributes can be changed globally through `main.js` configuration, see [Global Options](#globaloption)
+The extra attributes can also be defined globally through `main.js` configuration, see [Global Options](#globaloption)
 
 
 ### Available Methods/Functions
@@ -202,13 +202,17 @@ let config = generateConfig(
 
 <a name="mainjs"></a>
 
-#### Aurelia (main)
+### Aurelia (main.js)
 Make the plugin available globally in your `main.js` file. Please note the exported class is `abp-tags-input`
 
-```javascript
-// for WebPack only, also import CSS 
-// import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css';
+#### For WebPack only (main.js)
 
+```javascript
+import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css';
+```
+
+#### CLI/WebPack (main.js)
+```javascript
 export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
@@ -222,12 +226,9 @@ export function configure(aurelia) {
 <a name="globaloption"></a>
 
 ### Global Options
-You can change any of the global options directly in the your `main.js` through a `config` as shown below:
+You can change any of the global options directly in the your `main.js` through a `config.options` as shown below:
 
 ```javascript
-// for WebPack only, also import CSS 
-// import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css';
-
 export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
@@ -245,4 +246,6 @@ export function configure(aurelia) {
 [MIT License](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/blob/master/LICENSE)
 
 ### Contributions/Comments
-Contributions are welcome. This plugin was created to help the community and myself, if you wish to suggest something and/or want to make a PR (Pull Request), please feel free to do so. Also, please be respectful. Finally, if you like and use this Aurelia-Bootstrap-Plugin, please click on the :star: and add it as a favorite.
+Contributions are welcome. This plugin was created to help the community and myself and was mainly done through my free time. If you wish to suggest something and/or want to make a PR (Pull Request), please feel free to do so. Also, please be respectful. 
+
+Finally, if you like and use this Aurelia-Bootstrap-Plugin, please click on the :star: and add it as a favorite.
