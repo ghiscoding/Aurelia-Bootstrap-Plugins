@@ -12,5 +12,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var PickerConfig = exports.PickerConfig = function PickerConfig() {
   _classCallCheck(this, PickerConfig);
 
-  this.options = _pickerGlobalOptions.pickerGlobalOptions;
+  this.extra = _pickerGlobalOptions.globalExtraOptions;
+  this.options = _pickerGlobalOptions.globalPickerOptions;
 };

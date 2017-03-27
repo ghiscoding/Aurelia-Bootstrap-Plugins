@@ -3,7 +3,7 @@
 System.register(['./picker-global-options'], function (_export, _context) {
   "use strict";
 
-  var pickerGlobalOptions, PickerConfig;
+  var globalExtraOptions, globalPickerOptions, PickerConfig;
 
   function _classCallCheck(instance, Constructor) {
     if (!(instance instanceof Constructor)) {
@@ -13,13 +13,15 @@ System.register(['./picker-global-options'], function (_export, _context) {
 
   return {
     setters: [function (_pickerGlobalOptions) {
-      pickerGlobalOptions = _pickerGlobalOptions.pickerGlobalOptions;
+      globalExtraOptions = _pickerGlobalOptions.globalExtraOptions;
+      globalPickerOptions = _pickerGlobalOptions.globalPickerOptions;
     }],
     execute: function () {
       _export('PickerConfig', PickerConfig = function PickerConfig() {
         _classCallCheck(this, PickerConfig);
 
-        this.options = pickerGlobalOptions;
+        this.extra = globalExtraOptions;
+        this.options = globalPickerOptions;
       });
 
       _export('PickerConfig', PickerConfig);

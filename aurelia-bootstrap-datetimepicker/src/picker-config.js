@@ -1,7 +1,8 @@
-import {pickerGlobalOptions} from './picker-global-options';
+import {globalExtraOptions, globalPickerOptions} from './picker-global-options';
 
 export class PickerConfig {
   constructor() {
-    this.options = pickerGlobalOptions;
+    this.extra = globalExtraOptions;
+    this.options = globalPickerOptions;
   }
 }

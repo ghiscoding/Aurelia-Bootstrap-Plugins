@@ -2,11 +2,7 @@ import {inject, bindable, bindingMode} from 'aurelia-framework';
 import moment from 'moment';
 import $ from 'jquery';
 import 'eonasdan-bootstrap-datetimepicker';
-import {pickerGlobalOptions} from './picker-global-options';
-
-const _defaultPickerOptions = {
-  allowInputToggle: true
-};
+import {globalExtraOptions, globalPickerOptions} from './picker-global-options';
 
 @inject(Element)
 export class AbpDatetimePickerCustomElement {
@@ -15,9 +11,8 @@ export class AbpDatetimePickerCustomElement {
   @bindable({defaultBindingMode: bindingMode.twoWay}) value;
 
   // plugin own variables
-  @bindable iconBase = pickerGlobalOptions.iconBase;
-  @bindable timezone = pickerGlobalOptions.timezone;
-  @bindable withDateIcon = pickerGlobalOptions.withDateIcon;
+  @bindable iconBase = globalExtraOptions.iconBase;
+  @bindable withDateIcon = globalExtraOptions.withDateIcon;
 
   // options (from the View)
   @bindable options;
@@ -55,7 +50,7 @@ export class AbpDatetimePickerCustomElement {
     this.exposeMethods();
 
     // finally create the datepicker with all options
-    pickerOptions = Object.assign({}, _defaultPickerOptions, pickerOptions);
+    pickerOptions = Object.assign({}, globalPickerOptions, pickerOptions);
     this.domElm.datetimepicker(pickerOptions);
 
     this.domElm.on('dp.change', (e) => {

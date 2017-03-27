@@ -1,4 +1,4 @@
-var _dec, _dec2, _dec3, _dec4, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12;
+var _dec, _dec2, _dec3, _dec4, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11;
 
 function _initDefineProp(target, property, descriptor, context) {
   if (!descriptor) return;
@@ -47,11 +47,7 @@ import { inject, bindable, bindingMode } from 'aurelia-framework';
 import moment from 'moment';
 import $ from 'jquery';
 import 'eonasdan-bootstrap-datetimepicker';
-import { pickerGlobalOptions } from './picker-global-options';
-
-const _defaultPickerOptions = {
-  allowInputToggle: true
-};
+import { globalExtraOptions, globalPickerOptions } from './picker-global-options';
 
 export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec3 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec4 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = (_class2 = class AbpDatetimePickerCustomElement {
 
@@ -64,21 +60,19 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
 
     _initDefineProp(this, 'iconBase', _descriptor4, this);
 
-    _initDefineProp(this, 'timezone', _descriptor5, this);
+    _initDefineProp(this, 'withDateIcon', _descriptor5, this);
 
-    _initDefineProp(this, 'withDateIcon', _descriptor6, this);
+    _initDefineProp(this, 'options', _descriptor6, this);
 
-    _initDefineProp(this, 'options', _descriptor7, this);
+    _initDefineProp(this, 'onHide', _descriptor7, this);
 
-    _initDefineProp(this, 'onHide', _descriptor8, this);
+    _initDefineProp(this, 'onShow', _descriptor8, this);
 
-    _initDefineProp(this, 'onShow', _descriptor9, this);
+    _initDefineProp(this, 'onChange', _descriptor9, this);
 
-    _initDefineProp(this, 'onChange', _descriptor10, this);
+    _initDefineProp(this, 'onError', _descriptor10, this);
 
-    _initDefineProp(this, 'onError', _descriptor11, this);
-
-    _initDefineProp(this, 'onUpdate', _descriptor12, this);
+    _initDefineProp(this, 'onUpdate', _descriptor11, this);
 
     this._events = {};
     this._methods = {};
@@ -97,7 +91,7 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
     this.applyExposeEvents();
     this.exposeMethods();
 
-    pickerOptions = Object.assign({}, _defaultPickerOptions, pickerOptions);
+    pickerOptions = Object.assign({}, globalPickerOptions, pickerOptions);
     this.domElm.datetimepicker(pickerOptions);
 
     this.domElm.on('dp.change', e => {
@@ -276,34 +270,29 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
 }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'iconBase', [bindable], {
   enumerable: true,
   initializer: function () {
-    return pickerGlobalOptions.iconBase;
+    return globalExtraOptions.iconBase;
   }
-}), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'timezone', [bindable], {
+}), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'withDateIcon', [bindable], {
   enumerable: true,
   initializer: function () {
-    return pickerGlobalOptions.timezone;
+    return globalExtraOptions.withDateIcon;
   }
-}), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'withDateIcon', [bindable], {
-  enumerable: true,
-  initializer: function () {
-    return pickerGlobalOptions.withDateIcon;
-  }
-}), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, 'options', [bindable], {
+}), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'options', [bindable], {
   enumerable: true,
   initializer: null
-}), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, 'onHide', [bindable], {
+}), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, 'onHide', [bindable], {
   enumerable: true,
   initializer: null
-}), _descriptor9 = _applyDecoratedDescriptor(_class2.prototype, 'onShow', [bindable], {
+}), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, 'onShow', [bindable], {
   enumerable: true,
   initializer: null
-}), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, 'onChange', [bindable], {
+}), _descriptor9 = _applyDecoratedDescriptor(_class2.prototype, 'onChange', [bindable], {
   enumerable: true,
   initializer: null
-}), _descriptor11 = _applyDecoratedDescriptor(_class2.prototype, 'onError', [bindable], {
+}), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, 'onError', [bindable], {
   enumerable: true,
   initializer: null
-}), _descriptor12 = _applyDecoratedDescriptor(_class2.prototype, 'onUpdate', [bindable], {
+}), _descriptor11 = _applyDecoratedDescriptor(_class2.prototype, 'onUpdate', [bindable], {
   enumerable: true,
   initializer: null
 })), _class2)) || _class);

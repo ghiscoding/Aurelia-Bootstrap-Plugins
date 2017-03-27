@@ -15,6 +15,7 @@ define(['exports', './picker-global-options'], function (exports, _pickerGlobalO
   var PickerConfig = exports.PickerConfig = function PickerConfig() {
     _classCallCheck(this, PickerConfig);
 
-    this.options = _pickerGlobalOptions.pickerGlobalOptions;
+    this.extra = _pickerGlobalOptions.globalExtraOptions;
+    this.options = _pickerGlobalOptions.globalPickerOptions;
   };
 });

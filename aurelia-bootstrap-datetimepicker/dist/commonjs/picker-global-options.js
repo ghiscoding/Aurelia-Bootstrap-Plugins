@@ -3,7 +3,11 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var pickerGlobalOptions = exports.pickerGlobalOptions = {
+var globalExtraOptions = exports.globalExtraOptions = {
   iconBase: 'glyphicon',
   withDateIcon: true
+};
+
+var globalPickerOptions = exports.globalPickerOptions = {
+  allowInputToggle: true
 };

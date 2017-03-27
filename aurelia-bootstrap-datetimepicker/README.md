@@ -34,6 +34,8 @@ model.bind="dateObject"  // output --> Thu May 05 2005 10:00:00 GMT-0400 (Easter
 ### Available Options
 Every options of `Bootstrap Datepicker` can be call through `options.bind=""`. For the complete list, please visit the official site [Bootstrap Datepicker - Options](http://eonasdan.github.io/bootstrap-datetimepicker/Options/).
 
+**NOTE:** 
+The extra attributes can also be defined globally through `main.js` via a `config.options` configuration, see [Global Options](#globaloption)
 
 Examples
 
@@ -69,7 +71,7 @@ _from the View_
 ```
 
 **NOTE:** 
-The extra attributes can also be defined globally through `main.js` configuration, see [Global Options](#globaloption)
+The extra attributes can also be defined globally through `main.js` via a `config.extra` configuration, see [Global Options](#globaloption)
 
 
 ### Available Methods/Functions
@@ -226,7 +228,7 @@ export function configure(aurelia) {
 <a name="globaloption"></a>
 
 ### Global Options
-You can change any of the global options directly in the `main.js` through a `config.options` as shown below:
+You can change any of the global options directly in the `main.js` through a `config` as shown below:
 
 ```javascript
 export function configure(aurelia) {
@@ -234,8 +236,12 @@ export function configure(aurelia) {
     .standardConfiguration()
     .developmentLogging()
     .plugin('aurelia-bootstrap-datetimepicker', config => {
-      config.options.iconBase = 'glyphicon';
-      config.options.withDateIcon = true;
+      // extra attributes, with config.extra
+      config.extra.iconBase = 'glyphicon';
+      config.extra.withDateIcon = true;
+
+      // or even any picker options, with config.options
+      config.options.allowInputToggle = true;
     });
 
   aurelia.start().then(() => aurelia.setRoot());
