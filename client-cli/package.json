@@ -1,6 +1,6 @@
 {
   "name": "aurelia-bootstrap-plugins",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "Aurelia samples for Aurelia-Bootstrap-Plugins",
   "keywords": [
     "aurelia",
@@ -20,8 +20,8 @@
     "url": "https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins"
   },
   "dependencies": {
-    "aurelia-bootstrap-datetimepicker": "^0.3.2",
-    "aurelia-bootstrap-tagsinput": "^0.3.2",
+    "aurelia-bootstrap-datetimepicker": "^1.0.2",
+    "aurelia-bootstrap-tagsinput": "^1.0.0",
     "aurelia-bootstrapper": "^1.0.0",
     "aurelia-http-client": "^1.0.4",
     "bluebird": "^3.4.1",

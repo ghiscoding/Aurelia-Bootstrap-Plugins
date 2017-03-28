@@ -13,7 +13,15 @@ Bluebird.config({ warnings: false });
 export async function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
-    .plugin('aurelia-bootstrap-datetimepicker')
+    .plugin('aurelia-bootstrap-datetimepicker', config => {
+      // extra attributes, with config.extra
+      config.extra.iconBase = 'font-awesome';
+      config.extra.withDateIcon = true;
+
+      // or even any picker options, with config.options
+      config.options.showTodayButton = true;
+    })
+    .plugin('aurelia-bootstrap-select')
     .plugin('aurelia-bootstrap-tagsinput')
     .developmentLogging();
 

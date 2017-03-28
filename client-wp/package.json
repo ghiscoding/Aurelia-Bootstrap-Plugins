@@ -1,6 +1,6 @@
 {
   "name": "aurelia-bootstrap-plugins",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "Aurelia samples for Aurelia-Bootstrap-Plugins",
   "keywords": [
     "aurelia",
@@ -60,8 +60,8 @@
     }
   },
   "dependencies": {
-    "aurelia-bootstrap-datetimepicker": "^0.3.2",
-    "aurelia-bootstrap-tagsinput": "^0.3.2",
+    "aurelia-bootstrap-datetimepicker": "^1.0.2",
+    "aurelia-bootstrap-tagsinput": "^1.0.0",
     "aurelia-bootstrapper-webpack": "^1.1.0",
     "aurelia-event-aggregator": "^1.0.1",
     "aurelia-fetch-client": "^1.1.1",

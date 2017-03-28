@@ -15,7 +15,7 @@ export class Edit {
   constructor() {
     this.post = {
       categories: 'News,Javascript',
-      dateEntered: moment().format("YYYY-MM-DD")
+      dateEntered: '2005-05-05 10:00'
     }
   }
 
@@ -35,6 +35,14 @@ export class Edit {
 
   addTag() {
     this.tag.methods.add('Tag1');
+  }
+
+  changePostDateValue(dateStr) {
+    this.post.dateEntered = dateStr;
+  }
+
+  changePostDateObject(dateStr) {
+    this.myDateObject = new Date(dateStr);
   }
 
   removeAllTag() {
