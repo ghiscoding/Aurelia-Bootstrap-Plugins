@@ -106,7 +106,7 @@ var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_
     this.domElm = (0, _jquery2.default)(this.elm).find('.date');
 
     var pickerOptions = this.options || {};
-    if (!this.options.icons) {
+    if (!this.options || this.options && !this.options.icons) {
       pickerOptions.icons = this.attachIconBase();
     }
 
@@ -165,7 +165,11 @@ var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_
     this._originalDateObject = (0, _moment2.default)(this.model).toDate() || this.elm.getAttribute('model');
     var options = this.options || this.elm.getAttribute('options');
     var value = this._originalValue || this._originalDateObject;
-    var format = this._originalDateFormat = options.hasOwnProperty('format') ? options.format : null;
+    var format = void 0;
+
+    if (options) {
+      format = this._originalDateFormat = options.hasOwnProperty('format') ? options.format : null;
+    }
 
     this.model = (0, _moment2.default)(value).toDate();
     this.value = (0, _moment2.default)(value).format(format);

@@ -84,7 +84,7 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
     this.domElm = $(this.elm).find('.date');
 
     let pickerOptions = this.options || {};
-    if (!this.options.icons) {
+    if (!this.options || this.options && !this.options.icons) {
       pickerOptions.icons = this.attachIconBase();
     }
 
@@ -143,7 +143,11 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
     this._originalDateObject = moment(this.model).toDate() || this.elm.getAttribute('model');
     let options = this.options || this.elm.getAttribute('options');
     let value = this._originalValue || this._originalDateObject;
-    let format = this._originalDateFormat = options.hasOwnProperty('format') ? options.format : null;
+    let format;
+
+    if (options) {
+      format = this._originalDateFormat = options.hasOwnProperty('format') ? options.format : null;
+    }
 
     this.model = moment(value).toDate();
     this.value = moment(value).format(format);

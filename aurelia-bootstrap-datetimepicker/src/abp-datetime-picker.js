@@ -14,7 +14,7 @@ export class AbpDatetimePickerCustomElement {
   @bindable iconBase = globalExtraOptions.iconBase;
   @bindable withDateIcon = globalExtraOptions.withDateIcon;
 
-  // options (from the View)
+  // picker options
   @bindable options;
 
   // events (from the View)
@@ -41,7 +41,7 @@ export class AbpDatetimePickerCustomElement {
 
     // add base icons, unless user already added some
     let pickerOptions = this.options || {};
-    if (!this.options.icons) {
+    if (!this.options || (this.options && !this.options.icons)) {
       pickerOptions.icons = this.attachIconBase();
     }
 
@@ -107,7 +107,11 @@ export class AbpDatetimePickerCustomElement {
     this._originalDateObject = moment(this.model).toDate() || this.elm.getAttribute('model');
     let options = this.options || this.elm.getAttribute('options');
     let value = this._originalValue || this._originalDateObject;
-    let format = this._originalDateFormat = options.hasOwnProperty('format') ? options.format : null;
+    let format;
+
+    if (options) {
+      format = this._originalDateFormat = options.hasOwnProperty('format') ? options.format : null;
+    }
 
     this.model = moment(value).toDate();
     this.value = moment(value).format(format);

@@ -106,7 +106,7 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
           this.domElm = $(this.elm).find('.date');
 
           var pickerOptions = this.options || {};
-          if (!this.options.icons) {
+          if (!this.options || this.options && !this.options.icons) {
             pickerOptions.icons = this.attachIconBase();
           }
 
@@ -165,7 +165,11 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
           this._originalDateObject = moment(this.model).toDate() || this.elm.getAttribute('model');
           var options = this.options || this.elm.getAttribute('options');
           var value = this._originalValue || this._originalDateObject;
-          var format = this._originalDateFormat = options.hasOwnProperty('format') ? options.format : null;
+          var format = void 0;
+
+          if (options) {
+            format = this._originalDateFormat = options.hasOwnProperty('format') ? options.format : null;
+          }
 
           this.model = moment(value).toDate();
           this.value = moment(value).format(format);

@@ -73,6 +73,7 @@ _from the View_
 **NOTE:** 
 The extra attributes can also be defined globally through `main.js` via a `config.extra` configuration, see [Global Options](#globaloption)
 
+<a name="methods"></a>
 
 ### Available Methods/Functions
 Again every single methods which comes with `Bootstrap Datepicker` are available. For the complete list, please visit the official site [Bootstrap Datepicker - Functions](http://eonasdan.github.io/bootstrap-datetimepicker/Functions/). 
@@ -208,7 +209,6 @@ let config = generateConfig(
 Make the plugin available globally in your `main.js` file. Please note the exported class is `abp-tags-input`
 
 #### For WebPack only (main.js)
-
 ```javascript
 import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css';
 ```
@@ -240,7 +240,7 @@ export function configure(aurelia) {
       config.extra.iconBase = 'glyphicon';
       config.extra.withDateIcon = true;
 
-      // or even any picker options, with config.options
+      // or any picker options, with config.options
       config.options.allowInputToggle = true;
     });
 
