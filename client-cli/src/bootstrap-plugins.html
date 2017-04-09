@@ -58,6 +58,54 @@
                 <abp-datetime-picker element.bind="picker" value.bind="post.dateEntered2" model.bind="myDateObject2" options.bind="{ format:'YYYY-MM-DD', showTodayButton: true }"></abp-datetime-picker>
             </div>
         </div>
+
+        <div class="col-md-12">
+            <hr />
+        </div>
+
+        <h3>Bootstrap-Select</h3>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label class="control-label">Basic - String Collection</label>
+                <div>Value: ${camping}<br /> Item: ${campingValue}</div>
+                <div>
+                    <abp-select collection.bind="allCampingStuff" selected-value.bind="camping" selected-item.bind="campingValue"></abp-select>
+                </div>
+                
+                <label class="control-label">Object Collection - Empty on Null, Change Title, Class Styling, Alternate Title (on Relish)</label>
+                <div>Value: ${condimentValue} <br /> Item: ${condiment | stringify}</div>
+                <div>
+                    <abp-select picker-options.bind="selectOptions" empty-on-null="true" selected-item.bind="condiment" selected-value.bind="condimentValue" disabled="false" collection.bind="allCondiments" data-mapping-structure.bind="selectMappingStructure" object-key="id" element.bind="selectCondiment"></abp-select>
+                </div>                    
+
+                <label class="control-label">Object Collection - Data Content &amp; disabled last item</label>
+                <div>Value: ${condimentStyledValue} <br /> Item: ${condimentStyled | stringify}</div>
+                <div>
+                    <abp-select picker-options.bind="selectOptions" selected-item.bind="condimentStyled" selected-value.bind="condimentStyledValue" disabled="false" collection.bind="allStyledCondiments" data-mapping-structure.bind="selectMappingStructure" object-key="id" element.bind="selectStyledCondiment"></abp-select>
+                </div>                    
+
+                <label class="control-label">Optgroups, Multiple &amp; disabled last bread</label>
+                <div>Values: ${picnicValue} <br /> Items: ${picnic | stringify}</div>
+                <div>
+                    <abp-select id="multiSelect" picker-options.bind="selectOptions" selected-item.bind="picnic" selected-value.bind="picnicValue" collection.bind="allSelectionWithGroups" has-optgroup="true" data-mapping-structure.bind="selectMappingStructure" multiple="true" object-key="id" element.bind="selectPicnic"></abp-select>
+                </div>   
+                                 
+            </div>
+            <div class="">
+                <button class="btn btn-sm btn-primary"
+                click.delegate="preSelectFirstOptions()">
+                Change selection by item
+                </button>
+                <button class="btn btn-sm btn-primary"
+                click.delegate="preSelectSecondOptions()">
+                Change selection by value
+                </button>
+                <button class="btn btn-sm btn-warning"
+                click.delegate="toggleOptgroupBreads()">
+                Toggle disabled 'Breads' optgroup
+                </button>
+            </div>
+        </div>
     </form>
   </div>
 </template>

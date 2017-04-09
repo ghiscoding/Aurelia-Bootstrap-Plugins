@@ -12,6 +12,7 @@ Promise.config({
 export function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
+    .feature('resources')
     .plugin('aurelia-bootstrap-datetimepicker', config => {
       // extra attributes, with config.extra
       config.extra.iconBase = 'font-awesome';
@@ -20,6 +21,7 @@ export function configure(aurelia) {
       // or even any picker options, with config.options
       config.options.showTodayButton = true;
     })
+    .plugin('aurelia-bootstrap-select')
     .plugin('aurelia-bootstrap-tagsinput');
 
   if (environment.debug) {

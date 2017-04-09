@@ -22,10 +22,13 @@
   "dependencies": {
     "aurelia-bootstrap-datetimepicker": "^1.0.2",
     "aurelia-bootstrap-tagsinput": "^1.0.0",
+    "aurelia-bootstrap-select": "^0.1.0",
     "aurelia-bootstrapper": "^1.0.0",
+    "aurelia-cli": "^0.28.0",
     "aurelia-http-client": "^1.0.4",
     "bluebird": "^3.4.1",
     "bootstrap": "^3.3.7",
+    "bootstrap-select": "^1.12.2",
     "eonasdan-bootstrap-datetimepicker": "^4.17.46",
     "font-awesome": "^4.7.0",
     "jquery": "^3.1.0",
@@ -33,7 +36,6 @@
   },
   "peerDependencies": {},
   "devDependencies": {
-    "aurelia-cli": "^0.24.0",
     "aurelia-testing": "^1.0.0-beta.2.0.0",
     "aurelia-tools": "^0.2.4",
     "babel-eslint": "^6.1.2",

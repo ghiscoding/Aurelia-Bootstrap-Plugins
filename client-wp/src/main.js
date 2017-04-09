@@ -2,6 +2,7 @@
 import '../styles/styles.css';
 import 'font-awesome/css/font-awesome.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-select/dist/css/bootstrap-select.min.css';
 import 'bootstrap-tagsinput/dist/bootstrap-tagsinput.css';
 import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css';
 import 'bootstrap';
@@ -13,6 +14,7 @@ Bluebird.config({ warnings: false });
 export async function configure(aurelia) {
   aurelia.use
     .standardConfiguration()
+    .feature('resources')
     .plugin('aurelia-bootstrap-datetimepicker', config => {
       // extra attributes, with config.extra
       config.extra.iconBase = 'font-awesome';
