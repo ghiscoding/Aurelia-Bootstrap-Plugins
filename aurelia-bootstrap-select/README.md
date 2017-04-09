@@ -54,14 +54,12 @@ Examples
 
 _from the View_
 ```html
-<abp-select picker-options.bind="selectOptions" 
-picker-options.bind="{ actionsBox: true }" ...></abp-select>
+<abp-select picker-options.bind="{ actionsBox: true }" ...></abp-select>
 ```
 
-_from the ViewModel_
+_or from the View and ViewModel_
 ```html
-<abp-select picker-options.bind="selectOptions" 
-picker-options.bind="pickerOptions" ...></abp-select>
+<abp-select picker-options.bind="selectOptions" ...></abp-select>
 ```
 ```javascript
 export class Example {
