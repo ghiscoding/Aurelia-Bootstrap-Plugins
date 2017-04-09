@@ -187,10 +187,11 @@ export function configure(aurelia) {
 }
 ```
 
-### License
+## License
 [MIT License](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/blob/master/LICENSE)
 
-### Contributions/Comments
-Contributions are welcome. This plugin was created to help the community and myself and was mainly done through my free time. If you wish to suggest something and/or want to make a PR (Pull Request), please feel free to do so. Also, please be respectful. 
+## Contributions/Comments
+Contributions are welcome. This plugin was created to help the community (and myself), if you wish to suggest something and/or want to make a PR (Pull Request), please feel free to do so.
 
-Finally, if you like and use this Aurelia-Bootstrap-Plugin, please click on the :star: and add it as a favorite.
+## Use it, like it? 
+You like and use an Aurelia-Bootstrap-Plugin, please click on the :star: and spead the word.

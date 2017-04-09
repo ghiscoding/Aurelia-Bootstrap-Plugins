@@ -219,8 +219,10 @@ let myCollection = [
     { id: 1, option: 'Ketchup', company: 'Heinz' },
     { id: 2, option: 'Mustard', company: 'French\'s' }
 ];
+```
 
 _on View_
+
 ```html
 <abp-select object-key="id" collection.bind="myCollection" ...></abp-select>
 ```
