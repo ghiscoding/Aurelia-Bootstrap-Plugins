@@ -1,7 +1,7 @@
 # Aurelia-Bootstrap-Plugins
 
 ### Introduction
-`Aurelia-Bootstrap-Plugins` was coded to bridge with a set of commonly used 3rd party Bootstrap addons. The goal of these Plugins set is to support, as much as possible, the full suite of (`options`, `methods` & `events`) of their original 3rd party addons while being to easily call them in Aurelia.
+`Aurelia-Bootstrap-Plugins` was coded to bridge with a set of commonly used 3rd party Bootstrap addons. The goal of these Plugins is to support, as much as possible, the full suite of (`options`, `methods` & `events`) from their original 3rd party addons while being able to easily use them in Aurelia.
 
 ### Available plugins
 * [Aurelia-Bootstrap-Datetimepicker](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/tree/master/aurelia-bootstrap-datetimepicker) on [NPM](https://www.npmjs.com/package/aurelia-bootstrap-datetimepicker) / source [Eonasdan Bootstrap Datepicker](https://eonasdan.github.io/bootstrap-datetimepicker/)
