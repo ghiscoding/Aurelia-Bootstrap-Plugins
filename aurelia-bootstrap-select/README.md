@@ -75,7 +75,7 @@ export class Example {
 <a name="mapping"></a>
 
 ### Mapping Data Structure
-A default mapping data structure is used by the tool to apply certain styling or do certain action simply by reading a property pulled from the collection (for example, a property `disabled` in the collection can be used to disabled an option from the select). The list of the mapping is the following
+A default mapping data structure is used by the tool to apply certain styling or do certain action simply by reading a property pulled from the collection (for example, a property `disabled` in the collection can be used to disabled an option from the select). These mapping were created mainly for all the options that are available only as `data-zzz` (for examle `data-subtext`) that are defined in [Bootstrap-Select Examples](http://silviomoreto.github.io/bootstrap-select/examples/).  The list of the mapping is the following
 
 ```javascript
 mappingDataStructure: {
@@ -110,6 +110,12 @@ _in the ViewModel_
 let newMapping = {
   subtext: 'company'
 };
+
+// Given this collection of objects
+let myCollection = [
+    { id: 1, option: 'Ketchup', company: 'Heinz' },
+    { id: 2, option: 'Mustard', company: 'French\'s' }
+];
 ```
 
 **NOTE:** 
@@ -144,8 +150,8 @@ export class Example {
 
 ### Extra Methods/Functions
 To provide more functionality, we added extra methods that are also exposed the same way as mentioned in previous section [Available Methods](#methods). The list of extra methods is the following:
-* disableOptgroupByIndex(index, isDisable = true)
-* disableOptgroupByLabel(label, isDisable = true)
+* `disableOptgroupByIndex(index, isDisable = true)`
+* `disableOptgroupByLabel(label, isDisable = true)`
 
 Example
 
@@ -197,16 +203,22 @@ export class Example {
 ### Disabled
 There is multiple `disabled` options available. You can disable any of the following:
 * option 
-  * _by a mapping property (refer to [mapping data structure](#mapping)_
+  * _by a mapping property in your collection (refer to [mapping data structure](#mapping))_
 * optgroup 
   * _by a [mapping](#mapping) property or a [method](#extramethods)_
-* element 
+* element (the custom element itself)
   * _by adding `disabled` directly on the element_
 
 ### Multiple (select)
-To make the `Bootstrap Select` be a multi-select, simply add the `multiple` attribute to the element. 
+To make the `Bootstrap Select` be a multi-select, simply add the `multiple="true"` attribute to the element. 
 
-**Note** The attribute is used as a boolean attribute, so writing it this way `multiple="false"` will not make it a multi-select.
+_on View_
+
+```html
+<abp-select collection.bind="myCollection" multiple="true" ...></abp-select>
+```
+
+**Note** The attribute is used as a boolean attribute, so passing `false` like `multiple="false"` will make the select act as a regular single select.
 
 ### Object-Key (attribute)
 When using a collection a objects, the tool will use an attribute called `object-key` (by default is set to `id`) to know which property of the object to do comparison
@@ -224,13 +236,12 @@ let myCollection = [
 _on View_
 
 ```html
-<abp-select object-key="id" collection.bind="myCollection" ...></abp-select>
+<abp-select collection.bind="myCollection" object-key="id" ...></abp-select>
 ```
 
 ### Optgroup
-To have optgroup in your select list, just use the attribute `has-optgroup`. The optgroup will use the default mapping property of `groupLabel` which is `group` (refer to [Mapping Data Structure](#mapping) if you want to change it)
+To have optgroup in your select list, just use the attribute `has-optgroup="true"`. The optgroup will use the default mapping property of `groupLabel` which is `group` (refer to [Mapping Data Structure](#mapping) if you want to change it)
 
-**Note** The attribute is used as a boolean attribute, so writing it this way `has-optgroup="false"` will not use the optgroup.
 
 Example:
 
@@ -243,10 +254,13 @@ let myCollection = [
     { id: 12. option: 'Toasted', group: 'Breads' },
 ];
 ```
+
 _in View, it will automatically use the group property_
 ```html
 <abp-select collection.bind="allCondiments" has-optgroup="true"></abp-select>
 ```
+
+**Note** The attribute is used as a boolean attribute, so passing `false` as `has-optgroup="false"` will not show the optgroup.
 
 ## Installation
 You can run the examples or build your own by doing the following.
@@ -323,7 +337,7 @@ let config = generateConfig(
 <a name="mainjs"></a>
 
 ### Aurelia (main.js)
-Make the plugin available globally in your `main.js` file. Please note the exported class is `abp-tags-input`
+Make the plugin available globally in your `main.js` file. Please note the exported class is `abp-select`
 
 #### For WebPack only (main.js)
 ```javascript

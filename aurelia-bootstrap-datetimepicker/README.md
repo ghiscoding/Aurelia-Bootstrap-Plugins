@@ -206,7 +206,7 @@ let config = generateConfig(
 <a name="mainjs"></a>
 
 ### Aurelia (main.js)
-Make the plugin available globally in your `main.js` file. Please note the exported class is `abp-tags-input`
+Make the plugin available globally in your `main.js` file. Please note the exported class is `abp-datetime-picker`
 
 #### For WebPack only (main.js)
 ```javascript
