@@ -21,10 +21,10 @@
   },
   "dependencies": {
     "aurelia-bootstrap-datetimepicker": "^1.0.2",
-    "aurelia-bootstrap-tagsinput": "^1.0.0",
     "aurelia-bootstrap-select": "^0.1.0",
+    "aurelia-bootstrap-tagsinput": "^1.0.0",
     "aurelia-bootstrapper": "^1.0.0",
-    "aurelia-cli": "^0.28.0",
+    "aurelia-cli": "^0.26.1",
     "aurelia-http-client": "^1.0.4",
     "bluebird": "^3.4.1",
     "bootstrap": "^3.3.7",

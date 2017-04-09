@@ -120,25 +120,13 @@
             "name": "bootstrap",
             "path": "../node_modules/bootstrap/dist",
             "main": "js/bootstrap.min",
-            "deps": ["jquery"],
+            "deps": [
+              "jquery"
+            ],
             "exports": "$",
             "resources": [
               "css/bootstrap.css"
             ]
-          },
-          {
-            "name": "bootstrap-select",
-            "path": "../node_modules/bootstrap-select/dist",
-            "main": "js/bootstrap-select.min",
-            "resources": [
-              "css/bootstrap-select.min.css"
-            ]
-          },
-          {
-            "name": "aurelia-bootstrap-select",
-            "path": "../node_modules/aurelia-bootstrap-select/dist/amd",
-            "main": "index",
-            "resources": ["**/*.{css,html}"]
           },
           {
             "name": "bootstrap-tagsinput",
@@ -152,7 +140,9 @@
             "name": "aurelia-bootstrap-tagsinput",
             "path": "../node_modules/aurelia-bootstrap-tagsinput/dist/amd",
             "main": "index",
-            "resources": ["**/*.{css,html}"]
+            "resources": [
+              "**/*.{css,html}"
+            ]
           },
           {
             "name": "eonasdan-bootstrap-datetimepicker",
@@ -166,7 +156,25 @@
             "name": "aurelia-bootstrap-datetimepicker",
             "path": "../node_modules/aurelia-bootstrap-datetimepicker/dist/amd",
             "main": "index",
-            "resources": ["**/*.{css,html}"]
+            "resources": [
+              "**/*.{css,html}"
+            ]
+          },
+          {
+            "name": "bootstrap-select",
+            "main": "dist/js/bootstrap-select.js",
+            "path": "../node_modules/bootstrap-select",
+            "resources": [
+              "dist/css/bootstrap-select.min.css"
+            ]
+          },
+          {
+            "name": "aurelia-bootstrap-select",
+            "main": "index",
+            "path": "../node_modules/aurelia-bootstrap-select/dist/amd",
+            "resources": [
+              "**/*.{css,html}"
+            ]
           },
           {
             "name": "text",
@@ -190,6 +198,11 @@
           }
         ]
       }
-    ]
+    ],
+    "copyFiles": {
+      "node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2": "bootstrap/fonts",
+      "node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.woff": "bootstrap/fonts",
+      "node_modules/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf": "bootstrap/fonts"
+    }
   }
 }
