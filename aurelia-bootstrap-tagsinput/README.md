@@ -4,7 +4,8 @@
 An Aurelia Custom Element for the 3rd party addon [Bootstrap Tags Input](https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/)
 
 ### Screenshots
-Screenshots from the demo app 
+Screenshots from the demo app
+
 ![Aurelia-Bootstrap-Tagsinput](/aurelia-bootstrap-tagsinput/printscreen/abp-tagsinput.jpg)
 
 ### Usage

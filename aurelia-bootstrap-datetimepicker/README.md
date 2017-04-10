@@ -5,7 +5,8 @@ An Aurelia Custom Element for the 3rd party addon [Eonasdan Bootstrap Datepicker
 
 ### Screenshots
 
-Screenshots from the demo app 
+Screenshots from the demo app
+
 ![Aurelia-Bootstrap-Datetimepicker](/aurelia-bootstrap-datetimepicker/printscreen/abp-datetimepicker.jpg)
 
 ### Usage
