@@ -3,6 +3,11 @@
 ### Introduction
 An Aurelia Custom Element for the 3rd party addon [Eonasdan Bootstrap Datepicker](https://eonasdan.github.io/bootstrap-datetimepicker/)
 
+### Screenshots
+
+Screenshots from the demo app 
+![Aurelia-Bootstrap-Datetimepicker](/printscreen/Aurelia-Bootstrap-Datetimepicker.jpg)
+
 ### Usage
 A quick example of the code in action. Note that the value is available under the `value.bind`.
 ```html

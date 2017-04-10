@@ -3,6 +3,10 @@
 ### Introduction
 An Aurelia Custom Element for the 3rd party addon [Bootstrap-Select](http://silviomoreto.github.io/bootstrap-select/)
 
+### Screenshots
+
+Screenshots from the demo app 
+![Aurelia-Bootstrap-Select](/printscreen/Aurelia-Bootstrap-Select.jpg)
 
 ### Usage
 A quick example of the code in action. 
