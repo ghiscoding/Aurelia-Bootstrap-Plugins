@@ -6,7 +6,7 @@ An Aurelia Custom Element for the 3rd party addon [Eonasdan Bootstrap Datepicker
 ### Screenshots
 
 Screenshots from the demo app 
-![Aurelia-Bootstrap-Datetimepicker](/printscreen/Aurelia-Bootstrap-Datetimepicker.jpg)
+![Aurelia-Bootstrap-Datetimepicker](/aurelia-bootstrap-datetimepicker/printscreen/abp-datetimepicker.jpg)
 
 ### Usage
 A quick example of the code in action. Note that the value is available under the `value.bind`.

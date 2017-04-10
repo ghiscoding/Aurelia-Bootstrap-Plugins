@@ -5,7 +5,7 @@ An Aurelia Custom Element for the 3rd party addon [Bootstrap Tags Input](https:/
 
 ### Screenshots
 Screenshots from the demo app 
-![Aurelia-Bootstrap-Tagsinput](/printscreen/Aurelia-Bootstrap-Tagsinput.jpg)
+![Aurelia-Bootstrap-Tagsinput](/printscreen/abp-tagsinput.jpg)
 
 ### Usage
 A quick example of the code in action. Note that the value is available under the `value.bind`.
