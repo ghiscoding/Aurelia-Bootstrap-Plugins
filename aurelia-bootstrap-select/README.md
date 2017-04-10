@@ -7,7 +7,7 @@ An Aurelia Custom Element for the 3rd party addon [Bootstrap-Select](http://silv
 
 Screenshots from the demo app
 
-![Aurelia-Bootstrap-Select](/aurelia-bootstrap-select/printscreen/abp-select.png)
+![Aurelia-Bootstrap-Select](/aurelia-bootstrap-select/printscreen/abp-select.jpg)
 
 ### Usage
 A quick example of the code in action. 
