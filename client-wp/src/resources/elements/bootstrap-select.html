@@ -1,7 +1,0 @@
-<template>
-  <select id="testselect" class="selectpicker" value.bind="selectedIndex | numberToString" selected-item.bind="value">
-    <option repeat.for="item of items" value.bind="$index | numberToString">
-      ${item.name} (${item.diameter})
-    </option>
-  </select>
-</template>
