@@ -19,7 +19,7 @@ For conveniencies, we provide 2 bindable attributes (both are also `two-way` bin
 Example:
 
 ```html
-<abp-datetime-picker value.bind="dateEntered" model.bind="dateObject" options.bind="{ format: 'YYYY-MM-DD' }"></abp-datetime-picker>
+<abp-datetime-picker value.bind="dateEntered" model.bind="dateObject" options.bind="{ format:'YYYY-MM-DD hh:mm' }"></abp-datetime-picker>
 ```
 
 _if we use the date string '2005-05-05 10:00', the output will be (also note that I'm on the Eastern Timezone):_
@@ -140,7 +140,7 @@ npm install --save aurelia-bootstrap-datetimepicker
 <a name="cli"></a>
 
 #### Aurelia-CLI
-For `CLI` you will need to add (`aurelia-bootstrap-datetimepicker`) to your `aurelia.json` file. The exported class is `abp-datetime-picker`.
+For `CLI` you will need to add (`eonasdan-bootstrap-datetimepicker` and `aurelia-bootstrap-datetimepicker`) to your `aurelia.json` file. The exported class is `abp-datetime-picker`.
 ```javascript
 {
   "name": "eonasdan-bootstrap-datetimepicker",
@@ -154,7 +154,9 @@ For `CLI` you will need to add (`aurelia-bootstrap-datetimepicker`) to your `aur
   "name": "aurelia-bootstrap-datetimepicker",
   "path": "../node_modules/aurelia-bootstrap-datetimepicker/dist/amd",
   "main": "index",
-  "resources": ["**/*.{css,html}"]
+  "resources": [
+    "**/*.{css,html}"
+  ]
 },
 ```
 

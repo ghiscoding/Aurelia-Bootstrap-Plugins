@@ -238,12 +238,12 @@ _on View_
 ```
 
 ### Optgroup
-To have optgroup in your select list, just use the attribute `has-optgroup="true"`. The optgroup will use the default mapping property of `groupLabel` which is `group` (refer to [Mapping Data Structure](#mapping) if you want to change it)
+To have optgroup in your select list, just use the attribute `has-optgroup="true"`. The optgroup will use `group` as the default mapping (if you want to change it, refer to [Mapping Data Structure](#mapping) by changing the `groupLabel` property)
 
 
 Example:
 
-Given this collection of objects
+Given this collection of objects, with a `group` property.
 ```javascript
 let myCollection = [
     { id: 1, option: 'Ketchup', group: 'Condiments' },
@@ -253,7 +253,7 @@ let myCollection = [
 ];
 ```
 
-_in View, it will automatically use the group property_
+_in View, it will automatically use the `group` property_
 ```html
 <abp-select collection.bind="allCondiments" has-optgroup="true"></abp-select>
 ```
@@ -271,21 +271,23 @@ npm install --save aurelia-bootstrap-select
 <a name="cli"></a>
 
 #### Aurelia-CLI
-For `CLI` you will need to add (`aurelia-bootstrap-select`) to your `aurelia.json` file. The exported class is `abp-select`.
+For `CLI` you will need to add (`bootstrap-select` and `aurelia-bootstrap-select`) to your `aurelia.json` file. The exported class is `abp-select`.
 ```javascript
 {
   "name": "bootstrap-select",
-  "path": "../node_modules/bootstrap-select/dist",
-  "main": "js/bootstrap-select.min",
+  "main": "dist/js/bootstrap-select.js",
+  "path": "../node_modules/bootstrap-select",
   "resources": [
-    "css/bootstrap-select.min.css"
+    "dist/css/bootstrap-select.min.css"
   ]
 },
 {
   "name": "aurelia-bootstrap-select",
-  "path": "../node_modules/aurelia-bootstrap-select/dist/amd",
   "main": "index",
-  "resources": ["**/*.{css,html}"]
+  "path": "../node_modules/aurelia-bootstrap-select/dist/amd",
+  "resources": [
+    "**/*.{css,html}"
+  ]
 },
 ```
 

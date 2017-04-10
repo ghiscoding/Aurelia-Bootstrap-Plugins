@@ -131,7 +131,9 @@ For `CLI` you will need to add (`bootstrap-tagsinput` and `aurelia-bootstrap-tag
   "name": "aurelia-bootstrap-tagsinput",
   "path": "../node_modules/aurelia-bootstrap-tagsinput/dist/amd",
   "main": "index",
-  "resources": ["**/*.{css,html}"]
+  "resources": [
+    "**/*.{css,html}"
+  ]
 },
 ```
 
