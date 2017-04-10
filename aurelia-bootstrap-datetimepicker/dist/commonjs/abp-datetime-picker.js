@@ -161,18 +161,21 @@ var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_
   };
 
   AbpDatetimePickerCustomElement.prototype.bind = function bind() {
-    this._originalValue = this.value || this.elm.getAttribute('value');
-    this._originalDateObject = (0, _moment2.default)(this.model).toDate() || this.elm.getAttribute('model');
-    var options = this.options || this.elm.getAttribute('options');
-    var value = this._originalValue || this._originalDateObject;
     var format = void 0;
-
+    var options = this.options || this.elm.getAttribute('options');
     if (options) {
       format = this._originalDateFormat = options.hasOwnProperty('format') ? options.format : null;
     }
+    if (this.model) {
+      this._originalDateObject = (0, _moment2.default)(this.model).toDate() || this.elm.getAttribute('model');
+    }
+    this._originalValue = this.value || this.elm.getAttribute('value');
+    var value = this._originalValue || this._originalDateObject;
 
-    this.model = (0, _moment2.default)(value).toDate();
-    this.value = (0, _moment2.default)(value).format(format);
+    if (value) {
+      this.model = (0, _moment2.default)(value).toDate();
+      this.value = (0, _moment2.default)(value).format(format);
+    }
   };
 
   AbpDatetimePickerCustomElement.prototype.applyExposeEvents = function applyExposeEvents() {

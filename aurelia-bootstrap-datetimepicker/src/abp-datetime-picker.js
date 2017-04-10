@@ -103,18 +103,21 @@ export class AbpDatetimePickerCustomElement {
    * Keep original value(s) that could be passed by the user ViewModel.
    */
   bind() {
-    this._originalValue = this.value || this.elm.getAttribute('value');
-    this._originalDateObject = moment(this.model).toDate() || this.elm.getAttribute('model');
-    let options = this.options || this.elm.getAttribute('options');
-    let value = this._originalValue || this._originalDateObject;
     let format;
-
+    let options = this.options || this.elm.getAttribute('options');
     if (options) {
       format = this._originalDateFormat = options.hasOwnProperty('format') ? options.format : null;
     }
+    if (this.model) {
+      this._originalDateObject = moment(this.model).toDate() || this.elm.getAttribute('model');
+    }
+    this._originalValue = this.value || this.elm.getAttribute('value');
+    let value = this._originalValue || this._originalDateObject;
 
-    this.model = moment(value).toDate();
-    this.value = moment(value).format(format);
+    if (value) {
+      this.model = moment(value).toDate();
+      this.value = moment(value).format(format);
+    }
   }
 
   /**

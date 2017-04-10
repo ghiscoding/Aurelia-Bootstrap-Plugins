@@ -161,18 +161,21 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
         };
 
         AbpDatetimePickerCustomElement.prototype.bind = function bind() {
-          this._originalValue = this.value || this.elm.getAttribute('value');
-          this._originalDateObject = moment(this.model).toDate() || this.elm.getAttribute('model');
-          var options = this.options || this.elm.getAttribute('options');
-          var value = this._originalValue || this._originalDateObject;
           var format = void 0;
-
+          var options = this.options || this.elm.getAttribute('options');
           if (options) {
             format = this._originalDateFormat = options.hasOwnProperty('format') ? options.format : null;
           }
+          if (this.model) {
+            this._originalDateObject = moment(this.model).toDate() || this.elm.getAttribute('model');
+          }
+          this._originalValue = this.value || this.elm.getAttribute('value');
+          var value = this._originalValue || this._originalDateObject;
 
-          this.model = moment(value).toDate();
-          this.value = moment(value).format(format);
+          if (value) {
+            this.model = moment(value).toDate();
+            this.value = moment(value).format(format);
+          }
         };
 
         AbpDatetimePickerCustomElement.prototype.applyExposeEvents = function applyExposeEvents() {

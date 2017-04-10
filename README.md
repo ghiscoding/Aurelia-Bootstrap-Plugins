@@ -17,7 +17,7 @@
 
 
 ## Samples
-A quick Aurelia skeleton was put in place with all the currently available `Aurelia-Bootstrap-Plugins`
+A quick Aurelia skeleton for `CLI` &amp; `WebPack` was put in place with all the currently available `Aurelia-Bootstrap-Plugins`
 
 #### Aurelia-CLI
 ```bash
