@@ -20,6 +20,7 @@ export function configure(aurelia) {
       config.extra.withDateIcon = true;
 
       // or even any picker options, with config.options
+      config.options.format = 'YYYY-MM-DD';
       config.options.showTodayButton = true;
     })
     .plugin('aurelia-bootstrap-select')

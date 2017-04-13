@@ -60,7 +60,7 @@
     }
   },
   "dependencies": {
-    "aurelia-bootstrap-datetimepicker": "^1.0.4",
+    "aurelia-bootstrap-datetimepicker": "^1.0.5",
     "aurelia-bootstrap-select": "^0.1.0",
     "aurelia-bootstrap-tagsinput": "^1.0.0",
     "aurelia-bootstrapper-webpack": "^1.1.0",

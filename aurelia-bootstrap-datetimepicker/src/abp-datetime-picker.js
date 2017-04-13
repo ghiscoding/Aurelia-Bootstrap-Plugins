@@ -15,7 +15,7 @@ export class AbpDatetimePickerCustomElement {
   @bindable withDateIcon = globalExtraOptions.withDateIcon;
 
   // picker options
-  @bindable options;
+  @bindable options = {};
 
   // events (from the View)
   @bindable onHide;
@@ -51,9 +51,10 @@ export class AbpDatetimePickerCustomElement {
     this.exposeMethods();
 
     // finally create the datepicker with all options
-    pickerOptions = Object.assign({}, globalPickerOptions, pickerOptions);
-    this.domElm.datetimepicker(pickerOptions);
+    this.options = Object.assign({}, globalPickerOptions, pickerOptions);
+    this.domElm.datetimepicker(this.options);
 
+    // update Value & Model binding on a Date picker changed (watch)
     this.domElm.on('dp.change', (e) => {
       this.model = moment(e.date).toDate();
       this.value = moment(e.date).format(this._format);
@@ -103,9 +104,12 @@ export class AbpDatetimePickerCustomElement {
    * Keep original value(s) that could be passed by the user ViewModel.
    */
   bind() {
-    let options = this.options || this.elm.getAttribute('options');
-    if (options) {
-      this._format = this._originalDateFormat = options.hasOwnProperty('format') ? options.format : null;
+    // get the picker options (priority is Global Options first, then user option which could overwrite the Global options)
+    let pickerOptions = this.options || this.elm.getAttribute('options');
+    this.options = Object.assign({}, globalPickerOptions, pickerOptions);
+
+    if (this.options) {
+      this._format = this._originalDateFormat = this.options.hasOwnProperty('format') ? this.options.format : null;
     }
     if (this.model) {
       this._originalDateObject = moment(this.model).toDate() || this.elm.getAttribute('model');

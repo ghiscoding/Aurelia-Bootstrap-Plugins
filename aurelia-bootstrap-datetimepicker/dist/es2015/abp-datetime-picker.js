@@ -91,8 +91,8 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
     this.applyExposeEvents();
     this.exposeMethods();
 
-    pickerOptions = Object.assign({}, globalPickerOptions, pickerOptions);
-    this.domElm.datetimepicker(pickerOptions);
+    this.options = Object.assign({}, globalPickerOptions, pickerOptions);
+    this.domElm.datetimepicker(this.options);
 
     this.domElm.on('dp.change', e => {
       this.model = moment(e.date).toDate();
@@ -138,9 +138,11 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
   }
 
   bind() {
-    let options = this.options || this.elm.getAttribute('options');
-    if (options) {
-      this._format = this._originalDateFormat = options.hasOwnProperty('format') ? options.format : null;
+    let pickerOptions = this.options || this.elm.getAttribute('options');
+    this.options = Object.assign({}, globalPickerOptions, pickerOptions);
+
+    if (this.options) {
+      this._format = this._originalDateFormat = this.options.hasOwnProperty('format') ? this.options.format : null;
     }
     if (this.model) {
       this._originalDateObject = moment(this.model).toDate() || this.elm.getAttribute('model');
@@ -287,7 +289,9 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
   }
 }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'options', [bindable], {
   enumerable: true,
-  initializer: null
+  initializer: function () {
+    return {};
+  }
 }), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, 'onHide', [bindable], {
   enumerable: true,
   initializer: null

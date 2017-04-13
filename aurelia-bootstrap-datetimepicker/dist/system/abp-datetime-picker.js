@@ -113,8 +113,8 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
           this.applyExposeEvents();
           this.exposeMethods();
 
-          pickerOptions = Object.assign({}, globalPickerOptions, pickerOptions);
-          this.domElm.datetimepicker(pickerOptions);
+          this.options = Object.assign({}, globalPickerOptions, pickerOptions);
+          this.domElm.datetimepicker(this.options);
 
           this.domElm.on('dp.change', function (e) {
             _this.model = moment(e.date).toDate();
@@ -160,9 +160,11 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
         };
 
         AbpDatetimePickerCustomElement.prototype.bind = function bind() {
-          var options = this.options || this.elm.getAttribute('options');
-          if (options) {
-            this._format = this._originalDateFormat = options.hasOwnProperty('format') ? options.format : null;
+          var pickerOptions = this.options || this.elm.getAttribute('options');
+          this.options = Object.assign({}, globalPickerOptions, pickerOptions);
+
+          if (this.options) {
+            this._format = this._originalDateFormat = this.options.hasOwnProperty('format') ? this.options.format : null;
           }
           if (this.model) {
             this._originalDateObject = moment(this.model).toDate() || this.elm.getAttribute('model');
@@ -317,7 +319,9 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
         }
       }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'options', [bindable], {
         enumerable: true,
-        initializer: null
+        initializer: function initializer() {
+          return {};
+        }
       }), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, 'onHide', [bindable], {
         enumerable: true,
         initializer: null

@@ -36,15 +36,15 @@
                     <span class="text-danger">Formatted Date: </span>${post.dateEntered} <br/>
                     <span class="text-danger">Date Object:</span> ${myDateObject}
                 </div>
-                <abp-datetime-picker with-date-icon="false" element.bind="picker" value.bind="post.dateEntered" model.bind="myDateObject" options.bind="{ format:'YYYY-MM-DD hh:mm' }"></abp-datetime-picker>
+                <abp-datetime-picker with-date-icon="false" element.bind="picker" value.bind="post.dateEntered" model.bind="myDateObject" options.bind="{ format:'YYYY-MM-DD HH:mm' }"></abp-datetime-picker>
             </div>
             <button class="btn btn-primary btn-sm"
-                click.delegate="changePostDateValue('2000-01-05 12:00')">
-                Change Date Value #1 to January 5, 2000
+                click.delegate="changePostDateValue('2000-01-05 13:33')">
+                Change value.bind => Jan 5, 2000 - 1:33pm
             </button>
             <button class="btn btn-primary btn-sm"
-                click.delegate="changePostDateObject('2010-02-02 02:00')">
-                Change Date Object #1 to January 2, 2010
+                click.delegate="changePostDateObject('2010-02-02 10:00')">
+                Change model.bind => Feb 2, 2010 - 10am
             </button>
 
             <hr/> 
@@ -55,7 +55,7 @@
                     <span class="text-danger">Formatted Date: </span>${post.dateEntered2} <br />
                     <span class="text-danger">Date Object:</span> ${myDateObject2}
                 </div>
-                <abp-datetime-picker element.bind="picker" value.bind="post.dateEntered2" model.bind="myDateObject2" options.bind="{ format:'YYYY-MM-DD', showTodayButton: true }"></abp-datetime-picker>
+                <abp-datetime-picker element.bind="picker" value.bind="post.dateEntered2" model.bind="myDateObject2" options.bind="{ showTodayButton: true }"></abp-datetime-picker>
             </div>
         </div>
 

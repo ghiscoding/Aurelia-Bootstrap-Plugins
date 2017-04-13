@@ -52,7 +52,7 @@ export class Edit {
     this.post = {
       categories: 'News,Javascript,C#'
     };
-    this.myDateObject = new Date(2017, 1, 1);
+    this.myDateObject = new Date(2017, 1, 1, 14, 28);
     this.myDateObject2 = moment();
     this.camping = 'Flashlight';
     // this.picnic = [{ id: 2}, {id: 4 }];
