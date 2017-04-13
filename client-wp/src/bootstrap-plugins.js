@@ -1,4 +1,5 @@
 import {bindable, inject} from 'aurelia-framework';
+import moment from 'moment';
 
 @inject()
 export class Edit {
@@ -9,7 +10,6 @@ export class Edit {
   @bindable selectPicnic;
   @bindable tag;
 
-  dateEntered = null;
   post = {};
   picker;
   tag;
@@ -52,6 +52,7 @@ export class Edit {
       categories: 'News,Javascript,C#'
     };
     this.myDateObject = new Date(2017, 1, 1);
+    this.myDateObject2 = moment();
     this.camping = 'Flashlight';
     // this.picnic = [{ id: 2}, {id: 4 }];
     // this.condiment = { id: 4 };

@@ -30,6 +30,7 @@ export class AbpDatetimePickerCustomElement {
   _originalDateObject;
   _events = {};
   _methods = {};
+  _format;
 
   constructor(elm) {
     this.elm = elm;
@@ -54,9 +55,8 @@ export class AbpDatetimePickerCustomElement {
     this.domElm.datetimepicker(pickerOptions);
 
     this.domElm.on('dp.change', (e) => {
-      let format = this.getOption('format');
       this.model = moment(e.date).toDate();
-      this.value = moment(e.date).format(format);
+      this.value = moment(e.date).format(this._format);
     });
 
     // expose the element object to the outside
@@ -103,10 +103,9 @@ export class AbpDatetimePickerCustomElement {
    * Keep original value(s) that could be passed by the user ViewModel.
    */
   bind() {
-    let format;
     let options = this.options || this.elm.getAttribute('options');
     if (options) {
-      format = this._originalDateFormat = options.hasOwnProperty('format') ? options.format : null;
+      this._format = this._originalDateFormat = options.hasOwnProperty('format') ? options.format : null;
     }
     if (this.model) {
       this._originalDateObject = moment(this.model).toDate() || this.elm.getAttribute('model');
@@ -116,7 +115,7 @@ export class AbpDatetimePickerCustomElement {
 
     if (value) {
       this.model = moment(value).toDate();
-      this.value = moment(value).format(format);
+      this.value = moment(value).format(this._format);
     }
   }
 
@@ -270,15 +269,18 @@ export class AbpDatetimePickerCustomElement {
     if (typeof newValue.getMonth !== 'function') {
       throw new Error('Datetimepicker, model.bind must be of type Date');
     }
-    if (newValue !== oldValue) {
-      let format = this.getOption('format') || this._originalDateFormat;
-      this.value = moment(newValue).format(format);
+    if (newValue !== oldValue && newValue) {
+      if (moment(newValue, this._format, true).isValid()) {
+        this.value = moment(newValue).format(this._format);
+      }
     }
   }
 
   valueChanged(newValue, oldValue) {
-    if (newValue !== oldValue) {
-      this.model = moment(newValue).toDate();
+    if (newValue !== oldValue && newValue) {
+      if (moment(newValue, this._format, true).isValid()) {
+        this.model = moment(newValue).toDate();
+      }
     }
   }
 
