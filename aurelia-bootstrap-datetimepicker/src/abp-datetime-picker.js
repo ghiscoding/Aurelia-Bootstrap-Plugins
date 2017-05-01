@@ -283,7 +283,7 @@ export class AbpDatetimePickerCustomElement {
   valueChanged(newValue, oldValue) {
     if (newValue !== oldValue && newValue) {
       if (moment(newValue, this._format, true).isValid()) {
-        this.model = moment(newValue).toDate();
+        this.model = moment(newValue, this._format, true).toDate();
       }
     }
   }
