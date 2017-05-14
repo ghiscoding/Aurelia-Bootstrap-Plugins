@@ -251,7 +251,7 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
     }
     if (newValue !== oldValue && newValue) {
       if (moment(newValue, this._format, true).isValid()) {
-        this.value = moment(newValue).format(this._format);
+        this.value = moment(newValue, this._format, true).format(this._format);
       }
     }
   }
@@ -259,7 +259,7 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
   valueChanged(newValue, oldValue) {
     if (newValue !== oldValue && newValue) {
       if (moment(newValue, this._format, true).isValid()) {
-        this.model = moment(newValue).toDate();
+        this.model = moment(newValue, this._format, true).toDate();
       }
     }
   }

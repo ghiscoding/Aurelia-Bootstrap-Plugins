@@ -279,7 +279,7 @@ var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_
     }
     if (newValue !== oldValue && newValue) {
       if ((0, _moment2.default)(newValue, this._format, true).isValid()) {
-        this.value = (0, _moment2.default)(newValue).format(this._format);
+        this.value = (0, _moment2.default)(newValue, this._format, true).format(this._format);
       }
     }
   };
@@ -287,7 +287,7 @@ var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_
   AbpDatetimePickerCustomElement.prototype.valueChanged = function valueChanged(newValue, oldValue) {
     if (newValue !== oldValue && newValue) {
       if ((0, _moment2.default)(newValue, this._format, true).isValid()) {
-        this.model = (0, _moment2.default)(newValue).toDate();
+        this.model = (0, _moment2.default)(newValue, this._format, true).toDate();
       }
     }
   };

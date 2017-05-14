@@ -279,7 +279,7 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
           }
           if (newValue !== oldValue && newValue) {
             if (moment(newValue, this._format, true).isValid()) {
-              this.value = moment(newValue).format(this._format);
+              this.value = moment(newValue, this._format, true).format(this._format);
             }
           }
         };
@@ -287,7 +287,7 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
         AbpDatetimePickerCustomElement.prototype.valueChanged = function valueChanged(newValue, oldValue) {
           if (newValue !== oldValue && newValue) {
             if (moment(newValue, this._format, true).isValid()) {
-              this.model = moment(newValue).toDate();
+              this.model = moment(newValue, this._format, true).toDate();
             }
           }
         };
