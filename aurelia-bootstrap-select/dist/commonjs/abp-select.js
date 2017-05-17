@@ -306,7 +306,7 @@ var AbpSelectCustomElement = exports.AbpSelectCustomElement = (_dec = (0, _aurel
 
   AbpSelectCustomElement.prototype.getMappingPropertyValueFromIndex = function getMappingPropertyValueFromIndex(inputArray, arrayIndex, searchPropName) {
     var propertyName = this.getMappingProperty(searchPropName);
-    return inputArray[arrayIndex].hasOwnProperty(propertyName) ? inputArray[arrayIndex][propertyName] : '';
+    return inputArray[arrayIndex] && inputArray[arrayIndex].hasOwnProperty(propertyName) ? inputArray[arrayIndex][propertyName] : '';
   };
 
   AbpSelectCustomElement.prototype.getMappingPropertyValue = function getMappingPropertyValue(inputArray, searchPropName) {
