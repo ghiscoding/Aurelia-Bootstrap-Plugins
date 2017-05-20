@@ -24,7 +24,8 @@ export function configure(aurelia) {
       config.options.showTodayButton = true;
     })
     .plugin('aurelia-bootstrap-select')
-    .plugin('aurelia-bootstrap-tagsinput');
+    .plugin('aurelia-bootstrap-tagsinput')
+    .plugin('aurelia-validation');
 
   if (environment.debug) {
     aurelia.use.developmentLogging();
