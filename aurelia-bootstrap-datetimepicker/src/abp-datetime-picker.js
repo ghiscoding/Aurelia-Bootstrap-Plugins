@@ -1,4 +1,4 @@
-import {inject, bindable, bindingMode} from 'aurelia-framework';
+import {inject, bindable, bindingMode, DOM} from 'aurelia-framework';
 import moment from 'moment';
 import $ from 'jquery';
 import 'eonasdan-bootstrap-datetimepicker';
@@ -34,6 +34,9 @@ export class AbpDatetimePickerCustomElement {
 
   constructor(elm) {
     this.elm = elm;
+
+    // ensure the element exposes a "focus" method for Aurelia-Validation
+    elm.focus = () => this.input.focus();
   }
 
   attached() {
@@ -172,6 +175,16 @@ export class AbpDatetimePickerCustomElement {
         this._events.onUpdate(e);
       }
     });
+  }
+
+  /**
+   * forward "blur" events to the custom element
+   * As described in Aurelia-Validation
+   * https://www.danyow.net/aurelia-validation-alpha/
+   */
+  blur() {
+    const event = DOM.createCustomEvent('blur');
+    this.elm.dispatchEvent(event);
   }
 
   /**

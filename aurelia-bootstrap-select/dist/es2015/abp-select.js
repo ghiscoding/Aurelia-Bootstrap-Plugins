@@ -43,7 +43,7 @@ function _initializerWarningHelper(descriptor, context) {
   throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
 }
 
-import { inject, bindable, bindingMode } from 'aurelia-framework';
+import { inject, bindable, bindingMode, DOM } from 'aurelia-framework';
 import { UtilService } from './util-service';
 import $ from 'jquery';
 import 'bootstrap-select';
@@ -98,6 +98,8 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService), _dec2 
 
     this.elm = elm;
     this.util = utilService;
+
+    elm.focus = () => this.input.focus();
   }
 
   attached() {
@@ -205,6 +207,11 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService), _dec2 
     });
 
     return events;
+  }
+
+  blur() {
+    const event = DOM.createCustomEvent('blur');
+    this.elm.dispatchEvent(event);
   }
 
   exposeMethods() {

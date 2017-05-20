@@ -1,6 +1,10 @@
 <template>
     <div class.bind="parseBool(withDateIcon) ? 'input-group date' : 'date'">
-        <input type="text" class="form-control datetimepicker" value.bind="value" model.bind="model" element.bind="element">
+        <input type="text" class="form-control datetimepicker" 
+               value.bind="value" 
+               model.bind="model"
+               blur.trigger="blur()"
+               element.bind="element">
         <span if.bind="parseBool(withDateIcon)" class="input-group-addon" data-target="#datetimepicker" data-toggle="datetimepicker">
             <span class.bind="iconBase === 'glyphicon' ? 'glyphicon glyphicon-calendar' : 'fa fa-calendar'"></span>
         </span>

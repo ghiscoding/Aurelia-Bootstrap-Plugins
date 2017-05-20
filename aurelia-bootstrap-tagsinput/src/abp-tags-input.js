@@ -1,4 +1,4 @@
-import {inject, bindable, bindingMode} from 'aurelia-framework';
+import {inject, bindable, bindingMode, DOM} from 'aurelia-framework';
 import $ from 'jquery';
 import 'bootstrap-tagsinput/dist/bootstrap-tagsinput';
 import {globalExtraOptions, globalPickerOptions} from './picker-global-options';
@@ -29,6 +29,9 @@ export class AbpTagsInputCustomElement {
 
   constructor(elm) {
     this.elm = elm;
+
+    // ensure the element exposes a "focus" method for Aurelia-Validation
+    elm.focus = () => this.input.focus();
   }
 
   attached() {
@@ -110,6 +113,16 @@ export class AbpTagsInputCustomElement {
         this.events.onItemRemoved(e);
       }
     });
+  }
+
+  /**
+   * forward "blur" events to the custom element
+   * As described in Aurelia-Validation
+   * https://www.danyow.net/aurelia-validation-alpha/
+   */
+  blur() {
+    const event = DOM.createCustomEvent('blur');
+    this.elm.dispatchEvent(event);
   }
 
   /**

@@ -3,7 +3,7 @@
 System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-datetimepicker', './picker-global-options'], function (_export, _context) {
   "use strict";
 
-  var inject, bindable, bindingMode, moment, $, globalExtraOptions, globalPickerOptions, _dec, _dec2, _dec3, _dec4, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, AbpDatetimePickerCustomElement;
+  var inject, bindable, bindingMode, DOM, moment, $, globalExtraOptions, globalPickerOptions, _dec, _dec2, _dec3, _dec4, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, AbpDatetimePickerCustomElement;
 
   function _initDefineProp(target, property, descriptor, context) {
     if (!descriptor) return;
@@ -59,6 +59,7 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
       inject = _aureliaFramework.inject;
       bindable = _aureliaFramework.bindable;
       bindingMode = _aureliaFramework.bindingMode;
+      DOM = _aureliaFramework.DOM;
     }, function (_moment) {
       moment = _moment.default;
     }, function (_jquery) {
@@ -70,6 +71,8 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
     execute: function () {
       _export('AbpDatetimePickerCustomElement', AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec3 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec4 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = (_class2 = function () {
         function AbpDatetimePickerCustomElement(elm) {
+          var _this = this;
+
           _classCallCheck(this, AbpDatetimePickerCustomElement);
 
           _initDefineProp(this, 'element', _descriptor, this);
@@ -98,10 +101,14 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
           this._methods = {};
 
           this.elm = elm;
+
+          elm.focus = function () {
+            return _this.input.focus();
+          };
         }
 
         AbpDatetimePickerCustomElement.prototype.attached = function attached() {
-          var _this = this;
+          var _this2 = this;
 
           this.domElm = $(this.elm).find('.date');
 
@@ -117,8 +124,8 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
           this.domElm.datetimepicker(this.options);
 
           this.domElm.on('dp.change', function (e) {
-            _this.model = moment(e.date).toDate();
-            _this.value = moment(e.date).format(_this._format);
+            _this2.model = moment(e.date).toDate();
+            _this2.value = moment(e.date).format(_this2._format);
           });
 
           this.element = {
@@ -179,82 +186,87 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
         };
 
         AbpDatetimePickerCustomElement.prototype.applyExposeEvents = function applyExposeEvents() {
-          var _this2 = this;
+          var _this3 = this;
 
           this.domElm.on('dp.hide', function (e) {
-            if (typeof _this2.onHide === 'function') {
-              _this2.onHide(e);
+            if (typeof _this3.onHide === 'function') {
+              _this3.onHide(e);
             }
-            if (typeof _this2._events.onHide === 'function') {
-              _this2._events.onHide(e);
+            if (typeof _this3._events.onHide === 'function') {
+              _this3._events.onHide(e);
             }
           });
 
           this.domElm.on('dp.show', function (e) {
-            if (typeof _this2.onShow === 'function') {
-              _this2.onShow(e);
+            if (typeof _this3.onShow === 'function') {
+              _this3.onShow(e);
             }
-            if (typeof _this2._events.onShow === 'function') {
-              _this2._events.onShow(e);
+            if (typeof _this3._events.onShow === 'function') {
+              _this3._events.onShow(e);
             }
           });
 
           this.domElm.on('dp.change', function (e) {
-            if (typeof _this2.onChange === 'function') {
-              _this2.onChange(e);
+            if (typeof _this3.onChange === 'function') {
+              _this3.onChange(e);
             }
-            if (typeof _this2._events.onChange === 'function') {
-              _this2._events.onChange(e);
+            if (typeof _this3._events.onChange === 'function') {
+              _this3._events.onChange(e);
             }
           });
 
           this.domElm.on('dp.error', function (e) {
-            if (typeof _this2.onError === 'function') {
-              _this2.onError(e);
+            if (typeof _this3.onError === 'function') {
+              _this3.onError(e);
             }
-            if (typeof _this2._events.onError === 'function') {
-              _this2._events.onError(e);
+            if (typeof _this3._events.onError === 'function') {
+              _this3._events.onError(e);
             }
           });
 
           this.domElm.on('dp.update', function (e) {
-            if (typeof _this2.onUpdate === 'function') {
-              _this2.onUpdate(e);
+            if (typeof _this3.onUpdate === 'function') {
+              _this3.onUpdate(e);
             }
-            if (typeof _this2._events.onUpdate === 'function') {
-              _this2._events.onUpdate(e);
+            if (typeof _this3._events.onUpdate === 'function') {
+              _this3._events.onUpdate(e);
             }
           });
         };
 
+        AbpDatetimePickerCustomElement.prototype.blur = function blur() {
+          var event = DOM.createCustomEvent('blur');
+          this.elm.dispatchEvent(event);
+        };
+
         AbpDatetimePickerCustomElement.prototype.constructMethod = function constructMethod(methodType, methodName) {
-          var _this3 = this;
+          var _this4 = this;
 
           switch (methodType) {
             case 'getterSetter':
               return function (value) {
                 if (value) {
-                  return _this3.domElm.data('DateTimePicker')[methodName](value);
+                  return _this4.domElm.data('DateTimePicker')[methodName](value);
                 }
-                return _this3.domElm.data('DateTimePicker')[methodName]();
+                return _this4.domElm.data('DateTimePicker')[methodName]();
               };
             case 'caller':
             case 'getter':
             default:
               return function (value) {
-                return _this3.domElm.data('DateTimePicker')[methodName]();
+                return _this4.domElm.data('DateTimePicker')[methodName]();
               };
           }
         };
 
         AbpDatetimePickerCustomElement.prototype.exposeMethods = function exposeMethods() {
-          var _this4 = this;
+          var _this5 = this;
 
           var methodList = [{ name: 'allowInputToggle', type: 'getterSetter' }, { name: 'calendarWeeks', type: 'getterSetter' }, { name: 'clear', type: 'caller' }, { name: 'collapse', type: 'getterSetter' }, { name: 'date', type: 'getterSetter' }, { name: 'daysOfWeekDisabled', type: 'getterSetter' }, { name: 'dayViewHeaderFormat', type: 'getterSetter' }, { name: 'defaultDate', type: 'getterSetter' }, { name: 'destroy', type: 'caller' }, { name: 'debug', type: 'caller' }, { name: 'disable', type: 'caller' }, { name: 'disabledDates', type: 'getterSetter' }, { name: 'disabledHours', type: 'getterSetter' }, { name: 'disabledTimeIntervals', type: 'getterSetter' }, { name: 'enable', type: 'caller' }, { name: 'enabledDates', type: 'getterSetter' }, { name: 'enabledHours', type: 'getterSetter' }, { name: 'extraFormats', type: 'getterSetter' }, { name: 'focusOnShow', type: 'getterSetter' }, { name: 'format', type: 'getterSetter' }, { name: 'hide', type: 'caller' }, { name: 'icons', type: 'getterSetter' }, { name: 'ignoreReadonly', type: 'getterSetter' }, { name: 'inline', type: 'getterSetter' }, { name: 'keepInvalid', type: 'getterSetter' }, { name: 'keyBinds', type: 'getterSetter' }, { name: 'locale', type: 'getterSetter' }, { name: 'maxDate', type: 'getterSetter' }, { name: 'minDate', type: 'getterSetter' }, { name: 'options', type: 'getterSetter' }, { name: 'parseInputDate', type: 'getterSetter' }, { name: 'show', type: 'caller' }, { name: 'showClear', type: 'getterSetter' }, { name: 'showClose', type: 'getterSetter' }, { name: 'showTodayButton', type: 'getterSetter' }, { name: 'sideBySide', type: 'getterSetter' }, { name: 'stepping', type: 'getterSetter' }, { name: 'toggle', type: 'caller' }, { name: 'toolbarplacement', type: 'getterSetter' }, { name: 'tooltips', type: 'getterSetter' }, { name: 'useCurrent', type: 'getterSetter' }, { name: 'useStrict', type: 'getterSetter' }, { name: 'viewDate', type: 'getterSetter' }, { name: 'viewMode', type: 'getterSetter' }, { name: 'widgetPositioning', type: 'getterSetter' }];
 
           var methods = {};
           methodList.forEach(function (method) {
-            methods[method.name] = _this4.constructMethod(method.type, method.name);
+            methods[method.name] = _this5.constructMethod(method.type, method.name);
           });
 
           this._methods = methods;

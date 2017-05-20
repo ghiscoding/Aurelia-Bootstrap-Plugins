@@ -1,4 +1,4 @@
-import {inject, bindable, bindingMode} from 'aurelia-framework';
+import {inject, bindable, bindingMode, DOM} from 'aurelia-framework';
 import {UtilService} from './util-service';
 import $ from 'jquery';
 import 'bootstrap-select';
@@ -39,6 +39,9 @@ export class AbpSelectCustomElement {
   constructor(elm, utilService) {
     this.elm = elm;
     this.util = utilService;
+
+    // ensure the element exposes a "focus" method for Aurelia-Validation
+    elm.focus = () => this.input.focus();
   }
 
   attached() {
@@ -160,6 +163,16 @@ export class AbpSelectCustomElement {
     });
 
     return events;
+  }
+
+  /**
+   * forward "blur" events to the custom element
+   * As described in Aurelia-Validation
+   * https://www.danyow.net/aurelia-validation-alpha/
+   */
+  blur() {
+    const event = DOM.createCustomEvent('blur');
+    this.elm.dispatchEvent(event);
   }
 
   /**

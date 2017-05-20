@@ -43,7 +43,7 @@ function _initializerWarningHelper(descriptor, context) {
   throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
 }
 
-import { inject, bindable, bindingMode } from 'aurelia-framework';
+import { inject, bindable, bindingMode, DOM } from 'aurelia-framework';
 import $ from 'jquery';
 import 'bootstrap-tagsinput/dist/bootstrap-tagsinput';
 import { globalExtraOptions, globalPickerOptions } from './picker-global-options';
@@ -76,6 +76,8 @@ export let AbpTagsInputCustomElement = (_dec = inject(Element), _dec2 = bindable
     this.options = {};
 
     this.elm = elm;
+
+    elm.focus = () => this.input.focus();
   }
 
   attached() {
@@ -146,6 +148,11 @@ export let AbpTagsInputCustomElement = (_dec = inject(Element), _dec2 = bindable
         this.events.onItemRemoved(e);
       }
     });
+  }
+
+  blur() {
+    const event = DOM.createCustomEvent('blur');
+    this.elm.dispatchEvent(event);
   }
 
   exposeMethods() {

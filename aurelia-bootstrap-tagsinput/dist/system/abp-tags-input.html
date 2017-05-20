@@ -1,3 +1,7 @@
 <template>
-  <input type="text" data-role="tagsinput" value.bind="value" class="form-control" placeholder.bind="placeholder" />
+  <input type="text" class="form-control"
+         data-role="tagsinput" 
+         value.bind="value"
+         blur.trigger="blur()"
+         placeholder.bind="placeholder" />
 </template>

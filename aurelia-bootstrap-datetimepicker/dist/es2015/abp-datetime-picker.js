@@ -43,7 +43,7 @@ function _initializerWarningHelper(descriptor, context) {
   throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
 }
 
-import { inject, bindable, bindingMode } from 'aurelia-framework';
+import { inject, bindable, bindingMode, DOM } from 'aurelia-framework';
 import moment from 'moment';
 import $ from 'jquery';
 import 'eonasdan-bootstrap-datetimepicker';
@@ -78,6 +78,8 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
     this._methods = {};
 
     this.elm = elm;
+
+    elm.focus = () => this.input.focus();
   }
 
   attached() {
@@ -201,6 +203,11 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
         this._events.onUpdate(e);
       }
     });
+  }
+
+  blur() {
+    const event = DOM.createCustomEvent('blur');
+    this.elm.dispatchEvent(event);
   }
 
   constructMethod(methodType, methodName) {

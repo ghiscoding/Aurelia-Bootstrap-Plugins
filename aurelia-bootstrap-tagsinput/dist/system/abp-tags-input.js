@@ -3,7 +3,7 @@
 System.register(['aurelia-framework', 'jquery', 'bootstrap-tagsinput/dist/bootstrap-tagsinput', './picker-global-options'], function (_export, _context) {
   "use strict";
 
-  var inject, bindable, bindingMode, $, globalExtraOptions, globalPickerOptions, _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, AbpTagsInputCustomElement;
+  var inject, bindable, bindingMode, DOM, $, globalExtraOptions, globalPickerOptions, _dec, _dec2, _dec3, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, AbpTagsInputCustomElement;
 
   function _initDefineProp(target, property, descriptor, context) {
     if (!descriptor) return;
@@ -59,6 +59,7 @@ System.register(['aurelia-framework', 'jquery', 'bootstrap-tagsinput/dist/bootst
       inject = _aureliaFramework.inject;
       bindable = _aureliaFramework.bindable;
       bindingMode = _aureliaFramework.bindingMode;
+      DOM = _aureliaFramework.DOM;
     }, function (_jquery) {
       $ = _jquery.default;
     }, function (_bootstrapTagsinputDistBootstrapTagsinput) {}, function (_pickerGlobalOptions) {
@@ -68,6 +69,8 @@ System.register(['aurelia-framework', 'jquery', 'bootstrap-tagsinput/dist/bootst
     execute: function () {
       _export('AbpTagsInputCustomElement', AbpTagsInputCustomElement = (_dec = inject(Element), _dec2 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec3 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = (_class2 = function () {
         function AbpTagsInputCustomElement(elm) {
+          var _this = this;
+
           _classCallCheck(this, AbpTagsInputCustomElement);
 
           _initDefineProp(this, 'element', _descriptor, this);
@@ -95,6 +98,10 @@ System.register(['aurelia-framework', 'jquery', 'bootstrap-tagsinput/dist/bootst
           this.options = {};
 
           this.elm = elm;
+
+          elm.focus = function () {
+            return _this.input.focus();
+          };
         }
 
         AbpTagsInputCustomElement.prototype.attached = function attached() {
@@ -119,81 +126,86 @@ System.register(['aurelia-framework', 'jquery', 'bootstrap-tagsinput/dist/bootst
         };
 
         AbpTagsInputCustomElement.prototype.applyExposeEvents = function applyExposeEvents() {
-          var _this = this;
+          var _this2 = this;
 
           this.domElm.on('beforeItemAdd', function (e) {
-            if (typeof _this.onBeforeItemAdd === 'function') {
-              _this.onBeforeItemAdd(e);
+            if (typeof _this2.onBeforeItemAdd === 'function') {
+              _this2.onBeforeItemAdd(e);
             }
-            if (typeof _this.events.onBeforeItemAdd === 'function') {
-              _this.events.onBeforeItemAdd(e);
+            if (typeof _this2.events.onBeforeItemAdd === 'function') {
+              _this2.events.onBeforeItemAdd(e);
             }
           });
 
           this.domElm.on('beforeItemRemove', function (e) {
-            if (typeof _this.onBeforeItemRemove === 'function') {
-              _this.onBeforeItemRemove(e);
+            if (typeof _this2.onBeforeItemRemove === 'function') {
+              _this2.onBeforeItemRemove(e);
             }
-            if (typeof _this.events.onBeforeItemRemove === 'function') {
-              _this.events.onBeforeItemRemove(e);
+            if (typeof _this2.events.onBeforeItemRemove === 'function') {
+              _this2.events.onBeforeItemRemove(e);
             }
           });
 
           this.domElm.on('itemAdded', function (e) {
-            _this.value = _this.domElm.tagsinput('items');
-            if (typeof _this.onItemAdded === 'function') {
-              _this.onItemAdded(e);
+            _this2.value = _this2.domElm.tagsinput('items');
+            if (typeof _this2.onItemAdded === 'function') {
+              _this2.onItemAdded(e);
             }
-            if (typeof _this.events.onItemAdded === 'function') {
-              _this.events.onItemAdded(e);
+            if (typeof _this2.events.onItemAdded === 'function') {
+              _this2.events.onItemAdded(e);
             }
           });
 
           this.domElm.on('itemAddedOnInit', function (e) {
-            if (typeof _this.onItemAddedOnInit === 'function') {
-              _this.onItemAddedOnInit(e);
+            if (typeof _this2.onItemAddedOnInit === 'function') {
+              _this2.onItemAddedOnInit(e);
             }
-            if (typeof _this.events.onItemAddedOnInit === 'function') {
-              _this.events.onItemAddedOnInit(e);
+            if (typeof _this2.events.onItemAddedOnInit === 'function') {
+              _this2.events.onItemAddedOnInit(e);
             }
           });
 
           this.domElm.on('itemRemoved', function (e) {
-            _this.value = _this.domElm.tagsinput('items');
-            if (typeof _this.onItemRemoved === 'function') {
-              _this.onItemRemoved(e);
+            _this2.value = _this2.domElm.tagsinput('items');
+            if (typeof _this2.onItemRemoved === 'function') {
+              _this2.onItemRemoved(e);
             }
-            if (typeof _this.events.onItemRemoved === 'function') {
-              _this.events.onItemRemoved(e);
+            if (typeof _this2.events.onItemRemoved === 'function') {
+              _this2.events.onItemRemoved(e);
             }
           });
         };
 
+        AbpTagsInputCustomElement.prototype.blur = function blur() {
+          var event = DOM.createCustomEvent('blur');
+          this.elm.dispatchEvent(event);
+        };
+
         AbpTagsInputCustomElement.prototype.exposeMethods = function exposeMethods() {
-          var _this2 = this;
+          var _this3 = this;
 
           var methods = {
             add: function add(value) {
-              return _this2.domElm.tagsinput('add', value);
+              return _this3.domElm.tagsinput('add', value);
             },
             destroy: function destroy() {
-              return _this2.domElm.tagsinput('destroy');
+              return _this3.domElm.tagsinput('destroy');
             },
             focus: function focus() {
-              return _this2.domElm.tagsinput('focus');
+              return _this3.domElm.tagsinput('focus');
             },
             input: function input() {
-              return _this2.domElm.tagsinput('input');
+              return _this3.domElm.tagsinput('input');
             },
             refresh: function refresh() {
-              return _this2.domElm.tagsinput('refresh');
+              return _this3.domElm.tagsinput('refresh');
             },
             remove: function remove(value) {
-              return _this2.domElm.tagsinput('remove', value);
+              return _this3.domElm.tagsinput('remove', value);
             },
             removeAll: function removeAll() {
-              _this2.domElm.tagsinput('removeAll');
-              _this2.value = _this2.domElm.tagsinput('items');
+              _this3.domElm.tagsinput('removeAll');
+              _this3.value = _this3.domElm.tagsinput('items');
             }
           };
 

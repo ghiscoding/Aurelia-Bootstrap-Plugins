@@ -26,6 +26,7 @@ export async function configure(aurelia) {
     })
     .plugin('aurelia-bootstrap-select')
     .plugin('aurelia-bootstrap-tagsinput')
+    .plugin('aurelia-validation')
     .developmentLogging();
 
   // Uncomment the line below to enable animation.

@@ -67,6 +67,8 @@ define(['exports', 'aurelia-framework', './util-service', 'jquery', './picker-gl
 
   var AbpSelectCustomElement = exports.AbpSelectCustomElement = (_dec = (0, _aureliaFramework.inject)(Element, _utilService.UtilService), _dec2 = (0, _aureliaFramework.bindable)({ defaultBindingMode: _aureliaFramework.bindingMode.twoWay }), _dec3 = (0, _aureliaFramework.bindable)({ defaultBindingMode: _aureliaFramework.bindingMode.twoWay }), _dec4 = (0, _aureliaFramework.bindable)({ defaultBindingMode: _aureliaFramework.bindingMode.twoWay }), _dec(_class = (_class2 = function () {
     function AbpSelectCustomElement(elm, utilService) {
+      var _this = this;
+
       _classCallCheck(this, AbpSelectCustomElement);
 
       _initDefineProp(this, 'element', _descriptor, this);
@@ -115,6 +117,10 @@ define(['exports', 'aurelia-framework', './util-service', 'jquery', './picker-gl
 
       this.elm = elm;
       this.util = utilService;
+
+      elm.focus = function () {
+        return _this.input.focus();
+      };
     }
 
     AbpSelectCustomElement.prototype.attached = function attached() {
@@ -147,13 +153,13 @@ define(['exports', 'aurelia-framework', './util-service', 'jquery', './picker-gl
     };
 
     AbpSelectCustomElement.prototype.applyExposeEvents = function applyExposeEvents() {
-      var _this = this;
+      var _this2 = this;
 
       var events = {};
 
       this.domElm.on('show.bs.select', function (e) {
-        if (typeof _this.onShow === 'function') {
-          _this.onShow(e);
+        if (typeof _this2.onShow === 'function') {
+          _this2.onShow(e);
         }
         if (typeof events.onShow === 'function') {
           events.onShow(e);
@@ -161,8 +167,8 @@ define(['exports', 'aurelia-framework', './util-service', 'jquery', './picker-gl
       });
 
       this.domElm.on('shown.bs.select', function (e) {
-        if (typeof _this.onShown === 'function') {
-          _this.onShown(e);
+        if (typeof _this2.onShown === 'function') {
+          _this2.onShown(e);
         }
         if (typeof events.onShown === 'function') {
           events.onShown(e);
@@ -170,8 +176,8 @@ define(['exports', 'aurelia-framework', './util-service', 'jquery', './picker-gl
       });
 
       this.domElm.on('hide.bs.select', function (e) {
-        if (typeof _this.onHide === 'function') {
-          _this.onHide(e);
+        if (typeof _this2.onHide === 'function') {
+          _this2.onHide(e);
         }
         if (typeof events.onHide === 'function') {
           events.onHide(e);
@@ -179,8 +185,8 @@ define(['exports', 'aurelia-framework', './util-service', 'jquery', './picker-gl
       });
 
       this.domElm.on('hidden.bs.select', function (e) {
-        if (typeof _this.onHidden === 'function') {
-          _this.onHidden(e);
+        if (typeof _this2.onHidden === 'function') {
+          _this2.onHidden(e);
         }
         if (typeof events.onHidden === 'function') {
           events.onHidden(e);
@@ -188,8 +194,8 @@ define(['exports', 'aurelia-framework', './util-service', 'jquery', './picker-gl
       });
 
       this.domElm.on('loaded.bs.select', function (e) {
-        if (typeof _this.onLoaded === 'function') {
-          _this.onLoaded(e);
+        if (typeof _this2.onLoaded === 'function') {
+          _this2.onLoaded(e);
         }
         if (typeof events.onLoaded === 'function') {
           events.onLoaded(e);
@@ -197,8 +203,8 @@ define(['exports', 'aurelia-framework', './util-service', 'jquery', './picker-gl
       });
 
       this.domElm.on('rendered.bs.select', function (e) {
-        if (typeof _this.onRendered === 'function') {
-          _this.onRendered(e);
+        if (typeof _this2.onRendered === 'function') {
+          _this2.onRendered(e);
         }
         if (typeof events.onRendered === 'function') {
           events.onRendered(e);
@@ -206,8 +212,8 @@ define(['exports', 'aurelia-framework', './util-service', 'jquery', './picker-gl
       });
 
       this.domElm.on('refreshed.bs.select', function (e) {
-        if (typeof _this.onRefreshed === 'function') {
-          _this.onRefreshed(e);
+        if (typeof _this2.onRefreshed === 'function') {
+          _this2.onRefreshed(e);
         }
         if (typeof events.onRefreshed === 'function') {
           events.onRefreshed(e);
@@ -215,8 +221,8 @@ define(['exports', 'aurelia-framework', './util-service', 'jquery', './picker-gl
       });
 
       this.domElm.on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
-        if (typeof _this.onChanged === 'function') {
-          _this.onChanged(e);
+        if (typeof _this2.onChanged === 'function') {
+          _this2.onChanged(e);
         }
         if (typeof events.onChanged === 'function') {
           events.onChanged(e);
@@ -226,53 +232,58 @@ define(['exports', 'aurelia-framework', './util-service', 'jquery', './picker-gl
       return events;
     };
 
+    AbpSelectCustomElement.prototype.blur = function blur() {
+      var event = _aureliaFramework.DOM.createCustomEvent('blur');
+      this.elm.dispatchEvent(event);
+    };
+
     AbpSelectCustomElement.prototype.exposeMethods = function exposeMethods() {
-      var _this2 = this;
+      var _this3 = this;
 
       var methods = {
         deselectAll: function deselectAll() {
-          return _this2.domElm.selectpicker('deselectAll');
+          return _this3.domElm.selectpicker('deselectAll');
         },
         destroy: function destroy() {
-          return _this2.domElm.selectpicker('destroy');
+          return _this3.domElm.selectpicker('destroy');
         },
         disableOptgroupByIndex: function disableOptgroupByIndex(index) {
           var isDisable = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
-          if (_this2.domElm.find('optgroup')[index]) {
-            _this2.domElm.find('optgroup')[index].prop('disabled', isDisable);
-            _this2.domElm.selectpicker('refresh');
+          if (_this3.domElm.find('optgroup')[index]) {
+            _this3.domElm.find('optgroup')[index].prop('disabled', isDisable);
+            _this3.domElm.selectpicker('refresh');
           }
         },
         disableOptgroupByLabel: function disableOptgroupByLabel(label) {
           var isDisable = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
-          _this2.domElm.find('optgroup[label=' + label + ']').prop('disabled', isDisable);
-          _this2.domElm.selectpicker('refresh');
+          _this3.domElm.find('optgroup[label=' + label + ']').prop('disabled', isDisable);
+          _this3.domElm.selectpicker('refresh');
         },
         mobile: function mobile() {
-          return _this2.domElm.selectpicker('mobile');
+          return _this3.domElm.selectpicker('mobile');
         },
         refresh: function refresh() {
-          return _this2.domElm.selectpicker('refresh');
+          return _this3.domElm.selectpicker('refresh');
         },
         render: function render() {
-          return _this2.domElm.selectpicker('render');
+          return _this3.domElm.selectpicker('render');
         },
         val: function val(value) {
-          return _this2.domElm.selectpicker('val', value);
+          return _this3.domElm.selectpicker('val', value);
         },
         selectAll: function selectAll() {
-          return _this2.domElm.selectpicker('selectAll');
+          return _this3.domElm.selectpicker('selectAll');
         },
         setStyle: function setStyle(style) {
           var isAddingTheClass = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
           if (style.includes('btn')) {
             var action = isAddingTheClass ? 'add' : 'remove';
-            _this2.domElm.selectpicker('setStyle', style, action);
+            _this3.domElm.selectpicker('setStyle', style, action);
           } else {
-            _this2.domElm.addClass(style).selectpicker('setStyle');
+            _this3.domElm.addClass(style).selectpicker('setStyle');
           }
         }
       };
@@ -319,7 +330,7 @@ define(['exports', 'aurelia-framework', './util-service', 'jquery', './picker-gl
     };
 
     AbpSelectCustomElement.prototype.findItems = function findItems(collection, newValue, objectKey) {
-      var _this3 = this;
+      var _this4 = this;
 
       var foundItems = [];
       var searchingItems = [];
@@ -349,12 +360,12 @@ define(['exports', 'aurelia-framework', './util-service', 'jquery', './picker-gl
 
         var searchItem = _ref;
 
-        var searchFilter = _this3.util.isObject(searchItem) ? searchItem[objectKey] : searchItem;
+        var searchFilter = _this4.util.isObject(searchItem) ? searchItem[objectKey] : searchItem;
         var foundItem = collection.find(function (item) {
-          return _this3.util.isObject(item) ? item[objectKey] == searchFilter : item == searchFilter;
+          return _this4.util.isObject(item) ? item[objectKey] == searchFilter : item == searchFilter;
         });
         if (foundItem) {
-          selection.indexes.push(_this3.util.isObject(foundItem) ? foundItem[objectKey] : foundItem);
+          selection.indexes.push(_this4.util.isObject(foundItem) ? foundItem[objectKey] : foundItem);
           selection.items.push(foundItem);
           foundItems.push(foundItem);
         }
@@ -429,33 +440,33 @@ define(['exports', 'aurelia-framework', './util-service', 'jquery', './picker-gl
     };
 
     AbpSelectCustomElement.prototype.watchOnLoadedToRenderPreSelection = function watchOnLoadedToRenderPreSelection() {
-      var _this4 = this;
+      var _this5 = this;
 
       this.domElm.on('loaded.bs.select', function (e) {
-        var newValue = _this4._originalSelectedIndexes || _this4._originalSelectedObjects;
-        var selection = _this4.findItems(_this4.collection, newValue, _this4.objectKey);
+        var newValue = _this5._originalSelectedIndexes || _this5._originalSelectedObjects;
+        var selection = _this5.findItems(_this5.collection, newValue, _this5.objectKey);
         if (selection.indexes) {
-          _this4.selectedValue = selection.indexes;
+          _this5.selectedValue = selection.indexes;
         } else {
-          _this4.selectedValue = _this4.util.isObject(_this4.collection[0]) ? _this4.collection[0][_this4.objectKey] : _this4.collection[0];
+          _this5.selectedValue = _this5.util.isObject(_this5.collection[0]) ? _this5.collection[0][_this5.objectKey] : _this5.collection[0];
         }
-        _this4.selectedItem = selection.items ? selection.items : _this4.collection[0];
-        _this4.renderSelection(selection);
+        _this5.selectedItem = selection.items ? selection.items : _this5.collection[0];
+        _this5.renderSelection(selection);
       });
     };
 
     AbpSelectCustomElement.prototype.watchOnChangedToUpdateValueAndItemObjects = function watchOnChangedToUpdateValueAndItemObjects() {
-      var _this5 = this;
+      var _this6 = this;
 
       this.domElm.on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
-        _this5.selectedValue = _this5.domElm.selectpicker('val');
-        var selection = _this5.findItems(_this5.collection, _this5.selectedValue, _this5.objectKey);
+        _this6.selectedValue = _this6.domElm.selectpicker('val');
+        var selection = _this6.findItems(_this6.collection, _this6.selectedValue, _this6.objectKey);
         if (selection.indexes) {
-          _this5.domElm.selectpicker('val', selection.indexes);
+          _this6.domElm.selectpicker('val', selection.indexes);
         }
 
-        _this5.selectedValue = selection.indexes;
-        _this5.selectedItem = selection.items;
+        _this6.selectedValue = selection.indexes;
+        _this6.selectedItem = selection.items;
       });
     };
 
