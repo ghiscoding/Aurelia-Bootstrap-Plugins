@@ -33,8 +33,8 @@
           <abp-datetime-picker with-date-icon="false" value.bind="dateEntered & validate" model.bind="myDateObject" options.bind="{ format:'YYYY-MM-DD HH:mm' }"></abp-datetime-picker>
       </div>
       <div class="form-group">
-        <label class="control-label">Basic - String Collection</label>
-        <abp-select collection.bind="allCampingStuff" selected-value.bind="camping & validate" selected-item.bind="campingValue"></abp-select>
+        <label class="control-label">Camping</label>
+        <abp-select collection.bind="campingCollection" selected-value.bind="camping & validate" selected-item.bind="campingValue" empty-on-null="true"></abp-select>
       </div>
 
       <button type="submit" class="btn btn-primary">Submit</button>

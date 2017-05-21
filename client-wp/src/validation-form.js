@@ -1,19 +1,14 @@
 import {bindable, inject} from 'aurelia-framework';
-import {
-  ValidationControllerFactory,
-  ValidationController,
-  ValidationRules
-} from 'aurelia-validation';
+import {ValidationControllerFactory, ValidationRules} from 'aurelia-validation';
 import {BootstrapFormRenderer} from './bootstrap-form-renderer';
 
 @inject(ValidationControllerFactory)
-export class RegistrationForm {
-  @bindable selectCamping;
+export class ValidationForm {
   firstName = '';
   lastName = '';
   email = '';
   controller = null;
-  allCampingStuff = ['Tent', 'Flashlight', 'Sleeping Bag'];
+  campingCollection = ['Tent', 'Flashlight', 'Sleeping Bag'];
   
   constructor(controllerFactory) {
     this.controller = controllerFactory.createForCurrentScope();
@@ -26,10 +21,10 @@ export class RegistrationForm {
 }
 
 ValidationRules
-  .ensure(a => a.firstName).required()
-  .ensure(a => a.lastName).required()
-  .ensure(a => a.email).required().email()
-  .ensure(a => a.categories).required()
-  .ensure(a => a.dateEntered).required()
-  .ensure(a => a.camping).required()
-  .on(RegistrationForm);
+  .ensure('firstName').required()
+  .ensure('lastName').required()
+  .ensure('email').required().email()
+  .ensure('categories').required()
+  .ensure('dateEntered').required()
+  .ensure('camping').minItems(1)
+  .on(ValidationForm);

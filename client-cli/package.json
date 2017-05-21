@@ -26,7 +26,6 @@
     "aurelia-bootstrapper": "^1.0.0",
     "aurelia-cli": "^0.26.1",
     "aurelia-http-client": "^1.0.4",
-    "aurelia-validatejs": "^0.7.0",
     "aurelia-validation": "^1.0.0",
     "bluebird": "^3.4.1",
     "bootstrap": "^3.3.7",
