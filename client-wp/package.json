@@ -83,6 +83,7 @@
     "bluebird": "^3.4.7",
     "bootstrap": "^3.3.7",
     "bootstrap-select": "^1.12.2",
+    "bootstrap-tagsinput": "^0.7.1",
     "eonasdan-bootstrap-datetimepicker": "^4.17.46",
     "font-awesome": "^4.7.0",
     "isomorphic-fetch": "^2.2.1",
