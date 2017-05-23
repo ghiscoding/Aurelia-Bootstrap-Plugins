@@ -17,7 +17,9 @@
 
 
 ## Samples
-A quick Aurelia skeleton for `CLI` &amp; `WebPack` was put in place with all the currently available `Aurelia-Bootstrap-Plugins`
+A quick Aurelia skeleton for `CLI`, `WebPack` and the all new `ASP.Net Core WebPack 2.x (Jods new version)` were put in place to demonstrate all the currently available plugins usage of `Aurelia-Bootstrap-Plugins`. All samples are configured to run at [http://localhost:9000](http://localhost:9000)
+
+_`npm install` can be replaced by `yarn install` if you prefer `yarn`_
 
 #### Aurelia-CLI
 ```bash
@@ -33,6 +35,16 @@ git clone https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins
 cd client-wp
 npm install
 npm start
+```
+
+#### Aurelia ASP.Net Core - WebPack (typescript)
+This is based on the new [Jods Aurelia-WebPack 2.x base](https://github.com/jods4/aurelia-webpack-build/tree/master/demos/06-ASPNET), please make sure to read his [Wiki - Getting Started](https://github.com/jods4/aurelia-webpack-build/wiki/Getting-started)
+```bash
+git clone https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins
+cd client-aspnetcore-ts
+npm install
+dotnet restore
+dotnet watch run
 ```
 
 ### License

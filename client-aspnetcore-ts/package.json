@@ -1,0 +1,32 @@
+{
+  "license": "MIT",
+  "devDependencies": {
+    "aspnet-webpack": "^1.0.28",
+    "aurelia-webpack-plugin": "^2.0.0-rc.2",
+    "css-loader": "^0.28.2",
+    "expose-loader": "^0.7.3",
+    "file-loader": "^0.11.1",
+    "style-loader": "^0.18.0",
+    "ts-loader": "^2.0.3",
+    "tslib": "^1.7.1",
+    "typescript": "^2.2.2",
+    "url-loader": "^0.5.8",
+    "webpack": "^2.3.3",
+    "webpack-hot-middleware": "^2.18.0"
+  },
+  "dependencies": {
+    "aurelia-bootstrap-datetimepicker": "^1.0.7",
+    "aurelia-bootstrap-select": "^0.1.3",
+    "aurelia-bootstrap-tagsinput": "^1.0.1",
+    "aurelia-bootstrapper": "^2.1.1",
+    "aurelia-validation": "^1.0.0",
+    "bluebird": "^3.5.0",
+    "bootstrap": "^3.3.7",
+    "bootstrap-select": "^1.12.2",
+    "bootstrap-tagsinput": "^0.7.1",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.47",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.2.1",
+    "moment": "^2.18.1"
+  }
+}
