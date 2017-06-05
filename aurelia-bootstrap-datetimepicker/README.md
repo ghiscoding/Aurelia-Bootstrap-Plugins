@@ -147,7 +147,9 @@ npm install --save aurelia-bootstrap-datetimepicker
 
 #### Aurelia-CLI
 For `CLI` you will need to add (`eonasdan-bootstrap-datetimepicker` and `aurelia-bootstrap-datetimepicker`) to your `aurelia.json` file. The exported class is `abp-datetime-picker`.
+
 ```javascript
+"moment",
 {
   "name": "eonasdan-bootstrap-datetimepicker",
   "path": "../node_modules/eonasdan-bootstrap-datetimepicker/build",
@@ -164,6 +166,15 @@ For `CLI` you will need to add (`eonasdan-bootstrap-datetimepicker` and `aurelia
     "**/*.{css,html}"
   ]
 },
+```
+
+**Note** for `moment.js` locales, if you wish to include all locales, you can include them as shown below with `min/moment-with-locales`.
+```javascript
+{
+  "name": "moment",
+  "path": "../node_modules/moment",
+  "main": "min/moment-with-locales"
+}
 ```
 
 _index.html_
@@ -193,6 +204,7 @@ let config = generateConfig(
     path: outDir
   },
 +  plugins: [
++   // choose the moment.js locale that you want to add, in this example here, we are adding 'en', 'fr'
 +   new ContextReplacementPlugin(/moment[\/\\]locale$/, /en|fr/),
 +   new ProvidePlugin({
 +     $: "jquery",
