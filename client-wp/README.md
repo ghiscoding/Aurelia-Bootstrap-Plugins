@@ -6,6 +6,9 @@ npm install
 npm start
 ```
 
+**There is currently a bug in `Aurelia-Validation` that is tracked under [issue #448](https://github.com/aurelia/validation/issues/448). After installation you need to do this:**
+> if you are using webpack, you need to delete the node modules folder that is within the aurelia-validation package
+
 
 ## Plugin examples
 
@@ -28,7 +31,7 @@ A quick example of the code in action. Note that the value is available under th
 ### Aurelia-Bootstrap-Select
 
 #### Usage
-A quick example of the code in action. 
+A quick example of the code in action.
 
 **Note**: We use the `collection.bind` attribute to pass the collection of all select options and the selection is available from `selected-value` (value) and `selected-item` (string/object)
 

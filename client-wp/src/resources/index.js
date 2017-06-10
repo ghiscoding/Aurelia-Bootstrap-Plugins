@@ -1,5 +1,7 @@
+import {PLATFORM} from 'aurelia-pal';
+
 export function configure(config) {
   config.globalResources([
-    './value-converters/stringify'
+    PLATFORM.moduleName('./value-converters/stringify')
   ]);
 }

@@ -1,5 +1,5 @@
 import {bindable, inject} from 'aurelia-framework';
-import {ValidationControllerFactory, ValidationRules} from 'aurelia-validation';
+import {ValidationController, ValidationControllerFactory, ValidationRules} from 'aurelia-validation';
 import {BootstrapFormRenderer} from './bootstrap-form-renderer';
 
 @inject(ValidationControllerFactory)
@@ -9,12 +9,12 @@ export class ValidationForm {
   email = '';
   controller = null;
   campingCollection = ['Tent', 'Flashlight', 'Sleeping Bag'];
-  
+
   constructor(controllerFactory) {
     this.controller = controllerFactory.createForCurrentScope();
     this.controller.addRenderer(new BootstrapFormRenderer());
   }
-  
+
   submit() {
     this.controller.validate();
   }
