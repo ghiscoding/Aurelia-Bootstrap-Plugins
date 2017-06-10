@@ -123,8 +123,13 @@ var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_
     this.domElm.datetimepicker(this.options);
 
     this.domElm.on('dp.change', function (e) {
-      _this2.model = (0, _moment2.default)(e.date).toDate();
-      _this2.value = (0, _moment2.default)(e.date).format(_this2._format);
+      if ((0, _moment2.default)(e.date, _this2._format, true).isValid()) {
+        _this2.model = (0, _moment2.default)(e.date).toDate();
+        _this2.value = (0, _moment2.default)(e.date).format(_this2._format);
+      } else if (!e.date) {
+        _this2.model = null;
+        _this2.value = null;
+      }
     });
 
     this.element = {
@@ -178,7 +183,7 @@ var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_
     this._originalValue = this.value || this.elm.getAttribute('value');
     var value = this._originalValue || this._originalDateObject;
 
-    if (value) {
+    if (value && (0, _moment2.default)(value, this._format, true).isValid()) {
       this.model = (0, _moment2.default)(value).toDate();
       this.value = (0, _moment2.default)(value).format(this._format);
     }
@@ -285,7 +290,7 @@ var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_
   };
 
   AbpDatetimePickerCustomElement.prototype.modelChanged = function modelChanged(newValue, oldValue) {
-    if (typeof newValue.getMonth !== 'function') {
+    if (isNaN(Date.parse(newValue)) && newValue !== null) {
       throw new Error('Datetimepicker, model.bind must be of type Date');
     }
     if (newValue !== oldValue && newValue) {

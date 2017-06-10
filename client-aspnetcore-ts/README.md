@@ -1,12 +1,15 @@
 # Aurelia ASP.Net Core - WebPack (typescript)
 This is based on the new [Jods Aurelia-WebPack 2.x base](https://github.com/jods4/aurelia-webpack-build/tree/master/demos/06-ASPNET), please make sure to read his [Wiki - Getting Started](https://github.com/jods4/aurelia-webpack-build/wiki/Getting-started)
+
 ```bash
 git clone https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins
 cd client-aspnetcore-ts
 npm install
+set ASPNETCORE_ENVIRONMENT=Development
 dotnet restore
 dotnet watch run
 ```
+
 
 ## Plugin examples
 

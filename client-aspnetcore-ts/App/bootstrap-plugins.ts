@@ -9,6 +9,8 @@ export class Edit {
   @bindable selectStyledCondiment;
   @bindable selectPicnic;
   @bindable tag;
+  activeDate: Date = null;
+  dueDate: Date = null;
   myDateObject: Date;
   myDateObject2: Date;
   camping: string = '';
@@ -16,7 +18,7 @@ export class Edit {
   picnicValue: Array<number>;
   condiment: any;
   condimentStyled: any;
-  
+
   // Change selection by value (id)
   campingValue: string;
   condimentValue: number;

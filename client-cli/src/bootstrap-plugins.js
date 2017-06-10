@@ -10,7 +10,9 @@ export class Edit {
   @bindable selectPicnic;
   @bindable tag;
 
+  activeDate = null;
   dateEntered = null;
+  dueDate;
   post = {};
   picker;
   tag;

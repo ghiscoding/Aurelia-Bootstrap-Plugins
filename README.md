@@ -43,6 +43,7 @@ This is based on the new [Jods Aurelia-WebPack 2.x base](https://github.com/jods
 git clone https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins
 cd client-aspnetcore-ts
 npm install
+set ASPNETCORE_ENVIRONMENT=Development
 dotnet restore
 dotnet watch run
 ```

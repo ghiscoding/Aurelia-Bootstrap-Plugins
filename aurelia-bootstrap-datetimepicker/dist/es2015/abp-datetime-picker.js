@@ -97,8 +97,13 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
     this.domElm.datetimepicker(this.options);
 
     this.domElm.on('dp.change', e => {
-      this.model = moment(e.date).toDate();
-      this.value = moment(e.date).format(this._format);
+      if (moment(e.date, this._format, true).isValid()) {
+        this.model = moment(e.date).toDate();
+        this.value = moment(e.date).format(this._format);
+      } else if (!e.date) {
+        this.model = null;
+        this.value = null;
+      }
     });
 
     this.element = {
@@ -152,7 +157,7 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
     this._originalValue = this.value || this.elm.getAttribute('value');
     let value = this._originalValue || this._originalDateObject;
 
-    if (value) {
+    if (value && moment(value, this._format, true).isValid()) {
       this.model = moment(value).toDate();
       this.value = moment(value).format(this._format);
     }
@@ -253,7 +258,7 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
   }
 
   modelChanged(newValue, oldValue) {
-    if (typeof newValue.getMonth !== 'function') {
+    if (isNaN(Date.parse(newValue)) && newValue !== null) {
       throw new Error('Datetimepicker, model.bind must be of type Date');
     }
     if (newValue !== oldValue && newValue) {
