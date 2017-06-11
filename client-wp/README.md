@@ -6,10 +6,6 @@ npm install
 npm start
 ```
 
-**There is currently a bug in `Aurelia-Validation` that is tracked under [issue #448](https://github.com/aurelia/validation/issues/448). After installation you need to do this:**
-> if you are using webpack, you need to delete the node modules folder that is within the aurelia-validation package
-
-
 ## Plugin examples
 
 ### Aurelia-Bootstrap-Tagsinput
