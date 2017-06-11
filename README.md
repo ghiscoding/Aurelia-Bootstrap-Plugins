@@ -25,16 +25,17 @@ _`npm install` can be replaced by `yarn install` if you prefer `yarn`_
 ```bash
 git clone https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins
 cd client-cli
-npm install
+npm install # or: yarn install
 au run --watch
 ```
 
 #### Aurelia-Webpack
+Uses `Aurelia-Navigation-Skeleton` which is based on the new [Jods Aurelia-WebPack 2.x base](https://github.com/jods4/aurelia-webpack-build/tree/master/demos)
 ```bash
 git clone https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins
 cd client-wp
-npm install
-npm start
+npm install # or: yarn install
+npm start # or: yarn start
 ```
 
 #### Aurelia ASP.Net Core - WebPack (typescript)
@@ -42,7 +43,7 @@ This is based on the new [Jods Aurelia-WebPack 2.x base](https://github.com/jods
 ```bash
 git clone https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins
 cd client-aspnetcore-ts
-npm install
+npm install # or: yarn install
 set ASPNETCORE_ENVIRONMENT=Development
 dotnet restore
 dotnet watch run
@@ -55,4 +56,4 @@ dotnet watch run
 Contributions are welcome. This plugin was created to help the community (and myself), if you wish to suggest something and/or want to make a PR (Pull Request), please feel free to do so.
 
 ## Use it, like it? 
-You like and use an Aurelia-Bootstrap-Plugin, please click on the :star: and spead the word.
+You like and use an `Aurelia-Bootstrap-Plugins`, please click on the :star: and spead the word.

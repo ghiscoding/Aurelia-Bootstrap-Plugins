@@ -2,8 +2,8 @@
 ```bash
 git clone https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins
 cd client-wp
-npm install
-npm start
+npm install # or: yarn install
+npm start # or: yarn start
 ```
 
 ## Plugin examples

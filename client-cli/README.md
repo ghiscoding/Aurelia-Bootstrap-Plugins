@@ -2,7 +2,7 @@
 ```bash
 git clone https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins
 cd client-cli
-npm install
+npm install # or: yarn install
 au run --watch
 ```
 
