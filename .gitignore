@@ -1,9 +1,20 @@
-bin
-node_modules
-jspm_packages
-bower_components
 .idea
 .DS_STORE
-npm-debug.log
+
+# Logs
+logs
+*.log
+npm-debug.log*
 yarn-error.log
 yarn.lock
+
+
+# Dependency directories
+bower_components
+jspm_packages
+node_modules
+
+# Build
+bin
+obj
+**/wwwroot/dist
