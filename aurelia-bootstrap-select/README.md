@@ -392,4 +392,4 @@ export function configure(aurelia) {
 Contributions are welcome. This plugin was created to help the community (and myself), if you wish to suggest something and/or want to make a PR (Pull Request), please feel free to do so.
 
 ## Use it, like it? 
-You like and use an `Aurelia-Bootstrap-Plugins`, please click on the :star: and spead the word.
+You like and use an `Aurelia-Bootstrap-Plugins`, please click on the :star: and spread the word.
