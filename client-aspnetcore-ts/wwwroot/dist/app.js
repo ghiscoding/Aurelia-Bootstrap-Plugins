@@ -59,7 +59,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "dce7c11f6b4181d90997"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "7d79c3cfbd2ac883eb82"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -53927,7 +53927,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.AbpDatetimePickerCustomElement = undefined;
 
-var _dec, _dec2, _dec3, _dec4, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11;
+var _dec, _dec2, _dec3, _dec4, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12;
 
 var _aureliaFramework = __webpack_require__("aurelia-framework");
 
@@ -54002,21 +54002,23 @@ var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_
 
     _initDefineProp(this, 'value', _descriptor3, this);
 
-    _initDefineProp(this, 'iconBase', _descriptor4, this);
+    _initDefineProp(this, 'placeholder', _descriptor4, this);
 
-    _initDefineProp(this, 'withDateIcon', _descriptor5, this);
+    _initDefineProp(this, 'iconBase', _descriptor5, this);
 
-    _initDefineProp(this, 'options', _descriptor6, this);
+    _initDefineProp(this, 'withDateIcon', _descriptor6, this);
 
-    _initDefineProp(this, 'onHide', _descriptor7, this);
+    _initDefineProp(this, 'options', _descriptor7, this);
 
-    _initDefineProp(this, 'onShow', _descriptor8, this);
+    _initDefineProp(this, 'onHide', _descriptor8, this);
 
-    _initDefineProp(this, 'onChange', _descriptor9, this);
+    _initDefineProp(this, 'onShow', _descriptor9, this);
 
-    _initDefineProp(this, 'onError', _descriptor10, this);
+    _initDefineProp(this, 'onChange', _descriptor10, this);
 
-    _initDefineProp(this, 'onUpdate', _descriptor11, this);
+    _initDefineProp(this, 'onError', _descriptor11, this);
+
+    _initDefineProp(this, 'onUpdate', _descriptor12, this);
 
     this._events = {};
     this._methods = {};
@@ -54046,8 +54048,8 @@ var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_
 
     this.domElm.on('dp.change', function (e) {
       if ((0, _moment2.default)(e.date, _this2._format, true).isValid()) {
-        _this2.model = (0, _moment2.default)(e.date).toDate();
-        _this2.value = (0, _moment2.default)(e.date).format(_this2._format);
+        _this2.model = (0, _moment2.default)(e.date, _this2._format, true).toDate();
+        _this2.value = (0, _moment2.default)(e.date, _this2._format, true);
       } else if (!e.date) {
         _this2.model = null;
         _this2.value = null;
@@ -54097,17 +54099,17 @@ var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_
     this.options = Object.assign({}, _pickerGlobalOptions.globalPickerOptions, pickerOptions);
 
     if (this.options) {
-      this._format = this._originalDateFormat = this.options.hasOwnProperty('format') ? this.options.format : null;
+      this._format = this._originalDateFormat = this.options.hasOwnProperty('format') ? this.options.format : 'YYYY-MM-DD';
     }
     if (this.model) {
-      this._originalDateObject = (0, _moment2.default)(this.model).toDate() || this.elm.getAttribute('model');
+      this._originalDateObject = (0, _moment2.default)(this.model, this._format, true).toDate() || this.elm.getAttribute('model');
     }
     this._originalValue = this.value || this.elm.getAttribute('value');
     var value = this._originalValue || this._originalDateObject;
 
     if (value && (0, _moment2.default)(value, this._format, true).isValid()) {
-      this.model = (0, _moment2.default)(value).toDate();
-      this.value = (0, _moment2.default)(value).format(this._format);
+      this.model = (0, _moment2.default)(value, this._format, true).toDate();
+      this.value = (0, _moment2.default)(value, this._format, true);
     }
   };
 
@@ -54245,34 +54247,39 @@ var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_
 }), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'value', [_dec4], {
   enumerable: true,
   initializer: null
-}), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'iconBase', [_aureliaFramework.bindable], {
+}), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'placeholder', [_aureliaFramework.bindable], {
+  enumerable: true,
+  initializer: function initializer() {
+    return '';
+  }
+}), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'iconBase', [_aureliaFramework.bindable], {
   enumerable: true,
   initializer: function initializer() {
     return _pickerGlobalOptions.globalExtraOptions.iconBase;
   }
-}), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'withDateIcon', [_aureliaFramework.bindable], {
+}), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'withDateIcon', [_aureliaFramework.bindable], {
   enumerable: true,
   initializer: function initializer() {
     return _pickerGlobalOptions.globalExtraOptions.withDateIcon;
   }
-}), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'options', [_aureliaFramework.bindable], {
+}), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, 'options', [_aureliaFramework.bindable], {
   enumerable: true,
   initializer: function initializer() {
     return {};
   }
-}), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, 'onHide', [_aureliaFramework.bindable], {
+}), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, 'onHide', [_aureliaFramework.bindable], {
   enumerable: true,
   initializer: null
-}), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, 'onShow', [_aureliaFramework.bindable], {
+}), _descriptor9 = _applyDecoratedDescriptor(_class2.prototype, 'onShow', [_aureliaFramework.bindable], {
   enumerable: true,
   initializer: null
-}), _descriptor9 = _applyDecoratedDescriptor(_class2.prototype, 'onChange', [_aureliaFramework.bindable], {
+}), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, 'onChange', [_aureliaFramework.bindable], {
   enumerable: true,
   initializer: null
-}), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, 'onError', [_aureliaFramework.bindable], {
+}), _descriptor11 = _applyDecoratedDescriptor(_class2.prototype, 'onError', [_aureliaFramework.bindable], {
   enumerable: true,
   initializer: null
-}), _descriptor11 = _applyDecoratedDescriptor(_class2.prototype, 'onUpdate', [_aureliaFramework.bindable], {
+}), _descriptor12 = _applyDecoratedDescriptor(_class2.prototype, 'onUpdate', [_aureliaFramework.bindable], {
   enumerable: true,
   initializer: null
 })), _class2)) || _class);
@@ -54282,7 +54289,7 @@ var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_
 /***/ "aurelia-bootstrap-datetimepicker/abp-datetime-picker.html":
 /***/ (function(module, exports) {
 
-module.exports = "<template>\r\n    <div class.bind=\"parseBool(withDateIcon) ? 'input-group date' : 'date'\">\r\n        <input type=\"text\" class=\"form-control datetimepicker\" \r\n               value.bind=\"value\" \r\n               model.bind=\"model\"\r\n               blur.trigger=\"blur()\"\r\n               element.bind=\"element\">\r\n        <span if.bind=\"parseBool(withDateIcon)\" class=\"input-group-addon\" data-target=\"#datetimepicker\" data-toggle=\"datetimepicker\">\r\n            <span class.bind=\"iconBase === 'glyphicon' ? 'glyphicon glyphicon-calendar' : 'fa fa-calendar'\"></span>\r\n        </span>\r\n    </div>\r\n</template>\r\n";
+module.exports = "<template>\r\n    <div class.bind=\"parseBool(withDateIcon) ? 'input-group date' : 'date'\">\r\n        <input type=\"text\" class=\"form-control datetimepicker\" \r\n               value.bind=\"value\" \r\n               model.bind=\"model\"\r\n               blur.trigger=\"blur()\"\r\n               placeholder.bind=\"placeholder\"\r\n               element.bind=\"element\">\r\n        <span if.bind=\"parseBool(withDateIcon)\" class=\"input-group-addon\" data-target=\"#datetimepicker\" data-toggle=\"datetimepicker\">\r\n            <span class.bind=\"iconBase === 'glyphicon' ? 'glyphicon glyphicon-calendar' : 'fa fa-calendar'\"></span>\r\n        </span>\r\n    </div>\r\n</template>\r\n";
 
 /***/ }),
 
@@ -59740,8 +59747,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 let Edit = class Edit {
     constructor() {
-        this.activeDate = null;
-        this.dueDate = null;
+        this.task = { dueDate: undefined };
+        this.dueDate = '30.06.2017';
         this.camping = '';
         this.picnic = [];
         this.post = {};
@@ -59868,7 +59875,7 @@ Edit = __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __decorate */]([
 /***/ "bootstrap-plugins.html":
 /***/ (function(module, exports) {
 
-module.exports = "<template>\r\n  <div class=\"container\">\r\n        <form class=\"form-horizontal\" validate.bind=\"validation\">\r\n                    <h3>Input Tags Input</h3>\r\n        <div class=\"col-md-6\">\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Post Categories</label>\r\n                <div class=\"\">\r\n                    <abp-tags-input element.bind=\"tag\" value.bind=\"post.categories\" placeholder=\"enter a category tag\"></abp-tags-input>\r\n                </div>\r\n                <div class=\"\">\r\n                    list of items: ${post.categories}\r\n                </div>\r\n            </div>\r\n            <div class=\"\">\r\n                <button class=\"btn btn-primary\"\r\n                click.delegate=\"addTag()\">\r\n                Add Tag1\r\n                </button>\r\n                <button class=\"btn btn-warning\"\r\n                    click.delegate=\"removeTag('Javascript')\">\r\n                    Remove Javascript\r\n                    </button>\r\n                <button class=\"btn btn-danger\"\r\n                click.delegate=\"removeAllTag()\">\r\n                (after 1sec) Remove All Tags\r\n                </button>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"col-md-6\">\r\n            <h3>Eonasdan - Date Time Picker</h3>\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Date Entered 1</label>\r\n                <div>\r\n                    <span class=\"text-danger\">Formatted Date: </span>${post.dateEntered} <br/>\r\n                    <span class=\"text-danger\">Date Object:</span> ${myDateObject}\r\n                </div>\r\n                <abp-datetime-picker with-date-icon=\"false\" element.bind=\"picker\" value.bind=\"post.dateEntered\" model.bind=\"myDateObject\" options.bind=\"{ format:'YYYY-MM-DD HH:mm' }\"></abp-datetime-picker>\r\n            </div>\r\n            <button class=\"btn btn-primary btn-sm\"\r\n                click.delegate=\"changePostDateValue('2000-01-05 13:33')\">\r\n                Change value.bind => Jan 5, 2000 - 1:33pm\r\n            </button>\r\n            <button class=\"btn btn-primary btn-sm\"\r\n                click.delegate=\"changePostDateObject('2010-02-02 10:00')\">\r\n                Change model.bind => Feb 2, 2010 - 10am\r\n            </button>\r\n\r\n            <hr/>\r\n\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Date Entered 2</label>\r\n                <div>\r\n                    <span class=\"text-danger\">Formatted Date: </span>${post.dateEntered2} <br />\r\n                    <span class=\"text-danger\">Date Object:</span> ${myDateObject2}\r\n                </div>\r\n                <abp-datetime-picker element.bind=\"picker\" value.bind=\"post.dateEntered2\" model.bind=\"myDateObject2\" options.bind=\"{ showTodayButton: true }\"></abp-datetime-picker>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Date Entered 3</label>\r\n                <abp-datetime-picker element.bind=\"picker\" model.bind=\"dueDate\" options.bind=\"{ showClear: true, showTodayButton: true, format: 'YYYY-MM-DD' }\"></abp-datetime-picker>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Date Entered 4</label>\r\n                <abp-datetime-picker element.bind=\"picker\" value.bind=\"activeDate\" options.bind=\"{ showClear: true, showTodayButton: true, format: 'YYYY-MM-DD' }\"></abp-datetime-picker>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"col-md-12\">\r\n            <hr />\r\n        </div>\r\n\r\n        <h3>Bootstrap-Select</h3>\r\n        <div class=\"col-md-12\">\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Basic - String Collection</label>\r\n                <div>Value: ${camping}<br /> Item: ${campingValue}</div>\r\n                <div>\r\n                    <abp-select collection.bind=\"allCampingStuff\" selected-value.bind=\"camping\" selected-item.bind=\"campingValue\"></abp-select>\r\n                </div>\r\n\r\n                <label class=\"control-label\">Object Collection - Empty on Null, Change Title, Class Styling, Alternate Title (on Relish)</label>\r\n                <div>Value: ${condimentValue} <br /> Item: ${condiment | stringify}</div>\r\n                <div>\r\n                    <abp-select picker-options.bind=\"selectOptions\" empty-on-null=\"true\" selected-item.bind=\"condiment\" selected-value.bind=\"condimentValue\" disabled=\"false\" collection.bind=\"allCondiments\" data-mapping-structure.bind=\"selectMappingStructure\" object-key=\"id\" element.bind=\"selectCondiment\"></abp-select>\r\n                </div>\r\n\r\n                <label class=\"control-label\">Object Collection - Data Content &amp; disabled last item</label>\r\n                <div>Value: ${condimentStyledValue} <br /> Item: ${condimentStyled | stringify}</div>\r\n                <div>\r\n                    <abp-select picker-options.bind=\"selectOptions\" selected-item.bind=\"condimentStyled\" selected-value.bind=\"condimentStyledValue\" disabled=\"false\" collection.bind=\"allStyledCondiments\" data-mapping-structure.bind=\"selectMappingStructure\" object-key=\"id\" element.bind=\"selectStyledCondiment\"></abp-select>\r\n                </div>\r\n\r\n                <label class=\"control-label\">Optgroups, Multiple &amp; disabled last bread</label>\r\n                <div>Values: ${picnicValue} <br /> Items: ${picnic | stringify}</div>\r\n                <div>\r\n                    <abp-select id=\"multiSelect\" picker-options.bind=\"selectOptions\" selected-item.bind=\"picnic\" selected-value.bind=\"picnicValue\" collection.bind=\"allSelectionWithGroups\" has-optgroup=\"true\" data-mapping-structure.bind=\"selectMappingStructure\" multiple=\"true\" object-key=\"id\" element.bind=\"selectPicnic\"></abp-select>\r\n                </div>\r\n\r\n            </div>\r\n            <div class=\"\">\r\n                <button class=\"btn btn-sm btn-primary\"\r\n                click.delegate=\"preSelectFirstOptions()\">\r\n                Change selection by item\r\n                </button>\r\n                <button class=\"btn btn-sm btn-primary\"\r\n                click.delegate=\"preSelectSecondOptions()\">\r\n                Change selection by value\r\n                </button>\r\n                <button class=\"btn btn-sm btn-warning\"\r\n                click.delegate=\"toggleOptgroupBreads()\">\r\n                Toggle disabled 'Breads' optgroup\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </form>\r\n  </div>\r\n</template>\r\n";
+module.exports = "<template>\r\n  <div class=\"container\">\r\n        <form class=\"form-horizontal\" validate.bind=\"validation\">\r\n                    <h3>Input Tags Input</h3>\r\n        <div class=\"col-md-6\">\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Post Categories</label>\r\n                <div class=\"\">\r\n                    <abp-tags-input element.bind=\"tag\" value.bind=\"post.categories\" placeholder=\"enter a category tag\"></abp-tags-input>\r\n                </div>\r\n                <div class=\"\">\r\n                    list of items: ${post.categories}\r\n                </div>\r\n            </div>\r\n            <div class=\"\">\r\n                <button class=\"btn btn-primary\"\r\n                click.delegate=\"addTag()\">\r\n                Add Tag1\r\n                </button>\r\n                <button class=\"btn btn-warning\"\r\n                    click.delegate=\"removeTag('Javascript')\">\r\n                    Remove Javascript\r\n                    </button>\r\n                <button class=\"btn btn-danger\"\r\n                click.delegate=\"removeAllTag()\">\r\n                (after 1sec) Remove All Tags\r\n                </button>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"col-md-6\">\r\n            <h3>Eonasdan - Date Time Picker</h3>\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Date Entered 1</label>\r\n                <div>\r\n                    <span class=\"text-danger\">Formatted Date: </span>${post.dateEntered} <br/>\r\n                    <span class=\"text-danger\">Date Object:</span> ${myDateObject}\r\n                </div>\r\n                <abp-datetime-picker with-date-icon=\"false\" element.bind=\"picker\" value.bind=\"post.dateEntered\" model.bind=\"myDateObject\" options.bind=\"{ format:'YYYY-MM-DD HH:mm' }\"></abp-datetime-picker>\r\n            </div>\r\n            <button class=\"btn btn-primary btn-sm\"\r\n                click.delegate=\"changePostDateValue('2000-01-05 13:33')\">\r\n                Change value.bind => Jan 5, 2000 - 1:33pm\r\n            </button>\r\n            <button class=\"btn btn-primary btn-sm\"\r\n                click.delegate=\"changePostDateObject('2010-02-02 10:00')\">\r\n                Change model.bind => Feb 2, 2010 - 10am\r\n            </button>\r\n\r\n            <hr/>\r\n\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Date Entered 2</label>\r\n                <div>\r\n                    <span class=\"text-danger\">Formatted Date: </span>${post.dateEntered2} <br />\r\n                    <span class=\"text-danger\">Date Object:</span> ${myDateObject2}\r\n                </div>\r\n                <abp-datetime-picker element.bind=\"picker\" value.bind=\"post.dateEntered2\" model.bind=\"myDateObject2\" options.bind=\"{ showTodayButton: true }\"></abp-datetime-picker>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Date Entered 3</label>\r\n                <abp-datetime-picker element.bind=\"picker\" model.bind=\"dueDate\" options.bind=\"{ showClear: true, showTodayButton: true, format: 'DD.MM.YYYY' }\"></abp-datetime-picker>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Date Entered 4</label>\r\n                <abp-datetime-picker element.bind=\"picker\" value.bind=\"activeDate\" options.bind=\"{ showClear: true, showTodayButton: true, format: 'YYYY-MM-DD' }\"></abp-datetime-picker>\r\n            </div>\r\n            Task: ${task | stringify}\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Date Entered 5</label>\r\n                <abp-datetime-picker class=\"form-datepicker\" element.bind=\"picker\" model.bind=\"task.dueDate\" options.bind=\"{ showTodayButton: true, format: 'YYYY-MM-DD' }\"></abp-datetime-picker>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"col-md-12\">\r\n            <hr />\r\n        </div>\r\n\r\n        <h3>Bootstrap-Select</h3>\r\n        <div class=\"col-md-12\">\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Basic - String Collection</label>\r\n                <div>Value: ${camping}<br /> Item: ${campingValue}</div>\r\n                <div>\r\n                    <abp-select collection.bind=\"allCampingStuff\" selected-value.bind=\"camping\" selected-item.bind=\"campingValue\"></abp-select>\r\n                </div>\r\n\r\n                <label class=\"control-label\">Object Collection - Empty on Null, Change Title, Class Styling, Alternate Title (on Relish)</label>\r\n                <div>Value: ${condimentValue} <br /> Item: ${condiment | stringify}</div>\r\n                <div>\r\n                    <abp-select picker-options.bind=\"selectOptions\" empty-on-null=\"true\" selected-item.bind=\"condiment\" selected-value.bind=\"condimentValue\" disabled=\"false\" collection.bind=\"allCondiments\" data-mapping-structure.bind=\"selectMappingStructure\" object-key=\"id\" element.bind=\"selectCondiment\"></abp-select>\r\n                </div>\r\n\r\n                <label class=\"control-label\">Object Collection - Data Content &amp; disabled last item</label>\r\n                <div>Value: ${condimentStyledValue} <br /> Item: ${condimentStyled | stringify}</div>\r\n                <div>\r\n                    <abp-select picker-options.bind=\"selectOptions\" selected-item.bind=\"condimentStyled\" selected-value.bind=\"condimentStyledValue\" disabled=\"false\" collection.bind=\"allStyledCondiments\" data-mapping-structure.bind=\"selectMappingStructure\" object-key=\"id\" element.bind=\"selectStyledCondiment\"></abp-select>\r\n                </div>\r\n\r\n                <label class=\"control-label\">Optgroups, Multiple &amp; disabled last bread</label>\r\n                <div>Values: ${picnicValue} <br /> Items: ${picnic | stringify}</div>\r\n                <div>\r\n                    <abp-select id=\"multiSelect\" picker-options.bind=\"selectOptions\" selected-item.bind=\"picnic\" selected-value.bind=\"picnicValue\" collection.bind=\"allSelectionWithGroups\" has-optgroup=\"true\" data-mapping-structure.bind=\"selectMappingStructure\" multiple=\"true\" object-key=\"id\" element.bind=\"selectPicnic\"></abp-select>\r\n                </div>\r\n\r\n            </div>\r\n            <div class=\"\">\r\n                <button class=\"btn btn-sm btn-primary\"\r\n                click.delegate=\"preSelectFirstOptions()\">\r\n                Change selection by item\r\n                </button>\r\n                <button class=\"btn btn-sm btn-primary\"\r\n                click.delegate=\"preSelectSecondOptions()\">\r\n                Change selection by value\r\n                </button>\r\n                <button class=\"btn btn-sm btn-warning\"\r\n                click.delegate=\"toggleOptgroupBreads()\">\r\n                Toggle disabled 'Breads' optgroup\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </form>\r\n  </div>\r\n</template>\r\n";
 
 /***/ }),
 

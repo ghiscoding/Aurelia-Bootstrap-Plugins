@@ -1,20 +1,23 @@
 .idea
 .DS_STORE
 
+# Dependency directories
+bower_components
+jspm_packages
+node_modules
+
+# Build / ASP.Net Core
+*.suo
+*.user
+_ReSharper.*
+bin
+obj
+config
+packages
+
 # Logs
 logs
 *.log
 npm-debug.log*
 yarn-error.log
 yarn.lock
-
-
-# Dependency directories
-bower_components
-jspm_packages
-node_modules
-
-# Build
-bin
-obj
-**/wwwroot/dist

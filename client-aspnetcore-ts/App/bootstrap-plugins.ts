@@ -1,3 +1,7 @@
+export interface Task {
+  dueDate: Date;
+}
+
 import {bindable, inject} from 'aurelia-framework';
 import * as Moment from 'moment';
 
@@ -9,8 +13,9 @@ export class Edit {
   @bindable selectStyledCondiment;
   @bindable selectPicnic;
   @bindable tag;
-  activeDate: Date = null;
-  dueDate: Date = null;
+  task: Task = { dueDate: undefined};
+  activeDate: Date;
+  dueDate: string = '30.06.2017';
   myDateObject: Date;
   myDateObject2: Date;
   camping: string = '';

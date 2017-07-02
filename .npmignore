@@ -8,3 +8,7 @@ client-wp
 npm-debug.log
 yarn-error.log
 yarn.lock
+
+# Build / ASP.Net Core
+bin
+obj

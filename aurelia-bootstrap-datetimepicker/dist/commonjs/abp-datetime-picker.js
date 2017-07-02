@@ -126,8 +126,8 @@ var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_
 
     this.domElm.on('dp.change', function (e) {
       if ((0, _moment2.default)(e.date, _this2._format, true).isValid()) {
-        _this2.model = (0, _moment2.default)(e.date).toDate();
-        _this2.value = (0, _moment2.default)(e.date).format(_this2._format);
+        _this2.model = (0, _moment2.default)(e.date, _this2._format, true).toDate();
+        _this2.value = (0, _moment2.default)(e.date, _this2._format, true);
       } else if (!e.date) {
         _this2.model = null;
         _this2.value = null;
@@ -177,17 +177,17 @@ var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_
     this.options = Object.assign({}, _pickerGlobalOptions.globalPickerOptions, pickerOptions);
 
     if (this.options) {
-      this._format = this._originalDateFormat = this.options.hasOwnProperty('format') ? this.options.format : null;
+      this._format = this._originalDateFormat = this.options.hasOwnProperty('format') ? this.options.format : 'YYYY-MM-DD';
     }
     if (this.model) {
-      this._originalDateObject = (0, _moment2.default)(this.model).toDate() || this.elm.getAttribute('model');
+      this._originalDateObject = (0, _moment2.default)(this.model, this._format, true).toDate() || this.elm.getAttribute('model');
     }
     this._originalValue = this.value || this.elm.getAttribute('value');
     var value = this._originalValue || this._originalDateObject;
 
     if (value && (0, _moment2.default)(value, this._format, true).isValid()) {
-      this.model = (0, _moment2.default)(value).toDate();
-      this.value = (0, _moment2.default)(value).format(this._format);
+      this.model = (0, _moment2.default)(value, this._format, true).toDate();
+      this.value = (0, _moment2.default)(value, this._format, true);
     }
   };
 

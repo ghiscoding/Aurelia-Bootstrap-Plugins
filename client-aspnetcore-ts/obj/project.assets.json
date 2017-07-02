@@ -9669,16 +9669,16 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\OwnSyncDev\\GitHub\\Aurelia-Bootstrap-Plugins\\client-aspnetcore-ts\\AureliaDemo.csproj",
+      "projectUniqueName": "C:\\OwnSyncDev\\GitHub\\Aurelia-Bootstrap-Plugins\\client-aspnetcore-ts\\AureliaDemo.csproj",
       "projectName": "AureliaDemo",
-      "projectPath": "c:\\OwnSyncDev\\GitHub\\Aurelia-Bootstrap-Plugins\\client-aspnetcore-ts\\AureliaDemo.csproj",
-      "outputPath": "c:\\OwnSyncDev\\GitHub\\Aurelia-Bootstrap-Plugins\\client-aspnetcore-ts\\obj\\",
+      "projectPath": "C:\\OwnSyncDev\\GitHub\\Aurelia-Bootstrap-Plugins\\client-aspnetcore-ts\\AureliaDemo.csproj",
+      "outputPath": "C:\\OwnSyncDev\\GitHub\\Aurelia-Bootstrap-Plugins\\client-aspnetcore-ts\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.0"
       ],
       "files": {
-        "lib/netcoreapp1.0/AureliaDemo.dll": "c:\\OwnSyncDev\\GitHub\\Aurelia-Bootstrap-Plugins\\client-aspnetcore-ts\\bin\\placeholder\\netcoreapp1.0\\AureliaDemo.dll"
+        "lib/netcoreapp1.0/AureliaDemo.dll": "C:\\OwnSyncDev\\GitHub\\Aurelia-Bootstrap-Plugins\\client-aspnetcore-ts\\bin\\placeholder\\netcoreapp1.0\\AureliaDemo.dll"
       },
       "frameworks": {
         "netcoreapp1.0": {

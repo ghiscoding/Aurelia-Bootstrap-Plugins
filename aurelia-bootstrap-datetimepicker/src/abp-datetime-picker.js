@@ -61,8 +61,8 @@ export class AbpDatetimePickerCustomElement {
     // update Value & Model binding on a Date picker changed (watch)
     this.domElm.on('dp.change', (e) => {
       if (moment(e.date, this._format, true).isValid()) {
-        this.model = moment(e.date).toDate();
-        this.value = moment(e.date).format(this._format);
+        this.model = moment(e.date, this._format, true).toDate();
+        this.value = moment(e.date, this._format, true);
       } else if (!e.date) {
         this.model = null;
         this.value = null;
@@ -118,17 +118,17 @@ export class AbpDatetimePickerCustomElement {
     this.options = Object.assign({}, globalPickerOptions, pickerOptions);
 
     if (this.options) {
-      this._format = this._originalDateFormat = this.options.hasOwnProperty('format') ? this.options.format : null;
+      this._format = this._originalDateFormat = this.options.hasOwnProperty('format') ? this.options.format : 'YYYY-MM-DD';
     }
     if (this.model) {
-      this._originalDateObject = moment(this.model).toDate() || this.elm.getAttribute('model');
+      this._originalDateObject = moment(this.model, this._format, true).toDate() || this.elm.getAttribute('model');
     }
     this._originalValue = this.value || this.elm.getAttribute('value');
     let value = this._originalValue || this._originalDateObject;
 
     if (value && moment(value, this._format, true).isValid()) {
-      this.model = moment(value).toDate();
-      this.value = moment(value).format(this._format);
+      this.model = moment(value, this._format, true).toDate();
+      this.value = moment(value, this._format, true);
     }
   }
 

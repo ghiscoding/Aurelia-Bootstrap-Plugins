@@ -59,11 +59,16 @@
             </div>
             <div class="form-group">
                 <label class="control-label">Date Entered 3</label>
-                <abp-datetime-picker element.bind="picker" model.bind="dueDate" options.bind="{ showClear: true, showTodayButton: true, format: 'YYYY-MM-DD' }"></abp-datetime-picker>
+                <abp-datetime-picker element.bind="picker" model.bind="dueDate" options.bind="{ showClear: true, showTodayButton: true, format: 'DD.MM.YYYY' }"></abp-datetime-picker>
             </div>
             <div class="form-group">
                 <label class="control-label">Date Entered 4</label>
                 <abp-datetime-picker element.bind="picker" value.bind="activeDate" options.bind="{ showClear: true, showTodayButton: true, format: 'YYYY-MM-DD' }"></abp-datetime-picker>
+            </div>
+            Task: ${task | stringify}
+            <div class="form-group">
+                <label class="control-label">Date Entered 5</label>
+                <abp-datetime-picker class="form-datepicker" element.bind="picker" model.bind="task.dueDate" options.bind="{ showTodayButton: true, format: 'YYYY-MM-DD' }"></abp-datetime-picker>
             </div>
         </div>
 
