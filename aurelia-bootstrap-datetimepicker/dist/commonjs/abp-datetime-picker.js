@@ -327,7 +327,9 @@ var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_
   initializer: null
 }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'placeholder', [_aureliaFramework.bindable], {
   enumerable: true,
-  initializer: null
+  initializer: function initializer() {
+    return '';
+  }
 }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'iconBase', [_aureliaFramework.bindable], {
   enumerable: true,
   initializer: function initializer() {

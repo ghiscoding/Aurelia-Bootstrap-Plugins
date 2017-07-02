@@ -293,7 +293,9 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
   initializer: null
 }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'placeholder', [bindable], {
   enumerable: true,
-  initializer: null
+  initializer: function () {
+    return '';
+  }
 }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'iconBase', [bindable], {
   enumerable: true,
   initializer: function () {

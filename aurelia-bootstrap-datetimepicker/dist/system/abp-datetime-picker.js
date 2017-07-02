@@ -328,7 +328,9 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
         initializer: null
       }), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'placeholder', [bindable], {
         enumerable: true,
-        initializer: null
+        initializer: function initializer() {
+          return '';
+        }
       }), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'iconBase', [bindable], {
         enumerable: true,
         initializer: function initializer() {
