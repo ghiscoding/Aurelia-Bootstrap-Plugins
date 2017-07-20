@@ -52,7 +52,7 @@ export class Edit {
 
   constructor() {
     this.post = {
-      categories: 'News,Javascript,C#'
+      categories: ['Javascript' , 'C#']
     };
     this.myDateObject = new Date(2017, 1, 1, 14, 28);
     this.myDateObject2 = moment();
@@ -105,6 +105,10 @@ export class Edit {
 
   removeTag(tagName) {
     this.tag.methods.remove(tagName);
+  }
+
+  replaceAllTags() {
+    this.post.categories = ['Erlang', 'Python'];
   }
 
   preSelectFirstOptions() {

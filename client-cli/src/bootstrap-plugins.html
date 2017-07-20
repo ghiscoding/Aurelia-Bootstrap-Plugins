@@ -9,13 +9,17 @@
                     <abp-tags-input element.bind="tag" value.bind="post.categories" placeholder="enter a category tag"></abp-tags-input>
                 </div>
                 <div class="">
-                    list of items: ${post.categories}
+                    list of items: ${post.categories | stringify}
                 </div>
             </div>
             <div class="">
                 <button class="btn btn-primary"
-                click.delegate="addTag()">
-                Add Tag1
+                    click.delegate="addTag()">
+                    Add Tag1
+                </button>
+                <button class="btn btn-info"
+                    click.delegate="replaceAllTags()">
+                    Replace all tags
                 </button>
                 <button class="btn btn-warning"
                     click.delegate="removeTag('Javascript')">
