@@ -121,7 +121,10 @@ export let AbpTagsInputCustomElement = (_dec = inject(Element), _dec2 = bindable
     });
 
     this.domElm.on('itemAdded', e => {
-      this.value = this.domElm.tagsinput('items');
+      if (!e.options || !e.options.preventRefresh) {
+        this.suppressValueChanged = true;
+        this.value = this.domElm.tagsinput('items');
+      }
       if (typeof this.onItemAdded === 'function') {
         this.onItemAdded(e);
       }
@@ -140,7 +143,10 @@ export let AbpTagsInputCustomElement = (_dec = inject(Element), _dec2 = bindable
     });
 
     this.domElm.on('itemRemoved', e => {
-      this.value = this.domElm.tagsinput('items');
+      if (!e.options || !e.options.preventRefresh) {
+        this.suppressValueChanged = true;
+        this.value = this.domElm.tagsinput('items');
+      }
       if (typeof this.onItemRemoved === 'function') {
         this.onItemRemoved(e);
       }
@@ -166,6 +172,7 @@ export let AbpTagsInputCustomElement = (_dec = inject(Element), _dec2 = bindable
       refresh: () => this.domElm.tagsinput('refresh'),
       remove: value => this.domElm.tagsinput('remove', value),
       removeAll: () => {
+        this.suppressValueChanged = true;
         this.domElm.tagsinput('removeAll');
         this.value = this.domElm.tagsinput('items');
       }
@@ -176,6 +183,42 @@ export let AbpTagsInputCustomElement = (_dec = inject(Element), _dec2 = bindable
 
   detached() {
     this.domElm.tagsinput('destroy');
+    this.subscription.dispose();
+  }
+
+  areEqualArray(arr1, arr2) {
+    if (arr1 === null && arr2 === null) {
+      return true;
+    }
+    if (!Array.isArray(arr1) || !Array.isArray(arr2) || arr1.length !== arr2.length) {
+      return false;
+    }
+    for (let i = 0; i < arr1.length; i++) {
+      if (arr1[i] !== arr2[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  valueChanged(newValue, oldValue) {
+    let newValueSplit = typeof newValue === 'string' ? newValue.split(',') : newValue;
+    let oldValueSplit = typeof oldValue === 'string' ? oldValue.split(',') : oldValue;
+
+    if (newValue && this.domElm && newValue !== oldValue && !this.areEqualArray(newValueSplit, oldValueSplit)) {
+      if (this.suppressValueChanged) {
+        this.suppressValueChanged = false;
+        return;
+      }
+      if (!this.suppressValueChanged) {
+        this.domElm.tagsinput('removeAll');
+        if (Array.isArray(newValue)) {
+          newValue.forEach(value => this.domElm.tagsinput('add', value, { preventRefresh: true }));
+        } else {
+          this.domElm.tagsinput('add', newValue, { preventRefresh: true });
+        }
+      }
+    }
   }
 }, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'element', [_dec2], {
   enumerable: true,

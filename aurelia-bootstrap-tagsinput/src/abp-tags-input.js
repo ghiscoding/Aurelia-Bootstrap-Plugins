@@ -26,6 +26,7 @@ export class AbpTagsInputCustomElement {
   events = {};
   methods = {};
   options = {};
+  suppressValueChanged;
 
   constructor(elm) {
     this.elm = elm;
@@ -86,7 +87,11 @@ export class AbpTagsInputCustomElement {
     });
 
     this.domElm.on('itemAdded', (e) => {
-      this.value = this.domElm.tagsinput('items');
+      // refresh the value attribute (except when we explicitly don't want it)
+      if (!e.options || !e.options.preventRefresh) {
+        this.suppressValueChanged = true;
+        this.value = this.domElm.tagsinput('items');
+      }
       if (typeof this.onItemAdded === 'function') {
         this.onItemAdded(e);
       }
@@ -105,7 +110,11 @@ export class AbpTagsInputCustomElement {
     });
 
     this.domElm.on('itemRemoved', (e) => {
-      this.value = this.domElm.tagsinput('items');
+      // refresh the value attribute (except when we explicitly don't want it)
+      if (!e.options || !e.options.preventRefresh) {
+        this.suppressValueChanged = true;
+        this.value = this.domElm.tagsinput('items');
+      }
       if (typeof this.onItemRemoved === 'function') {
         this.onItemRemoved(e);
       }
@@ -137,6 +146,7 @@ export class AbpTagsInputCustomElement {
       refresh: () => this.domElm.tagsinput('refresh'),
       remove: (value) => this.domElm.tagsinput('remove', value),
       removeAll: () => {
+        this.suppressValueChanged = true;
         this.domElm.tagsinput('removeAll');
         this.value = this.domElm.tagsinput('items');
       }
@@ -147,5 +157,55 @@ export class AbpTagsInputCustomElement {
 
   detached() {
     this.domElm.tagsinput('destroy');
+    this.subscription.dispose();
+  }
+
+  /** A simple array compare */
+  areEqualArray(arr1, arr2) {
+    if (arr1 === null && arr2 === null) {
+      return true;
+    }
+    if (!Array.isArray(arr1) || !Array.isArray(arr2) || (arr1.length !== arr2.length)) {
+      return false;
+    }
+    for (let i = 0; i < arr1.length; i++) {
+      if (arr1[i] !== arr2[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  /**
+   * because of a bug which still has an open issue on Github for the `refresh` not working correctly
+   * https://github.com/bootstrap-tagsinput/bootstrap-tagsinput/issues/98
+   * we need to `removeAll` and then loop on each new item to add them back as new tag
+   * however we want to avoid recursive call on valueChanged by using preventRefresh flag & comparing split values
+   * @param newValue
+   * @param oldValue
+   */
+  valueChanged(newValue, oldValue) {
+    // tagsinput deals with the values as csv, while the value could also be an array of values
+    // let's make them all on the same type as array of string which will be easier to deal with
+    let newValueSplit = (typeof newValue === 'string') ? newValue.split(',') : newValue;
+    let oldValueSplit = (typeof oldValue === 'string') ? oldValue.split(',') : oldValue;
+
+    // check the newValue vs oldValue but also the split result
+    // because in some cases we might have tagsinput saying the value is "tag1, tag2" while the newValue is ["tag1", "tag2"]
+    // which are equivalent and so we check that too
+    if (newValue && this.domElm && (newValue !== oldValue) && !this.areEqualArray(newValueSplit, oldValueSplit)) {
+      if (this.suppressValueChanged) {
+        this.suppressValueChanged = false;
+        return;
+      }
+      if (!this.suppressValueChanged) {
+        this.domElm.tagsinput('removeAll');
+        if (Array.isArray(newValue)) {
+          newValue.forEach(value => this.domElm.tagsinput('add', value, {preventRefresh: true}));
+        } else {
+          this.domElm.tagsinput('add', newValue, {preventRefresh: true});
+        }
+      }
+    }
   }
 }

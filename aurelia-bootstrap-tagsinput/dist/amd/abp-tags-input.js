@@ -145,7 +145,10 @@ define(['exports', 'aurelia-framework', 'jquery', './picker-global-options', 'bo
       });
 
       this.domElm.on('itemAdded', function (e) {
-        _this2.value = _this2.domElm.tagsinput('items');
+        if (!e.options || !e.options.preventRefresh) {
+          _this2.suppressValueChanged = true;
+          _this2.value = _this2.domElm.tagsinput('items');
+        }
         if (typeof _this2.onItemAdded === 'function') {
           _this2.onItemAdded(e);
         }
@@ -164,7 +167,10 @@ define(['exports', 'aurelia-framework', 'jquery', './picker-global-options', 'bo
       });
 
       this.domElm.on('itemRemoved', function (e) {
-        _this2.value = _this2.domElm.tagsinput('items');
+        if (!e.options || !e.options.preventRefresh) {
+          _this2.suppressValueChanged = true;
+          _this2.value = _this2.domElm.tagsinput('items');
+        }
         if (typeof _this2.onItemRemoved === 'function') {
           _this2.onItemRemoved(e);
         }
@@ -202,6 +208,7 @@ define(['exports', 'aurelia-framework', 'jquery', './picker-global-options', 'bo
           return _this3.domElm.tagsinput('remove', value);
         },
         removeAll: function removeAll() {
+          _this3.suppressValueChanged = true;
           _this3.domElm.tagsinput('removeAll');
           _this3.value = _this3.domElm.tagsinput('items');
         }
@@ -212,6 +219,46 @@ define(['exports', 'aurelia-framework', 'jquery', './picker-global-options', 'bo
 
     AbpTagsInputCustomElement.prototype.detached = function detached() {
       this.domElm.tagsinput('destroy');
+      this.subscription.dispose();
+    };
+
+    AbpTagsInputCustomElement.prototype.areEqualArray = function areEqualArray(arr1, arr2) {
+      if (arr1 === null && arr2 === null) {
+        return true;
+      }
+      if (!Array.isArray(arr1) || !Array.isArray(arr2) || arr1.length !== arr2.length) {
+        return false;
+      }
+      for (var i = 0; i < arr1.length; i++) {
+        if (arr1[i] !== arr2[i]) {
+          return false;
+        }
+      }
+      return true;
+    };
+
+    AbpTagsInputCustomElement.prototype.valueChanged = function valueChanged(newValue, oldValue) {
+      var _this4 = this;
+
+      var newValueSplit = typeof newValue === 'string' ? newValue.split(',') : newValue;
+      var oldValueSplit = typeof oldValue === 'string' ? oldValue.split(',') : oldValue;
+
+      if (newValue && this.domElm && newValue !== oldValue && !this.areEqualArray(newValueSplit, oldValueSplit)) {
+        if (this.suppressValueChanged) {
+          this.suppressValueChanged = false;
+          return;
+        }
+        if (!this.suppressValueChanged) {
+          this.domElm.tagsinput('removeAll');
+          if (Array.isArray(newValue)) {
+            newValue.forEach(function (value) {
+              return _this4.domElm.tagsinput('add', value, { preventRefresh: true });
+            });
+          } else {
+            this.domElm.tagsinput('add', newValue, { preventRefresh: true });
+          }
+        }
+      }
     };
 
     return AbpTagsInputCustomElement;
