@@ -1,5 +1,23 @@
 {
+  "name": "aurelia-bootstrap-plugin",
+  "version": "1.0.0",
+  "description": "Aurelia samples for Aurelia-Bootstrap-Plugins",
+  "keywords": [
+    "aurelia",
+    "bootstrap",
+    "datetimepicker",
+    "tagsinput"
+  ],
+  "main": "wwwroot/dist/app.js",
+  "repository": {
+    "url": "http://github.com/ghiscoding/aurelia-slickgrid",
+    "type": "git"
+  },
+  "author": "Ghislain B.",
   "license": "MIT",
+  "engines": {
+    "node": ">= 6.0.0"
+  },
   "devDependencies": {
     "aspnet-webpack": "^1.0.29",
     "aurelia-loader-nodejs": "1.0.1",
