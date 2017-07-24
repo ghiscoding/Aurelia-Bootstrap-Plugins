@@ -157,7 +157,6 @@ export class AbpTagsInputCustomElement {
 
   detached() {
     this.domElm.tagsinput('destroy');
-    this.subscription.dispose();
   }
 
   /** A simple array compare */

@@ -183,7 +183,6 @@ export let AbpTagsInputCustomElement = (_dec = inject(Element), _dec2 = bindable
 
   detached() {
     this.domElm.tagsinput('destroy');
-    this.subscription.dispose();
   }
 
   areEqualArray(arr1, arr2) {

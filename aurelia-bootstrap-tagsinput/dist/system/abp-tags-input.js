@@ -221,7 +221,6 @@ System.register(['aurelia-framework', 'jquery', 'bootstrap-tagsinput/dist/bootst
 
         AbpTagsInputCustomElement.prototype.detached = function detached() {
           this.domElm.tagsinput('destroy');
-          this.subscription.dispose();
         };
 
         AbpTagsInputCustomElement.prototype.areEqualArray = function areEqualArray(arr1, arr2) {

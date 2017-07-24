@@ -218,7 +218,6 @@ var AbpTagsInputCustomElement = exports.AbpTagsInputCustomElement = (_dec = (0, 
 
   AbpTagsInputCustomElement.prototype.detached = function detached() {
     this.domElm.tagsinput('destroy');
-    this.subscription.dispose();
   };
 
   AbpTagsInputCustomElement.prototype.areEqualArray = function areEqualArray(arr1, arr2) {
