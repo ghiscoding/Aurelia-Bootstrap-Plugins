@@ -9,7 +9,7 @@ export class App {
     config.map([
       { route: 'bootstrap-plugins', name: 'bootstrap-plugins',  moduleId: PLATFORM.moduleName('./bootstrap-plugins'), nav: true, title: 'Bootstrap Plugins' },
       { route: 'validation-form',   name: 'validation-form',    moduleId: PLATFORM.moduleName('./validation-form'),   nav: true, title: 'Validation Form' },
-      { route: '', redirect: PLATFORM.moduleName('validation-form') }
+      { route: '', redirect: 'validation-form' }
     ]);
 
     this.router = router;

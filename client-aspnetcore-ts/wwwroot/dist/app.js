@@ -60,7 +60,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "8e1b63c17f2bfbd32abc"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "b681601f5e8e460400c2"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -3143,7 +3143,7 @@ if (typeof FEATURE_NO_ES2015 === 'undefined') {
     },
         propertyIsEnumerable = function propertyIsEnumerable(key) {
       var uid = '' + key;
-      return onlySymbols(uid) ? hOP.call(this, uid) && this[internalSymbol]['@@' + uid] : pIE.call(this, key);
+      return onlySymbols(uid) ? hOP.call(this, uid) && this[internalSymbol] && this[internalSymbol]['@@' + uid] : pIE.call(this, key);
     },
         setAndGetSymbol = function setAndGetSymbol(uid) {
       var descriptor = {
@@ -3196,7 +3196,16 @@ if (typeof FEATURE_NO_ES2015 === 'undefined') {
     descriptor.value = $getOwnPropertySymbols;
     defineProperty(Object, GOPS, descriptor);
 
+    var cachedWindowNames = (typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object' ? Object.getOwnPropertyNames(window) : [];
+    var originalObjectGetOwnPropertyNames = Object.getOwnPropertyNames;
     descriptor.value = function getOwnPropertyNames(o) {
+      if (toString.call(o) === '[object Window]') {
+        try {
+          return originalObjectGetOwnPropertyNames(o);
+        } catch (e) {
+          return [].concat([], cachedWindowNames);
+        }
+      }
       return gOPN(o).filter(onlyNonSymbols);
     };
     defineProperty(Object, GOPN, descriptor);
@@ -3976,7 +3985,7 @@ function getControllersWithClassInstances(oldPrototype) {
     var controllers = Array.from(new Set((_a = []).concat.apply(_a, controllersLists)));
     var previouslyTraversed = new Set();
     var traversalInfo = (_b = []).concat.apply(_b, controllers.map(function (parentController) {
-        return __WEBPACK_IMPORTED_MODULE_5__view_model_traverse_controller__["a" /* traverseController */](oldPrototype, parentController, {
+        return Object(__WEBPACK_IMPORTED_MODULE_5__view_model_traverse_controller__["a" /* traverseController */])(oldPrototype, parentController, {
             previouslyTraversed: previouslyTraversed,
             parentController: parentController
         });
@@ -3993,7 +4002,7 @@ var HmrContext = (function () {
         this.viewEngine.addResourcePlugin('.css', {
             fetch: function (moduleId) {
                 return _a = {},
-                    _a[moduleId] = __WEBPACK_IMPORTED_MODULE_4__hmr_css_resource__["a" /* _createCSSResource */](moduleId),
+                    _a[moduleId] = Object(__WEBPACK_IMPORTED_MODULE_4__hmr_css_resource__["a" /* _createCSSResource */])(moduleId),
                     _a;
                 var _a;
             },
@@ -4130,12 +4139,12 @@ var HmrContext = (function () {
                         originalFactory.template = newViewFactory.template;
                         originalFactory.instructions = newViewFactory.instructions;
                         originalFactory.resources = newViewFactory.resources;
-                        elementsToReRender = __WEBPACK_IMPORTED_MODULE_6__view_traverse_controller__["a" /* getElementsToRerender */](originalFactory.template);
+                        elementsToReRender = Object(__WEBPACK_IMPORTED_MODULE_6__view_traverse_controller__["a" /* getElementsToRerender */])(originalFactory.template);
                         factoryToRenderWith = newViewFactory;
                         // const factoryToRenderWith = originalFactory;
-                        elementsToReRender.slots.forEach(function (slot) { return __WEBPACK_IMPORTED_MODULE_7__render_utils__["b" /* rerenderMatchingSlotChildren */](slot, factoryToRenderWith, originalFactory.template); });
-                        elementsToReRender.viewControllers.forEach(function (e) { return __WEBPACK_IMPORTED_MODULE_7__render_utils__["a" /* rerenderController */](e, 'view', factoryToRenderWith); });
-                        elementsToReRender.scopeControllers.forEach(function (e) { return __WEBPACK_IMPORTED_MODULE_7__render_utils__["a" /* rerenderController */](e, 'scope', factoryToRenderWith); });
+                        elementsToReRender.slots.forEach(function (slot) { return Object(__WEBPACK_IMPORTED_MODULE_7__render_utils__["b" /* rerenderMatchingSlotChildren */])(slot, factoryToRenderWith, originalFactory.template); });
+                        elementsToReRender.viewControllers.forEach(function (e) { return Object(__WEBPACK_IMPORTED_MODULE_7__render_utils__["a" /* rerenderController */])(e, 'view', factoryToRenderWith); });
+                        elementsToReRender.scopeControllers.forEach(function (e) { return Object(__WEBPACK_IMPORTED_MODULE_7__render_utils__["a" /* rerenderController */])(e, 'scope', factoryToRenderWith); });
                         return [2 /*return*/];
                 }
             });
@@ -4394,7 +4403,7 @@ __webpack_require__(130);
 __webpack_require__(126);
 __webpack_require__(219);
 __webpack_require__(224);
-module.exports = __webpack_require__(237);
+module.exports = __webpack_require__(236);
 
 
 /***/ }),
@@ -10151,7 +10160,7 @@ module.exports = ret;
 
 },{"./es5":13}]},{},[4])(4)
 });                    ;if (typeof window !== 'undefined' && window !== null) {                               window.P = window.Promise;                                                     } else if (typeof self !== 'undefined' && self !== null) {                             self.P = self.Promise;                                                         }
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33), __webpack_require__(6), __webpack_require__(32), __webpack_require__(66).setImmediate))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(37), __webpack_require__(6), __webpack_require__(32), __webpack_require__(66).setImmediate))
 
 /***/ }),
 
@@ -10345,7 +10354,7 @@ module.exports = ret;
     attachTo.clearImmediate = clearImmediate;
 }(typeof self === "undefined" ? typeof global === "undefined" ? this : global : self));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32), __webpack_require__(33)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(32), __webpack_require__(37)))
 
 /***/ }),
 
@@ -10382,7 +10391,7 @@ function fixupCSSUrls(address, css) {
     if (quote === '\'' || quote === '"') {
       p1 = p1.substr(1, p1.length - 2);
     }
-    return 'url(\'' + __WEBPACK_IMPORTED_MODULE_3_aurelia_path__["d" /* relativeToFile */](p1, address) + '\')';
+    return 'url(\'' + Object(__WEBPACK_IMPORTED_MODULE_3_aurelia_path__["d" /* relativeToFile */])(p1, address) + '\')';
   });
 }
 
@@ -10452,7 +10461,7 @@ var CSSViewEngineHooks = function () {
 function _createCSSResource(address) {
   var _dec, _class;
 
-  var ViewCSS = (_dec = __WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["_3" /* resource */](new CSSResource(address)), _dec(_class = function (_CSSViewEngineHooks) {
+  var ViewCSS = (_dec = Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["_3" /* resource */])(new CSSResource(address)), _dec(_class = function (_CSSViewEngineHooks) {
     _inherits(ViewCSS, _CSSViewEngineHooks);
 
     function ViewCSS() {
@@ -10506,7 +10515,7 @@ function configure(config) {
           bindable = [];
         }
 
-        return _ref = {}, _ref[elementName] = __WEBPACK_IMPORTED_MODULE_1__dynamic_element__["a" /* _createDynamicElement */](elementName, address, bindable), _ref;
+        return _ref = {}, _ref[elementName] = Object(__WEBPACK_IMPORTED_MODULE_1__dynamic_element__["a" /* _createDynamicElement */])(elementName, address, bindable), _ref;
       });
     }
   });
@@ -10526,7 +10535,7 @@ function configure(config) {
 function _createDynamicElement(name, viewUrl, bindableNames) {
   var _dec, _dec2, _class;
 
-  var DynamicElement = (_dec = __WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["W" /* customElement */](name), _dec2 = __WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["_6" /* useView */](viewUrl), _dec(_class = _dec2(_class = function () {
+  var DynamicElement = (_dec = Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["W" /* customElement */])(name), _dec2 = Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["_6" /* useView */])(viewUrl), _dec(_class = _dec2(_class = function () {
     function DynamicElement() {
       
     }
@@ -10539,7 +10548,7 @@ function _createDynamicElement(name, viewUrl, bindableNames) {
   }()) || _class) || _class);
 
   for (var i = 0, ii = bindableNames.length; i < ii; ++i) {
-    __WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["R" /* bindable */](bindableNames[i])(DynamicElement);
+    Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["R" /* bindable */])(bindableNames[i])(DynamicElement);
   }
   return DynamicElement;
 }
@@ -10859,7 +10868,7 @@ var RouteRecognizer = function () {
       delete routeParams[param];
     }
 
-    var queryString = __WEBPACK_IMPORTED_MODULE_0_aurelia_path__["a" /* buildQueryString */](routeParams);
+    var queryString = Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_path__["a" /* buildQueryString */])(routeParams);
     output += queryString ? '?' + queryString : '';
 
     return output;
@@ -10875,7 +10884,7 @@ var RouteRecognizer = function () {
     if (queryStart !== -1) {
       var queryString = normalizedPath.substr(queryStart + 1, normalizedPath.length);
       normalizedPath = normalizedPath.substr(0, queryStart);
-      queryParams = __WEBPACK_IMPORTED_MODULE_0_aurelia_path__["c" /* parseQueryString */](queryString);
+      queryParams = Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_path__["c" /* parseQueryString */])(queryString);
     }
 
     normalizedPath = decodeURI(normalizedPath);
@@ -11076,7 +11085,7 @@ function addSegment(currentState, segment) {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TemplatingRouteLoader; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_aurelia_dependency_injection__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_aurelia_templating__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_aurelia_router__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_aurelia_router__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_aurelia_path__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_aurelia_metadata__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__router_view__ = __webpack_require__("aurelia-templating-router/router-view");
@@ -11095,7 +11104,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 
-var TemplatingRouteLoader = (_dec = __WEBPACK_IMPORTED_MODULE_0_aurelia_dependency_injection__["r" /* inject */](__WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["g" /* CompositionEngine */]), _dec(_class = function (_RouteLoader) {
+var TemplatingRouteLoader = (_dec = Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_dependency_injection__["r" /* inject */])(__WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["g" /* CompositionEngine */]), _dec(_class = function (_RouteLoader) {
   _inherits(TemplatingRouteLoader, _RouteLoader);
 
   function TemplatingRouteLoader(compositionEngine) {
@@ -11110,7 +11119,7 @@ var TemplatingRouteLoader = (_dec = __WEBPACK_IMPORTED_MODULE_0_aurelia_dependen
   TemplatingRouteLoader.prototype.loadRoute = function loadRoute(router, config) {
     var childContainer = router.container.createChild();
 
-    var viewModel = /\.html/.test(config.moduleId) ? createDynamicClass(config.moduleId) : __WEBPACK_IMPORTED_MODULE_3_aurelia_path__["d" /* relativeToFile */](config.moduleId, __WEBPACK_IMPORTED_MODULE_4_aurelia_metadata__["a" /* Origin */].get(router.container.viewModel.constructor).moduleId);
+    var viewModel = /\.html/.test(config.moduleId) ? createDynamicClass(config.moduleId) : Object(__WEBPACK_IMPORTED_MODULE_3_aurelia_path__["d" /* relativeToFile */])(config.moduleId, __WEBPACK_IMPORTED_MODULE_4_aurelia_metadata__["a" /* Origin */].get(router.container.viewModel.constructor).moduleId);
 
     var instruction = {
       viewModel: viewModel,
@@ -11142,7 +11151,7 @@ function createDynamicClass(moduleId) {
 
   var name = /([^\/^\?]+)\.html/i.exec(moduleId)[1];
 
-  var DynamicClass = (_dec2 = __WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["W" /* customElement */](name), _dec3 = __WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["_6" /* useView */](moduleId), _dec2(_class2 = _dec3(_class2 = function () {
+  var DynamicClass = (_dec2 = Object(__WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["W" /* customElement */])(name), _dec3 = Object(__WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["_6" /* useView */])(moduleId), _dec2(_class2 = _dec3(_class2 = function () {
     function DynamicClass() {
       
     }
@@ -11206,7 +11215,7 @@ webpackContext.id = 138;
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ValidateBindingBehaviorBase; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_aurelia_dependency_injection__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__validation_controller__ = __webpack_require__(28);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__validate_trigger__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__validate_trigger__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__get_target_dom_element__ = __webpack_require__(90);
 
 
@@ -11222,7 +11231,7 @@ var ValidateBindingBehaviorBase = (function () {
     ValidateBindingBehaviorBase.prototype.bind = function (binding, source, rulesOrController, rules) {
         var _this = this;
         // identify the target element.
-        var target = __WEBPACK_IMPORTED_MODULE_3__get_target_dom_element__["a" /* getTargetDOMElement */](binding, source);
+        var target = Object(__WEBPACK_IMPORTED_MODULE_3__get_target_dom_element__["a" /* getTargetDOMElement */])(binding, source);
         // locate the controller.
         var controller;
         if (rulesOrController instanceof __WEBPACK_IMPORTED_MODULE_1__validation_controller__["a" /* ValidationController */]) {
@@ -11508,7 +11517,7 @@ function parseQueryString(queryString) {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ValidationControllerFactory; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__validation_controller__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__validator__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__property_accessor_parser__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__property_accessor_parser__ = __webpack_require__(35);
 
 
 
@@ -15960,7 +15969,7 @@ return jQuery.parseXML;
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
 	__webpack_require__(0),
 	__webpack_require__(10),
-	__webpack_require__(37), // clone
+	__webpack_require__(36), // clone
 	__webpack_require__(25) // parent, contents
 ], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery ) {
 
@@ -16653,7 +16662,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 	__webpack_require__(191),
 	__webpack_require__(27),
 	__webpack_require__(25),
-	__webpack_require__(37),
+	__webpack_require__(36),
 	__webpack_require__(8)
 ], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, stripAndCollapse ) {
 
@@ -17887,7 +17896,7 @@ var RelativeViewStrategy = (_dec = viewStrategy(), _dec(_class2 = function () {
 
   RelativeViewStrategy.prototype.loadViewFactory = function loadViewFactory(viewEngine, compileInstruction, loadContext, target) {
     if (this.absolutePath === null && this.moduleId) {
-      this.absolutePath = __WEBPACK_IMPORTED_MODULE_3_aurelia_path__["d" /* relativeToFile */](this.path, this.moduleId);
+      this.absolutePath = Object(__WEBPACK_IMPORTED_MODULE_3_aurelia_path__["d" /* relativeToFile */])(this.path, this.moduleId);
     }
 
     compileInstruction.associatedModuleId = this.moduleId;
@@ -17896,7 +17905,7 @@ var RelativeViewStrategy = (_dec = viewStrategy(), _dec(_class2 = function () {
 
   RelativeViewStrategy.prototype.makeRelativeTo = function makeRelativeTo(file) {
     if (this.absolutePath === null) {
-      this.absolutePath = __WEBPACK_IMPORTED_MODULE_3_aurelia_path__["d" /* relativeToFile */](this.path, file);
+      this.absolutePath = Object(__WEBPACK_IMPORTED_MODULE_3_aurelia_path__["d" /* relativeToFile */])(this.path, file);
     }
   };
 
@@ -18116,7 +18125,7 @@ var BindingLanguage = function () {
 
 var noNodes = Object.freeze([]);
 
-var SlotCustomAttribute = (_dec6 = __WEBPACK_IMPORTED_MODULE_5_aurelia_dependency_injection__["r" /* inject */](__WEBPACK_IMPORTED_MODULE_2_aurelia_pal__["b" /* DOM */].Element), _dec6(_class8 = function () {
+var SlotCustomAttribute = (_dec6 = Object(__WEBPACK_IMPORTED_MODULE_5_aurelia_dependency_injection__["r" /* inject */])(__WEBPACK_IMPORTED_MODULE_2_aurelia_pal__["b" /* DOM */].Element), _dec6(_class8 = function () {
   function SlotCustomAttribute(element) {
     
 
@@ -18655,7 +18664,7 @@ var ViewResources = function () {
   };
 
   ViewResources.prototype.relativeToView = function relativeToView(path) {
-    return __WEBPACK_IMPORTED_MODULE_3_aurelia_path__["d" /* relativeToFile */](path, this.viewUrl);
+    return Object(__WEBPACK_IMPORTED_MODULE_3_aurelia_path__["d" /* relativeToFile */])(path, this.viewUrl);
   };
 
   ViewResources.prototype.registerElement = function registerElement(tagName, behavior) {
@@ -18773,7 +18782,7 @@ var View = function () {
 
     this.isBound = true;
     this.bindingContext = bindingContext;
-    this.overrideContext = overrideContext || __WEBPACK_IMPORTED_MODULE_6_aurelia_binding__["_11" /* createOverrideContext */](bindingContext);
+    this.overrideContext = overrideContext || Object(__WEBPACK_IMPORTED_MODULE_6_aurelia_binding__["_11" /* createOverrideContext */])(bindingContext);
 
     this.resources._invokeHook('beforeBind', this);
 
@@ -19366,7 +19375,7 @@ var ViewSlot = function () {
   return ViewSlot;
 }();
 
-var ProviderResolver = __WEBPACK_IMPORTED_MODULE_5_aurelia_dependency_injection__["z" /* resolver */](_class11 = function () {
+var ProviderResolver = Object(__WEBPACK_IMPORTED_MODULE_5_aurelia_dependency_injection__["z" /* resolver */])(_class11 = function () {
   function ProviderResolver() {
     
   }
@@ -19814,7 +19823,7 @@ function makeShadowSlot(compiler, resources, node, instructions, parentInjectorI
   return auShadowSlot;
 }
 
-var ViewCompiler = (_dec7 = __WEBPACK_IMPORTED_MODULE_5_aurelia_dependency_injection__["r" /* inject */](BindingLanguage, ViewResources), _dec7(_class13 = function () {
+var ViewCompiler = (_dec7 = Object(__WEBPACK_IMPORTED_MODULE_5_aurelia_dependency_injection__["r" /* inject */])(BindingLanguage, ViewResources), _dec7(_class13 = function () {
   function ViewCompiler(bindingLanguage, resources) {
     
 
@@ -20493,7 +20502,7 @@ var ProxyViewFactory = function () {
   return ProxyViewFactory;
 }();
 
-var ViewEngine = (_dec8 = __WEBPACK_IMPORTED_MODULE_5_aurelia_dependency_injection__["r" /* inject */](__WEBPACK_IMPORTED_MODULE_4_aurelia_loader__["a" /* Loader */], __WEBPACK_IMPORTED_MODULE_5_aurelia_dependency_injection__["b" /* Container */], ViewCompiler, ModuleAnalyzer, ViewResources), _dec8(_class14 = (_temp4 = _class15 = function () {
+var ViewEngine = (_dec8 = Object(__WEBPACK_IMPORTED_MODULE_5_aurelia_dependency_injection__["r" /* inject */])(__WEBPACK_IMPORTED_MODULE_4_aurelia_loader__["a" /* Loader */], __WEBPACK_IMPORTED_MODULE_5_aurelia_dependency_injection__["b" /* Container */], ViewCompiler, ModuleAnalyzer, ViewResources), _dec8(_class14 = (_temp4 = _class15 = function () {
   function ViewEngine(loader, container, viewCompiler, moduleAnalyzer, appResources) {
     
 
@@ -20578,7 +20587,7 @@ var ViewEngine = (_dec8 = __WEBPACK_IMPORTED_MODULE_5_aurelia_dependency_injecti
         var templateImportCount = importIds.length;
         for (var i = 0, ii = viewModelRequires.length; i < ii; ++i) {
           var req = viewModelRequires[i];
-          var importId = typeof req === 'function' ? __WEBPACK_IMPORTED_MODULE_1_aurelia_metadata__["a" /* Origin */].get(req).moduleId : __WEBPACK_IMPORTED_MODULE_3_aurelia_path__["d" /* relativeToFile */](req.src || req, registryEntry.address);
+          var importId = typeof req === 'function' ? __WEBPACK_IMPORTED_MODULE_1_aurelia_metadata__["a" /* Origin */].get(req).moduleId : Object(__WEBPACK_IMPORTED_MODULE_3_aurelia_path__["d" /* relativeToFile */])(req.src || req, registryEntry.address);
 
           if (importIds.indexOf(importId) === -1) {
             importIds.push(importId);
@@ -20715,7 +20724,7 @@ var Controller = function () {
 
   Controller.prototype.automate = function automate(overrideContext, owningView) {
     this.view.bindingContext = this.viewModel;
-    this.view.overrideContext = overrideContext || __WEBPACK_IMPORTED_MODULE_6_aurelia_binding__["_11" /* createOverrideContext */](this.viewModel);
+    this.view.overrideContext = overrideContext || Object(__WEBPACK_IMPORTED_MODULE_6_aurelia_binding__["_11" /* createOverrideContext */])(this.viewModel);
     this.view._isUserControlled = true;
 
     if (this.behavior.handlesCreated) {
@@ -20771,9 +20780,9 @@ var Controller = function () {
       if (this.viewModel === scope.overrideContext.bindingContext) {
         overrideContext = scope.overrideContext;
       } else if (this.instruction.inheritBindingContext) {
-        overrideContext = __WEBPACK_IMPORTED_MODULE_6_aurelia_binding__["_11" /* createOverrideContext */](this.viewModel, scope.overrideContext);
+        overrideContext = Object(__WEBPACK_IMPORTED_MODULE_6_aurelia_binding__["_11" /* createOverrideContext */])(this.viewModel, scope.overrideContext);
       } else {
-        overrideContext = __WEBPACK_IMPORTED_MODULE_6_aurelia_binding__["_11" /* createOverrideContext */](this.viewModel);
+        overrideContext = Object(__WEBPACK_IMPORTED_MODULE_6_aurelia_binding__["_11" /* createOverrideContext */])(this.viewModel);
         overrideContext.__parentOverrideContext = scope.overrideContext;
       }
 
@@ -20849,7 +20858,7 @@ var Controller = function () {
   return Controller;
 }();
 
-var BehaviorPropertyObserver = (_dec9 = __WEBPACK_IMPORTED_MODULE_6_aurelia_binding__["_31" /* subscriberCollection */](), _dec9(_class16 = function () {
+var BehaviorPropertyObserver = (_dec9 = Object(__WEBPACK_IMPORTED_MODULE_6_aurelia_binding__["_31" /* subscriberCollection */])(), _dec9(_class16 = function () {
   function BehaviorPropertyObserver(taskQueue, obj, propertyName, selfSubscriber, initialValue) {
     
 
@@ -21787,7 +21796,7 @@ function tryActivateViewModel(context) {
   return context.viewModel.activate(context.model) || Promise.resolve();
 }
 
-var CompositionEngine = (_dec10 = __WEBPACK_IMPORTED_MODULE_5_aurelia_dependency_injection__["r" /* inject */](ViewEngine, ViewLocator), _dec10(_class17 = function () {
+var CompositionEngine = (_dec10 = Object(__WEBPACK_IMPORTED_MODULE_5_aurelia_dependency_injection__["r" /* inject */])(ViewEngine, ViewLocator), _dec10(_class17 = function () {
   function CompositionEngine(viewEngine, viewLocator) {
     
 
@@ -22148,7 +22157,7 @@ function viewResources() {
   };
 }
 
-var TemplatingEngine = (_dec11 = __WEBPACK_IMPORTED_MODULE_5_aurelia_dependency_injection__["r" /* inject */](__WEBPACK_IMPORTED_MODULE_5_aurelia_dependency_injection__["b" /* Container */], ModuleAnalyzer, ViewCompiler, CompositionEngine), _dec11(_class18 = function () {
+var TemplatingEngine = (_dec11 = Object(__WEBPACK_IMPORTED_MODULE_5_aurelia_dependency_injection__["r" /* inject */])(__WEBPACK_IMPORTED_MODULE_5_aurelia_dependency_injection__["b" /* Container */], ModuleAnalyzer, ViewCompiler, CompositionEngine), _dec11(_class18 = function () {
   function TemplatingEngine(container, moduleAnalyzer, viewCompiler, compositionEngine) {
     
 
@@ -22236,7 +22245,7 @@ var TemplateRegistryEntry = function () {
   }
 
   TemplateRegistryEntry.prototype.addDependency = function addDependency(src, name) {
-    var finalSrc = typeof src === 'string' ? __WEBPACK_IMPORTED_MODULE_0_aurelia_path__["d" /* relativeToFile */](src, this.address) : __WEBPACK_IMPORTED_MODULE_1_aurelia_metadata__["a" /* Origin */].get(src).moduleId;
+    var finalSrc = typeof src === 'string' ? Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_path__["d" /* relativeToFile */])(src, this.address) : __WEBPACK_IMPORTED_MODULE_1_aurelia_metadata__["a" /* Origin */].get(src).moduleId;
 
     this.dependencies.push(new TemplateDependency(finalSrc, name));
   };
@@ -22267,7 +22276,7 @@ var TemplateRegistryEntry = function () {
           throw new Error('<require> element in ' + address + ' has no "from" attribute.');
         }
 
-        dependencies[i] = new TemplateDependency(__WEBPACK_IMPORTED_MODULE_0_aurelia_path__["d" /* relativeToFile */](src, address), current.getAttribute('as'));
+        dependencies[i] = new TemplateDependency(Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_path__["d" /* relativeToFile */])(src, address), current.getAttribute('as'));
 
         if (current.parentNode) {
           current.parentNode.removeChild(current);
@@ -24578,7 +24587,7 @@ function updateOverrideContexts(views, startIndex) {
 
 function createFullOverrideContext(repeat, data, index, length, key) {
   var bindingContext = {};
-  var overrideContext = __WEBPACK_IMPORTED_MODULE_0_aurelia_binding__["_11" /* createOverrideContext */](bindingContext, repeat.scope.overrideContext);
+  var overrideContext = Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_binding__["_11" /* createOverrideContext */])(bindingContext, repeat.scope.overrideContext);
 
   if (typeof key !== 'undefined') {
     bindingContext[repeat.key] = key;
@@ -27593,7 +27602,7 @@ var UtilService = exports.UtilService = function () {
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
- * Bootstrap-select v1.12.2 (http://silviomoreto.github.io/bootstrap-select)
+ * Bootstrap-select v1.12.4 (http://silviomoreto.github.io/bootstrap-select)
  *
  * Copyright 2013-2017 bootstrap-select
  * Licensed under MIT (https://github.com/silviomoreto/bootstrap-select/blob/master/LICENSE)
@@ -27759,12 +27768,22 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
   };
 
   var changed_arguments = null;
+
+  var EventIsSupported = (function() {
+    try {
+      new Event('change');
+      return true;
+    } catch (e) {
+      return false;
+    }
+  })();
+
   $.fn.triggerNative = function (eventName) {
     var el = this[0],
         event;
 
     if (el.dispatchEvent) { // for modern browsers & IE9+
-      if (typeof Event === 'function') {
+      if (EventIsSupported) {
         // For modern browsers
         event = new Event(eventName, {
           bubbles: true
@@ -27789,28 +27808,28 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
   // Case insensitive contains search
   $.expr.pseudos.icontains = function (obj, index, meta) {
-    var $obj = $(obj);
+    var $obj = $(obj).find('a');
     var haystack = ($obj.data('tokens') || $obj.text()).toString().toUpperCase();
     return haystack.includes(meta[3].toUpperCase());
   };
 
   // Case insensitive begins search
   $.expr.pseudos.ibegins = function (obj, index, meta) {
-    var $obj = $(obj);
+    var $obj = $(obj).find('a');
     var haystack = ($obj.data('tokens') || $obj.text()).toString().toUpperCase();
     return haystack.startsWith(meta[3].toUpperCase());
   };
 
   // Case and accent insensitive contains search
   $.expr.pseudos.aicontains = function (obj, index, meta) {
-    var $obj = $(obj);
+    var $obj = $(obj).find('a');
     var haystack = ($obj.data('tokens') || $obj.data('normalizedText') || $obj.text()).toString().toUpperCase();
     return haystack.includes(meta[3].toUpperCase());
   };
 
   // Case and accent insensitive begins search
   $.expr.pseudos.aibegins = function (obj, index, meta) {
-    var $obj = $(obj);
+    var $obj = $(obj).find('a');
     var haystack = ($obj.data('tokens') || $obj.data('normalizedText') || $obj.text()).toString().toUpperCase();
     return haystack.startsWith(meta[3].toUpperCase());
   };
@@ -27922,7 +27941,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
     this.init();
   };
 
-  Selectpicker.VERSION = '1.12.2';
+  Selectpicker.VERSION = '1.12.4';
 
   // part of this is duplicated in i18n/defaults-en_US.js. Make sure to update both.
   Selectpicker.DEFAULTS = {
@@ -28039,9 +28058,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
       if (that.$element[0].hasAttribute('required')) {
         this.$element.on('invalid', function () {
-          that.$button
-            .addClass('bs-invalid')
-            .focus();
+          that.$button.addClass('bs-invalid');
 
           that.$element.on({
             'focus.bs.select': function () {
@@ -28058,6 +28075,11 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
               if (this.validity.valid) that.$button.removeClass('bs-invalid');
               that.$element.off('rendered.bs.select');
             }
+          });
+
+          that.$button.on('blur.bs.select', function() {
+            that.$element.focus().blur();
+            that.$button.off('blur.bs.select');
           });
         });
       }
@@ -28154,9 +28176,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
        */
       var generateLI = function (content, index, classes, optgroup) {
         return '<li' +
-            ((typeof classes !== 'undefined' & '' !== classes) ? ' class="' + classes + '"' : '') +
-            ((typeof index !== 'undefined' & null !== index) ? ' data-original-index="' + index + '"' : '') +
-            ((typeof optgroup !== 'undefined' & null !== optgroup) ? 'data-optgroup="' + optgroup + '"' : '') +
+            ((typeof classes !== 'undefined' && '' !== classes) ? ' class="' + classes + '"' : '') +
+            ((typeof index !== 'undefined' && null !== index) ? ' data-original-index="' + index + '"' : '') +
+            ((typeof optgroup !== 'undefined' && null !== optgroup) ? 'data-optgroup="' + optgroup + '"' : '') +
             '>' + content + '</li>';
       };
 
@@ -28200,7 +28222,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
         }
       }
 
-      this.$element.find('option').each(function (index) {
+      var $selectOptions = this.$element.find('option');
+
+      $selectOptions.each(function (index) {
         var $this = $(this);
 
         liIndex++;
@@ -28209,7 +28233,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
         // Get the class and text for the option
         var optionClass = this.className || '',
-            inline = this.style.cssText,
+            inline = htmlEscape(this.style.cssText),
             text = $this.data('content') ? $this.data('content') : $this.html(),
             tokens = $this.data('tokens') ? $this.data('tokens') : null,
             subtext = typeof $this.data('subtext') !== 'undefined' ? '<small class="text-muted">' + $this.data('subtext') + '</small>' : '',
@@ -28217,13 +28241,20 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
             $parent = $this.parent(),
             isOptgroup = $parent[0].tagName === 'OPTGROUP',
             isOptgroupDisabled = isOptgroup && $parent[0].disabled,
-            isDisabled = this.disabled || isOptgroupDisabled;
+            isDisabled = this.disabled || isOptgroupDisabled,
+            prevHiddenIndex;
 
         if (icon !== '' && isDisabled) {
           icon = '<span>' + icon + '</span>';
         }
 
         if (that.options.hideDisabled && (isDisabled && !isOptgroup || isOptgroupDisabled)) {
+          // set prevHiddenIndex - the index of the first hidden option in a group of hidden options
+          // used to determine whether or not a divider should be placed after an optgroup if there are
+          // hidden options between the optgroup and the first visible option
+          prevHiddenIndex = $this.data('prevHiddenIndex');
+          $this.next().data('prevHiddenIndex', (prevHiddenIndex !== undefined ? prevHiddenIndex : index));
+
           liIndex--;
           return;
         }
@@ -28275,31 +28306,26 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
         } else if ($this.data('divider') === true) {
           _li.push(generateLI('', index, 'divider'));
         } else if ($this.data('hidden') === true) {
+          // set prevHiddenIndex - the index of the first hidden option in a group of hidden options
+          // used to determine whether or not a divider should be placed after an optgroup if there are
+          // hidden options between the optgroup and the first visible option
+          prevHiddenIndex = $this.data('prevHiddenIndex');
+          $this.next().data('prevHiddenIndex', (prevHiddenIndex !== undefined ? prevHiddenIndex : index));
+
           _li.push(generateLI(generateA(text, optionClass, inline, tokens), index, 'hidden is-hidden'));
         } else {
           var showDivider = this.previousElementSibling && this.previousElementSibling.tagName === 'OPTGROUP';
 
           // if previous element is not an optgroup and hideDisabled is true
           if (!showDivider && that.options.hideDisabled) {
-            // get previous elements
-            var $prev = $(this).prevAll();
+            prevHiddenIndex = $this.data('prevHiddenIndex');
 
-            for (var i = 0; i < $prev.length; i++) {
-              // find the first element in the previous elements that is an optgroup
-              if ($prev[i].tagName === 'OPTGROUP') {
-                var optGroupDistance = 0;
-
-                // loop through the options in between the current option and the optgroup
-                // and check if they are hidden or disabled
-                for (var d = 0; d < i; d++) {
-                  var prevOption = $prev[d];
-                  if (prevOption.disabled || $(prevOption).data('hidden') === true) optGroupDistance++;
-                }
-
-                // if all of the options between the current option and the optgroup are hidden or disabled, show the divider
-                if (optGroupDistance === i) showDivider = true;
-
-                break;
+            if (prevHiddenIndex !== undefined) {
+              // select the element **before** the first hidden element in the group
+              var prevHidden = $selectOptions.eq(prevHiddenIndex)[0].previousElementSibling;
+              
+              if (prevHidden && prevHidden.tagName === 'OPTGROUP' && !prevHidden.disabled) {
+                showDivider = true;
               }
             }
           }
@@ -28332,11 +28358,12 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
      */
     render: function (updateLi) {
       var that = this,
-          notDisabled;
+          notDisabled,
+          $selectOptions = this.$element.find('option');
 
       //Update the LI to match the SELECT
       if (updateLi !== false) {
-        this.$element.find('option').each(function (index) {
+        $selectOptions.each(function (index) {
           var $lis = that.findLis().eq(that.liObj[index]);
 
           that.setDisabled(index, this.disabled || this.parentNode.tagName === 'OPTGROUP' && this.parentNode.disabled, $lis);
@@ -28348,7 +28375,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
       this.tabIndex();
 
-      var selectedItems = this.$element.find('option').map(function () {
+      var selectedItems = $selectOptions.map(function () {
         if (this.selected) {
           if (that.options.hideDisabled && (this.disabled || this.parentNode.tagName === 'OPTGROUP' && this.parentNode.disabled)) return;
 
@@ -28380,7 +28407,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
         var max = this.options.selectedTextFormat.split('>');
         if ((max.length > 1 && selectedItems.length > max[1]) || (max.length == 1 && selectedItems.length >= 2)) {
           notDisabled = this.options.hideDisabled ? ', [disabled]' : '';
-          var totalCount = this.$element.find('option').not('[data-divider="true"], [data-hidden="true"]' + notDisabled).length,
+          var totalCount = $selectOptions.not('[data-divider="true"], [data-hidden="true"]' + notDisabled).length,
               tr8nText = (typeof this.options.countSelectedText === 'function') ? this.options.countSelectedText(selectedItems.length, totalCount) : this.options.countSelectedText;
           title = tr8nText.replace('{0}', selectedItems.length.toString()).replace('{1}', totalCount.toString());
         }
@@ -29040,9 +29067,9 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
           var $searchBase = that.$lis.not('.is-hidden, .divider, .dropdown-header'),
               $hideItems;
           if (that.options.liveSearchNormalize) {
-            $hideItems = $searchBase.find('a').not(':a' + that._searchStyle() + '("' + normalizeToBase(that.$searchbox.val()) + '")');
+            $hideItems = $searchBase.not(':a' + that._searchStyle() + '("' + normalizeToBase(that.$searchbox.val()) + '")');
           } else {
-            $hideItems = $searchBase.find('a').not(':' + that._searchStyle() + '("' + that.$searchbox.val() + '")');
+            $hideItems = $searchBase.not(':' + that._searchStyle() + '("' + that.$searchbox.val() + '")');
           }
 
           if ($hideItems.length === $searchBase.length) {
@@ -29050,7 +29077,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
             that.$menuInner.append($no_results);
             that.$lis.addClass('hidden');
           } else {
-            $hideItems.parent().addClass('hidden');
+            $hideItems.addClass('hidden');
 
             var $lisVisible = that.$lis.not('.hidden'),
                 $foundDiv;
@@ -29075,6 +29102,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
             if ($foundDiv) $foundDiv.addClass('hidden');
 
             $searchBase.not('.hidden').first().addClass('active');
+            that.$menuInner.scrollTop(0);
           }
         }
       });
@@ -29156,11 +29184,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
           $items,
           that = $parent.data('this'),
           index,
-          next,
-          first,
-          last,
-          prev,
-          nextPrev,
           prevIndex,
           isActive,
           selector = ':not(.disabled, .hidden, .dropdown-header, .divider)',
@@ -29215,11 +29238,6 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
             105: '9'
           };
 
-      if (that.options.liveSearch) $parent = $this.parent().parent();
-
-      if (that.options.container) $parent = that.$menu;
-
-      $items = $('[role="listbox"] li', $parent);
 
       isActive = that.$newElement.hasClass('open');
 
@@ -29242,60 +29260,29 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
           that.$menuInner.click();
           that.$button.focus();
         }
-        // $items contains li elements when liveSearch is enabled
-        $items = $('[role="listbox"] li' + selector, $parent);
-        if (!$this.val() && !/(38|40)/.test(e.keyCode.toString(10))) {
-          if ($items.filter('.active').length === 0) {
-            $items = that.$menuInner.find('li');
-            if (that.options.liveSearchNormalize) {
-              $items = $items.filter(':a' + that._searchStyle() + '(' + normalizeToBase(keyCodeMap[e.keyCode]) + ')');
-            } else {
-              $items = $items.filter(':' + that._searchStyle() + '(' + keyCodeMap[e.keyCode] + ')');
-            }
-          }
-        }
       }
 
-      if (!$items.length) return;
-
       if (/(38|40)/.test(e.keyCode.toString(10))) {
-        index = $items.index($items.find('a').filter(':focus').parent());
-        first = $items.filter(selector).first().index();
-        last = $items.filter(selector).last().index();
-        next = $items.eq(index).nextAll(selector).eq(0).index();
-        prev = $items.eq(index).prevAll(selector).eq(0).index();
-        nextPrev = $items.eq(next).prevAll(selector).eq(0).index();
+        $items = that.$lis.filter(selector);
+        if (!$items.length) return;
 
-        if (that.options.liveSearch) {
-          $items.each(function (i) {
-            if (!$(this).hasClass('disabled')) {
-              $(this).data('index', i);
-            }
-          });
+        if (!that.options.liveSearch) {
+          index = $items.index($items.find('a').filter(':focus').parent());
+	    } else {
           index = $items.index($items.filter('.active'));
-          first = $items.first().data('index');
-          last = $items.last().data('index');
-          next = $items.eq(index).nextAll().eq(0).data('index');
-          prev = $items.eq(index).prevAll().eq(0).data('index');
-          nextPrev = $items.eq(next).prevAll().eq(0).data('index');
         }
 
-        prevIndex = $this.data('prevIndex');
+        prevIndex = that.$menuInner.data('prevIndex');
 
         if (e.keyCode == 38) {
-          if (that.options.liveSearch) index--;
-          if (index != nextPrev && index > prev) index = prev;
-          if (index < first) index = first;
-          if (index == prevIndex) index = last;
+          if ((that.options.liveSearch || index == prevIndex) && index != -1) index--;
+          if (index < 0) index += $items.length;
         } else if (e.keyCode == 40) {
-          if (that.options.liveSearch) index++;
-          if (index == -1) index = 0;
-          if (index != nextPrev && index < next) index = next;
-          if (index > last) index = last;
-          if (index == prevIndex) index = first;
+          if (that.options.liveSearch || index == prevIndex) index++;
+          index = index % $items.length;
         }
 
-        $this.data('prevIndex', index);
+        that.$menuInner.data('prevIndex', index);
 
         if (!that.options.liveSearch) {
           $items.eq(index).children('a').focus();
@@ -29312,11 +29299,10 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
             count,
             prevKey;
 
-        $items.each(function () {
-          if (!$(this).hasClass('disabled')) {
-            if ($.trim($(this).children('a').text().toLowerCase()).substring(0, 1) == keyCodeMap[e.keyCode]) {
-              keyIndex.push($(this).index());
-            }
+        $items = that.$lis.filter(selector);
+        $items.each(function (i) {
+          if ($.trim($(this).children('a').text().toLowerCase()).substring(0, 1) == keyCodeMap[e.keyCode]) {
+            keyIndex.push(i);
           }
         });
 
@@ -30665,7 +30651,7 @@ function fixupCSSUrls(address, css) {
         if (quote === '\'' || quote === '"') {
             p1 = p1.substr(1, p1.length - 2);
         }
-        return 'url(\'' + __WEBPACK_IMPORTED_MODULE_2_aurelia_path__["d" /* relativeToFile */](p1, address) + '\')';
+        return 'url(\'' + Object(__WEBPACK_IMPORTED_MODULE_2_aurelia_path__["d" /* relativeToFile */])(p1, address) + '\')';
     });
 }
 var CSSResource = (function () {
@@ -30740,7 +30726,7 @@ function _createCSSResource(address) {
         return ViewCSS;
     }(CSSViewEngineHooks));
     ViewCSS = __decorate([
-        __WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["_3" /* resource */](new CSSResource(address))
+        Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["_3" /* resource */])(new CSSResource(address))
     ], ViewCSS);
     return ViewCSS;
 }
@@ -31015,7 +31001,7 @@ function traverseControllerForTemplates(auController, matchingTemplate) {
 }
 function getElementsToRerender(template) {
     // get visible elements to re-render:
-    var auElements = __WEBPACK_IMPORTED_MODULE_1__aurelia_hot_module_reload__["getAuElements"]();
+    var auElements = Object(__WEBPACK_IMPORTED_MODULE_1__aurelia_hot_module_reload__["getAuElements"])();
     var controllers = auElements.filter(function (el) {
         /* NOTE: viewless components like blur-image do not have el.au.controller set */
         return el.au && el.au.controller && (el.au.controller.view || el.au.controller.scope);
@@ -31166,8 +31152,7 @@ var options = {
   name: ''
 };
 if (true) {
-  var path = __webpack_require__(225);
-  var querystring = __webpack_require__(226);
+  var querystring = __webpack_require__(225);
   var overrides = querystring.parse(__resourceQuery.slice(1));
   if (overrides.path) options.path = overrides.path;
   if (overrides.timeout) options.timeout = overrides.timeout;
@@ -31184,7 +31169,7 @@ if (true) {
     options.warn = false;
   }
   if (overrides.dynamicPublicPath) {
-    options.path = path.join(__webpack_require__.p, options.path);
+    options.path = __webpack_require__.p + options.path;
   }
 }
 
@@ -31287,11 +31272,11 @@ if (typeof window !== 'undefined') {
 }
 
 function createReporter() {
-  var strip = __webpack_require__(229);
+  var strip = __webpack_require__(228);
 
   var overlay;
   if (typeof document !== 'undefined' && options.overlay) {
-    overlay = __webpack_require__(231);
+    overlay = __webpack_require__(230);
   }
 
   var styles = {
@@ -31344,7 +31329,7 @@ function createReporter() {
   };
 }
 
-var processUpdate = __webpack_require__(236);
+var processUpdate = __webpack_require__(235);
 
 var customHandler;
 var subscribeAllHandler;
@@ -31416,248 +31401,16 @@ if (module) {
 /***/ 225:
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(process) {// Copyright Joyent, Inc. and other Node contributors.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to permit
-// persons to whom the Software is furnished to do so, subject to the
-// following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-// resolves . and .. elements in a path array with directory names there
-// must be no slashes, empty elements, or device names (c:\) in the array
-// (so also no leading and trailing slashes - it does not distinguish
-// relative and absolute paths)
-function normalizeArray(parts, allowAboveRoot) {
-  // if the path tries to go above the root, `up` ends up > 0
-  var up = 0;
-  for (var i = parts.length - 1; i >= 0; i--) {
-    var last = parts[i];
-    if (last === '.') {
-      parts.splice(i, 1);
-    } else if (last === '..') {
-      parts.splice(i, 1);
-      up++;
-    } else if (up) {
-      parts.splice(i, 1);
-      up--;
-    }
-  }
-
-  // if the path is allowed to go above the root, restore leading ..s
-  if (allowAboveRoot) {
-    for (; up--; up) {
-      parts.unshift('..');
-    }
-  }
-
-  return parts;
-}
-
-// Split a filename into [root, dir, basename, ext], unix version
-// 'root' is just a slash, or nothing.
-var splitPathRe =
-    /^(\/?|)([\s\S]*?)((?:\.{1,2}|[^\/]+?|)(\.[^.\/]*|))(?:[\/]*)$/;
-var splitPath = function(filename) {
-  return splitPathRe.exec(filename).slice(1);
-};
-
-// path.resolve([from ...], to)
-// posix version
-exports.resolve = function() {
-  var resolvedPath = '',
-      resolvedAbsolute = false;
-
-  for (var i = arguments.length - 1; i >= -1 && !resolvedAbsolute; i--) {
-    var path = (i >= 0) ? arguments[i] : process.cwd();
-
-    // Skip empty and invalid entries
-    if (typeof path !== 'string') {
-      throw new TypeError('Arguments to path.resolve must be strings');
-    } else if (!path) {
-      continue;
-    }
-
-    resolvedPath = path + '/' + resolvedPath;
-    resolvedAbsolute = path.charAt(0) === '/';
-  }
-
-  // At this point the path should be resolved to a full absolute path, but
-  // handle relative paths to be safe (might happen when process.cwd() fails)
-
-  // Normalize the path
-  resolvedPath = normalizeArray(filter(resolvedPath.split('/'), function(p) {
-    return !!p;
-  }), !resolvedAbsolute).join('/');
-
-  return ((resolvedAbsolute ? '/' : '') + resolvedPath) || '.';
-};
-
-// path.normalize(path)
-// posix version
-exports.normalize = function(path) {
-  var isAbsolute = exports.isAbsolute(path),
-      trailingSlash = substr(path, -1) === '/';
-
-  // Normalize the path
-  path = normalizeArray(filter(path.split('/'), function(p) {
-    return !!p;
-  }), !isAbsolute).join('/');
-
-  if (!path && !isAbsolute) {
-    path = '.';
-  }
-  if (path && trailingSlash) {
-    path += '/';
-  }
-
-  return (isAbsolute ? '/' : '') + path;
-};
-
-// posix version
-exports.isAbsolute = function(path) {
-  return path.charAt(0) === '/';
-};
-
-// posix version
-exports.join = function() {
-  var paths = Array.prototype.slice.call(arguments, 0);
-  return exports.normalize(filter(paths, function(p, index) {
-    if (typeof p !== 'string') {
-      throw new TypeError('Arguments to path.join must be strings');
-    }
-    return p;
-  }).join('/'));
-};
+"use strict";
 
 
-// path.relative(from, to)
-// posix version
-exports.relative = function(from, to) {
-  from = exports.resolve(from).substr(1);
-  to = exports.resolve(to).substr(1);
+exports.decode = exports.parse = __webpack_require__(226);
+exports.encode = exports.stringify = __webpack_require__(227);
 
-  function trim(arr) {
-    var start = 0;
-    for (; start < arr.length; start++) {
-      if (arr[start] !== '') break;
-    }
-
-    var end = arr.length - 1;
-    for (; end >= 0; end--) {
-      if (arr[end] !== '') break;
-    }
-
-    if (start > end) return [];
-    return arr.slice(start, end - start + 1);
-  }
-
-  var fromParts = trim(from.split('/'));
-  var toParts = trim(to.split('/'));
-
-  var length = Math.min(fromParts.length, toParts.length);
-  var samePartsLength = length;
-  for (var i = 0; i < length; i++) {
-    if (fromParts[i] !== toParts[i]) {
-      samePartsLength = i;
-      break;
-    }
-  }
-
-  var outputParts = [];
-  for (var i = samePartsLength; i < fromParts.length; i++) {
-    outputParts.push('..');
-  }
-
-  outputParts = outputParts.concat(toParts.slice(samePartsLength));
-
-  return outputParts.join('/');
-};
-
-exports.sep = '/';
-exports.delimiter = ':';
-
-exports.dirname = function(path) {
-  var result = splitPath(path),
-      root = result[0],
-      dir = result[1];
-
-  if (!root && !dir) {
-    // No dirname whatsoever
-    return '.';
-  }
-
-  if (dir) {
-    // It has a dirname, strip trailing slash
-    dir = dir.substr(0, dir.length - 1);
-  }
-
-  return root + dir;
-};
-
-
-exports.basename = function(path, ext) {
-  var f = splitPath(path)[2];
-  // TODO: make this comparison case-insensitive on windows?
-  if (ext && f.substr(-1 * ext.length) === ext) {
-    f = f.substr(0, f.length - ext.length);
-  }
-  return f;
-};
-
-
-exports.extname = function(path) {
-  return splitPath(path)[3];
-};
-
-function filter (xs, f) {
-    if (xs.filter) return xs.filter(f);
-    var res = [];
-    for (var i = 0; i < xs.length; i++) {
-        if (f(xs[i], i, xs)) res.push(xs[i]);
-    }
-    return res;
-}
-
-// String.prototype.substr - negative index don't work in IE8
-var substr = 'ab'.substr(-1) === 'b'
-    ? function (str, start, len) { return str.substr(start, len) }
-    : function (str, start, len) {
-        if (start < 0) start = str.length + start;
-        return str.substr(start, len);
-    }
-;
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(33)))
 
 /***/ }),
 
 /***/ 226:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.decode = exports.parse = __webpack_require__(227);
-exports.encode = exports.stringify = __webpack_require__(228);
-
-
-/***/ }),
-
-/***/ 227:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31749,7 +31502,7 @@ var isArray = Array.isArray || function (xs) {
 
 /***/ }),
 
-/***/ 228:
+/***/ 227:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -31842,15 +31595,27 @@ var objectKeys = Object.keys || function (obj) {
 
 /***/ }),
 
+/***/ 228:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var ansiRegex = __webpack_require__(229)();
+
+module.exports = function (str) {
+	return typeof str === 'string' ? str.replace(ansiRegex, '') : str;
+};
+
+
+/***/ }),
+
 /***/ 229:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-var ansiRegex = __webpack_require__(230)();
-
-module.exports = function (str) {
-	return typeof str === 'string' ? str.replace(ansiRegex, '') : str;
+module.exports = function () {
+	return /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-PRZcf-nqry=><]/g;
 };
 
 
@@ -32219,18 +31984,6 @@ function updateLink (link, options, obj) {
 /***/ 230:
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-
-module.exports = function () {
-	return /[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-PRZcf-nqry=><]/g;
-};
-
-
-/***/ }),
-
-/***/ 231:
-/***/ (function(module, exports, __webpack_require__) {
-
 /*eslint-env browser*/
 
 var clientOverlay = document.createElement('div');
@@ -32257,7 +32010,7 @@ for (var key in styles) {
   clientOverlay.style[key] = styles[key];
 }
 
-var ansiHTML = __webpack_require__(232);
+var ansiHTML = __webpack_require__(231);
 var colors = {
   reset: ['transparent', 'transparent'],
   black: '181818',
@@ -32272,7 +32025,7 @@ var colors = {
 };
 ansiHTML.setColors(colors);
 
-var Entities = __webpack_require__(233).AllHtmlEntities;
+var Entities = __webpack_require__(232).AllHtmlEntities;
 var entities = new Entities();
 
 exports.showProblems =
@@ -32314,7 +32067,7 @@ function problemType (type) {
 
 /***/ }),
 
-/***/ 232:
+/***/ 231:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -32498,12 +32251,12 @@ ansiHTML.reset()
 
 /***/ }),
 
-/***/ 233:
+/***/ 232:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = {
-  XmlEntities: __webpack_require__(234),
-  Html4Entities: __webpack_require__(235),
+  XmlEntities: __webpack_require__(233),
+  Html4Entities: __webpack_require__(234),
   Html5Entities: __webpack_require__(128),
   AllHtmlEntities: __webpack_require__(128)
 };
@@ -32511,7 +32264,7 @@ module.exports = {
 
 /***/ }),
 
-/***/ 234:
+/***/ 233:
 /***/ (function(module, exports) {
 
 var ALPHA_INDEX = {
@@ -32673,7 +32426,7 @@ module.exports = XmlEntities;
 
 /***/ }),
 
-/***/ 235:
+/***/ 234:
 /***/ (function(module, exports) {
 
 var HTML_ALPHA = ['apos', 'nbsp', 'iexcl', 'cent', 'pound', 'curren', 'yen', 'brvbar', 'sect', 'uml', 'copy', 'ordf', 'laquo', 'not', 'shy', 'reg', 'macr', 'deg', 'plusmn', 'sup2', 'sup3', 'acute', 'micro', 'para', 'middot', 'cedil', 'sup1', 'ordm', 'raquo', 'frac14', 'frac12', 'frac34', 'iquest', 'Agrave', 'Aacute', 'Acirc', 'Atilde', 'Auml', 'Aring', 'Aelig', 'Ccedil', 'Egrave', 'Eacute', 'Ecirc', 'Euml', 'Igrave', 'Iacute', 'Icirc', 'Iuml', 'ETH', 'Ntilde', 'Ograve', 'Oacute', 'Ocirc', 'Otilde', 'Ouml', 'times', 'Oslash', 'Ugrave', 'Uacute', 'Ucirc', 'Uuml', 'Yacute', 'THORN', 'szlig', 'agrave', 'aacute', 'acirc', 'atilde', 'auml', 'aring', 'aelig', 'ccedil', 'egrave', 'eacute', 'ecirc', 'euml', 'igrave', 'iacute', 'icirc', 'iuml', 'eth', 'ntilde', 'ograve', 'oacute', 'ocirc', 'otilde', 'ouml', 'divide', 'oslash', 'ugrave', 'uacute', 'ucirc', 'uuml', 'yacute', 'thorn', 'yuml', 'quot', 'amp', 'lt', 'gt', 'OElig', 'oelig', 'Scaron', 'scaron', 'Yuml', 'circ', 'tilde', 'ensp', 'emsp', 'thinsp', 'zwnj', 'zwj', 'lrm', 'rlm', 'ndash', 'mdash', 'lsquo', 'rsquo', 'sbquo', 'ldquo', 'rdquo', 'bdquo', 'dagger', 'Dagger', 'permil', 'lsaquo', 'rsaquo', 'euro', 'fnof', 'Alpha', 'Beta', 'Gamma', 'Delta', 'Epsilon', 'Zeta', 'Eta', 'Theta', 'Iota', 'Kappa', 'Lambda', 'Mu', 'Nu', 'Xi', 'Omicron', 'Pi', 'Rho', 'Sigma', 'Tau', 'Upsilon', 'Phi', 'Chi', 'Psi', 'Omega', 'alpha', 'beta', 'gamma', 'delta', 'epsilon', 'zeta', 'eta', 'theta', 'iota', 'kappa', 'lambda', 'mu', 'nu', 'xi', 'omicron', 'pi', 'rho', 'sigmaf', 'sigma', 'tau', 'upsilon', 'phi', 'chi', 'psi', 'omega', 'thetasym', 'upsih', 'piv', 'bull', 'hellip', 'prime', 'Prime', 'oline', 'frasl', 'weierp', 'image', 'real', 'trade', 'alefsym', 'larr', 'uarr', 'rarr', 'darr', 'harr', 'crarr', 'lArr', 'uArr', 'rArr', 'dArr', 'hArr', 'forall', 'part', 'exist', 'empty', 'nabla', 'isin', 'notin', 'ni', 'prod', 'sum', 'minus', 'lowast', 'radic', 'prop', 'infin', 'ang', 'and', 'or', 'cap', 'cup', 'int', 'there4', 'sim', 'cong', 'asymp', 'ne', 'equiv', 'le', 'ge', 'sub', 'sup', 'nsub', 'sube', 'supe', 'oplus', 'otimes', 'perp', 'sdot', 'lceil', 'rceil', 'lfloor', 'rfloor', 'lang', 'rang', 'loz', 'spades', 'clubs', 'hearts', 'diams'];
@@ -32827,7 +32580,7 @@ module.exports = Html4Entities;
 
 /***/ }),
 
-/***/ 236:
+/***/ 235:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -32838,7 +32591,7 @@ module.exports = Html4Entities;
 
 /* global window __webpack_hash__ */
 
-if (!module.hot) {
+if (false) {
   throw new Error("[HMR] Hot Module Replacement is disabled.");
 }
 
@@ -32966,7 +32719,7 @@ module.exports = function(hash, moduleMap, options) {
 
 /***/ }),
 
-/***/ 237:
+/***/ 236:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -33136,7 +32889,7 @@ function bootstrap(configure) {
 }
 
 var starting = run();
-/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(6), __webpack_require__(33)))
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(6), __webpack_require__(37)))
 
 /***/ }),
 
@@ -35361,10 +35114,10 @@ return jQuery;
 "use strict";
 /* WEBPACK VAR INJECTION */(function(Promise) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ValidationController; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__validator__ = __webpack_require__(29);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__validate_trigger__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__validate_trigger__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__property_info__ = __webpack_require__(87);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__validate_result__ = __webpack_require__(39);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__property_accessor_parser__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__property_accessor_parser__ = __webpack_require__(35);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__validate_event__ = __webpack_require__(89);
 
 
@@ -35568,7 +35321,7 @@ var ValidationController = (function () {
                 }
                 for (var _c = 0, _d = Array.from(_this.bindings); _c < _d.length; _c++) {
                     var _e = _d[_c], binding = _e[0], rules = _e[1].rules;
-                    var propertyInfo = __WEBPACK_IMPORTED_MODULE_2__property_info__["a" /* getPropertyInfo */](binding.sourceExpression, binding.source);
+                    var propertyInfo = Object(__WEBPACK_IMPORTED_MODULE_2__property_info__["a" /* getPropertyInfo */])(binding.sourceExpression, binding.source);
                     if (!propertyInfo || _this.objects.has(propertyInfo.object)) {
                         continue;
                     }
@@ -35624,7 +35377,7 @@ var ValidationController = (function () {
         var elements = [];
         for (var _i = 0, _b = Array.from(this.bindings); _i < _b.length; _i++) {
             var _c = _b[_i], binding = _c[0], target = _c[1].target;
-            var propertyInfo = __WEBPACK_IMPORTED_MODULE_2__property_info__["a" /* getPropertyInfo */](binding.sourceExpression, binding.source);
+            var propertyInfo = Object(__WEBPACK_IMPORTED_MODULE_2__property_info__["a" /* getPropertyInfo */])(binding.sourceExpression, binding.source);
             if (propertyInfo && propertyInfo.object === object && propertyInfo.propertyName === propertyName) {
                 elements.push(target);
             }
@@ -35708,7 +35461,7 @@ var ValidationController = (function () {
         if (!binding.isBound) {
             return;
         }
-        var propertyInfo = __WEBPACK_IMPORTED_MODULE_2__property_info__["a" /* getPropertyInfo */](binding.sourceExpression, binding.source);
+        var propertyInfo = Object(__WEBPACK_IMPORTED_MODULE_2__property_info__["a" /* getPropertyInfo */])(binding.sourceExpression, binding.source);
         var rules;
         var registeredBinding = this.bindings.get(binding);
         if (registeredBinding) {
@@ -35726,7 +35479,7 @@ var ValidationController = (function () {
      */
     ValidationController.prototype.resetBinding = function (binding) {
         var registeredBinding = this.bindings.get(binding);
-        var propertyInfo = __WEBPACK_IMPORTED_MODULE_2__property_info__["a" /* getPropertyInfo */](binding.sourceExpression, binding.source);
+        var propertyInfo = Object(__WEBPACK_IMPORTED_MODULE_2__property_info__["a" /* getPropertyInfo */])(binding.sourceExpression, binding.source);
         if (!propertyInfo && registeredBinding) {
             propertyInfo = registeredBinding.propertyInfo;
         }
@@ -41808,197 +41561,6 @@ module.exports = g;
 /***/ }),
 
 /***/ 33:
-/***/ (function(module, exports) {
-
-// shim for using process in browser
-var process = module.exports = {};
-
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
-
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
-}
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
-
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
-    } else {
-        queueIndex = -1;
-    }
-    if (queue.length) {
-        drainQueue();
-    }
-}
-
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
-
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
-            }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
-        }
-    }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
-}
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
-};
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
-
-function noop() {}
-
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
-process.prependListener = noop;
-process.prependOnceListener = noop;
-
-process.listeners = function (name) { return [] }
-
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
-};
-
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
-
-
-/***/ }),
-
-/***/ 34:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43850,7 +43412,7 @@ function restorePreviousLocation(router) {
 
 /***/ }),
 
-/***/ 35:
+/***/ 34:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43883,7 +43445,7 @@ var validateTrigger;
 
 /***/ }),
 
-/***/ 36:
+/***/ 35:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -43898,7 +43460,7 @@ var PropertyAccessorParser = (function () {
         this.parser = parser;
     }
     PropertyAccessorParser.prototype.parse = function (property) {
-        if (__WEBPACK_IMPORTED_MODULE_1__util__["a" /* isString */](property)) {
+        if (Object(__WEBPACK_IMPORTED_MODULE_1__util__["a" /* isString */])(property)) {
             return property;
         }
         var accessorText = getAccessorExpression(property.toString());
@@ -43928,7 +43490,7 @@ function getAccessorExpression(fn) {
 
 /***/ }),
 
-/***/ 37:
+/***/ 36:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_DEFINE_ARRAY__ = [
@@ -44420,6 +43982,197 @@ jQuery.each( {
 return jQuery;
 }.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+
+
+/***/ }),
+
+/***/ 37:
+/***/ (function(module, exports) {
+
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
+var queue = [];
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
+
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
+    } else {
+        queueIndex = -1;
+    }
+    if (queue.length) {
+        drainQueue();
+    }
+}
+
+function drainQueue() {
+    if (draining) {
+        return;
+    }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
+
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
+            }
+        }
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
+}
+
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
+
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
+
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
 
 
 /***/ }),
@@ -45505,7 +45258,7 @@ exports = module.exports = __webpack_require__(22)(undefined);
 
 
 // module
-exports.push([module.i, "/*!\r\n * Bootstrap-select v1.12.2 (http://silviomoreto.github.io/bootstrap-select)\r\n *\r\n * Copyright 2013-2017 bootstrap-select\r\n * Licensed under MIT (https://github.com/silviomoreto/bootstrap-select/blob/master/LICENSE)\r\n */select.bs-select-hidden,select.selectpicker{display:none!important}.bootstrap-select{width:220px\\9}.bootstrap-select>.dropdown-toggle{width:100%;padding-right:25px;z-index:1}.bootstrap-select>.dropdown-toggle.bs-placeholder,.bootstrap-select>.dropdown-toggle.bs-placeholder:active,.bootstrap-select>.dropdown-toggle.bs-placeholder:focus,.bootstrap-select>.dropdown-toggle.bs-placeholder:hover{color:#999}.bootstrap-select>select{position:absolute!important;bottom:0;left:50%;display:block!important;width:.5px!important;height:100%!important;padding:0!important;opacity:0!important;border:none}.bootstrap-select>select.mobile-device{top:0;left:0;display:block!important;width:100%!important;z-index:2}.error .bootstrap-select .dropdown-toggle,.has-error .bootstrap-select .dropdown-toggle{border-color:#b94a48}.bootstrap-select.fit-width{width:auto!important}.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn){width:220px}.bootstrap-select .dropdown-toggle:focus{outline:thin dotted #333!important;outline:5px auto -webkit-focus-ring-color!important;outline-offset:-2px}.bootstrap-select.form-control{margin-bottom:0;padding:0;border:none}.bootstrap-select.form-control:not([class*=col-]){width:100%}.bootstrap-select.form-control.input-group-btn{z-index:auto}.bootstrap-select.form-control.input-group-btn:not(:first-child):not(:last-child)>.btn{border-radius:0}.bootstrap-select.btn-group:not(.input-group-btn),.bootstrap-select.btn-group[class*=col-]{float:none;display:inline-block;margin-left:0}.bootstrap-select.btn-group.dropdown-menu-right,.bootstrap-select.btn-group[class*=col-].dropdown-menu-right,.row .bootstrap-select.btn-group[class*=col-].dropdown-menu-right{float:right}.form-group .bootstrap-select.btn-group,.form-horizontal .bootstrap-select.btn-group,.form-inline .bootstrap-select.btn-group{margin-bottom:0}.form-group-lg .bootstrap-select.btn-group.form-control,.form-group-sm .bootstrap-select.btn-group.form-control{padding:0}.form-group-lg .bootstrap-select.btn-group.form-control .dropdown-toggle,.form-group-sm .bootstrap-select.btn-group.form-control .dropdown-toggle{height:100%;font-size:inherit;line-height:inherit;border-radius:inherit}.form-inline .bootstrap-select.btn-group .form-control{width:100%}.bootstrap-select.btn-group.disabled,.bootstrap-select.btn-group>.disabled{cursor:not-allowed}.bootstrap-select.btn-group.disabled:focus,.bootstrap-select.btn-group>.disabled:focus{outline:0!important}.bootstrap-select.btn-group.bs-container{position:absolute;height:0!important;padding:0!important}.bootstrap-select.btn-group.bs-container .dropdown-menu{z-index:1060}.bootstrap-select.btn-group .dropdown-toggle .filter-option{display:inline-block;overflow:hidden;width:100%;text-align:left}.bootstrap-select.btn-group .dropdown-toggle .caret{position:absolute;top:50%;right:12px;margin-top:-2px;vertical-align:middle}.bootstrap-select.btn-group[class*=col-] .dropdown-toggle{width:100%}.bootstrap-select.btn-group .dropdown-menu{min-width:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}.bootstrap-select.btn-group .dropdown-menu.inner{position:static;float:none;border:0;padding:0;margin:0;border-radius:0;-webkit-box-shadow:none;box-shadow:none}.bootstrap-select.btn-group .dropdown-menu li{position:relative}.bootstrap-select.btn-group .dropdown-menu li.active small{color:#fff}.bootstrap-select.btn-group .dropdown-menu li.disabled a{cursor:not-allowed}.bootstrap-select.btn-group .dropdown-menu li a{cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.bootstrap-select.btn-group .dropdown-menu li a.opt{position:relative;padding-left:2.25em}.bootstrap-select.btn-group .dropdown-menu li a span.check-mark{display:none}.bootstrap-select.btn-group .dropdown-menu li a span.text{display:inline-block}.bootstrap-select.btn-group .dropdown-menu li small{padding-left:.5em}.bootstrap-select.btn-group .dropdown-menu .notify{position:absolute;bottom:5px;width:96%;margin:0 2%;min-height:26px;padding:3px 5px;background:#f5f5f5;border:1px solid #e3e3e3;-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.05);box-shadow:inset 0 1px 1px rgba(0,0,0,.05);pointer-events:none;opacity:.9;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}.bootstrap-select.btn-group .no-results{padding:3px;background:#f5f5f5;margin:0 5px;white-space:nowrap}.bootstrap-select.btn-group.fit-width .dropdown-toggle .filter-option{position:static}.bootstrap-select.btn-group.fit-width .dropdown-toggle .caret{position:static;top:auto;margin-top:-1px}.bootstrap-select.btn-group.show-tick .dropdown-menu li.selected a span.check-mark{position:absolute;display:inline-block;right:15px;margin-top:5px}.bootstrap-select.btn-group.show-tick .dropdown-menu li a span.text{margin-right:34px}.bootstrap-select.show-menu-arrow.open>.dropdown-toggle{z-index:1061}.bootstrap-select.show-menu-arrow .dropdown-toggle:before{content:'';border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:7px solid rgba(204,204,204,.2);position:absolute;bottom:-4px;left:9px;display:none}.bootstrap-select.show-menu-arrow .dropdown-toggle:after{content:'';border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:6px solid #fff;position:absolute;bottom:-4px;left:10px;display:none}.bootstrap-select.show-menu-arrow.dropup .dropdown-toggle:before{bottom:auto;top:-3px;border-top:7px solid rgba(204,204,204,.2);border-bottom:0}.bootstrap-select.show-menu-arrow.dropup .dropdown-toggle:after{bottom:auto;top:-3px;border-top:6px solid #fff;border-bottom:0}.bootstrap-select.show-menu-arrow.pull-right .dropdown-toggle:before{right:12px;left:auto}.bootstrap-select.show-menu-arrow.pull-right .dropdown-toggle:after{right:13px;left:auto}.bootstrap-select.show-menu-arrow.open>.dropdown-toggle:after,.bootstrap-select.show-menu-arrow.open>.dropdown-toggle:before{display:block}.bs-actionsbox,.bs-donebutton,.bs-searchbox{padding:4px 8px}.bs-actionsbox{width:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}.bs-actionsbox .btn-group button{width:50%}.bs-donebutton{float:left;width:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}.bs-donebutton .btn-group button{width:100%}.bs-searchbox+.bs-actionsbox{padding:0 8px 4px}.bs-searchbox .form-control{margin-bottom:0;width:100%;float:none}", ""]);
+exports.push([module.i, "/*!\r\n * Bootstrap-select v1.12.4 (http://silviomoreto.github.io/bootstrap-select)\r\n *\r\n * Copyright 2013-2017 bootstrap-select\r\n * Licensed under MIT (https://github.com/silviomoreto/bootstrap-select/blob/master/LICENSE)\r\n */select.bs-select-hidden,select.selectpicker{display:none!important}.bootstrap-select{width:220px\\9}.bootstrap-select>.dropdown-toggle{width:100%;padding-right:25px;z-index:1}.bootstrap-select>.dropdown-toggle.bs-placeholder,.bootstrap-select>.dropdown-toggle.bs-placeholder:active,.bootstrap-select>.dropdown-toggle.bs-placeholder:focus,.bootstrap-select>.dropdown-toggle.bs-placeholder:hover{color:#999}.bootstrap-select>select{position:absolute!important;bottom:0;left:50%;display:block!important;width:.5px!important;height:100%!important;padding:0!important;opacity:0!important;border:none}.bootstrap-select>select.mobile-device{top:0;left:0;display:block!important;width:100%!important;z-index:2}.error .bootstrap-select .dropdown-toggle,.has-error .bootstrap-select .dropdown-toggle{border-color:#b94a48}.bootstrap-select.fit-width{width:auto!important}.bootstrap-select:not([class*=col-]):not([class*=form-control]):not(.input-group-btn){width:220px}.bootstrap-select .dropdown-toggle:focus{outline:thin dotted #333!important;outline:5px auto -webkit-focus-ring-color!important;outline-offset:-2px}.bootstrap-select.form-control{margin-bottom:0;padding:0;border:none}.bootstrap-select.form-control:not([class*=col-]){width:100%}.bootstrap-select.form-control.input-group-btn{z-index:auto}.bootstrap-select.form-control.input-group-btn:not(:first-child):not(:last-child)>.btn{border-radius:0}.bootstrap-select.btn-group:not(.input-group-btn),.bootstrap-select.btn-group[class*=col-]{float:none;display:inline-block;margin-left:0}.bootstrap-select.btn-group.dropdown-menu-right,.bootstrap-select.btn-group[class*=col-].dropdown-menu-right,.row .bootstrap-select.btn-group[class*=col-].dropdown-menu-right{float:right}.form-group .bootstrap-select.btn-group,.form-horizontal .bootstrap-select.btn-group,.form-inline .bootstrap-select.btn-group{margin-bottom:0}.form-group-lg .bootstrap-select.btn-group.form-control,.form-group-sm .bootstrap-select.btn-group.form-control{padding:0}.form-group-lg .bootstrap-select.btn-group.form-control .dropdown-toggle,.form-group-sm .bootstrap-select.btn-group.form-control .dropdown-toggle{height:100%;font-size:inherit;line-height:inherit;border-radius:inherit}.form-inline .bootstrap-select.btn-group .form-control{width:100%}.bootstrap-select.btn-group.disabled,.bootstrap-select.btn-group>.disabled{cursor:not-allowed}.bootstrap-select.btn-group.disabled:focus,.bootstrap-select.btn-group>.disabled:focus{outline:0!important}.bootstrap-select.btn-group.bs-container{position:absolute;height:0!important;padding:0!important}.bootstrap-select.btn-group.bs-container .dropdown-menu{z-index:1060}.bootstrap-select.btn-group .dropdown-toggle .filter-option{display:inline-block;overflow:hidden;width:100%;text-align:left}.bootstrap-select.btn-group .dropdown-toggle .caret{position:absolute;top:50%;right:12px;margin-top:-2px;vertical-align:middle}.bootstrap-select.btn-group[class*=col-] .dropdown-toggle{width:100%}.bootstrap-select.btn-group .dropdown-menu{min-width:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}.bootstrap-select.btn-group .dropdown-menu.inner{position:static;float:none;border:0;padding:0;margin:0;border-radius:0;-webkit-box-shadow:none;box-shadow:none}.bootstrap-select.btn-group .dropdown-menu li{position:relative}.bootstrap-select.btn-group .dropdown-menu li.active small{color:#fff}.bootstrap-select.btn-group .dropdown-menu li.disabled a{cursor:not-allowed}.bootstrap-select.btn-group .dropdown-menu li a{cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.bootstrap-select.btn-group .dropdown-menu li a.opt{position:relative;padding-left:2.25em}.bootstrap-select.btn-group .dropdown-menu li a span.check-mark{display:none}.bootstrap-select.btn-group .dropdown-menu li a span.text{display:inline-block}.bootstrap-select.btn-group .dropdown-menu li small{padding-left:.5em}.bootstrap-select.btn-group .dropdown-menu .notify{position:absolute;bottom:5px;width:96%;margin:0 2%;min-height:26px;padding:3px 5px;background:#f5f5f5;border:1px solid #e3e3e3;-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,.05);box-shadow:inset 0 1px 1px rgba(0,0,0,.05);pointer-events:none;opacity:.9;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}.bootstrap-select.btn-group .no-results{padding:3px;background:#f5f5f5;margin:0 5px;white-space:nowrap}.bootstrap-select.btn-group.fit-width .dropdown-toggle .filter-option{position:static}.bootstrap-select.btn-group.fit-width .dropdown-toggle .caret{position:static;top:auto;margin-top:-1px}.bootstrap-select.btn-group.show-tick .dropdown-menu li.selected a span.check-mark{position:absolute;display:inline-block;right:15px;margin-top:5px}.bootstrap-select.btn-group.show-tick .dropdown-menu li a span.text{margin-right:34px}.bootstrap-select.show-menu-arrow.open>.dropdown-toggle{z-index:1061}.bootstrap-select.show-menu-arrow .dropdown-toggle:before{content:'';border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:7px solid rgba(204,204,204,.2);position:absolute;bottom:-4px;left:9px;display:none}.bootstrap-select.show-menu-arrow .dropdown-toggle:after{content:'';border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:6px solid #fff;position:absolute;bottom:-4px;left:10px;display:none}.bootstrap-select.show-menu-arrow.dropup .dropdown-toggle:before{bottom:auto;top:-3px;border-top:7px solid rgba(204,204,204,.2);border-bottom:0}.bootstrap-select.show-menu-arrow.dropup .dropdown-toggle:after{bottom:auto;top:-3px;border-top:6px solid #fff;border-bottom:0}.bootstrap-select.show-menu-arrow.pull-right .dropdown-toggle:before{right:12px;left:auto}.bootstrap-select.show-menu-arrow.pull-right .dropdown-toggle:after{right:13px;left:auto}.bootstrap-select.show-menu-arrow.open>.dropdown-toggle:after,.bootstrap-select.show-menu-arrow.open>.dropdown-toggle:before{display:block}.bs-actionsbox,.bs-donebutton,.bs-searchbox{padding:4px 8px}.bs-actionsbox{width:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}.bs-actionsbox .btn-group button{width:50%}.bs-donebutton{float:left;width:100%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}.bs-donebutton .btn-group button{width:100%}.bs-searchbox+.bs-actionsbox{padding:0 8px 4px}.bs-searchbox .form-control{margin-bottom:0;width:100%;float:none}", ""]);
 
 // exports
 
@@ -45589,7 +45342,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 	__webpack_require__(26),
 	__webpack_require__(179),
 	__webpack_require__(180),
-	__webpack_require__(37),
+	__webpack_require__(36),
 	__webpack_require__(182),
 	__webpack_require__(185),
 	__webpack_require__(30),
@@ -46256,7 +46009,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;!(__WEBPACK_AMD_
 	__webpack_require__(59),
 	__webpack_require__(24),
 	__webpack_require__(25),
-	__webpack_require__(37),
+	__webpack_require__(36),
 	__webpack_require__(30),
 	__webpack_require__(174)
 ], __WEBPACK_AMD_DEFINE_RESULT__ = function( jQuery, document, rcssNum, rnothtmlwhite, cssExpand, isHiddenWithinTree, swap,
@@ -47599,7 +47352,7 @@ var ArrayRepeatStrategy = function () {
           var view = childrenSnapshot[index];
           var oldItem = view.bindingContext[itemNameInBindingContext];
 
-          if (__WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["c" /* indexOf */](items, oldItem, matcher) === -1) {
+          if (Object(__WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["c" /* indexOf */])(items, oldItem, matcher) === -1) {
             viewsToRemove.push(view);
           } else {
             itemsPreviouslyInViews.push(oldItem);
@@ -47614,11 +47367,11 @@ var ArrayRepeatStrategy = function () {
           updateViews = function updateViews() {
             for (var _index = 0; _index < itemsLength; _index++) {
               var item = items[_index];
-              var indexOfView = __WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["c" /* indexOf */](itemsPreviouslyInViews, item, matcher, _index);
+              var indexOfView = Object(__WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["c" /* indexOf */])(itemsPreviouslyInViews, item, matcher, _index);
               var _view = void 0;
 
               if (indexOfView === -1) {
-                var overrideContext = __WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["a" /* createFullOverrideContext */](repeat, items[_index], _index, itemsLength);
+                var overrideContext = Object(__WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["a" /* createFullOverrideContext */])(repeat, items[_index], _index, itemsLength);
                 repeat.insertView(_index, overrideContext.bindingContext, overrideContext);
 
                 itemsPreviouslyInViews.splice(_index, 0, undefined);
@@ -47633,7 +47386,7 @@ var ArrayRepeatStrategy = function () {
               }
 
               if (_view) {
-                __WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["g" /* updateOverrideContext */](_view.overrideContext, _index, itemsLength);
+                Object(__WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["g" /* updateOverrideContext */])(_view.overrideContext, _index, itemsLength);
               }
             }
 
@@ -47659,7 +47412,7 @@ var ArrayRepeatStrategy = function () {
 
   ArrayRepeatStrategy.prototype._standardProcessInstanceChanged = function _standardProcessInstanceChanged(repeat, items) {
     for (var i = 0, ii = items.length; i < ii; i++) {
-      var overrideContext = __WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["a" /* createFullOverrideContext */](repeat, items[i], i, ii);
+      var overrideContext = Object(__WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["a" /* createFullOverrideContext */])(repeat, items[i], i, ii);
       repeat.addView(overrideContext.bindingContext, overrideContext);
     }
   };
@@ -47691,7 +47444,7 @@ var ArrayRepeatStrategy = function () {
     }
 
     for (var _i = viewsLength; _i < itemsLength; _i++) {
-      var overrideContext = __WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["a" /* createFullOverrideContext */](repeat, items[_i], _i, itemsLength);
+      var overrideContext = Object(__WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["a" /* createFullOverrideContext */])(repeat, items[_i], _i, itemsLength);
       repeat.addView(overrideContext.bindingContext, overrideContext);
     }
   };
@@ -47706,7 +47459,7 @@ var ArrayRepeatStrategy = function () {
             removed = _splices$i.removed,
             addedCount = _splices$i.addedCount;
 
-        __WEBPACK_IMPORTED_MODULE_1_aurelia_binding__["_24" /* mergeSplice */](repeat.__queuedSplices, index, removed, addedCount);
+        Object(__WEBPACK_IMPORTED_MODULE_1_aurelia_binding__["_24" /* mergeSplice */])(repeat.__queuedSplices, index, removed, addedCount);
       }
 
       repeat.__array = array.slice(0);
@@ -47757,12 +47510,12 @@ var ArrayRepeatStrategy = function () {
     if (rmPromises.length > 0) {
       return Promise.all(rmPromises).then(function () {
         var spliceIndexLow = _this3._handleAddedSplices(repeat, array, splices);
-        __WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["h" /* updateOverrideContexts */](repeat.views(), spliceIndexLow);
+        Object(__WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["h" /* updateOverrideContexts */])(repeat.views(), spliceIndexLow);
       });
     }
 
     var spliceIndexLow = this._handleAddedSplices(repeat, array, splices);
-    __WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["h" /* updateOverrideContexts */](repeat.views(), spliceIndexLow);
+    Object(__WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["h" /* updateOverrideContexts */])(repeat.views(), spliceIndexLow);
 
     return undefined;
   };
@@ -47781,7 +47534,7 @@ var ArrayRepeatStrategy = function () {
       }
 
       for (; addIndex < end; ++addIndex) {
-        var overrideContext = __WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["a" /* createFullOverrideContext */](repeat, array[addIndex], addIndex, arrayLength);
+        var overrideContext = Object(__WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["a" /* createFullOverrideContext */])(repeat, array[addIndex], addIndex, arrayLength);
         repeat.insertView(addIndex, overrideContext.bindingContext, overrideContext);
       }
     }
@@ -47845,7 +47598,7 @@ var MapRepeatStrategy = function () {
     var overrideContext = void 0;
 
     items.forEach(function (value, key) {
-      overrideContext = __WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["a" /* createFullOverrideContext */](repeat, value, index, items.size, key);
+      overrideContext = Object(__WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["a" /* createFullOverrideContext */])(repeat, value, index, items.size, key);
       repeat.addView(overrideContext.bindingContext, overrideContext);
       ++index;
     });
@@ -47871,11 +47624,11 @@ var MapRepeatStrategy = function () {
           if (viewOrPromise instanceof Promise) {
             rmPromises.push(viewOrPromise);
           }
-          overrideContext = __WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["a" /* createFullOverrideContext */](repeat, map.get(key), removeIndex, map.size, key);
+          overrideContext = Object(__WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["a" /* createFullOverrideContext */])(repeat, map.get(key), removeIndex, map.size, key);
           repeat.insertView(removeIndex, overrideContext.bindingContext, overrideContext);
           break;
         case 'add':
-          overrideContext = __WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["a" /* createFullOverrideContext */](repeat, map.get(key), map.size - 1, map.size, key);
+          overrideContext = Object(__WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["a" /* createFullOverrideContext */])(repeat, map.get(key), map.size - 1, map.size, key);
           repeat.insertView(map.size - 1, overrideContext.bindingContext, overrideContext);
           break;
         case 'delete':
@@ -47898,10 +47651,10 @@ var MapRepeatStrategy = function () {
 
     if (rmPromises.length > 0) {
       Promise.all(rmPromises).then(function () {
-        __WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["h" /* updateOverrideContexts */](repeat.views(), 0);
+        Object(__WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["h" /* updateOverrideContexts */])(repeat.views(), 0);
       });
     } else {
-      __WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["h" /* updateOverrideContexts */](repeat.views(), 0);
+      Object(__WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["h" /* updateOverrideContexts */])(repeat.views(), 0);
     }
   };
 
@@ -47963,7 +47716,7 @@ var SetRepeatStrategy = function () {
     var overrideContext = void 0;
 
     items.forEach(function (value) {
-      overrideContext = __WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["a" /* createFullOverrideContext */](repeat, value, index, items.size);
+      overrideContext = Object(__WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["a" /* createFullOverrideContext */])(repeat, value, index, items.size);
       repeat.addView(overrideContext.bindingContext, overrideContext);
       ++index;
     });
@@ -47984,7 +47737,7 @@ var SetRepeatStrategy = function () {
       value = record.value;
       switch (record.type) {
         case 'add':
-          overrideContext = __WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["a" /* createFullOverrideContext */](repeat, value, set.size - 1, set.size);
+          overrideContext = Object(__WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["a" /* createFullOverrideContext */])(repeat, value, set.size - 1, set.size);
           repeat.insertView(set.size - 1, overrideContext.bindingContext, overrideContext);
           break;
         case 'delete':
@@ -48004,10 +47757,10 @@ var SetRepeatStrategy = function () {
 
     if (rmPromises.length > 0) {
       Promise.all(rmPromises).then(function () {
-        __WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["h" /* updateOverrideContexts */](repeat.views(), 0);
+        Object(__WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["h" /* updateOverrideContexts */])(repeat.views(), 0);
       });
     } else {
-      __WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["h" /* updateOverrideContexts */](repeat.views(), 0);
+      Object(__WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["h" /* updateOverrideContexts */])(repeat.views(), 0);
     }
   };
 
@@ -48087,11 +47840,11 @@ var NumberRepeatStrategy = function () {
     }
 
     for (i = childrenLength, ii = value; i < ii; ++i) {
-      overrideContext = __WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["a" /* createFullOverrideContext */](repeat, i, i, ii);
+      overrideContext = Object(__WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["a" /* createFullOverrideContext */])(repeat, i, i, ii);
       repeat.addView(overrideContext.bindingContext, overrideContext);
     }
 
-    __WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["h" /* updateOverrideContexts */](repeat.views(), 0);
+    Object(__WEBPACK_IMPORTED_MODULE_0__repeat_utilities__["h" /* updateOverrideContexts */])(repeat.views(), 0);
   };
 
   return NumberRepeatStrategy;
@@ -49008,7 +48761,7 @@ function getPropertyInfo(expression, source) {
     var object;
     var propertyName;
     if (expression instanceof __WEBPACK_IMPORTED_MODULE_0_aurelia_binding__["c" /* AccessScope */]) {
-        object = __WEBPACK_IMPORTED_MODULE_0_aurelia_binding__["_20" /* getContextFor */](expression.name, source, expression.ancestor);
+        object = Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_binding__["_20" /* getContextFor */])(expression.name, source, expression.ancestor);
         propertyName = expression.name;
     }
     else if (expression instanceof __WEBPACK_IMPORTED_MODULE_0_aurelia_binding__["b" /* AccessMember */]) {
@@ -54009,7 +53762,7 @@ var FluentRules = (function () {
         return this.satisfies(function (value) {
             return value !== null
                 && value !== undefined
-                && !(__WEBPACK_IMPORTED_MODULE_2__util__["a" /* isString */](value) && !/\S/.test(value));
+                && !(Object(__WEBPACK_IMPORTED_MODULE_2__util__["a" /* isString */])(value) && !/\S/.test(value));
         }).withMessageKey('required');
     };
     /**
@@ -55578,7 +55331,10 @@ var AbpTagsInputCustomElement = exports.AbpTagsInputCustomElement = (_dec = (0, 
     });
 
     this.domElm.on('itemAdded', function (e) {
-      _this2.value = _this2.domElm.tagsinput('items');
+      if (!e.options || !e.options.preventRefresh) {
+        _this2.suppressValueChanged = true;
+        _this2.value = _this2.domElm.tagsinput('items');
+      }
       if (typeof _this2.onItemAdded === 'function') {
         _this2.onItemAdded(e);
       }
@@ -55597,7 +55353,10 @@ var AbpTagsInputCustomElement = exports.AbpTagsInputCustomElement = (_dec = (0, 
     });
 
     this.domElm.on('itemRemoved', function (e) {
-      _this2.value = _this2.domElm.tagsinput('items');
+      if (!e.options || !e.options.preventRefresh) {
+        _this2.suppressValueChanged = true;
+        _this2.value = _this2.domElm.tagsinput('items');
+      }
       if (typeof _this2.onItemRemoved === 'function') {
         _this2.onItemRemoved(e);
       }
@@ -55635,6 +55394,7 @@ var AbpTagsInputCustomElement = exports.AbpTagsInputCustomElement = (_dec = (0, 
         return _this3.domElm.tagsinput('remove', value);
       },
       removeAll: function removeAll() {
+        _this3.suppressValueChanged = true;
         _this3.domElm.tagsinput('removeAll');
         _this3.value = _this3.domElm.tagsinput('items');
       }
@@ -55645,6 +55405,45 @@ var AbpTagsInputCustomElement = exports.AbpTagsInputCustomElement = (_dec = (0, 
 
   AbpTagsInputCustomElement.prototype.detached = function detached() {
     this.domElm.tagsinput('destroy');
+  };
+
+  AbpTagsInputCustomElement.prototype.areEqualArray = function areEqualArray(arr1, arr2) {
+    if (arr1 === null && arr2 === null) {
+      return true;
+    }
+    if (!Array.isArray(arr1) || !Array.isArray(arr2) || arr1.length !== arr2.length) {
+      return false;
+    }
+    for (var i = 0; i < arr1.length; i++) {
+      if (arr1[i] !== arr2[i]) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  AbpTagsInputCustomElement.prototype.valueChanged = function valueChanged(newValue, oldValue) {
+    var _this4 = this;
+
+    var newValueSplit = typeof newValue === 'string' ? newValue.split(',') : newValue;
+    var oldValueSplit = typeof oldValue === 'string' ? oldValue.split(',') : oldValue;
+
+    if (newValue && this.domElm && newValue !== oldValue && !this.areEqualArray(newValueSplit, oldValueSplit)) {
+      if (this.suppressValueChanged) {
+        this.suppressValueChanged = false;
+        return;
+      }
+      if (!this.suppressValueChanged) {
+        this.domElm.tagsinput('removeAll');
+        if (Array.isArray(newValue)) {
+          newValue.forEach(function (value) {
+            return _this4.domElm.tagsinput('add', value, { preventRefresh: true });
+          });
+        } else {
+          this.domElm.tagsinput('add', newValue, { preventRefresh: true });
+        }
+      }
+    }
   };
 
   return AbpTagsInputCustomElement;
@@ -55689,7 +55488,7 @@ var AbpTagsInputCustomElement = exports.AbpTagsInputCustomElement = (_dec = (0, 
 /***/ "aurelia-bootstrap-tagsinput/abp-tags-input.html":
 /***/ (function(module, exports) {
 
-module.exports = "<template>\r\n  <input type=\"text\" class=\"form-control\"\r\n         data-role=\"tagsinput\" \r\n         value.bind=\"value\"\r\n         blur.trigger=\"blur()\"\r\n         placeholder.bind=\"placeholder\" />\r\n</template>\r\n";
+module.exports = "<template>\r\n  <input type=\"text\" class=\"form-control\"\r\n         data-role=\"tagsinput\"\r\n         value.bind=\"value\"\r\n         blur.trigger=\"blur()\"\r\n         placeholder.bind=\"placeholder\" />\r\n</template>\r\n";
 
 /***/ }),
 
@@ -56153,7 +55952,7 @@ var Aurelia = function () {
 
     if (!root) {
       if (this.configModuleId) {
-        root = __WEBPACK_IMPORTED_MODULE_5_aurelia_path__["d" /* relativeToFile */]('./app', this.configModuleId);
+        root = Object(__WEBPACK_IMPORTED_MODULE_5_aurelia_path__["d" /* relativeToFile */])('./app', this.configModuleId);
       } else {
         root = 'app';
       }
@@ -56391,7 +56190,7 @@ var FrameworkConfiguration = function () {
       var name = resource;
 
       if ((resource.startsWith('./') || resource.startsWith('../')) && parent !== '') {
-        name = __WEBPACK_IMPORTED_MODULE_5_aurelia_path__["b" /* join */](parent, resource);
+        name = Object(__WEBPACK_IMPORTED_MODULE_5_aurelia_path__["b" /* join */])(parent, resource);
       }
 
       this.resourcesToLoad[name] = { moduleId: name, relativeTo: grandParent };
@@ -57349,7 +57148,7 @@ function initialize() {
     return;
   }
 
-  __WEBPACK_IMPORTED_MODULE_0_aurelia_pal__["e" /* initializePAL */](function (platform, feature, dom) {
+  Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_pal__["e" /* initializePAL */])(function (platform, feature, dom) {
     Object.assign(platform, _PLATFORM);
     Object.assign(feature, _FEATURE);
     Object.assign(dom, _DOM);
@@ -57472,7 +57271,7 @@ var AttributeMap = (_temp = _class = function () {
     if (/(?:^data-)|(?:^aria-)|:/.test(attributeName)) {
       return attributeName;
     }
-    return __WEBPACK_IMPORTED_MODULE_1_aurelia_binding__["_6" /* camelCase */](attributeName);
+    return Object(__WEBPACK_IMPORTED_MODULE_1_aurelia_binding__["_6" /* camelCase */])(attributeName);
   };
 
   return AttributeMap;
@@ -57579,7 +57378,7 @@ var InterpolationBinding = function () {
   return InterpolationBinding;
 }();
 
-var ChildInterpolationBinding = (_dec = __WEBPACK_IMPORTED_MODULE_1_aurelia_binding__["_9" /* connectable */](), _dec(_class2 = function () {
+var ChildInterpolationBinding = (_dec = Object(__WEBPACK_IMPORTED_MODULE_1_aurelia_binding__["_9" /* connectable */])(), _dec(_class2 = function () {
   function ChildInterpolationBinding(target, observerLocator, sourceExpression, mode, lookupFunctions, targetProperty, left, right) {
     
 
@@ -57648,7 +57447,7 @@ var ChildInterpolationBinding = (_dec = __WEBPACK_IMPORTED_MODULE_1_aurelia_bind
     this.updateTarget(this.rawValue);
 
     if (this.mode === __WEBPACK_IMPORTED_MODULE_1_aurelia_binding__["_4" /* bindingMode */].oneWay) {
-      __WEBPACK_IMPORTED_MODULE_1_aurelia_binding__["_17" /* enqueueBindingConnect */](this);
+      Object(__WEBPACK_IMPORTED_MODULE_1_aurelia_binding__["_17" /* enqueueBindingConnect */])(this);
     }
   };
 
@@ -58147,18 +57946,18 @@ function configure(config) {
 
 
 function configure(config) {
-  __WEBPACK_IMPORTED_MODULE_31__aurelia_hide_style__["c" /* injectAureliaHideStyleAtHead */]();
+  Object(__WEBPACK_IMPORTED_MODULE_31__aurelia_hide_style__["c" /* injectAureliaHideStyleAtHead */])();
 
   config.globalResources('./compose', './if', './with', './repeat', './show', './hide', './replaceable', './sanitize-html', './focus', './binding-mode-behaviors', './self-binding-behavior', './throttle-binding-behavior', './debounce-binding-behavior', './signal-binding-behavior', './update-trigger-binding-behavior', './attr-binding-behavior');
 
-  __WEBPACK_IMPORTED_MODULE_23__html_resource_plugin__["a" /* configure */](config);
+  Object(__WEBPACK_IMPORTED_MODULE_23__html_resource_plugin__["a" /* configure */])(config);
 
   var viewEngine = config.container.get(__WEBPACK_IMPORTED_MODULE_10_aurelia_templating__["H" /* ViewEngine */]);
   var styleResourcePlugin = {
     fetch: function fetch(address) {
       var _ref;
 
-      return _ref = {}, _ref[address] = __WEBPACK_IMPORTED_MODULE_11__css_resource__["a" /* _createCSSResource */](address), _ref;
+      return _ref = {}, _ref[address] = Object(__WEBPACK_IMPORTED_MODULE_11__css_resource__["a" /* _createCSSResource */])(address), _ref;
     }
   };
   ['.css', '.less', '.sass', '.scss', '.styl'].forEach(function (ext) {
@@ -58225,19 +58024,19 @@ var modeBindingBehavior = {
   }
 };
 
-var OneTimeBindingBehavior = (_dec = __WEBPACK_IMPORTED_MODULE_1_aurelia_metadata__["e" /* mixin */](modeBindingBehavior), _dec(_class = function OneTimeBindingBehavior() {
+var OneTimeBindingBehavior = (_dec = Object(__WEBPACK_IMPORTED_MODULE_1_aurelia_metadata__["e" /* mixin */])(modeBindingBehavior), _dec(_class = function OneTimeBindingBehavior() {
   
 
   this.mode = __WEBPACK_IMPORTED_MODULE_0_aurelia_binding__["_4" /* bindingMode */].oneTime;
 }) || _class);
 
-var OneWayBindingBehavior = (_dec2 = __WEBPACK_IMPORTED_MODULE_1_aurelia_metadata__["e" /* mixin */](modeBindingBehavior), _dec2(_class2 = function OneWayBindingBehavior() {
+var OneWayBindingBehavior = (_dec2 = Object(__WEBPACK_IMPORTED_MODULE_1_aurelia_metadata__["e" /* mixin */])(modeBindingBehavior), _dec2(_class2 = function OneWayBindingBehavior() {
   
 
   this.mode = __WEBPACK_IMPORTED_MODULE_0_aurelia_binding__["_4" /* bindingMode */].oneWay;
 }) || _class2);
 
-var TwoWayBindingBehavior = (_dec3 = __WEBPACK_IMPORTED_MODULE_1_aurelia_metadata__["e" /* mixin */](modeBindingBehavior), _dec3(_class3 = function TwoWayBindingBehavior() {
+var TwoWayBindingBehavior = (_dec3 = Object(__WEBPACK_IMPORTED_MODULE_1_aurelia_metadata__["e" /* mixin */])(modeBindingBehavior), _dec3(_class3 = function TwoWayBindingBehavior() {
   
 
   this.mode = __WEBPACK_IMPORTED_MODULE_0_aurelia_binding__["_4" /* bindingMode */].twoWay;
@@ -58307,7 +58106,7 @@ function _initializerWarningHelper(descriptor, context) {
 
 
 
-var Compose = (_dec = __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["W" /* customElement */]('compose'), _dec2 = __WEBPACK_IMPORTED_MODULE_0_aurelia_dependency_injection__["r" /* inject */](__WEBPACK_IMPORTED_MODULE_3_aurelia_pal__["b" /* DOM */].Element, __WEBPACK_IMPORTED_MODULE_0_aurelia_dependency_injection__["b" /* Container */], __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["g" /* CompositionEngine */], __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["M" /* ViewSlot */], __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["L" /* ViewResources */], __WEBPACK_IMPORTED_MODULE_1_aurelia_task_queue__["a" /* TaskQueue */]), _dec(_class = __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["_0" /* noView */](_class = _dec2(_class = (_class2 = function () {
+var Compose = (_dec = Object(__WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["W" /* customElement */])('compose'), _dec2 = Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_dependency_injection__["r" /* inject */])(__WEBPACK_IMPORTED_MODULE_3_aurelia_pal__["b" /* DOM */].Element, __WEBPACK_IMPORTED_MODULE_0_aurelia_dependency_injection__["b" /* Container */], __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["g" /* CompositionEngine */], __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["M" /* ViewSlot */], __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["L" /* ViewResources */], __WEBPACK_IMPORTED_MODULE_1_aurelia_task_queue__["a" /* TaskQueue */]), _dec(_class = Object(__WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["_0" /* noView */])(_class = _dec2(_class = (_class2 = function () {
   function Compose(element, container, compositionEngine, viewSlot, viewResources, taskQueue) {
     
 
@@ -58538,7 +58337,7 @@ var _dec, _dec2, _class;
 
 
 
-var Focus = (_dec = __WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["V" /* customAttribute */]('focus', __WEBPACK_IMPORTED_MODULE_1_aurelia_binding__["_4" /* bindingMode */].twoWay), _dec2 = __WEBPACK_IMPORTED_MODULE_2_aurelia_dependency_injection__["r" /* inject */](__WEBPACK_IMPORTED_MODULE_4_aurelia_pal__["b" /* DOM */].Element, __WEBPACK_IMPORTED_MODULE_3_aurelia_task_queue__["a" /* TaskQueue */]), _dec(_class = _dec2(_class = function () {
+var Focus = (_dec = Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["V" /* customAttribute */])('focus', __WEBPACK_IMPORTED_MODULE_1_aurelia_binding__["_4" /* bindingMode */].twoWay), _dec2 = Object(__WEBPACK_IMPORTED_MODULE_2_aurelia_dependency_injection__["r" /* inject */])(__WEBPACK_IMPORTED_MODULE_4_aurelia_pal__["b" /* DOM */].Element, __WEBPACK_IMPORTED_MODULE_3_aurelia_task_queue__["a" /* TaskQueue */]), _dec(_class = _dec2(_class = function () {
   function Focus(element, taskQueue) {
     var _this = this;
 
@@ -58621,7 +58420,7 @@ var _dec, _dec2, _class;
 
 
 
-var Hide = (_dec = __WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["V" /* customAttribute */]('hide'), _dec2 = __WEBPACK_IMPORTED_MODULE_0_aurelia_dependency_injection__["r" /* inject */](__WEBPACK_IMPORTED_MODULE_2_aurelia_pal__["b" /* DOM */].Element, __WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["a" /* Animator */], __WEBPACK_IMPORTED_MODULE_0_aurelia_dependency_injection__["h" /* Optional */].of(__WEBPACK_IMPORTED_MODULE_2_aurelia_pal__["b" /* DOM */].boundary, true)), _dec(_class = _dec2(_class = function () {
+var Hide = (_dec = Object(__WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["V" /* customAttribute */])('hide'), _dec2 = Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_dependency_injection__["r" /* inject */])(__WEBPACK_IMPORTED_MODULE_2_aurelia_pal__["b" /* DOM */].Element, __WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["a" /* Animator */], __WEBPACK_IMPORTED_MODULE_0_aurelia_dependency_injection__["h" /* Optional */].of(__WEBPACK_IMPORTED_MODULE_2_aurelia_pal__["b" /* DOM */].boundary, true)), _dec(_class = _dec2(_class = function () {
   function Hide(element, animator, domBoundary) {
     
 
@@ -58631,7 +58430,7 @@ var Hide = (_dec = __WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["V" /* custo
   }
 
   Hide.prototype.created = function created() {
-    __WEBPACK_IMPORTED_MODULE_3__aurelia_hide_style__["b" /* injectAureliaHideStyleAtBoundary */](this.domBoundary);
+    Object(__WEBPACK_IMPORTED_MODULE_3__aurelia_hide_style__["b" /* injectAureliaHideStyleAtBoundary */])(this.domBoundary);
   };
 
   Hide.prototype.valueChanged = function valueChanged(newValue) {
@@ -58666,7 +58465,7 @@ var _dec, _dec2, _class;
 
 
 
-var If = (_dec = __WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["V" /* customAttribute */]('if'), _dec2 = __WEBPACK_IMPORTED_MODULE_1_aurelia_dependency_injection__["r" /* inject */](__WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["f" /* BoundViewFactory */], __WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["M" /* ViewSlot */]), _dec(_class = __WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["_4" /* templateController */](_class = _dec2(_class = function () {
+var If = (_dec = Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["V" /* customAttribute */])('if'), _dec2 = Object(__WEBPACK_IMPORTED_MODULE_1_aurelia_dependency_injection__["r" /* inject */])(__WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["f" /* BoundViewFactory */], __WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["M" /* ViewSlot */]), _dec(_class = Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["_4" /* templateController */])(_class = _dec2(_class = function () {
   function If(viewFactory, viewSlot) {
     
 
@@ -58845,7 +58644,7 @@ function _initializerWarningHelper(descriptor, context) {
 
 
 
-var Repeat = (_dec = __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["V" /* customAttribute */]('repeat'), _dec2 = __WEBPACK_IMPORTED_MODULE_0_aurelia_dependency_injection__["r" /* inject */](__WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["f" /* BoundViewFactory */], __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["B" /* TargetInstruction */], __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["M" /* ViewSlot */], __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["L" /* ViewResources */], __WEBPACK_IMPORTED_MODULE_1_aurelia_binding__["N" /* ObserverLocator */], __WEBPACK_IMPORTED_MODULE_3__repeat_strategy_locator__["a" /* RepeatStrategyLocator */]), _dec(_class = __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["_4" /* templateController */](_class = _dec2(_class = (_class2 = function (_AbstractRepeater) {
+var Repeat = (_dec = Object(__WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["V" /* customAttribute */])('repeat'), _dec2 = Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_dependency_injection__["r" /* inject */])(__WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["f" /* BoundViewFactory */], __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["B" /* TargetInstruction */], __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["M" /* ViewSlot */], __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["L" /* ViewResources */], __WEBPACK_IMPORTED_MODULE_1_aurelia_binding__["N" /* ObserverLocator */], __WEBPACK_IMPORTED_MODULE_3__repeat_strategy_locator__["a" /* RepeatStrategyLocator */]), _dec(_class = Object(__WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["_4" /* templateController */])(_class = _dec2(_class = (_class2 = function (_AbstractRepeater) {
   _inherits(Repeat, _AbstractRepeater);
 
   function Repeat(viewFactory, instruction, viewSlot, viewResources, observerLocator, strategyLocator) {
@@ -58853,7 +58652,7 @@ var Repeat = (_dec = __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["V" /* cus
 
     var _this = _possibleConstructorReturn(this, _AbstractRepeater.call(this, {
       local: 'item',
-      viewsRequireLifecycle: __WEBPACK_IMPORTED_MODULE_5__analyze_view_factory__["a" /* viewsRequireLifecycle */](viewFactory)
+      viewsRequireLifecycle: Object(__WEBPACK_IMPORTED_MODULE_5__analyze_view_factory__["a" /* viewsRequireLifecycle */])(viewFactory)
     }));
 
     _initDefineProp(_this, 'items', _descriptor, _this);
@@ -58873,9 +58672,9 @@ var Repeat = (_dec = __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["V" /* cus
     _this.value = 'value';
     _this.strategyLocator = strategyLocator;
     _this.ignoreMutation = false;
-    _this.sourceExpression = __WEBPACK_IMPORTED_MODULE_4__repeat_utilities__["b" /* getItemsSourceExpression */](_this.instruction, 'repeat.for');
-    _this.isOneTime = __WEBPACK_IMPORTED_MODULE_4__repeat_utilities__["d" /* isOneTime */](_this.sourceExpression);
-    _this.viewsRequireLifecycle = __WEBPACK_IMPORTED_MODULE_5__analyze_view_factory__["a" /* viewsRequireLifecycle */](viewFactory);
+    _this.sourceExpression = Object(__WEBPACK_IMPORTED_MODULE_4__repeat_utilities__["b" /* getItemsSourceExpression */])(_this.instruction, 'repeat.for');
+    _this.isOneTime = Object(__WEBPACK_IMPORTED_MODULE_4__repeat_utilities__["d" /* isOneTime */])(_this.sourceExpression);
+    _this.viewsRequireLifecycle = Object(__WEBPACK_IMPORTED_MODULE_5__analyze_view_factory__["a" /* viewsRequireLifecycle */])(viewFactory);
     return _this;
   }
 
@@ -58925,7 +58724,7 @@ var Repeat = (_dec = __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["V" /* cus
   };
 
   Repeat.prototype._getInnerCollection = function _getInnerCollection() {
-    var expression = __WEBPACK_IMPORTED_MODULE_4__repeat_utilities__["e" /* unwrapExpression */](this.sourceExpression);
+    var expression = Object(__WEBPACK_IMPORTED_MODULE_4__repeat_utilities__["e" /* unwrapExpression */])(this.sourceExpression);
     if (!expression) {
       return null;
     }
@@ -59054,14 +58853,14 @@ var Repeat = (_dec = __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["V" /* cus
   Repeat.prototype.updateBindings = function updateBindings(view) {
     var j = view.bindings.length;
     while (j--) {
-      __WEBPACK_IMPORTED_MODULE_4__repeat_utilities__["f" /* updateOneTimeBinding */](view.bindings[j]);
+      Object(__WEBPACK_IMPORTED_MODULE_4__repeat_utilities__["f" /* updateOneTimeBinding */])(view.bindings[j]);
     }
     j = view.controllers.length;
     while (j--) {
       var k = view.controllers[j].boundProperties.length;
       while (k--) {
         var binding = view.controllers[j].boundProperties[k].binding;
-        __WEBPACK_IMPORTED_MODULE_4__repeat_utilities__["f" /* updateOneTimeBinding */](binding);
+        Object(__WEBPACK_IMPORTED_MODULE_4__repeat_utilities__["f" /* updateOneTimeBinding */])(binding);
       }
     }
   };
@@ -59098,7 +58897,7 @@ var _dec, _dec2, _class;
 
 
 
-var Replaceable = (_dec = __WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["V" /* customAttribute */]('replaceable'), _dec2 = __WEBPACK_IMPORTED_MODULE_0_aurelia_dependency_injection__["r" /* inject */](__WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["f" /* BoundViewFactory */], __WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["M" /* ViewSlot */]), _dec(_class = __WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["_4" /* templateController */](_class = _dec2(_class = function () {
+var Replaceable = (_dec = Object(__WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["V" /* customAttribute */])('replaceable'), _dec2 = Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_dependency_injection__["r" /* inject */])(__WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["f" /* BoundViewFactory */], __WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["M" /* ViewSlot */]), _dec(_class = Object(__WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["_4" /* templateController */])(_class = _dec2(_class = function () {
   function Replaceable(viewFactory, viewSlot) {
     
 
@@ -59142,7 +58941,7 @@ var _dec, _dec2, _class;
 
 
 
-var SanitizeHTMLValueConverter = (_dec = __WEBPACK_IMPORTED_MODULE_0_aurelia_binding__["_32" /* valueConverter */]('sanitizeHTML'), _dec2 = __WEBPACK_IMPORTED_MODULE_1_aurelia_dependency_injection__["r" /* inject */](__WEBPACK_IMPORTED_MODULE_2__html_sanitizer__["a" /* HTMLSanitizer */]), _dec(_class = _dec2(_class = function () {
+var SanitizeHTMLValueConverter = (_dec = Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_binding__["_32" /* valueConverter */])('sanitizeHTML'), _dec2 = Object(__WEBPACK_IMPORTED_MODULE_1_aurelia_dependency_injection__["r" /* inject */])(__WEBPACK_IMPORTED_MODULE_2__html_sanitizer__["a" /* HTMLSanitizer */]), _dec(_class = _dec2(_class = function () {
   function SanitizeHTMLValueConverter(sanitizer) {
     
 
@@ -59220,7 +59019,7 @@ var _dec, _dec2, _class;
 
 
 
-var Show = (_dec = __WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["V" /* customAttribute */]('show'), _dec2 = __WEBPACK_IMPORTED_MODULE_0_aurelia_dependency_injection__["r" /* inject */](__WEBPACK_IMPORTED_MODULE_2_aurelia_pal__["b" /* DOM */].Element, __WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["a" /* Animator */], __WEBPACK_IMPORTED_MODULE_0_aurelia_dependency_injection__["h" /* Optional */].of(__WEBPACK_IMPORTED_MODULE_2_aurelia_pal__["b" /* DOM */].boundary, true)), _dec(_class = _dec2(_class = function () {
+var Show = (_dec = Object(__WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["V" /* customAttribute */])('show'), _dec2 = Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_dependency_injection__["r" /* inject */])(__WEBPACK_IMPORTED_MODULE_2_aurelia_pal__["b" /* DOM */].Element, __WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["a" /* Animator */], __WEBPACK_IMPORTED_MODULE_0_aurelia_dependency_injection__["h" /* Optional */].of(__WEBPACK_IMPORTED_MODULE_2_aurelia_pal__["b" /* DOM */].boundary, true)), _dec(_class = _dec2(_class = function () {
   function Show(element, animator, domBoundary) {
     
 
@@ -59230,7 +59029,7 @@ var Show = (_dec = __WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["V" /* custo
   }
 
   Show.prototype.created = function created() {
-    __WEBPACK_IMPORTED_MODULE_3__aurelia_hide_style__["b" /* injectAureliaHideStyleAtBoundary */](this.domBoundary);
+    Object(__WEBPACK_IMPORTED_MODULE_3__aurelia_hide_style__["b" /* injectAureliaHideStyleAtBoundary */])(this.domBoundary);
   };
 
   Show.prototype.valueChanged = function valueChanged(newValue) {
@@ -59464,7 +59263,7 @@ var _dec, _dec2, _class;
 
 
 
-var With = (_dec = __WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["V" /* customAttribute */]('with'), _dec2 = __WEBPACK_IMPORTED_MODULE_0_aurelia_dependency_injection__["r" /* inject */](__WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["f" /* BoundViewFactory */], __WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["M" /* ViewSlot */]), _dec(_class = __WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["_4" /* templateController */](_class = _dec2(_class = function () {
+var With = (_dec = Object(__WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["V" /* customAttribute */])('with'), _dec2 = Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_dependency_injection__["r" /* inject */])(__WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["f" /* BoundViewFactory */], __WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["M" /* ViewSlot */]), _dec(_class = Object(__WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["_4" /* templateController */])(_class = _dec2(_class = function () {
   function With(viewFactory, viewSlot) {
     
 
@@ -59480,7 +59279,7 @@ var With = (_dec = __WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["V" /* custo
   };
 
   With.prototype.valueChanged = function valueChanged(newValue) {
-    var overrideContext = __WEBPACK_IMPORTED_MODULE_2_aurelia_binding__["_11" /* createOverrideContext */](newValue, this.parentOverrideContext);
+    var overrideContext = Object(__WEBPACK_IMPORTED_MODULE_2_aurelia_binding__["_11" /* createOverrideContext */])(newValue, this.parentOverrideContext);
     if (!this.view) {
       this.view = this.viewFactory.create();
       this.view.bind(newValue, overrideContext);
@@ -59509,7 +59308,7 @@ var With = (_dec = __WEBPACK_IMPORTED_MODULE_1_aurelia_templating__["V" /* custo
 "use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "configure", function() { return configure; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_aurelia_pal__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_aurelia_router__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_aurelia_router__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__route_loader__ = __webpack_require__(137);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__router_view__ = __webpack_require__("aurelia-templating-router/router-view");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__route_href__ = __webpack_require__("aurelia-templating-router/route-href");
@@ -59540,7 +59339,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RouteHref", function() { return RouteHref; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_aurelia_templating__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_aurelia_dependency_injection__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_aurelia_router__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_aurelia_router__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_aurelia_pal__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_aurelia_logging__ = __webpack_require__(13);
 var _dec, _dec2, _dec3, _dec4, _dec5, _class;
@@ -59555,7 +59354,7 @@ var _dec, _dec2, _dec3, _dec4, _dec5, _class;
 
 var logger = __WEBPACK_IMPORTED_MODULE_4_aurelia_logging__["getLogger"]('route-href');
 
-var RouteHref = (_dec = __WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["V" /* customAttribute */]('route-href'), _dec2 = __WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["R" /* bindable */]({ name: 'route', changeHandler: 'processChange' }), _dec3 = __WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["R" /* bindable */]({ name: 'params', changeHandler: 'processChange' }), _dec4 = __WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["R" /* bindable */]({ name: 'attribute', defaultValue: 'href' }), _dec5 = __WEBPACK_IMPORTED_MODULE_1_aurelia_dependency_injection__["r" /* inject */](__WEBPACK_IMPORTED_MODULE_2_aurelia_router__["c" /* Router */], __WEBPACK_IMPORTED_MODULE_3_aurelia_pal__["b" /* DOM */].Element), _dec(_class = _dec2(_class = _dec3(_class = _dec4(_class = _dec5(_class = function () {
+var RouteHref = (_dec = Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["V" /* customAttribute */])('route-href'), _dec2 = Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["R" /* bindable */])({ name: 'route', changeHandler: 'processChange' }), _dec3 = Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["R" /* bindable */])({ name: 'params', changeHandler: 'processChange' }), _dec4 = Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_templating__["R" /* bindable */])({ name: 'attribute', defaultValue: 'href' }), _dec5 = Object(__WEBPACK_IMPORTED_MODULE_1_aurelia_dependency_injection__["r" /* inject */])(__WEBPACK_IMPORTED_MODULE_2_aurelia_router__["c" /* Router */], __WEBPACK_IMPORTED_MODULE_3_aurelia_pal__["b" /* DOM */].Element), _dec(_class = _dec2(_class = _dec3(_class = _dec4(_class = _dec5(_class = function () {
   function RouteHref(router, element) {
     
 
@@ -59617,7 +59416,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_aurelia_dependency_injection__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_aurelia_binding__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_aurelia_router__ = __webpack_require__(34);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_aurelia_router__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_aurelia_metadata__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_aurelia_pal__ = __webpack_require__(1);
 var _dec, _dec2, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4;
@@ -59674,7 +59473,7 @@ function _initializerWarningHelper(descriptor, context) {
 
 
 
-var RouterView = (_dec = __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["W" /* customElement */]('router-view'), _dec2 = __WEBPACK_IMPORTED_MODULE_0_aurelia_dependency_injection__["r" /* inject */](__WEBPACK_IMPORTED_MODULE_5_aurelia_pal__["b" /* DOM */].Element, __WEBPACK_IMPORTED_MODULE_0_aurelia_dependency_injection__["b" /* Container */], __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["M" /* ViewSlot */], __WEBPACK_IMPORTED_MODULE_3_aurelia_router__["c" /* Router */], __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["K" /* ViewLocator */], __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["h" /* CompositionTransaction */], __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["g" /* CompositionEngine */]), _dec(_class = __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["_0" /* noView */](_class = _dec2(_class = (_class2 = function () {
+var RouterView = (_dec = Object(__WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["W" /* customElement */])('router-view'), _dec2 = Object(__WEBPACK_IMPORTED_MODULE_0_aurelia_dependency_injection__["r" /* inject */])(__WEBPACK_IMPORTED_MODULE_5_aurelia_pal__["b" /* DOM */].Element, __WEBPACK_IMPORTED_MODULE_0_aurelia_dependency_injection__["b" /* Container */], __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["M" /* ViewSlot */], __WEBPACK_IMPORTED_MODULE_3_aurelia_router__["c" /* Router */], __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["K" /* ViewLocator */], __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["h" /* CompositionTransaction */], __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["g" /* CompositionEngine */]), _dec(_class = Object(__WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["_0" /* noView */])(_class = _dec2(_class = (_class2 = function () {
   function RouterView(element, container, viewSlot, router, viewLocator, compositionTransaction, compositionEngine) {
     
 
@@ -59792,7 +59591,7 @@ var RouterView = (_dec = __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["W" /*
 
       return this.compositionEngine.createController(layoutInstruction).then(function (controller) {
         __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["x" /* ShadowDOM */].distributeView(viewPortInstruction.controller.view, controller.slots || controller.view.slots);
-        controller.automate(__WEBPACK_IMPORTED_MODULE_1_aurelia_binding__["_11" /* createOverrideContext */](layoutInstruction.viewModel), _this2.owningView);
+        controller.automate(Object(__WEBPACK_IMPORTED_MODULE_1_aurelia_binding__["_11" /* createOverrideContext */])(layoutInstruction.viewModel), _this2.owningView);
         controller.view.children.push(viewPortInstruction.controller.view);
         return controller.view || controller;
       }).then(function (newView) {
@@ -59863,7 +59662,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getTargetDOMElement", function() { return __WEBPACK_IMPORTED_MODULE_0__get_target_dom_element__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__property_info__ = __webpack_require__(87);
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getPropertyInfo", function() { return __WEBPACK_IMPORTED_MODULE_1__property_info__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__property_accessor_parser__ = __webpack_require__(36);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__property_accessor_parser__ = __webpack_require__(35);
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "PropertyAccessorParser", function() { return __WEBPACK_IMPORTED_MODULE_2__property_accessor_parser__["a"]; });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "getAccessorExpression", function() { return __WEBPACK_IMPORTED_MODULE_2__property_accessor_parser__["b"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__validate_binding_behavior__ = __webpack_require__("aurelia-validation/validate-binding-behavior");
@@ -59876,7 +59675,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "ValidateEvent", function() { return __WEBPACK_IMPORTED_MODULE_4__validate_event__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__validate_result__ = __webpack_require__(39);
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "ValidateResult", function() { return __WEBPACK_IMPORTED_MODULE_5__validate_result__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__validate_trigger__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__validate_trigger__ = __webpack_require__(34);
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "validateTrigger", function() { return __WEBPACK_IMPORTED_MODULE_6__validate_trigger__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__validation_controller__ = __webpack_require__(28);
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "ValidationController", function() { return __WEBPACK_IMPORTED_MODULE_7__validation_controller__["a"]; });
@@ -59988,7 +59787,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ValidateOnChangeBindingBehavior", function() { return ValidateOnChangeBindingBehavior; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ValidateOnChangeOrBlurBindingBehavior", function() { return ValidateOnChangeOrBlurBindingBehavior; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_aurelia_task_queue__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__validate_trigger__ = __webpack_require__(35);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__validate_trigger__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__validate_binding_behavior_base__ = __webpack_require__(139);
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -60173,13 +59972,13 @@ var ValidationErrorsCustomAttribute = (function () {
     };
     ValidationErrorsCustomAttribute.inject = [__WEBPACK_IMPORTED_MODULE_4_aurelia_pal__["b" /* DOM */].Element, __WEBPACK_IMPORTED_MODULE_1_aurelia_dependency_injection__["f" /* Lazy */].of(__WEBPACK_IMPORTED_MODULE_3__validation_controller__["a" /* ValidationController */])];
     __decorate([
-        __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["R" /* bindable */]({ defaultBindingMode: __WEBPACK_IMPORTED_MODULE_0_aurelia_binding__["_4" /* bindingMode */].oneWay })
+        Object(__WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["R" /* bindable */])({ defaultBindingMode: __WEBPACK_IMPORTED_MODULE_0_aurelia_binding__["_4" /* bindingMode */].oneWay })
     ], ValidationErrorsCustomAttribute.prototype, "controller", void 0);
     __decorate([
-        __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["R" /* bindable */]({ primaryProperty: true, defaultBindingMode: __WEBPACK_IMPORTED_MODULE_0_aurelia_binding__["_4" /* bindingMode */].twoWay })
+        Object(__WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["R" /* bindable */])({ primaryProperty: true, defaultBindingMode: __WEBPACK_IMPORTED_MODULE_0_aurelia_binding__["_4" /* bindingMode */].twoWay })
     ], ValidationErrorsCustomAttribute.prototype, "errors", void 0);
     ValidationErrorsCustomAttribute = __decorate([
-        __WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["V" /* customAttribute */]('validation-errors')
+        Object(__WEBPACK_IMPORTED_MODULE_2_aurelia_templating__["V" /* customAttribute */])('validation-errors')
     ], ValidationErrorsCustomAttribute);
     return ValidationErrorsCustomAttribute;
 }());
@@ -60273,7 +60072,7 @@ let Edit = class Edit {
             selectedTextFormat: 'count > 3'
         };
         this.post = {
-            categories: 'News,Javascript,C#'
+            categories: ['Javascript', 'C#']
         };
         this.myDateObject = new Date(2017, 1, 1, 14, 28);
         this.myDateObject2 = __WEBPACK_IMPORTED_MODULE_2_moment__().toDate();
@@ -60318,6 +60117,9 @@ let Edit = class Edit {
     removeTag(tagName) {
         this.tag.methods.remove(tagName);
     }
+    replaceAllTags() {
+        this.post.categories = ['Erlang', 'Python'];
+    }
     preSelectFirstOptions() {
         // Change selection by item (object/string)
         this.camping = 'Tent';
@@ -60352,7 +60154,7 @@ __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __decorate */]([
     __WEBPACK_IMPORTED_MODULE_1_aurelia_framework__["bindable"]
 ], Edit.prototype, "tag", void 0);
 Edit = __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __decorate */]([
-    __WEBPACK_IMPORTED_MODULE_1_aurelia_framework__["inject"]()
+    Object(__WEBPACK_IMPORTED_MODULE_1_aurelia_framework__["inject"])()
 ], Edit);
 
 
@@ -60362,7 +60164,7 @@ Edit = __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __decorate */]([
 /***/ "bootstrap-plugins.html":
 /***/ (function(module, exports) {
 
-module.exports = "<template>\r\n  <div class=\"container\">\r\n        <form class=\"form-horizontal\" validate.bind=\"validation\">\r\n                    <h3>Input Tags Input</h3>\r\n        <div class=\"col-md-6\">\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Post Categories</label>\r\n                <div class=\"\">\r\n                    <abp-tags-input element.bind=\"tag\" value.bind=\"post.categories\" placeholder=\"enter a category tag\"></abp-tags-input>\r\n                </div>\r\n                <div class=\"\">\r\n                    list of items: ${post.categories}\r\n                </div>\r\n            </div>\r\n            <div class=\"\">\r\n                <button class=\"btn btn-primary\"\r\n                click.delegate=\"addTag()\">\r\n                Add Tag1\r\n                </button>\r\n                <button class=\"btn btn-warning\"\r\n                    click.delegate=\"removeTag('Javascript')\">\r\n                    Remove Javascript\r\n                    </button>\r\n                <button class=\"btn btn-danger\"\r\n                click.delegate=\"removeAllTag()\">\r\n                (after 1sec) Remove All Tags\r\n                </button>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"col-md-6\">\r\n            <h3>Eonasdan - Date Time Picker</h3>\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Date Entered 1</label>\r\n                <div>\r\n                    <span class=\"text-danger\">Formatted Date: </span>${post.dateEntered} <br/>\r\n                    <span class=\"text-danger\">Date Object:</span> ${myDateObject}\r\n                </div>\r\n                <abp-datetime-picker with-date-icon=\"false\" element.bind=\"picker\" value.bind=\"post.dateEntered\" model.bind=\"myDateObject\" options.bind=\"{ format:'YYYY-MM-DD HH:mm' }\"></abp-datetime-picker>\r\n            </div>\r\n            <button class=\"btn btn-primary btn-sm\"\r\n                click.delegate=\"changePostDateValue('2000-01-05 13:33')\">\r\n                Change value.bind => Jan 5, 2000 - 1:33pm\r\n            </button>\r\n            <button class=\"btn btn-primary btn-sm\"\r\n                click.delegate=\"changePostDateObject('2010-02-02 10:00')\">\r\n                Change model.bind => Feb 2, 2010 - 10am\r\n            </button>\r\n\r\n            <hr/>\r\n\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Date Entered 2</label>\r\n                <div>\r\n                    <span class=\"text-danger\">Formatted Date: </span>${post.dateEntered2} <br />\r\n                    <span class=\"text-danger\">Date Object:</span> ${myDateObject2}\r\n                </div>\r\n                <abp-datetime-picker element.bind=\"picker\" value.bind=\"post.dateEntered2\" model.bind=\"myDateObject2\" options.bind=\"{ showTodayButton: true }\"></abp-datetime-picker>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Date Entered 3</label>\r\n                <abp-datetime-picker element.bind=\"picker\" model.bind=\"dueDate\" options.bind=\"{ showClear: true, showTodayButton: true, format: 'DD.MM.YYYY' }\"></abp-datetime-picker>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Date Entered 4</label>\r\n                <abp-datetime-picker element.bind=\"picker\" value.bind=\"activeDate\" options.bind=\"{ showClear: true, showTodayButton: true, format: 'YYYY-MM-DD' }\"></abp-datetime-picker>\r\n            </div>\r\n            Task: ${task | stringify}\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Date Entered 5</label>\r\n                <abp-datetime-picker class=\"form-datepicker\" element.bind=\"picker\" model.bind=\"task.dueDate\" options.bind=\"{ showTodayButton: true, format: 'YYYY-MM-DD' }\"></abp-datetime-picker>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"col-md-12\">\r\n            <hr />\r\n        </div>\r\n\r\n        <h3>Bootstrap-Select</h3>\r\n        <div class=\"col-md-12\">\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Basic - String Collection</label>\r\n                <div>Value: ${camping}<br /> Item: ${campingValue}</div>\r\n                <div>\r\n                    <abp-select collection.bind=\"allCampingStuff\" selected-value.bind=\"camping\" selected-item.bind=\"campingValue\"></abp-select>\r\n                </div>\r\n\r\n                <label class=\"control-label\">Object Collection - Empty on Null, Change Title, Class Styling, Alternate Title (on Relish)</label>\r\n                <div>Value: ${condimentValue} <br /> Item: ${condiment | stringify}</div>\r\n                <div>\r\n                    <abp-select picker-options.bind=\"selectOptions\" empty-on-null=\"true\" selected-item.bind=\"condiment\" selected-value.bind=\"condimentValue\" disabled=\"false\" collection.bind=\"allCondiments\" data-mapping-structure.bind=\"selectMappingStructure\" object-key=\"id\" element.bind=\"selectCondiment\"></abp-select>\r\n                </div>\r\n\r\n                <label class=\"control-label\">Object Collection - Data Content &amp; disabled last item</label>\r\n                <div>Value: ${condimentStyledValue} <br /> Item: ${condimentStyled | stringify}</div>\r\n                <div>\r\n                    <abp-select picker-options.bind=\"selectOptions\" selected-item.bind=\"condimentStyled\" selected-value.bind=\"condimentStyledValue\" disabled=\"false\" collection.bind=\"allStyledCondiments\" data-mapping-structure.bind=\"selectMappingStructure\" object-key=\"id\" element.bind=\"selectStyledCondiment\"></abp-select>\r\n                </div>\r\n\r\n                <label class=\"control-label\">Optgroups, Multiple &amp; disabled last bread</label>\r\n                <div>Values: ${picnicValue} <br /> Items: ${picnic | stringify}</div>\r\n                <div>\r\n                    <abp-select id=\"multiSelect\" picker-options.bind=\"selectOptions\" selected-item.bind=\"picnic\" selected-value.bind=\"picnicValue\" collection.bind=\"allSelectionWithGroups\" has-optgroup=\"true\" data-mapping-structure.bind=\"selectMappingStructure\" multiple=\"true\" object-key=\"id\" element.bind=\"selectPicnic\"></abp-select>\r\n                </div>\r\n\r\n            </div>\r\n            <div class=\"\">\r\n                <button class=\"btn btn-sm btn-primary\"\r\n                click.delegate=\"preSelectFirstOptions()\">\r\n                Change selection by item\r\n                </button>\r\n                <button class=\"btn btn-sm btn-primary\"\r\n                click.delegate=\"preSelectSecondOptions()\">\r\n                Change selection by value\r\n                </button>\r\n                <button class=\"btn btn-sm btn-warning\"\r\n                click.delegate=\"toggleOptgroupBreads()\">\r\n                Toggle disabled 'Breads' optgroup\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </form>\r\n  </div>\r\n</template>\r\n";
+module.exports = "<template>\r\n  <div class=\"container\">\r\n        <form class=\"form-horizontal\" validate.bind=\"validation\">\r\n                    <h3>Input Tags Input</h3>\r\n        <div class=\"col-md-6\">\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Post Categories</label>\r\n                <div class=\"\">\r\n                    <abp-tags-input element.bind=\"tag\" value.bind=\"post.categories\" placeholder=\"enter a category tag\"></abp-tags-input>\r\n                </div>\r\n                <div class=\"\">\r\n                    list of items: ${post.categories | stringify}\r\n                </div>\r\n            </div>\r\n            <div class=\"\">\r\n                <button class=\"btn btn-primary\"\r\n                    click.delegate=\"addTag()\">\r\n                    Add Tag1\r\n                </button>\r\n                <button class=\"btn btn-info\"\r\n                    click.delegate=\"replaceAllTags()\">\r\n                    Replace all tags\r\n                </button>\r\n                <button class=\"btn btn-warning\"\r\n                    click.delegate=\"removeTag('Javascript')\">\r\n                    Remove Javascript\r\n                    </button>\r\n                <button class=\"btn btn-danger\"\r\n                click.delegate=\"removeAllTag()\">\r\n                (after 1sec) Remove All Tags\r\n                </button>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"col-md-6\">\r\n            <h3>Eonasdan - Date Time Picker</h3>\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Date Entered 1</label>\r\n                <div>\r\n                    <span class=\"text-danger\">Formatted Date: </span>${post.dateEntered} <br/>\r\n                    <span class=\"text-danger\">Date Object:</span> ${myDateObject}\r\n                </div>\r\n                <abp-datetime-picker with-date-icon=\"false\" element.bind=\"picker\" value.bind=\"post.dateEntered\" model.bind=\"myDateObject\" options.bind=\"{ format:'YYYY-MM-DD HH:mm' }\"></abp-datetime-picker>\r\n            </div>\r\n            <button class=\"btn btn-primary btn-sm\"\r\n                click.delegate=\"changePostDateValue('2000-01-05 13:33')\">\r\n                Change value.bind => Jan 5, 2000 - 1:33pm\r\n            </button>\r\n            <button class=\"btn btn-primary btn-sm\"\r\n                click.delegate=\"changePostDateObject('2010-02-02 10:00')\">\r\n                Change model.bind => Feb 2, 2010 - 10am\r\n            </button>\r\n\r\n            <hr/>\r\n\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Date Entered 2</label>\r\n                <div>\r\n                    <span class=\"text-danger\">Formatted Date: </span>${post.dateEntered2} <br />\r\n                    <span class=\"text-danger\">Date Object:</span> ${myDateObject2}\r\n                </div>\r\n                <abp-datetime-picker element.bind=\"picker\" value.bind=\"post.dateEntered2\" model.bind=\"myDateObject2\" options.bind=\"{ showTodayButton: true }\"></abp-datetime-picker>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Date Entered 3</label>\r\n                <abp-datetime-picker element.bind=\"picker\" model.bind=\"dueDate\" options.bind=\"{ showClear: true, showTodayButton: true, format: 'DD.MM.YYYY' }\"></abp-datetime-picker>\r\n            </div>\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Date Entered 4</label>\r\n                <abp-datetime-picker element.bind=\"picker\" value.bind=\"activeDate\" options.bind=\"{ showClear: true, showTodayButton: true, format: 'YYYY-MM-DD' }\"></abp-datetime-picker>\r\n            </div>\r\n            Task: ${task | stringify}\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Date Entered 5</label>\r\n                <abp-datetime-picker class=\"form-datepicker\" element.bind=\"picker\" model.bind=\"task.dueDate\" options.bind=\"{ showTodayButton: true, format: 'YYYY-MM-DD' }\"></abp-datetime-picker>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"col-md-12\">\r\n            <hr />\r\n        </div>\r\n\r\n        <h3>Bootstrap-Select</h3>\r\n        <div class=\"col-md-12\">\r\n            <div class=\"form-group\">\r\n                <label class=\"control-label\">Basic - String Collection</label>\r\n                <div>Value: ${camping}<br /> Item: ${campingValue}</div>\r\n                <div>\r\n                    <abp-select collection.bind=\"allCampingStuff\" selected-value.bind=\"camping\" selected-item.bind=\"campingValue\"></abp-select>\r\n                </div>\r\n\r\n                <label class=\"control-label\">Object Collection - Empty on Null, Change Title, Class Styling, Alternate Title (on Relish)</label>\r\n                <div>Value: ${condimentValue} <br /> Item: ${condiment | stringify}</div>\r\n                <div>\r\n                    <abp-select picker-options.bind=\"selectOptions\" empty-on-null=\"true\" selected-item.bind=\"condiment\" selected-value.bind=\"condimentValue\" disabled=\"false\" collection.bind=\"allCondiments\" data-mapping-structure.bind=\"selectMappingStructure\" object-key=\"id\" element.bind=\"selectCondiment\"></abp-select>\r\n                </div>\r\n\r\n                <label class=\"control-label\">Object Collection - Data Content &amp; disabled last item</label>\r\n                <div>Value: ${condimentStyledValue} <br /> Item: ${condimentStyled | stringify}</div>\r\n                <div>\r\n                    <abp-select picker-options.bind=\"selectOptions\" selected-item.bind=\"condimentStyled\" selected-value.bind=\"condimentStyledValue\" disabled=\"false\" collection.bind=\"allStyledCondiments\" data-mapping-structure.bind=\"selectMappingStructure\" object-key=\"id\" element.bind=\"selectStyledCondiment\"></abp-select>\r\n                </div>\r\n\r\n                <label class=\"control-label\">Optgroups, Multiple &amp; disabled last bread</label>\r\n                <div>Values: ${picnicValue} <br /> Items: ${picnic | stringify}</div>\r\n                <div>\r\n                    <abp-select id=\"multiSelect\" picker-options.bind=\"selectOptions\" selected-item.bind=\"picnic\" selected-value.bind=\"picnicValue\" collection.bind=\"allSelectionWithGroups\" has-optgroup=\"true\" data-mapping-structure.bind=\"selectMappingStructure\" multiple=\"true\" object-key=\"id\" element.bind=\"selectPicnic\"></abp-select>\r\n                </div>\r\n\r\n            </div>\r\n            <div class=\"\">\r\n                <button class=\"btn btn-sm btn-primary\"\r\n                click.delegate=\"preSelectFirstOptions()\">\r\n                Change selection by item\r\n                </button>\r\n                <button class=\"btn btn-sm btn-primary\"\r\n                click.delegate=\"preSelectSecondOptions()\">\r\n                Change selection by value\r\n                </button>\r\n                <button class=\"btn btn-sm btn-warning\"\r\n                click.delegate=\"toggleOptgroupBreads()\">\r\n                Toggle disabled 'Breads' optgroup\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </form>\r\n  </div>\r\n</template>\r\n";
 
 /***/ }),
 
@@ -60388,7 +60190,6 @@ module.exports = "<template>\r\n  <div class=\"container\">\r\n        <form cla
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__style_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__style_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_bluebird__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8_bluebird___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8_bluebird__);
-/// <reference types="aurelia-loader-webpack/src/webpack-hot-interface"/>
 // we want font-awesome to load as soon as possible to show the fa-spinner
 
 
@@ -60493,7 +60294,7 @@ let ValidationForm = class ValidationForm {
     }
 };
 ValidationForm = __WEBPACK_IMPORTED_MODULE_0_tslib__["a" /* __decorate */]([
-    __WEBPACK_IMPORTED_MODULE_1_aurelia_framework__["inject"](__WEBPACK_IMPORTED_MODULE_2_aurelia_validation__["ValidationControllerFactory"])
+    Object(__WEBPACK_IMPORTED_MODULE_1_aurelia_framework__["inject"])(__WEBPACK_IMPORTED_MODULE_2_aurelia_validation__["ValidationControllerFactory"])
 ], ValidationForm);
 
 __WEBPACK_IMPORTED_MODULE_2_aurelia_validation__["ValidationRules"]
