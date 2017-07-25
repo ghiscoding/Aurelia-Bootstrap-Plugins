@@ -40,7 +40,7 @@ model.bind="dateObject"  // output --> Thu May 05 2005 10:00:00 GMT-0400 (Easter
 ### Available Options
 Every options of `Bootstrap Datepicker` can be call through `options.bind=""`. For the complete list, please visit the official site [Bootstrap Datepicker - Options](http://eonasdan.github.io/bootstrap-datetimepicker/Options/).
 
-**NOTE:** 
+**NOTE:**
 The picker options can also be defined globally through `main.js` via a `config.options` configuration, see [Global Options](#globaloption)
 
 Examples
@@ -56,7 +56,7 @@ _from the ViewModel_
 ```
 ```javascript
 export class Example {
-    pickerOptions = { 
+    pickerOptions = {
       format: 'YYYY-MM-DD'
     };
 }
@@ -76,15 +76,15 @@ _from the View_
 <abp-datetime-picker icon-base="font-awesome" with-date-icon="false"></abp-datetime-picker>
 ```
 
-**NOTE:** 
+**NOTE:**
 The extra attributes can also be defined globally through `main.js` via a `config.extra` configuration, see [Global Options](#globaloption)
 
 <a name="methods"></a>
 
 ### Available Methods/Functions
-Again every single methods which comes with `Bootstrap Datepicker` are available. For the complete list, please visit the official site [Bootstrap Datepicker - Functions](http://eonasdan.github.io/bootstrap-datetimepicker/Functions/). 
+Again every single methods which comes with `Bootstrap Datepicker` are available. For the complete list, please visit the official site [Bootstrap Datepicker - Functions](http://eonasdan.github.io/bootstrap-datetimepicker/Functions/).
 
-To have access to the methods/functions, you will need to expose the element itself through `element.bind` to expose the methods _(also note that doing so will also give you access to `events`, `options` and `methods`)_. 
+To have access to the methods/functions, you will need to expose the element itself through `element.bind` to expose the methods _(also note that doing so will also give you access to `events`, `options` and `methods`)_.
 
 Example
 
@@ -108,9 +108,9 @@ export class Example {
 <a name="events"></a>
 
 ### Available Events
-Every events of `Bootstrap Datepicker` are, as no surprises, available as well. For the complete list, please visit the official site [Bootstrap Datepicker - Events](http://eonasdan.github.io/bootstrap-datetimepicker/Events/). 
+Every events of `Bootstrap Datepicker` are, as no surprises, available as well. For the complete list, please visit the official site [Bootstrap Datepicker - Events](http://eonasdan.github.io/bootstrap-datetimepicker/Events/).
 
-To have access to the `events`, you will need to expose the element itself through `element.bind` to expose the methods _(also note that doing so will also give you access to `events`, `options` and `methods`)_. 
+To have access to the `events`, you will need to expose the element itself through `element.bind` to expose the methods _(also note that doing so will also give you access to `events`, `options` and `methods`)_.
 
 **Note**
 The events are called with the syntax of `onEvent` which differs from the original syntax. Example, for the `dp.change`, we would use the `onChange` event.
@@ -179,7 +179,7 @@ For `CLI` you will need to add (`eonasdan-bootstrap-datetimepicker` and `aurelia
 
 _index.html_
 ```html
-<link rel="stylesheet" type="text/css" 
+<link rel="stylesheet" type="text/css"
 href="../node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
 ```
 
@@ -245,6 +245,14 @@ export function configure(aurelia) {
 }
 ```
 
+**Note on `aurelia-webpack-plugin 2.0`**
+
+If you started using the new `aurelia-webpack-plugin` version `2.0`, which is currently in [RC Pre-Release](https://github.com/aurelia/webpack-plugin/releases) and is already packaged in some of the [Aurelia Skeletons](https://github.com/aurelia/skeleton-navigation) (not all). You will have to use the `PLATFORM.ModuleName` wrapper. The previous code becomes:
+
+```javascript
+aurelia.use.plugin(PLATFORM.moduleName('aurelia-bootstrap-datetimepicker'));
+```
+
 <a name="globaloption"></a>
 
 ### Global Options
@@ -268,11 +276,29 @@ export function configure(aurelia) {
 }
 ```
 
+or with `aurelia-webpack-plugin 2.0` :
+
+```javascript
+export function configure(aurelia) {
+  aurelia.use.standardConfiguration().developmentLogging();
+  aurelia.use.plugin(PLATFORM.moduleName('aurelia-bootstrap-datetimepicker'), config => {
+    // extra attributes, with config.extra
+    config.extra.iconBase = 'font-awesome';
+    config.extra.withDateIcon = true;
+
+    // or even any picker options, with config.options
+    config.options.format = 'YYYY-MM-DD';
+    config.options.showTodayButton = true;
+  });
+  aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName('app')));
+}
+```
+
 ## License
 [MIT License](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/blob/master/LICENSE)
 
 ## Contributions/Comments
 Contributions are welcome. This plugin was created to help the community (and myself), if you wish to suggest something and/or want to make a PR (Pull Request), please feel free to do so.
 
-## Use it, like it? 
+## Use it, like it?
 You like and use an `Aurelia-Bootstrap-Plugins`, please click on the :star: and spread the word.

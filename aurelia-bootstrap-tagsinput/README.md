@@ -18,7 +18,7 @@ A quick example of the code in action. Note that the value is available under th
 ### Available Options
 Every options of `Bootstrap Tags Input` can be called through `options.bind=""`. For the complete list, please visit the official site [Bootstrap Tags Input - Options](http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/#options).
 
-**NOTE:** 
+**NOTE:**
 The picker options can also be defined globally through `main.js` via a `config.options` configuration, see [Global Options](#globaloption)
 
 Examples
@@ -46,9 +46,9 @@ export class Example {
 <a name="methods"></a>
 
 ### Available Methods/Functions
-Again every single methods which comes with `Bootstrap Tags Input` are available. For the complete list, please visit the official site [Bootstrap Tags Input - Functions](http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/#methods). 
+Again every single methods which comes with `Bootstrap Tags Input` are available. For the complete list, please visit the official site [Bootstrap Tags Input - Functions](http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/#methods).
 
-To have access to the methods/functions, you will need to expose the element itself through `element.bind` to expose the methods _(also note that doing so will also give you access to `events`, `options` and `methods`)_. 
+To have access to the methods/functions, you will need to expose the element itself through `element.bind` to expose the methods _(also note that doing so will also give you access to `events`, `options` and `methods`)_.
 
 Example
 
@@ -73,9 +73,9 @@ export class Example {
 <a name="events"></a>
 
 ### Available Events
-Every events of `Bootstrap Tags Input` are, as no surprises, available as well. For the complete list, please visit the official site [Bootstrap Tags Input - Events](http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/#events). 
+Every events of `Bootstrap Tags Input` are, as no surprises, available as well. For the complete list, please visit the official site [Bootstrap Tags Input - Events](http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/#events).
 
-To have access to the `events`, you will need to expose the element itself through `element.bind` to expose the methods _(also note that doing so will also give you access to `events`, `options` and `methods`)_. 
+To have access to the `events`, you will need to expose the element itself through `element.bind` to expose the methods _(also note that doing so will also give you access to `events`, `options` and `methods`)_.
 
 **Note**
 The events are called with the syntax of `onEvent` which differs from the original syntax. Example, for the `beforeItemAdd`, we would use the `onBeforeItemAdd` event.
@@ -172,6 +172,14 @@ export function configure(aurelia) {
 }
 ```
 
+**Note on `aurelia-webpack-plugin 2.0`**
+
+If you started using the new `aurelia-webpack-plugin` version `2.0`, which is currently in [RC Pre-Release](https://github.com/aurelia/webpack-plugin/releases) and is already packaged in some of the [Aurelia Skeletons](https://github.com/aurelia/skeleton-navigation) (not all). You will have to use the `PLATFORM.ModuleName` wrapper. The previous code becomes:
+
+```javascript
+aurelia.use.plugin(PLATFORM.moduleName('aurelia-bootstrap-tagsinput'));
+```
+
 <a name="globaloption"></a>
 
 ### Global Options
@@ -194,11 +202,27 @@ export function configure(aurelia) {
 }
 ```
 
+or with `aurelia-webpack-plugin 2.0` :
+
+```javascript
+export function configure(aurelia) {
+  aurelia.use.standardConfiguration().developmentLogging();
+  aurelia.use.plugin(PLATFORM.moduleName('aurelia-bootstrap-tagsinput'), config => {
+    // extra attributes, with config.extra
+    config.extra.bootstrapVersion = 4;
+
+    // or any picker options, with config.options
+    config.options.tagConfirmKeys = [13, 44]
+  });
+  aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName('app')));
+}
+```
+
 ## License
 [MIT License](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/blob/master/LICENSE)
 
 ## Contributions/Comments
 Contributions are welcome. This plugin was created to help the community (and myself), if you wish to suggest something and/or want to make a PR (Pull Request), please feel free to do so.
 
-## Use it, like it? 
+## Use it, like it?
 You like and use an `Aurelia-Bootstrap-Plugins`, please click on the :star: and spread the word.

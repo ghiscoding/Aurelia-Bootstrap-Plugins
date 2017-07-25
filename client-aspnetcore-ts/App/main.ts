@@ -13,8 +13,7 @@ import * as Bluebird from 'bluebird';
 Bluebird.config({ warnings: { wForgottenReturn: false } });
 
 export function configure(aurelia: Aurelia) {
-  aurelia.use.standardConfiguration()                
-                .developmentLogging();
+  aurelia.use.standardConfiguration().developmentLogging();
 
   aurelia.use.feature(PLATFORM.moduleName("resources/index"));
   aurelia.use.plugin(PLATFORM.moduleName('aurelia-bootstrap-datetimepicker'), config => {
@@ -29,6 +28,5 @@ export function configure(aurelia: Aurelia) {
   aurelia.use.plugin(PLATFORM.moduleName('aurelia-bootstrap-select'));
   aurelia.use.plugin(PLATFORM.moduleName('aurelia-bootstrap-tagsinput'));
   aurelia.use.plugin(PLATFORM.moduleName('aurelia-validation'));
-  aurelia.start()
-         .then(() => aurelia.setRoot(PLATFORM.moduleName('app')));
+  aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName('app')));
 }
