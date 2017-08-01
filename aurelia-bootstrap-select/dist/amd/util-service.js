@@ -61,6 +61,10 @@ define(['exports'], function (exports) {
       );
     };
 
+    UtilService.prototype.parseBoolOrTrueOnEmpty = function parseBoolOrTrueOnEmpty(value) {
+      return value === undefined || value === '' ? true : this.parseBool(value);
+    };
+
     return UtilService;
   }();
 });

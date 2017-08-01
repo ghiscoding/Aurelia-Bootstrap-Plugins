@@ -64,6 +64,10 @@ System.register([], function (_export, _context) {
           );
         };
 
+        UtilService.prototype.parseBoolOrTrueOnEmpty = function parseBoolOrTrueOnEmpty(value) {
+          return value === undefined || value === '' ? true : this.parseBool(value);
+        };
+
         return UtilService;
       }());
 

@@ -76,4 +76,13 @@ export class UtilService {
   parseBool(value) {
     return (/^(true|1)$/i).test(value);
   }
+
+  /**
+   * Parse the argument to a boolean output when available, else return True on empty
+   * @param {any} input value
+   * @return {bool} result
+   */
+  parseBoolOrTrueOnEmpty(value) {
+    return (value === undefined || value === '') ? true : this.parseBool(value);
+  }
 }

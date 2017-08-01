@@ -1,16 +1,16 @@
 <template>
-    <select class="selectpicker" selected-value.bind="selectedValue" selected-item.bind="selectedItem" 
+    <select class="selectpicker" selected-value.bind="selectedValue" selected-item.bind="selectedItem"
             value.bind="value"
             collection.bind="collection"
             class.bind="class"
-            disabled.bind="util.parseBool(disabled)"
+            disabled.bind="util.parseBoolOrTrueOnEmpty(disabled)"
             element.bind="element"
-            multiple.bind="util.parseBool(multiple) & optional"
+            multiple.bind="util.parseBoolOrTrueOnEmpty(multiple) & optional"
             blur.trigger="blur()"
             placeholder.bind="placeholder">
 
         <optgroup if.bind="util.parseBool(hasOptgroup)" repeat.for="group of getGroupedCollection()"
-                  label.bind="getMappingPropertyValueFromIndex(group, $index, 'groupLabel')" 
+                  label.bind="getMappingPropertyValueFromIndex(group, $index, 'groupLabel')"
                   data-max-options.bind="getMappingPropertyValueFromIndex(group, $index, 'maxOptions') & optional"
                   disabled.bind="getMappingPropertyValueFromIndex(group, $index, 'groupDisabled') & optional">
             <option repeat.for="opt of group" model.bind="opt"
