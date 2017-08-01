@@ -5,6 +5,8 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-select/dist/css/bootstrap-select.min.css';
 import 'bootstrap-tagsinput/dist/bootstrap-tagsinput.css';
 import 'eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css';
+import 'nprogress/nprogress.css';
+import './styles/typeahead-custom.css';
 import 'babel-polyfill';
 import {PLATFORM} from 'aurelia-pal';
 import * as Bluebird from 'bluebird';

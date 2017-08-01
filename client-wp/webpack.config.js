@@ -1,10 +1,11 @@
-const path = require('path')
+const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const { AureliaPlugin } = require('aurelia-webpack-plugin');
 const { optimize: { CommonsChunkPlugin }, ProvidePlugin } = require('webpack');
 const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
+const portBackEnd = 5000;
 
 // config helpers:
 const ensureArray = (config) => config && (Array.isArray(config) ? config : [config]) || []
@@ -50,6 +51,11 @@ module.exports = ({production, server, extractCss, coverage} = {}) => ({
     contentBase: outDir,
     // serve index.html for all 404 (required for push-state)
     historyApiFallback: true,
+    proxy: {
+      '/api/*': {
+        target: `http://127.0.0.1:${portBackEnd}/`
+      }
+    }
   },
   module: {
     rules: [

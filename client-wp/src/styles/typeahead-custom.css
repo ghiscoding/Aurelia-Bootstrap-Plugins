@@ -1,0 +1,50 @@
+.tt-suggestion {
+    padding: 4px 10px;
+}
+.tt-suggestion:hover {
+  background-color: #04a2dd !important;
+}
+
+.tt-suggestion + .tt-suggestion {
+    border-top: 1px solid #ccc;
+}
+
+.typeahead-symbol {
+    font-weight: bold;
+    font-size: 13px;
+    color: #04a2dd;
+}
+
+.typeahead-descr {
+    font-size: 11px;
+    font-style: italic;
+    color: #686868;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
+
+.tt-cursor .typeahead-symbol,
+.tt-suggestion:hover > .typeahead-symbol {
+  color: #fff;
+}
+
+.tt-cursor .typeahead-ne,
+.tt-suggestion:hover > .typeahead-ne {
+    color: #e2e2e2;
+}
+
+.tt-cursor .typeahead-descr,
+.tt-suggestion:hover > .typeahead-descr {
+    color: #f0f0f0;
+}
+
+.tt-suggestion {
+    height: 40px;
+}
+
+.tt-menu,
+.tt-dropdown-menu {
+    z-index: 10;
+    position: relative;
+}

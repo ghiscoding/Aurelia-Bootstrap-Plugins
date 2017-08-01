@@ -1,5 +1,8 @@
 import {bindable, inject} from 'aurelia-framework';
 import moment from 'moment';
+//import {AureliaBootstrapTypeahead} from 'aurelia-bootstrap-typeahead';
+import * as nprogress from 'nprogress';
+import * as typeaheadTemplate from './templates/typeahead-symbol-template.html';
 
 @inject()
 export class BootstrapPlugin {
@@ -48,6 +51,11 @@ export class BootstrapPlugin {
     showTick: true,
     selectedTextFormat: 'count > 3'
   };
+  typeaheadEmptyTemplate = `<div class="empty-message">No matches from Controller.</div>`;
+  //typeaheadEmptyTemplateUrl = "src/templates/typeahead-empty-template.html";
+  typeaheadRemoteUrl = './api/yahoo/quote/%QUERY';
+  typeaheadTemplateUrl = 'src/templates/typeahead-symbol-template.html';
+  typeaheadTemplate = typeaheadTemplate;
 
   constructor() {
     this.post = {
@@ -83,6 +91,14 @@ export class BootstrapPlugin {
 
   addTag() {
     this.tag.methods.add('Tag1');
+  }
+
+  afterCallback() {
+    nprogress.done();
+  }
+
+  beforeCallback() {
+    nprogress.start();
   }
 
   changePostDateValue(dateStr) {
