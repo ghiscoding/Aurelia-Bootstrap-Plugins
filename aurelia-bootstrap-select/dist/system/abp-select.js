@@ -148,7 +148,13 @@ System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-sel
         };
 
         AbpSelectCustomElement.prototype.bind = function bind() {
-          this.multiple = this.util.parseBool(this.multiple || this.elm.getAttribute('multiple'));
+          if (this.elm.hasAttribute('multiple')) {
+            this.multiple = true;
+            if (this.elm.getAttribute('multiple') === false) {
+              this.multiple = false;
+            }
+          }
+
           var originalSelectedObjects = this.selectedItem || this.elm.getAttribute('selectedItem');
           var originalSelectedIndexes = this.selectedValue || this.elm.getAttribute('selectedValue');
 

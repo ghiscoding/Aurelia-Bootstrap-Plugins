@@ -96,7 +96,7 @@
                     <abp-select picker-options.bind="selectOptions" selected-item.bind="condimentStyled" selected-value.bind="condimentStyledValue" disabled="false" collection.bind="allStyledCondiments" data-mapping-structure.bind="selectMappingStructure" object-key="id" element.bind="selectStyledCondiment"></abp-select>
                 </div>
 
-                <label class="control-label">Optgroups, Multiple &amp; disabled last bread</label>
+                <label class="control-label">Optgroups, Multiple &amp; disabled last bread option</label>
                 <div>Values: ${picnicValue} <br /> Items: ${picnic | stringify}</div>
                 <div>
                     <abp-select id="multiSelect" picker-options.bind="selectOptions" selected-item.bind="picnic" selected-value.bind="picnicValue" collection.bind="allSelectionWithGroups" has-optgroup="true" data-mapping-structure.bind="selectMappingStructure" multiple="true" object-key="id" element.bind="selectPicnic"></abp-select>

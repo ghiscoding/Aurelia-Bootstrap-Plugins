@@ -37,4 +37,8 @@ export let UtilService = class UtilService {
     return (/^(true|1)$/i.test(value)
     );
   }
+
+  parseBoolOrTrueOnEmpty(value) {
+    return value === undefined || value === '' ? true : this.parseBool(value);
+  }
 };

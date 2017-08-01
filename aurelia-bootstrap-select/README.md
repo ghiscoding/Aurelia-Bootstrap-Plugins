@@ -213,7 +213,7 @@ There is multiple `disabled` options available. You can disable any of the follo
   * _by adding `disabled` directly on the element_
 
 ### Multiple (select)
-To make the `Bootstrap Select` be a multi-select, simply add the `multiple="true"` attribute to the element.
+To make the `Bootstrap Select` be a multi-select, simply add the `multiple="true"` (or just `multiple`) attribute to the element.
 
 _on View_
 
@@ -221,7 +221,7 @@ _on View_
 <abp-select collection.bind="myCollection" multiple="true" ...></abp-select>
 ```
 
-**Note** The attribute is used as a boolean attribute, so passing `false` like `multiple="false"` will make the select act as a regular single select.
+**Note:** The attribute is used as a boolean attribute, so passing `false` like `multiple="false"` will make the select act as a regular single select.
 
 ### Object-Key (attribute)
 When using a collection a objects, the tool will use an attribute called `object-key` (by default is set to `id`) to know which property of the object to do comparison

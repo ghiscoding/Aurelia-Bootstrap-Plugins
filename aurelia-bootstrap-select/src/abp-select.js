@@ -74,7 +74,13 @@ export class AbpSelectCustomElement {
    * If nothing was passed, it will default to first option of select
    */
   bind() {
-    this.multiple = this.util.parseBool(this.multiple || this.elm.getAttribute('multiple'));
+    if (this.elm.hasAttribute('multiple')) {
+      this.multiple = true;
+      if (this.elm.getAttribute('multiple') === false) {
+        this.multiple = false;
+      }
+    }
+
     let originalSelectedObjects = this.selectedItem || this.elm.getAttribute('selectedItem');
     let originalSelectedIndexes = this.selectedValue || this.elm.getAttribute('selectedValue');
 
