@@ -134,6 +134,8 @@ export class Example {
   }
 }
 ```
+In this example the element is exposed via the "picker" property (you can chose any name for this property) and the event call back is set up using the Aurelia Changed callback whose name is the property name ("picker") prepending the word Changed ("pickerChanged()"). This function is only called once at binding and allows us to set the element events callbacks.
+
 
 ## Installation
 You can run the examples or build your own by doing the following.
