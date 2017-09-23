@@ -34,8 +34,8 @@
     "webpack-hot-middleware": "^2.18.1"
   },
   "dependencies": {
-    "aurelia-bootstrap-datetimepicker": "^1.0.10",
-    "aurelia-bootstrap-select": "^1.0.1",
+    "aurelia-bootstrap-datetimepicker": "^1.0.11",
+    "aurelia-bootstrap-select": "^1.0.2",
     "aurelia-bootstrap-tagsinput": "^1.1.1",
     "aurelia-bootstrapper": "^2.1.1",
     "aurelia-loader-webpack": "2.1.0",

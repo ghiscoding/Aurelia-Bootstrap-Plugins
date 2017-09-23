@@ -20,8 +20,8 @@
     "url": "https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins"
   },
   "dependencies": {
-    "aurelia-bootstrap-datetimepicker": "^1.0.10",
-    "aurelia-bootstrap-select": "^1.0.1",
+    "aurelia-bootstrap-datetimepicker": "^1.0.11",
+    "aurelia-bootstrap-select": "^1.0.2",
     "aurelia-bootstrap-tagsinput": "^1.1.1",
     "aurelia-bootstrapper": "^1.0.0",
     "aurelia-cli": "^0.26.1",

@@ -187,6 +187,14 @@ _index.html_
 href="../node_modules/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
 ```
 
+##### Bootstrap 4
+An extra custom CSS file was added to address the Bootstrap 4 changes (until `Bootstrap-Datetimepicker` comes out with version that supports it). If you followed the instruction earlier to modify the `aurelia.json` file then it should work without any modification, if it does not then make sure to have this portion (under the `aurelia-bootstrap-datetimepicker` package):
+```json
+  "resources": [
+    "**/*.{css,html}"
+  ]
+```
+
 <a name="webpack"></a>
 
 #### Aurelia-Webpack
@@ -247,6 +255,12 @@ export function configure(aurelia) {
 
   aurelia.start().then(() => aurelia.setRoot());
 }
+```
+
+##### Bootstrap 4 support
+An extra custom CSS file was added to address the changes (until `Bootstrap-Datetimepicker` comes out with version that supports it), you can import this custom CSS file via:
+```javascript
+import 'aurelia-bootstrap-datetimepicker/dist/amd/bootstrap-datetimepicker-bs4.css';
 ```
 
 **Note on `aurelia-webpack-plugin 2.0`**
