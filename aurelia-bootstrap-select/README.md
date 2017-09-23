@@ -302,14 +302,6 @@ _index.html_
 href="../node_modules/bootstrap-select/dist/css/bootstrap-select.min.css">
 ```
 
-##### Bootstrap 4
-An extra custom CSS file was added to address the Bootstrap 4 changes (until `Bootstrap-Select` comes out with version that supports it). If you followed the instruction earlier to modify the `aurelia.json` file then it should work without any modification, if it does not then make sure to have this portion (under the `aurelia-bootstrap-select` package):
-```json
-  "resources": [
-    "**/*.{css,html}"
-  ]
-```
-
 
 <a name="webpack"></a>
 
@@ -356,12 +348,6 @@ Make the plugin available globally in your `main.js` file. Please note the expor
 #### For WebPack only (main.js)
 ```javascript
 import 'bootstrap-select/dist/css/bootstrap-select.min.css';
-```
-
-##### Bootstrap 4 support
-An extra custom CSS file was added to address the changes (until `Bootstrap-Select` comes out with version that supports it), you can import this custom CSS file via:
-```javascript
-import 'aurelia-bootstrap-select/dist/amd/bootstrap-datetimepicker-bs4.css';
 ```
 
 #### CLI/WebPack (main.js)
