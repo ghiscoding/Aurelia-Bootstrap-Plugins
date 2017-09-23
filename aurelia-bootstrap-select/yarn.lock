@@ -960,7 +960,7 @@ boom@2.x.x:
   dependencies:
     hoek "2.x.x"
 
-bootstrap-select@^1.12.2:
+bootstrap-select@^1.12.4:
   version "1.12.4"
   resolved "https://registry.yarnpkg.com/bootstrap-select/-/bootstrap-select-1.12.4.tgz#7f15d3c0ce978868d9c09c70f96624f55fa02ee1"
   dependencies:
