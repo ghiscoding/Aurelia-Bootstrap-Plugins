@@ -1,6 +1,6 @@
 {
   "name": "aurelia-bootstrap-select",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "An Aurelia Custom Element for the 3rd party addon [Bootstrap-Select]",
   "keywords": [
     "aurelia",
