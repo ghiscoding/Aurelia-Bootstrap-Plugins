@@ -42,7 +42,7 @@ export class AbpTagsInputCustomElement {
     // Bootstrap 3 & 4 have different class names
     //if tagClass isn't yet configured we will define the tagClass depending on the version
     let pickerOptions = this.options || {};
-    if (!this.options.tagClass) {
+    if (!pickerOptions.tagClass) {
       pickerOptions.tagClass = this.bootstrapVersion === 3 ? 'label label-info' : 'badge badge-info';
     }
 
@@ -58,7 +58,7 @@ export class AbpTagsInputCustomElement {
     // this will be useful for calling events/methods/options from the outside
     this.element = {
       events: this.events,
-      options: this.options,
+      options: pickerOptions,
       methods: this.methods
     };
   }
