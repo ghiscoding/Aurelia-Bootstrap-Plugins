@@ -108,7 +108,7 @@ System.register(['aurelia-framework', 'jquery', 'bootstrap-tagsinput/dist/bootst
           this.domElm = $(this.elm).find('input');
 
           var pickerOptions = this.options || {};
-          if (!this.options.tagClass) {
+          if (!pickerOptions.tagClass) {
             pickerOptions.tagClass = this.bootstrapVersion === 3 ? 'label label-info' : 'badge badge-info';
           }
 
@@ -120,7 +120,7 @@ System.register(['aurelia-framework', 'jquery', 'bootstrap-tagsinput/dist/bootst
 
           this.element = {
             events: this.events,
-            options: this.options,
+            options: pickerOptions,
             methods: this.methods
           };
         };

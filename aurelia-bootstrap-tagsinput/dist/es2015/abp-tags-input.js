@@ -84,7 +84,7 @@ export let AbpTagsInputCustomElement = (_dec = inject(Element), _dec2 = bindable
     this.domElm = $(this.elm).find('input');
 
     let pickerOptions = this.options || {};
-    if (!this.options.tagClass) {
+    if (!pickerOptions.tagClass) {
       pickerOptions.tagClass = this.bootstrapVersion === 3 ? 'label label-info' : 'badge badge-info';
     }
 
@@ -96,7 +96,7 @@ export let AbpTagsInputCustomElement = (_dec = inject(Element), _dec2 = bindable
 
     this.element = {
       events: this.events,
-      options: this.options,
+      options: pickerOptions,
       methods: this.methods
     };
   }

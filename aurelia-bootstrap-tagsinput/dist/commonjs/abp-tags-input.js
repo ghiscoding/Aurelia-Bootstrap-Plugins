@@ -105,7 +105,7 @@ var AbpTagsInputCustomElement = exports.AbpTagsInputCustomElement = (_dec = (0, 
     this.domElm = (0, _jquery2.default)(this.elm).find('input');
 
     var pickerOptions = this.options || {};
-    if (!this.options.tagClass) {
+    if (!pickerOptions.tagClass) {
       pickerOptions.tagClass = this.bootstrapVersion === 3 ? 'label label-info' : 'badge badge-info';
     }
 
@@ -117,7 +117,7 @@ var AbpTagsInputCustomElement = exports.AbpTagsInputCustomElement = (_dec = (0, 
 
     this.element = {
       events: this.events,
-      options: this.options,
+      options: pickerOptions,
       methods: this.methods
     };
   };
