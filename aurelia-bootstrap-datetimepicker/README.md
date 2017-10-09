@@ -3,6 +3,9 @@
 ### Introduction
 An Aurelia Custom Element for the 3rd party addon [Eonasdan Bootstrap Datepicker](https://eonasdan.github.io/bootstrap-datetimepicker/)
 
+### Demo page
+[https://ghiscoding.github.io/aurelia/bootstrap-plugins/datetime-picker](https://ghiscoding.github.io/#/aurelia/bootstrap-plugins/datetime-picker)
+
 ### Screenshots
 
 Screenshots from the demo app
