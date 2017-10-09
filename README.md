@@ -3,6 +3,9 @@
 ### Introduction
 `Aurelia-Bootstrap-Plugins` was coded to bridge with a set of commonly used 3rd party Bootstrap addons. The goal of these Plugins is to support, as much as possible, the full suite of (`options`, `methods` & `events`) from their original 3rd party addons while easily using them in Aurelia.
 
+### Demo page
+[https://ghiscoding.github.io/aurelia/bootstrap-plugins](https://ghiscoding.github.io/#/aurelia/bootstrap-plugins)
+
 ### Available plugins
 * [Aurelia-Bootstrap-Datetimepicker](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/tree/master/aurelia-bootstrap-datetimepicker) on [NPM](https://www.npmjs.com/package/aurelia-bootstrap-datetimepicker) / source [Eonasdan Bootstrap Datepicker](https://eonasdan.github.io/bootstrap-datetimepicker/)
 * [Aurelia-Bootstrap-Tagsinput](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/tree/master/aurelia-bootstrap-tagsinput) on [NPM](https://www.npmjs.com/package/aurelia-bootstrap-tagsinput) / source [Bootstrap Tags Input](http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/)
