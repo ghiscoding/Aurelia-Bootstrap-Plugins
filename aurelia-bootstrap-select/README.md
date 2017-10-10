@@ -4,7 +4,7 @@
 An Aurelia Custom Element for the 3rd party addon [Bootstrap-Select](http://silviomoreto.github.io/bootstrap-select/)
 
 ### Demo page
-[https://ghiscoding.github.io/aurelia/bootstrap-plugins/bootstrap-select](https://ghiscoding.github.io/#/aurelia/bootstrap-plugins/bootstrap-select)
+[https://ghiscoding.github.io/Aurelia-Bootstrap-Plugins/#/aurelia/bootstrap-plugins/bootstrap-select](https://ghiscoding.github.io/Aurelia-Bootstrap-Plugins/#/aurelia/bootstrap-plugins/bootstrap-select)
 
 ### Screenshots
 

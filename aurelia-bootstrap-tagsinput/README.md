@@ -4,7 +4,7 @@
 An Aurelia Custom Element for the 3rd party addon [Bootstrap Tags Input](https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/)
 
 ### Demo page
-[https://ghiscoding.github.io/aurelia/bootstrap-plugins/tags-input](https://ghiscoding.github.io/#/aurelia/bootstrap-plugins/tags-input)
+[https://ghiscoding.github.io/Aurelia-Bootstrap-Plugins/#/aurelia/bootstrap-plugins/tags-input](https://ghiscoding.github.io/Aurelia-Bootstrap-Plugins/#/aurelia/bootstrap-plugins/tags-input)
 
 ### Screenshots
 Screenshots from the demo app
