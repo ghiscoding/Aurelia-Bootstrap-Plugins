@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "aurelia-validation": "github:aurelia/validation",
-    "moment": "registry:npm/moment#2.10.5+20160211003958"
-  }
-}
