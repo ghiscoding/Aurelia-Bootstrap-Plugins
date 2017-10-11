@@ -1,7 +1,7 @@
 module.exports = {
   "plugins": [
     "transform-decorators",
-    "transform-class-properties"
+    ["transform-class-properties", { "loose" : true }]
   ],
   "presets": [
     [

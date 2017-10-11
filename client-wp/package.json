@@ -20,8 +20,7 @@
   },
   "scripts": {
     "start": "nps",
-    "test": "nps test",
-    "postinstall": "rm -rf ./node_modules/aurelia-validation/node_modules"
+    "test": "nps test"
   },
   "jest": {
     "modulePaths": [
@@ -127,6 +126,7 @@
     "bootstrap": "3.3.7",
     "font-awesome": "4.7.0",
     "isomorphic-fetch": "2.2.1",
-    "jquery": "3.2.1"
+    "jquery": "3.2.1",
+    "moment": "^2.19.0"
   }
 }
