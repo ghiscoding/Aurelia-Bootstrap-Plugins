@@ -1,0 +1,40 @@
+<template>
+  <div class="container">
+    <h2>Aurelia-Bootstrap-Tagsinput</h2>
+    <iframe allowtransparency="true" scrolling="no" frameborder="0" src="https://buttons.github.io/buttons.html#href=https%3A%2F%2Fgithub.com%2Fghiscoding%2FAurelia-Bootstrap-Plugins&amp;aria-label=Star%20ghiscoding%2FAurelia-Bootstrap-Plugins%20on%20GitHub&amp;data-icon=octicon-star&amp;data-text=Star&amp;data-show-count=true" style="width: 90px; height: 20px; border: none;"></iframe>
+    <br/>
+    <a href="https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/tree/master/aurelia-bootstrap-tagsinput">Github Page (documentation)</a> |
+    <a href="https://www.npmjs.com/package/aurelia-bootstrap-tagsinput">NPM Package</a> |
+    <a href="http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/">source (bootstrap-tagsinput)</a>
+
+    <hr/>
+
+    <form class="form-horizontal" validate.bind="validation">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label">Post Categories</label>
+          <div class="">
+            <abp-tags-input element.bind="tag" value.bind="post.categories" placeholder="enter a category tag"></abp-tags-input>
+          </div>
+          <div class="">
+            list of items: ${post.categories | stringify}
+          </div>
+        </div>
+        <div class="">
+          <button class="btn btn-sm btn-primary" click.delegate="addTag()">
+            Add Tag1
+          </button>
+          <button class="btn btn-sm btn-info" click.delegate="replaceAllTags()">
+            Replace all tags
+          </button>
+          <button class="btn btn-sm btn-warning" click.delegate="removeTag('Javascript')">
+            Remove Javascript
+          </button>
+          <button class="btn btn-sm btn-danger" click.delegate="removeAllTag()">
+            (after 1sec) Remove All Tags
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</template>

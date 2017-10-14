@@ -1,0 +1,72 @@
+<template>
+  <div class="container">
+    <h2>Aurelia-Bootstrap-Datetimepicker</h2>
+    <iframe allowtransparency="true" scrolling="no" frameborder="0" src="https://buttons.github.io/buttons.html#href=https%3A%2F%2Fgithub.com%2Fghiscoding%2FAurelia-Bootstrap-Plugins&amp;aria-label=Star%20ghiscoding%2FAurelia-Bootstrap-Plugins%20on%20GitHub&amp;data-icon=octicon-star&amp;data-text=Star&amp;data-show-count=true" style="width: 90px; height: 20px; border: none;"></iframe>
+    <br/>
+    <a href="https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/tree/master/aurelia-bootstrap-datetimepicker">Github Page (documentation)</a> |
+    <a href="https://www.npmjs.com/package/aurelia-bootstrap-datetimepicker">NPM Package</a> |
+    <a href="https://eonasdan.github.io/bootstrap-datetimepicker/">source (eonasdan - datetime picker)</a>
+
+    <hr/>
+
+    <form class="form-horizontal" validate.bind="validation">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="control-label">Date Entered</label>
+          <p>preset to "2017-02-01 02:30am"</p>
+          <div>
+            <span class="text-danger">Formatted Date: </span>${post.dateEntered}
+            <br/>
+            <span class="text-danger">Date Object:</span> ${myDateObject}
+          </div>
+          <abp-datetime-picker with-date-icon="false" element.bind="picker" value.bind="post.dateEntered" model.bind="myDateObject"
+            options.bind="{ format:'YYYY-MM-DD HH:mm' }"></abp-datetime-picker>
+        </div>
+        <button class="btn btn-primary btn-sm" click.delegate="changePostDateValue('2000-01-05 13:33')">
+          Change value.bind => Jan 5, 2000 - 1:33pm
+        </button>
+        <button class="btn btn-primary btn-sm" click.delegate="changePostDateObject('2010-02-02 10:00')">
+          Change model.bind => Feb 2, 2010 - 10am
+        </button>
+
+        <hr/>
+
+        <div class="form-group">
+          <label class="control-label">Date Entered 2</label>
+          <p>today's date with Moment.js &amp; global option "config.options.format = 'YYYY-MM-DD'"</p>
+          <div>
+            <span class="text-danger">Formatted Date: </span>${post.dateEntered2}
+            <br />
+            <span class="text-danger">Date Object:</span> ${myDateObject2}
+          </div>
+          <abp-datetime-picker value.bind="post.dateEntered2" model.bind="myDateObject2" options.bind="{ showTodayButton: true }"></abp-datetime-picker>
+        </div>
+        
+        <hr/>
+
+        <div class="form-group">
+          <label class="control-label">Euro Format</label>
+          <abp-datetime-picker model.bind="dueDate" options.bind="{ showClear: true, showTodayButton: true, format: 'DD.MM.YYYY' }"></abp-datetime-picker>
+        </div>
+
+        <hr/>
+
+        <div class="form-group">
+          <label class="control-label">Null Date</label>
+          <abp-datetime-picker value.bind="activeDate" icon-base="glyphicon" options.bind="{ showClear: true, showTodayButton: true, format: 'YYYY-MM-DD' }"></abp-datetime-picker>
+        </div>
+
+        <hr/>
+        
+        <div class="form-group">
+          <label class="control-label">Font-Awesome icons</label>
+          <abp-datetime-picker value.bind="awesomeDate" icon-base="font-awesome" options.bind="{ showClear: true, showTodayButton: true, format: 'YYYY-MM-DD' }"></abp-datetime-picker>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <hr />
+      </div>
+    </form>
+  </div>
+</template>
