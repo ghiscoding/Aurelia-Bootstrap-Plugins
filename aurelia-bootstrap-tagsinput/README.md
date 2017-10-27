@@ -6,6 +6,11 @@ An Aurelia Custom Element for the 3rd party addon [Bootstrap Tags Input](https:/
 ### Demo page
 [https://ghiscoding.github.io/Aurelia-Bootstrap-Plugins/#/aurelia/bootstrap-plugins/tags-input](https://ghiscoding.github.io/Aurelia-Bootstrap-Plugins/#/aurelia/bootstrap-plugins/tags-input)
 
+## Important Note
+Please note that the `Bootstrap-tagsinput` library is no longer supported and, unfortunately, we found out that there are some issues when trying to use it with an array of objects. Even though their documentation says that it supports it, it actually doesn't seem to work properly. This is an issue with the external library itself (`Bootstrap-Tagsinput`) and I do not have control over this. You can refer to this issue [#28](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/issues/28) for more details. Also as mentioned in the issue, I might switch to another lib in the future, if you know a good one then write a comment in that issue, thanks.
+
+**Array of strings are working correctly** and are the only viable option. If I knew this earlier, I would have chosen another external library but anyhow, we have to accept it.
+
 ### Screenshots
 Screenshots from the demo app
 
