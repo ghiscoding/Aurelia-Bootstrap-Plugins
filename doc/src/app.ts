@@ -3,9 +3,9 @@ import {Router, RouterConfiguration} from 'aurelia-router';
 
 export class App {
   router: Router;
-  
+
   configureRouter(config, router) {
-    config.title = 'Aurelia';
+    config.title = 'Aurelia-Bootstrap-Plugins';
     config.map([
       { route: ['', 'bootstrap-plugins/intro'], name: 'bootstrap-plugins/intro', title: 'Aurelia-Bootstrap-Plugins Intro', moduleId: PLATFORM.moduleName('./bootstrap-plugins/intro')},
       { route: 'bootstrap-plugins/bootstrap-select', name: 'bootstrap-plugins/bootstrap-select', title: 'Bootstrap-Select', moduleId: PLATFORM.moduleName('./bootstrap-plugins/bootstrap-select'), nav: true, settings: { childOf: 'bootstrap-plugins' }},
