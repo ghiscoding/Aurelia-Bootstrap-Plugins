@@ -3,6 +3,10 @@ const { AureliaPlugin } = require('aurelia-webpack-plugin');
 const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const ContextReplacementPlugin = require('webpack/lib/ContextReplacementPlugin');
 
+const cssRules = [
+  { loader: 'css-loader' },
+];
+
 module.exports = {
   entry: { main: 'aurelia-bootstrapper' },
 
@@ -23,15 +27,32 @@ module.exports = {
 
   module: {
     rules: [
+      // CSS required in JS/TS files should use the style-loader that auto-injects it into the website
+      // only when the issuer is a .js/.ts file, so the loaders are not applied inside html templates
       {
         test: /\.css$/i,
-        loader: 'css-loader',
-        issuer: /\.html?$/i
+        issuer: [{ not: [{ test: /\.html$/i }] }],
+        use: extractCss ? ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: cssRules
+        }) : ['style-loader', ...cssRules],
       },
       {
         test: /\.css$/i,
-        loader: ['style-loader', 'css-loader'],
+        issuer: [{ test: /\.html$/i }],
+        // CSS required in templates cannot be extracted safely
+        // because Aurelia would try to require it again in runtime
+        use: cssRules
+      },
+      {
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
         issuer: /\.[tj]s$/i
+      },
+      {
+        test: /\.scss$/,
+        use: ['css-loader', 'sass-loader'],
+        issuer: /\.html?$/i
       },
       { test: /\.html$/i, loaders: 'html-loader' },
       { test: /\.ts$/i, loaders: 'ts-loader' },
@@ -56,12 +77,36 @@ module.exports = {
 
   plugins: [
     new AureliaPlugin(),
-    new ContextReplacementPlugin(/moment[\/\\]locale$/, /en|fr/),
     new ProvidePlugin({
       'Promise': 'bluebird',
       '$': 'jquery',
       'jQuery': 'jquery',
       'window.jQuery': 'jquery',
-    })
+    }),
+    new ModuleDependenciesPlugin({
+      'aurelia-testing': [ './compile-spy', './view-spy' ]
+    }),
+    new TsConfigPathsPlugin(),
+    new CheckerPlugin(),
+    new HtmlWebpackPlugin({
+      template: 'index.ejs',
+      metadata: {
+        // available in index.ejs //
+        title, server, baseUrl
+      }
+    }),
+    ...when(extractCss, new ExtractTextPlugin({
+      filename: production ? '[contenthash].css' : '[id].css',
+      allChunks: true
+    })),
+    ...when(production, new CommonsChunkPlugin({
+      name: ['common']
+    })),
+    ...when(production, new CopyWebpackPlugin([
+      { from: 'static/favicon.ico', to: 'favicon.ico' }
+    ])),
+    ...when(production, new UglifyJsPlugin({
+      sourceMap: true
+    }))
   ]
 };

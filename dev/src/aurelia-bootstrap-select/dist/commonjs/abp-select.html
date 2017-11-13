@@ -1,0 +1,46 @@
+<template>
+    <select class="selectpicker" selected-value.bind="selectedValue" selected-item.bind="selectedItem"
+            value.bind="value"
+            collection.bind="collection"
+            class.bind="class"
+            disabled.bind="util.parseBoolOrTrueOnEmpty(disabled)"
+            element.bind="element"
+            multiple.bind="util.parseBoolOrTrueOnEmpty(multiple) & optional"
+            blur.trigger="blur()"
+            placeholder.bind="placeholder">
+
+        <optgroup if.bind="util.parseBool(hasOptgroup)" repeat.for="group of getGroupedCollection()"
+                  label.bind="getMappingPropertyValueFromIndex(group, $index, 'groupLabel')"
+                  data-max-options.bind="getMappingPropertyValueFromIndex(group, $index, 'maxOptions') & optional"
+                  disabled.bind="getMappingPropertyValueFromIndex(group, $index, 'groupDisabled') & optional">
+            <option repeat.for="opt of group" model.bind="opt"
+                value.bind="util.isObject(opt) ? opt[objectKey] : opt"
+                data-content.bind="getMappingPropertyValue(opt, 'content') & optional"
+                data-icon.bind="getMappingPropertyValue(opt, 'icon') & optional"
+                data-divider.bind="getMappingPropertyValue(opt, 'divider') & optional"
+                data-subtext.bind="getMappingPropertyValue(opt, 'subtext') & optional"
+                data-tokens.bind="getMappingPropertyValue(opt, 'tokens') & optional"
+                disabled.bind="getMappingPropertyValue(opt, 'disabled') & optional"
+                class.bind="getMappingPropertyValue(opt, 'class') & optional"
+                selected.bind="(util.isObject(opt) ? isSelected(opt[objectKey]) : isSelected(opt)) & optional"
+                style.bind="getMappingPropertyValue(opt, 'style') & optional"
+                title.bind="getMappingPropertyValue(opt, 'title') & optional">
+                ${util.isObject(opt) ? getMappingPropertyValue(opt, 'option') : opt}
+            </option>
+        </optgroup>
+        <option if.bind="!util.parseBool(hasOptgroup)" repeat.for="opt of collection" model.bind="opt"
+            value.bind="util.isObject(opt) ? opt[objectKey] : opt"
+            data-content.bind="getMappingPropertyValue(opt, 'content') & optional"
+            data-icon.bind="getMappingPropertyValue(opt, 'icon') & optional"
+            data-divider.bind="getMappingPropertyValue(opt, 'divider') & optional"
+            data-subtext.bind="getMappingPropertyValue(opt, 'subtext') & optional"
+            data-tokens.bind="getMappingPropertyValue(opt, 'tokens') & optional"
+            disabled.bind="getMappingPropertyValue(opt, 'disabled') & optional"
+            class.bind="getMappingPropertyValue(opt, 'class') & optional"
+            selected.bind="(util.isObject(opt) ? isSelected(opt[objectKey]) : isSelected(opt)) & optional"
+            style.bind="getMappingPropertyValue(opt, 'style') & optional"
+            title.bind="getMappingPropertyValue(opt, 'title') & optional">
+            ${util.isObject(opt) ? getMappingPropertyValue(opt, 'option') : opt}
+        </option>
+    </select>
+</template>

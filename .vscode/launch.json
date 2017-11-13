@@ -8,8 +8,12 @@
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome",
-            "url": "http://localhost:9000",
-            "webRoot": "${workspaceRoot}"
+            "url": "http://localhost:8081",
+            "webRoot": "${workspaceRoot}/dev/src",
+            "userDataDir": "${workspaceRoot}/.chrome",
+            "sourceMapPathOverrides": {
+              "webpack:///./src/*": "${webRoot}/*"
+            }
         },
         {
             "type": "node",
