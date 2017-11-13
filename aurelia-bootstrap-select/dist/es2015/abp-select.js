@@ -355,9 +355,11 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService), _dec2 
 
       if (!this.util.parseBool(this.emptyOnNull) && !this.multiple || this.isNotEmptySelection(selection)) {
         if (selection.indexes.length > 0) {
-          this.selectedValue = selection.indexes;
+          const selectedValue = selection.indexes;
+          this.selectedValue = !this.multiple && Array.isArray(selectedValue) ? selectedValue[0] : selectedValue;
         } else {
-          this.selectedValue = this.util.isObject(this.collection[0]) ? this.collection[0][this.objectKey] : this.collection[0];
+          const selectedValue = this.util.isObject(this.collection[0]) ? this.collection[0][this.objectKey] : this.collection[0];
+          this.selectedValue = !this.multiple && Array.isArray(selectedValue) ? selectedValue[0] : selectedValue;
         }
       }
 
@@ -370,7 +372,10 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService), _dec2 
       let selection = this.findItems(this.collection, newValue || this._originalSelectedObjects, this.objectKey);
 
       if (!this.util.parseBool(this.emptyOnNull) && !this.multiple || this.isNotEmptySelection(selection)) {
-        this.selectedItem = selection.items.length > 0 ? selection.items : this.collection[0];
+        const selectedItem = selection.items.length > 0 ? selection.items : this.collection[0];
+        this.selectedItem = !this.multiple && Array.isArray(selectedItem) ? selectedItem[0] : selectedItem;
+      } else if (this.util.parseBool(this.emptyOnNull) && !this.multiple) {
+        this.selectedItem = undefined;
       }
 
       this.renderSelection(selection);

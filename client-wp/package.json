@@ -10,7 +10,7 @@
   ],
   "main": "dist/app.bundle.js",
   "repository": {
-    "url": "http://github.com/ghiscoding/aurelia-slickgrid",
+    "url": "https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins",
     "type": "git"
   },
   "author": "Ghislain B.",

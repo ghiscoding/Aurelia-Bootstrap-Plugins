@@ -424,9 +424,11 @@ var AbpSelectCustomElement = exports.AbpSelectCustomElement = (_dec = (0, _aurel
 
       if (!this.util.parseBool(this.emptyOnNull) && !this.multiple || this.isNotEmptySelection(selection)) {
         if (selection.indexes.length > 0) {
-          this.selectedValue = selection.indexes;
+          var selectedValue = selection.indexes;
+          this.selectedValue = !this.multiple && Array.isArray(selectedValue) ? selectedValue[0] : selectedValue;
         } else {
-          this.selectedValue = this.util.isObject(this.collection[0]) ? this.collection[0][this.objectKey] : this.collection[0];
+          var _selectedValue = this.util.isObject(this.collection[0]) ? this.collection[0][this.objectKey] : this.collection[0];
+          this.selectedValue = !this.multiple && Array.isArray(_selectedValue) ? _selectedValue[0] : _selectedValue;
         }
       }
 
@@ -439,7 +441,10 @@ var AbpSelectCustomElement = exports.AbpSelectCustomElement = (_dec = (0, _aurel
       var selection = this.findItems(this.collection, newValue || this._originalSelectedObjects, this.objectKey);
 
       if (!this.util.parseBool(this.emptyOnNull) && !this.multiple || this.isNotEmptySelection(selection)) {
-        this.selectedItem = selection.items.length > 0 ? selection.items : this.collection[0];
+        var selectedItem = selection.items.length > 0 ? selection.items : this.collection[0];
+        this.selectedItem = !this.multiple && Array.isArray(selectedItem) ? selectedItem[0] : selectedItem;
+      } else if (this.util.parseBool(this.emptyOnNull) && !this.multiple) {
+        this.selectedItem = undefined;
       }
 
       this.renderSelection(selection);

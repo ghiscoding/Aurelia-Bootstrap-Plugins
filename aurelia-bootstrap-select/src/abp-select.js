@@ -387,10 +387,12 @@ export class AbpSelectCustomElement {
       // get selected indexes (ids), unless user chose to emptyOnNull on first pass
       if ((!this.util.parseBool(this.emptyOnNull) && !this.multiple) || this.isNotEmptySelection(selection)) {
         if (selection.indexes.length > 0) {
-          this.selectedValue = selection.indexes;
+          const selectedValue = selection.indexes;
+          this.selectedValue = (!this.multiple && Array.isArray(selectedValue)) ? selectedValue[0] : selectedValue;
         } else {
           // value could be an object, if so we will use the objectKey (object.id by default)
-          this.selectedValue = (this.util.isObject(this.collection[0]) ? this.collection[0][this.objectKey] : this.collection[0]);
+          const selectedValue = (this.util.isObject(this.collection[0]) ? this.collection[0][this.objectKey] : this.collection[0]);
+          this.selectedValue = (!this.multiple && Array.isArray(selectedValue)) ? selectedValue[0] : selectedValue;
         }
       }
 
@@ -410,7 +412,11 @@ export class AbpSelectCustomElement {
 
       // get selected items (string/object), unless user chose to emptyOnNull on first pass
       if ((!this.util.parseBool(this.emptyOnNull) && !this.multiple) || this.isNotEmptySelection(selection)) {
-        this.selectedItem = (selection.items.length > 0) ? selection.items : this.collection[0];
+        const selectedItem = (selection.items.length > 0) ? selection.items : this.collection[0];
+        this.selectedItem = (!this.multiple && Array.isArray(selectedItem)) ? selectedItem[0] : selectedItem;
+      } else if (this.util.parseBool(this.emptyOnNull) && !this.multiple) {
+        // if user has defined emptyOnNull and is not set to multiple, we should set the item to undefined
+        this.selectedItem = undefined;
       }
 
       this.renderSelection(selection);
