@@ -1,4 +1,4 @@
-var _dec, _dec2, _dec3, _dec4, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, _descriptor17, _descriptor18, _descriptor19, _descriptor20, _descriptor21, _descriptor22;
+var _dec, _dec2, _dec3, _dec4, _dec5, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, _descriptor17, _descriptor18, _descriptor19, _descriptor20, _descriptor21, _descriptor22;
 
 function _initDefineProp(target, property, descriptor, context) {
   if (!descriptor) return;
@@ -49,18 +49,18 @@ import $ from 'jquery';
 import 'bootstrap-select';
 import { globalExtraOptions, globalPickerOptions } from './picker-global-options';
 
-export let AbpSelectCustomElement = (_dec = inject(Element, UtilService), _dec2 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec3 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec4 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = (_class2 = class AbpSelectCustomElement {
+export let AbpSelectCustomElement = (_dec = inject(Element, UtilService), _dec2 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec3 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec4 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec5 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = (_class2 = class AbpSelectCustomElement {
 
   constructor(elm, utilService) {
-    _initDefineProp(this, 'element', _descriptor, this);
+    _initDefineProp(this, 'collection', _descriptor, this);
 
-    _initDefineProp(this, 'selectedItem', _descriptor2, this);
+    _initDefineProp(this, 'element', _descriptor2, this);
 
-    _initDefineProp(this, 'selectedValue', _descriptor3, this);
+    _initDefineProp(this, 'selectedItem', _descriptor3, this);
 
-    _initDefineProp(this, 'class', _descriptor4, this);
+    _initDefineProp(this, 'selectedValue', _descriptor4, this);
 
-    _initDefineProp(this, 'collection', _descriptor5, this);
+    _initDefineProp(this, 'class', _descriptor5, this);
 
     _initDefineProp(this, 'dataMappingStructure', _descriptor6, this);
 
@@ -103,7 +103,7 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService), _dec2 
   }
 
   attached() {
-    this.domElm = $(this.elm).find('.selectpicker');
+    this.domElm = $(this.pickerRef);
 
     let events = this.applyExposeEvents();
     let methods = this.exposeMethods();
@@ -250,6 +250,12 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService), _dec2 
     };
 
     return methods;
+  }
+
+  collectionChanged(newCollection, oldCollection) {
+    setTimeout(() => {
+      this.domElm.selectpicker('render').selectpicker('refresh');
+    });
   }
 
   detached() {
@@ -408,23 +414,23 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService), _dec2 
       this.selectedItem = selection.items;
     });
   }
-}, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'element', [_dec2], {
-  enumerable: true,
-  initializer: null
-}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'selectedItem', [_dec3], {
-  enumerable: true,
-  initializer: null
-}), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'selectedValue', [_dec4], {
-  enumerable: true,
-  initializer: null
-}), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'class', [bindable], {
-  enumerable: true,
-  initializer: null
-}), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'collection', [bindable], {
+}, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'collection', [_dec2], {
   enumerable: true,
   initializer: function () {
     return [];
   }
+}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'element', [_dec3], {
+  enumerable: true,
+  initializer: null
+}), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'selectedItem', [_dec4], {
+  enumerable: true,
+  initializer: null
+}), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'selectedValue', [_dec5], {
+  enumerable: true,
+  initializer: null
+}), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'class', [bindable], {
+  enumerable: true,
+  initializer: null
 }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'dataMappingStructure', [bindable], {
   enumerable: true,
   initializer: null

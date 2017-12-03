@@ -105,16 +105,20 @@
             </div>
             <div class="">
                 <button class="btn btn-sm btn-primary"
-                click.delegate="preSelectFirstOptions()">
-                Change selection by item
+                  click.delegate="changeSelectCollection()">
+                  Change collection
                 </button>
                 <button class="btn btn-sm btn-primary"
-                click.delegate="preSelectSecondOptions()">
-                Change selection by value
+                  click.delegate="preSelectFirstOptions()">
+                  Change selection by item
+                </button>
+                <button class="btn btn-sm btn-primary"
+                  click.delegate="preSelectSecondOptions()">
+                  Change selection by value
                 </button>
                 <button class="btn btn-sm btn-warning"
-                click.delegate="toggleOptgroupBreads()">
-                Toggle disabled 'Breads' optgroup
+                  click.delegate="toggleOptgroupBreads()">
+                  Toggle disabled 'Breads' optgroup
                 </button>
             </div>
         </div>

@@ -13,6 +13,7 @@ export class SelectEdit {
   @bindable selectStyledCondiment;
   @bindable selectPicnic;
   @bindable tag;
+  @bindable firstPicker;
   task: Task = { dueDate: undefined};
   activeDate: Date;
   dueDate: string = '30.06.2017';
@@ -47,7 +48,7 @@ export class SelectEdit {
   ];
   allCondiments = [
     { id: 1, option: 'Ketchup', company: 'Heinz' },
-    { id: 2, option: 'Mustard', company: 'French\'s', divider: true },
+    { id: 2, option: 'Mustard', company: 'French\'s' },
     { id: 3, option: 'Relish', company: 'Sweet', style: 'background: #5cb85c; color: #fff;', title: 'Alternate Title' },
     { id: 4, option: 'Mayonnaise', company: 'Miracle Whip', icon: 'glyphicon-heart' }
   ];
@@ -78,6 +79,35 @@ export class SelectEdit {
     // this.condimentValue = 3;
   }
 
+  changeSelectCollection() {
+    // change collection of a select
+    this.allCampingStuff = ['Heater', 'Marshmallow'];
+    
+    this.allSelectionWithGroups = [
+      { id: 1, option: 'Cheedar', company: 'Kraft', group: 'Cheese' },
+      { id: 12, option: 'Steam', group: 'Breads' },
+      { id: 11, option: 'Plain', disabled: false, group: 'Breads' },
+      { id: 4, option: 'Cream Cheese', company: 'Philadelphia', group: 'Condiments' },
+      { id: 13, option: 'Grilled', group: 'Breads', disabled: true }
+    ];
+    
+    this.allCondiments = [
+      { id: 1, option: 'Cheedar', company: 'Krafty' },
+      { id: 2, option: 'Cream Cheese', company: 'Philadelphia' }
+    ];
+    this.allStyledCondiments = [
+      { id: 1, option: 'Cheedar', company: 'Kraft', content: '<span class="label label-warning">Cheedar</span>' },
+      { id: 2, option: 'Cream Cheese', company: 'Philadelphia', content: '<span class="label label-info">Cream Cheese</span>' }
+    ];
+    
+  }
+
+  firstPickerChanged() {
+    this.firstPicker.events.onChange = (e) => console.log('onChange');
+    this.firstPicker.events.onUpdate = (e) => console.log('onUpdate');
+    this.firstPicker.events.onRefreshed = (e) => console.log('onRefreshed');
+  }
+
   pickerChanged() {
     this.picker.events.onChange = (e) => console.log('onChange');
     this.picker.events.onUpdate = (e) => console.log('onUpdate');
@@ -88,41 +118,9 @@ export class SelectEdit {
     this.selectPicnic.events.onChanged = (e) => console.log('onChanged');
   }
 
-  tagChanged() {
-    this.tag.events.onBeforeItemAdd = (e) => console.log('onBeforeItemAdd');
-    this.tag.events.onBeforeItemRemove = (e) => console.log('onBeforeItemRemove');
-    this.tag.events.onItemAdded = (e) => console.log('onItemAdded');
-    this.tag.events.onItemAddedOnInit = (e) => console.log('onItemAddedOnInit');
-    this.tag.events.onItemRemoved = (e) => console.log('onItemRemoved');
-  }
-
-  addTag() {
-    this.tag.methods.add('Tag1');
-  }
-
-  changePostDateValue(dateStr) {
-    this.post.dateEntered = dateStr;
-  }
-
-  changePostDateObject(dateStr) {
-    this.myDateObject = new Date(dateStr);
-  }
-
   toggleOptgroupBreads() {
     this.isOptgroupBreadDisabled = !this.isOptgroupBreadDisabled;
     this.selectPicnic.methods.disableOptgroupByLabel('Breads', this.isOptgroupBreadDisabled);
-  }
-
-  removeAllTag() {
-    setTimeout(() => this.tag.methods.removeAll(), 1000);
-  }
-
-  removeTag(tagName) {
-    this.tag.methods.remove(tagName);
-  }
-
-  replaceAllTags() {
-    this.post.categories = ['Erlang', 'Python'];
   }
 
   preSelectFirstOptions() {

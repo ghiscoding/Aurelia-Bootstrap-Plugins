@@ -7,11 +7,11 @@ import {globalExtraOptions, globalPickerOptions} from './picker-global-options';
 
 @inject(Element, UtilService)
 export class AbpSelectCustomElement {
+  @bindable({defaultBindingMode: bindingMode.twoWay}) collection = [];
   @bindable({defaultBindingMode: bindingMode.twoWay}) element;
   @bindable({defaultBindingMode: bindingMode.twoWay}) selectedItem;
   @bindable({defaultBindingMode: bindingMode.twoWay}) selectedValue;
   @bindable class;
-  @bindable collection = [];
   @bindable dataMappingStructure;
   @bindable disabled = false;
   @bindable emptyOnNull = false;
@@ -35,6 +35,7 @@ export class AbpSelectCustomElement {
   // variables
   _originalSelectedIndexes;
   _originalSelectedObjects;
+  pickerRef;
 
   constructor(elm, utilService) {
     this.elm = elm;
@@ -46,7 +47,7 @@ export class AbpSelectCustomElement {
 
   attached() {
     // reference to the DOM element
-    this.domElm = $(this.elm).find('.selectpicker');
+    this.domElm = $(this.pickerRef);
 
     // expose events & methods
     let events = this.applyExposeEvents();
@@ -214,6 +215,14 @@ export class AbpSelectCustomElement {
     };
 
     return methods;
+  }
+
+  collectionChanged(newCollection, oldCollection) {
+    setTimeout(() => {
+      this.domElm
+        .selectpicker('render')
+        .selectpicker('refresh');
+    });
   }
 
   detached() {

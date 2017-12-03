@@ -5,7 +5,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.OptionalBindingBehavior = exports.AbpSelectCustomElement = undefined;
 
-var _dec, _dec2, _dec3, _dec4, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, _descriptor17, _descriptor18, _descriptor19, _descriptor20, _descriptor21, _descriptor22;
+var _dec, _dec2, _dec3, _dec4, _dec5, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, _descriptor17, _descriptor18, _descriptor19, _descriptor20, _descriptor21, _descriptor22;
 
 var _aureliaFramework = require('aurelia-framework');
 
@@ -66,21 +66,21 @@ function _initializerWarningHelper(descriptor, context) {
   throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
 }
 
-var AbpSelectCustomElement = exports.AbpSelectCustomElement = (_dec = (0, _aureliaFramework.inject)(Element, _utilService.UtilService), _dec2 = (0, _aureliaFramework.bindable)({ defaultBindingMode: _aureliaFramework.bindingMode.twoWay }), _dec3 = (0, _aureliaFramework.bindable)({ defaultBindingMode: _aureliaFramework.bindingMode.twoWay }), _dec4 = (0, _aureliaFramework.bindable)({ defaultBindingMode: _aureliaFramework.bindingMode.twoWay }), _dec(_class = (_class2 = function () {
+var AbpSelectCustomElement = exports.AbpSelectCustomElement = (_dec = (0, _aureliaFramework.inject)(Element, _utilService.UtilService), _dec2 = (0, _aureliaFramework.bindable)({ defaultBindingMode: _aureliaFramework.bindingMode.twoWay }), _dec3 = (0, _aureliaFramework.bindable)({ defaultBindingMode: _aureliaFramework.bindingMode.twoWay }), _dec4 = (0, _aureliaFramework.bindable)({ defaultBindingMode: _aureliaFramework.bindingMode.twoWay }), _dec5 = (0, _aureliaFramework.bindable)({ defaultBindingMode: _aureliaFramework.bindingMode.twoWay }), _dec(_class = (_class2 = function () {
   function AbpSelectCustomElement(elm, utilService) {
     var _this = this;
 
     _classCallCheck(this, AbpSelectCustomElement);
 
-    _initDefineProp(this, 'element', _descriptor, this);
+    _initDefineProp(this, 'collection', _descriptor, this);
 
-    _initDefineProp(this, 'selectedItem', _descriptor2, this);
+    _initDefineProp(this, 'element', _descriptor2, this);
 
-    _initDefineProp(this, 'selectedValue', _descriptor3, this);
+    _initDefineProp(this, 'selectedItem', _descriptor3, this);
 
-    _initDefineProp(this, 'class', _descriptor4, this);
+    _initDefineProp(this, 'selectedValue', _descriptor4, this);
 
-    _initDefineProp(this, 'collection', _descriptor5, this);
+    _initDefineProp(this, 'class', _descriptor5, this);
 
     _initDefineProp(this, 'dataMappingStructure', _descriptor6, this);
 
@@ -125,7 +125,7 @@ var AbpSelectCustomElement = exports.AbpSelectCustomElement = (_dec = (0, _aurel
   }
 
   AbpSelectCustomElement.prototype.attached = function attached() {
-    this.domElm = (0, _jquery2.default)(this.elm).find('.selectpicker');
+    this.domElm = (0, _jquery2.default)(this.pickerRef);
 
     var events = this.applyExposeEvents();
     var methods = this.exposeMethods();
@@ -298,6 +298,14 @@ var AbpSelectCustomElement = exports.AbpSelectCustomElement = (_dec = (0, _aurel
     return methods;
   };
 
+  AbpSelectCustomElement.prototype.collectionChanged = function collectionChanged(newCollection, oldCollection) {
+    var _this4 = this;
+
+    setTimeout(function () {
+      _this4.domElm.selectpicker('render').selectpicker('refresh');
+    });
+  };
+
   AbpSelectCustomElement.prototype.detached = function detached() {
     this.domElm.selectpicker('destroy');
   };
@@ -337,7 +345,7 @@ var AbpSelectCustomElement = exports.AbpSelectCustomElement = (_dec = (0, _aurel
   };
 
   AbpSelectCustomElement.prototype.findItems = function findItems(collection, newValue, objectKey) {
-    var _this4 = this;
+    var _this5 = this;
 
     var foundItems = [];
     var searchingItems = [];
@@ -367,12 +375,12 @@ var AbpSelectCustomElement = exports.AbpSelectCustomElement = (_dec = (0, _aurel
 
       var searchItem = _ref;
 
-      var searchFilter = _this4.util.isObject(searchItem) ? searchItem[objectKey] : searchItem;
+      var searchFilter = _this5.util.isObject(searchItem) ? searchItem[objectKey] : searchItem;
       var foundItem = collection.find(function (item) {
-        return _this4.util.isObject(item) ? item[objectKey] == searchFilter : item == searchFilter;
+        return _this5.util.isObject(item) ? item[objectKey] == searchFilter : item == searchFilter;
       });
       if (foundItem) {
-        selection.indexes.push(_this4.util.isObject(foundItem) ? foundItem[objectKey] : foundItem);
+        selection.indexes.push(_this5.util.isObject(foundItem) ? foundItem[objectKey] : foundItem);
         selection.items.push(foundItem);
         foundItems.push(foundItem);
       }
@@ -452,54 +460,54 @@ var AbpSelectCustomElement = exports.AbpSelectCustomElement = (_dec = (0, _aurel
   };
 
   AbpSelectCustomElement.prototype.watchOnLoadedToRenderPreSelection = function watchOnLoadedToRenderPreSelection() {
-    var _this5 = this;
+    var _this6 = this;
 
     this.domElm.on('loaded.bs.select', function (e) {
-      var newValue = _this5._originalSelectedIndexes || _this5._originalSelectedObjects;
-      var selection = _this5.findItems(_this5.collection, newValue, _this5.objectKey);
+      var newValue = _this6._originalSelectedIndexes || _this6._originalSelectedObjects;
+      var selection = _this6.findItems(_this6.collection, newValue, _this6.objectKey);
       if (selection.indexes) {
-        _this5.selectedValue = selection.indexes;
+        _this6.selectedValue = selection.indexes;
       } else {
-        _this5.selectedValue = _this5.util.isObject(_this5.collection[0]) ? _this5.collection[0][_this5.objectKey] : _this5.collection[0];
+        _this6.selectedValue = _this6.util.isObject(_this6.collection[0]) ? _this6.collection[0][_this6.objectKey] : _this6.collection[0];
       }
-      _this5.selectedItem = selection.items ? selection.items : _this5.collection[0];
-      _this5.renderSelection(selection);
+      _this6.selectedItem = selection.items ? selection.items : _this6.collection[0];
+      _this6.renderSelection(selection);
     });
   };
 
   AbpSelectCustomElement.prototype.watchOnChangedToUpdateValueAndItemObjects = function watchOnChangedToUpdateValueAndItemObjects() {
-    var _this6 = this;
+    var _this7 = this;
 
     this.domElm.on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
-      _this6.selectedValue = _this6.domElm.selectpicker('val');
-      var selection = _this6.findItems(_this6.collection, _this6.selectedValue, _this6.objectKey);
+      _this7.selectedValue = _this7.domElm.selectpicker('val');
+      var selection = _this7.findItems(_this7.collection, _this7.selectedValue, _this7.objectKey);
       if (selection.indexes) {
-        _this6.domElm.selectpicker('val', selection.indexes);
+        _this7.domElm.selectpicker('val', selection.indexes);
       }
 
-      _this6.selectedValue = selection.indexes;
-      _this6.selectedItem = selection.items;
+      _this7.selectedValue = selection.indexes;
+      _this7.selectedItem = selection.items;
     });
   };
 
   return AbpSelectCustomElement;
-}(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'element', [_dec2], {
-  enumerable: true,
-  initializer: null
-}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'selectedItem', [_dec3], {
-  enumerable: true,
-  initializer: null
-}), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'selectedValue', [_dec4], {
-  enumerable: true,
-  initializer: null
-}), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'class', [_aureliaFramework.bindable], {
-  enumerable: true,
-  initializer: null
-}), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'collection', [_aureliaFramework.bindable], {
+}(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'collection', [_dec2], {
   enumerable: true,
   initializer: function initializer() {
     return [];
   }
+}), _descriptor2 = _applyDecoratedDescriptor(_class2.prototype, 'element', [_dec3], {
+  enumerable: true,
+  initializer: null
+}), _descriptor3 = _applyDecoratedDescriptor(_class2.prototype, 'selectedItem', [_dec4], {
+  enumerable: true,
+  initializer: null
+}), _descriptor4 = _applyDecoratedDescriptor(_class2.prototype, 'selectedValue', [_dec5], {
+  enumerable: true,
+  initializer: null
+}), _descriptor5 = _applyDecoratedDescriptor(_class2.prototype, 'class', [_aureliaFramework.bindable], {
+  enumerable: true,
+  initializer: null
 }), _descriptor6 = _applyDecoratedDescriptor(_class2.prototype, 'dataMappingStructure', [_aureliaFramework.bindable], {
   enumerable: true,
   initializer: null

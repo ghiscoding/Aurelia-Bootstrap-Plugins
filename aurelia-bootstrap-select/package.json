@@ -1,6 +1,6 @@
 {
   "name": "aurelia-bootstrap-select",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "An Aurelia Custom Element for the 3rd party addon [Bootstrap-Select]",
   "keywords": [
     "aurelia",
@@ -34,7 +34,7 @@
     "randomatic": "^1.1.6"
   },
   "devDependencies": {
-    "aurelia-tools": "^0.2.4",
+    "aurelia-tools": "^1.0.0",
     "babel": "^6.5.2",
     "babel-eslint": "^6.1.2",
     "babel-plugin-syntax-flow": "^6.8.0",

@@ -252,9 +252,9 @@ asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
 
-aurelia-tools@^0.2.4:
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/aurelia-tools/-/aurelia-tools-0.2.4.tgz#15c992f3049e95d98848043bc8b583b3db1fba54"
+aurelia-tools@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/aurelia-tools/-/aurelia-tools-1.0.0.tgz#c7d82c939ee4c46026ac2a05a99fc446732a31bc"
   dependencies:
     breeze-dag "^0.1.0"
     through2 "^2.0.0"

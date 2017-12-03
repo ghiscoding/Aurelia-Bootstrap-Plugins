@@ -12,14 +12,14 @@
     <form class="form-horizontal" validate.bind="validation">      
       <div class="col-md-12">
         <div class="">
+            <button class="btn btn-sm btn-primary" click.delegate="changeSelectCollection()">
+              Change collection
+            </button>
             <button class="btn btn-sm btn-primary" click.delegate="preSelectFirstOptions()">
               Change all Select by item
             </button>
             <button class="btn btn-sm btn-primary" click.delegate="preSelectSecondOptions()">
               Change all Select by value
-            </button>
-            <button class="btn btn-sm btn-warning" click.delegate="toggleOptgroupBreads()">
-              Toggle disabled 'Breads' optgroup
             </button>
           </div>
 
@@ -27,8 +27,9 @@
           <label class="control-label">Basic - String Collection</label>
           <div>Value: ${camping}
             <br /> Item: ${campingValue}</div>
+            <br /> Collection: ${allCampingStuff | stringify}
           <div>
-            <abp-select collection.bind="allCampingStuff" selected-value.bind="camping" selected-item.bind="campingValue"></abp-select>
+            <abp-select element.bind="firstPicker" collection.bind="allCampingStuff" selected-value.bind="camping" selected-item.bind="campingValue"></abp-select>
           </div>
 
           <br/>

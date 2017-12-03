@@ -1,5 +1,5 @@
 <template>
-    <select class="selectpicker" selected-value.bind="selectedValue" selected-item.bind="selectedItem"
+    <select element.ref="pickerRef" if.bind="collection" class="selectpicker" selected-value.bind="selectedValue" selected-item.bind="selectedItem"
             value.bind="value"
             collection.bind="collection"
             class.bind="class"
@@ -31,6 +31,7 @@
         <option if.bind="!util.parseBool(hasOptgroup)" repeat.for="opt of collection" model.bind="opt"
             value.bind="util.isObject(opt) ? opt[objectKey] : opt"
             data-content.bind="getMappingPropertyValue(opt, 'content') & optional"
+            content.bind="getMappingPropertyValue(opt, 'content') & optional"
             data-icon.bind="getMappingPropertyValue(opt, 'icon') & optional"
             data-divider.bind="getMappingPropertyValue(opt, 'divider') & optional"
             data-subtext.bind="getMappingPropertyValue(opt, 'subtext') & optional"
