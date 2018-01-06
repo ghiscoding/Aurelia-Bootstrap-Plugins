@@ -50,7 +50,30 @@ selected-item   // output --> { id: 2, option: 'Mustard', company: 'French\'s' }
 selected-value  // output --> 2
 ```
 
-<a name="options"></a>
+#### Use it in the View
+```html
+<div>
+  Value: ${condimentValue}
+  Item: ${condimentItem | stringify}
+</div>
+```
+#### Use it in the ViewModel with the `changed` bindable event
+```javascript
+export class Example {
+  @bindable condimentItem;
+  @bindable condimentValue;
+
+  condimentItemChanged(newItem) {
+    // output --> { id: 2, option: 'Mustard', company: 'French\'s' }
+    console.log('Item changed:', newItem);
+  }
+
+  condimentValueChanged(newValue) {
+    // output --> 2
+    console.log('Value changed:', newValue)
+  }
+}
+```
 
 ### Available Options
 Every options of `Bootstrap Select` can be called through `picker-options.bind=""`. For the complete list, please visit the official site [Bootstrap Select - Options](http://silviomoreto.github.io/bootstrap-select/options/).
