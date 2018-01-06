@@ -14,6 +14,8 @@ export class AbpDatetimePickerCustomElement {
   // plugin own variables
   @bindable iconBase = globalExtraOptions.iconBase;
   @bindable withDateIcon = globalExtraOptions.withDateIcon;
+  @bindable bootstrapVersion = globalExtraOptions.bootstrapVersion;
+  @bindable buttonClass = globalExtraOptions.buttonClass;
 
   // picker options
   @bindable options = {};
@@ -309,5 +311,9 @@ export class AbpDatetimePickerCustomElement {
 
   parseBool(value) {
     return (/^(true|1)$/i).test(value);
+  }
+
+  showCalendar() {
+    this.domElm.data('DateTimePicker').show();
   }
 }

@@ -65,7 +65,7 @@ define(['exports', 'aurelia-framework', 'moment', 'jquery', './picker-global-opt
     throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
   }
 
-  var _dec, _dec2, _dec3, _dec4, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12;
+  var _dec, _dec2, _dec3, _dec4, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14;
 
   var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_dec = (0, _aureliaFramework.inject)(Element), _dec2 = (0, _aureliaFramework.bindable)({ defaultBindingMode: _aureliaFramework.bindingMode.twoWay }), _dec3 = (0, _aureliaFramework.bindable)({ defaultBindingMode: _aureliaFramework.bindingMode.twoWay }), _dec4 = (0, _aureliaFramework.bindable)({ defaultBindingMode: _aureliaFramework.bindingMode.twoWay }), _dec(_class = (_class2 = function () {
     function AbpDatetimePickerCustomElement(elm) {
@@ -85,17 +85,21 @@ define(['exports', 'aurelia-framework', 'moment', 'jquery', './picker-global-opt
 
       _initDefineProp(this, 'withDateIcon', _descriptor6, this);
 
-      _initDefineProp(this, 'options', _descriptor7, this);
+      _initDefineProp(this, 'bootstrapVersion', _descriptor7, this);
 
-      _initDefineProp(this, 'onHide', _descriptor8, this);
+      _initDefineProp(this, 'buttonClass', _descriptor8, this);
 
-      _initDefineProp(this, 'onShow', _descriptor9, this);
+      _initDefineProp(this, 'options', _descriptor9, this);
 
-      _initDefineProp(this, 'onChange', _descriptor10, this);
+      _initDefineProp(this, 'onHide', _descriptor10, this);
 
-      _initDefineProp(this, 'onError', _descriptor11, this);
+      _initDefineProp(this, 'onShow', _descriptor11, this);
 
-      _initDefineProp(this, 'onUpdate', _descriptor12, this);
+      _initDefineProp(this, 'onChange', _descriptor12, this);
+
+      _initDefineProp(this, 'onError', _descriptor13, this);
+
+      _initDefineProp(this, 'onUpdate', _descriptor14, this);
 
       this._events = {};
       this._methods = {};
@@ -314,6 +318,10 @@ define(['exports', 'aurelia-framework', 'moment', 'jquery', './picker-global-opt
       );
     };
 
+    AbpDatetimePickerCustomElement.prototype.showCalendar = function showCalendar() {
+      this.domElm.data('DateTimePicker').show();
+    };
+
     return AbpDatetimePickerCustomElement;
   }(), (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'element', [_dec2], {
     enumerable: true,
@@ -339,24 +347,34 @@ define(['exports', 'aurelia-framework', 'moment', 'jquery', './picker-global-opt
     initializer: function initializer() {
       return _pickerGlobalOptions.globalExtraOptions.withDateIcon;
     }
-  }), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, 'options', [_aureliaFramework.bindable], {
+  }), _descriptor7 = _applyDecoratedDescriptor(_class2.prototype, 'bootstrapVersion', [_aureliaFramework.bindable], {
+    enumerable: true,
+    initializer: function initializer() {
+      return _pickerGlobalOptions.globalExtraOptions.bootstrapVersion;
+    }
+  }), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, 'buttonClass', [_aureliaFramework.bindable], {
+    enumerable: true,
+    initializer: function initializer() {
+      return _pickerGlobalOptions.globalExtraOptions.buttonClass;
+    }
+  }), _descriptor9 = _applyDecoratedDescriptor(_class2.prototype, 'options', [_aureliaFramework.bindable], {
     enumerable: true,
     initializer: function initializer() {
       return {};
     }
-  }), _descriptor8 = _applyDecoratedDescriptor(_class2.prototype, 'onHide', [_aureliaFramework.bindable], {
+  }), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, 'onHide', [_aureliaFramework.bindable], {
     enumerable: true,
     initializer: null
-  }), _descriptor9 = _applyDecoratedDescriptor(_class2.prototype, 'onShow', [_aureliaFramework.bindable], {
+  }), _descriptor11 = _applyDecoratedDescriptor(_class2.prototype, 'onShow', [_aureliaFramework.bindable], {
     enumerable: true,
     initializer: null
-  }), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, 'onChange', [_aureliaFramework.bindable], {
+  }), _descriptor12 = _applyDecoratedDescriptor(_class2.prototype, 'onChange', [_aureliaFramework.bindable], {
     enumerable: true,
     initializer: null
-  }), _descriptor11 = _applyDecoratedDescriptor(_class2.prototype, 'onError', [_aureliaFramework.bindable], {
+  }), _descriptor13 = _applyDecoratedDescriptor(_class2.prototype, 'onError', [_aureliaFramework.bindable], {
     enumerable: true,
     initializer: null
-  }), _descriptor12 = _applyDecoratedDescriptor(_class2.prototype, 'onUpdate', [_aureliaFramework.bindable], {
+  }), _descriptor14 = _applyDecoratedDescriptor(_class2.prototype, 'onUpdate', [_aureliaFramework.bindable], {
     enumerable: true,
     initializer: null
   })), _class2)) || _class);

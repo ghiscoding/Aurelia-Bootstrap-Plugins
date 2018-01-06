@@ -8,6 +8,8 @@ System.register([], function (_export, _context) {
     setters: [],
     execute: function () {
       _export('globalExtraOptions', globalExtraOptions = {
+        buttonClass: 'btn btn-outline-secondary',
+        bootstrapVersion: 3,
         iconBase: 'glyphicon',
         withDateIcon: true
       });

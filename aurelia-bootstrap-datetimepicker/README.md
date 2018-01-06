@@ -80,7 +80,7 @@ _from the View_
 ```
 
 **NOTE:**
-The extra attributes can also be defined globally through `main.js` via a `config.extra` configuration, see [Global Options](#globaloption)
+The extra attributes can also be defined globally through `main.js` via a `config.extra` configuration, see [Global Options](#globaloption). To know which Global Options are available take a look at the [Global Options file](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/blob/master/aurelia-bootstrap-datetimepicker/src/picker-global-options.js)
 
 <a name="methods"></a>
 
@@ -314,6 +314,8 @@ export function configure(aurelia) {
   aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName('app')));
 }
 ```
+
+To know which Global Options are available take a look at the [Global Options file](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/blob/master/aurelia-bootstrap-datetimepicker/src/picker-global-options.js)
 
 ## License
 [MIT License](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/blob/master/LICENSE)
