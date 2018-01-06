@@ -27,7 +27,7 @@ A quick example of the code in action. Note that the value is available under th
 Every options of `Bootstrap Tags Input` can be called through `options.bind=""`. For the complete list, please visit the official site [Bootstrap Tags Input - Options](http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/#options).
 
 **NOTE:**
-The picker options can also be defined globally through `main.js` via a `config.options` configuration, see [Global Options](#globaloption)
+The picker options can also be defined globally through `main.js` via a `config.options` configuration, see [Global Options](#globaloption). To know which Global Options are available take a look at the [Global Options file](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/blob/master/aurelia-bootstrap-tagsinput/src/picker-global-options.js)
 
 Examples
 
@@ -117,6 +117,8 @@ Example
 ```javascript
 .plugin('aurelia-bootstrap-tagsinput', config => { config.extra.bootstrapVersion = 4; });
 ```
+
+To know which Global Options are available take a look at the [Global Options file](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/blob/master/aurelia-bootstrap-tagsinput/src/picker-global-options.js)
 
 ## Installation
 You can run the examples or build your own by doing the following.

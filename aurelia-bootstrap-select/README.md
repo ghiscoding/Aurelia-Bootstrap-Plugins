@@ -79,7 +79,7 @@ export class Example {
 Every options of `Bootstrap Select` can be called through `picker-options.bind=""`. For the complete list, please visit the official site [Bootstrap Select - Options](http://silviomoreto.github.io/bootstrap-select/options/).
 
 **NOTE:**
-The picker options can also be defined globally through `main.js` via a `config.options` configuration, see [Global Options](#globaloption)
+The picker options can also be defined globally through `main.js` via a `config.options` configuration, see [Global Options](#globaloption). To know which Global Options are available take a look at the [Global Options file](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/blob/master/aurelia-bootstrap-select/src/picker-global-options.js)
 
 Examples
 
@@ -450,6 +450,7 @@ export function configure(aurelia) {
   aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName('app')));
 }
 ```
+To know which Global Options are available take a look at the [Global Options file](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/blob/master/aurelia-bootstrap-select/src/picker-global-options.js)
 
 ## License
 [MIT License](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/blob/master/LICENSE)
