@@ -265,13 +265,13 @@ An extra custom CSS file was added to address the changes (until `Bootstrap-Date
 ```javascript
 import 'aurelia-bootstrap-datetimepicker/dist/amd/bootstrap-datetimepicker-bs4.css';
 
-// in the main.ts file change the bootstrapVersion
-    aurelia.use.plugin(PLATFORM.moduleName('aurelia-bootstrap-datetimepicker'), config => {
-      config.extra.bootstrapVersion = 4;
+// in the main.js file change the bootstrapVersion
+aurelia.use.plugin('aurelia-bootstrap-datetimepicker', config => {
+  config.extra.bootstrapVersion = 4;
 
-      // you can also change the button class, default is shown below
-      config.extra.buttonClass = 'btn btn-outline-secondary';
-    });
+  // you can also change the button class, default is shown below
+  config.extra.buttonClass = 'btn btn-outline-secondary';
+});
 ```
 
 **Note on `aurelia-webpack-plugin 2.0`**
