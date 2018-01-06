@@ -264,6 +264,14 @@ export function configure(aurelia) {
 An extra custom CSS file was added to address the changes (until `Bootstrap-Datetimepicker` comes out with version that supports it), you can import this custom CSS file via:
 ```javascript
 import 'aurelia-bootstrap-datetimepicker/dist/amd/bootstrap-datetimepicker-bs4.css';
+
+// in the main.ts file change the bootstrapVersion
+    aurelia.use.plugin(PLATFORM.moduleName('aurelia-bootstrap-datetimepicker'), config => {
+      config.extra.bootstrapVersion = 4;
+
+      // you can also change the button class, default is shown below
+      config.extra.buttonClass = 'btn btn-outline-secondary';
+    });
 ```
 
 **Note on `aurelia-webpack-plugin 2.0`**
@@ -291,6 +299,12 @@ export function configure(aurelia) {
 
       // or any picker options, with config.options
       config.options.allowInputToggle = true;
+
+      // if you use Bootstrap 4 Beta 3
+      config.extra.bootstrapVersion = 4;
+
+      // you can also change the Bootstrap 4 button class, default is shown below
+      config.extra.buttonClass = 'btn btn-outline-secondary';
     });
 
   aurelia.start().then(() => aurelia.setRoot());
