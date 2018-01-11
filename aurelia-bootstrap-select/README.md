@@ -75,6 +75,48 @@ export class Example {
 }
 ```
 
+#### How to use it with a Complex Object?
+As per @Mobe91 comment, here's an example on how to use it with a complex object.
+##### View
+```html
+<abp-select element.bind="mypicker"
+   selected-item.bind="condimentSelection.selectedCondimentItem"
+   selected-value.bind="condimentSelection.selectedCondimentValue"
+   collection.bind="allCampingStuff">
+</abp-select>
+```
+
+##### ViewModel
+```javascript
+@autoinject
+export class MyController {
+   bindingEngine: BindingEngine;
+   allCampingStuff = [...]; // some collection
+   condimentSelection = {
+      selectedCondimentItem: null,
+      selectedCondimentValue: null
+   };
+   selectedCondimentItemSubscription: Subscription;
+
+   constructor(bindingEngine: BindingEngine) {
+    this.bindingEngine = bindingEngine;
+   }
+
+   attached() {
+    let observer = this.bindingEngine.expressionObserver(this.condimentSelection, 'selectedCondimentItem');
+    this.selectedCondimentItemSubscription= observer.subscribe(newValue => this.selectedCondimentItemChanged(newValue));
+   }
+
+   detached() {
+    this.businessesSubscription.dispose();
+   }
+
+   selectedCondimentItemChanged(newValue) {
+     // handle value change
+   }
+}
+```
+
 ### Available Options
 Every options of `Bootstrap Select` can be called through `picker-options.bind=""`. For the complete list, please visit the official site [Bootstrap Select - Options](http://silviomoreto.github.io/bootstrap-select/options/).
 
