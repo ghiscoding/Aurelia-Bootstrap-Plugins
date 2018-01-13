@@ -1,0 +1,41 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Build Demo (doc folder)",
+        "command": "yarn",
+        "type": "shell",
+        "args": [
+          "build:doc"
+        ],
+        "problemMatcher": []
+      },
+      {
+        "label": "Build ABP-DateTimePicker Plugin",
+        "command": "yarn",
+        "type": "shell",
+        "args": [
+          "build:abp-datetime"
+        ],
+        "problemMatcher": []
+      },
+      {
+        "label": "Build ABP-Select Plugin",
+        "command": "yarn",
+        "type": "shell",
+        "args": [
+          "build:abp-select"
+        ],
+        "problemMatcher": []
+      },
+      {
+        "label": "Build ABP-Tagsinput Plugin",
+        "command": "yarn",
+        "type": "shell",
+        "args": [
+          "build:abp-tagsinput"
+        ],
+        "problemMatcher": []
+      }
+    ]
+  }
