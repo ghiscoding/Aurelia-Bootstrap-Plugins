@@ -28,7 +28,8 @@
     "build:abp-datetime": "cd aurelia-bootstrap-datetimepicker && gulp build",
     "build:abp-select": "cd aurelia-bootstrap-select && gulp build",
     "build:abp-tagsinput": "cd aurelia-bootstrap-tagsinput && gulp build",
-    "build:doc": "cd doc && yarn start build"
+    "build:doc": "cd doc && yarn start build",
+    "run:doc": "cd doc && yarn start"
   },
   "dependencies": {
     "gulp": "^3.9.1",
