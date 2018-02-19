@@ -3,9 +3,10 @@ import {UtilService} from './util-service';
 import $ from 'jquery';
 import 'bootstrap-select';
 import {globalExtraOptions, globalPickerOptions} from './picker-global-options';
+import {BindingEngine} from 'aurelia-binding';
 //import 'bootstrap-select/dist/css/bootstrap-select.min.css';
 
-@inject(Element, UtilService)
+@inject(Element, UtilService, BindingEngine)
 export class AbpSelectCustomElement {
   @bindable({defaultBindingMode: bindingMode.twoWay}) collection = [];
   @bindable({defaultBindingMode: bindingMode.twoWay}) element;
@@ -36,10 +37,13 @@ export class AbpSelectCustomElement {
   _originalSelectedIndexes;
   _originalSelectedObjects;
   pickerRef;
+  bindingEngine;
+  collectionSubscription;
 
-  constructor(elm, utilService) {
+  constructor(elm, utilService, bindingEngine) {
     this.elm = elm;
     this.util = utilService;
+    this.bindingEngine = bindingEngine;
 
     // ensure the element exposes a "focus" method for Aurelia-Validation
     elm.focus = () => this.input.focus();
@@ -65,6 +69,9 @@ export class AbpSelectCustomElement {
       methods: methods,
       dataMappingStructure: this.dataMappingStructure
     };
+
+    var observer = this.bindingEngine.expressionObserver(this, 'collection');
+    this.collectionSubscription = observer.subscribe((newCollection, oldCollection) => this.collectionChangedObserver(newCollection, oldCollection));
 
     this.watchOnLoadedToRenderPreSelection();
     this.watchOnChangedToUpdateValueAndItemObjects();
@@ -217,16 +224,13 @@ export class AbpSelectCustomElement {
     return methods;
   }
 
-  collectionChanged(newCollection, oldCollection) {
-    setTimeout(() => {
-      this.domElm
-        .selectpicker('render')
-        .selectpicker('refresh');
-    });
+  collectionChangedObserver(newCollection, oldCollection) {
+    this.domElm.selectpicker('refresh');
   }
 
   detached() {
     this.domElm.selectpicker('destroy');
+    this.collectionSubscription.dispose();
   }
 
   /**
@@ -360,26 +364,17 @@ export class AbpSelectCustomElement {
   }
 
   /**
-   * From a selection option (from View), we want to know if the item is selected
-   * @param {any} option
-   */
-  isSelected(option) {
-    if (option === this._originalSelectedIndexes || option === this._originalSelectedObjects) {
-      return true;
-    }
-    return false;
-  }
-
-  /**
    * Select the item in the UI element from a selection object passed
    * The structure is:: selection = { indexes: [], items: [] };
    * @param {object} selection object
    */
   renderSelection(selection) {
-    if (selection.indexes.length > 0) {
-      this.domElm.selectpicker('val', selection.indexes);
-    } else if (this.util.parseBool(this.emptyOnNull) && this.isEmptySelection(selection)) {
-      this.domElm.selectpicker('val', null);
+    if (this.domElm) {
+        if (selection.indexes.length > 0) {
+          this.domElm.selectpicker('val', selection.indexes);
+        } else if (this.util.parseBool(this.emptyOnNull) && this.isEmptySelection(selection)) {
+          this.domElm.selectpicker('val', null);
+        }
     }
   }
 
