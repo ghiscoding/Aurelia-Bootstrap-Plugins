@@ -48,10 +48,11 @@ import { UtilService } from './util-service';
 import $ from 'jquery';
 import 'bootstrap-select';
 import { globalExtraOptions, globalPickerOptions } from './picker-global-options';
+import { BindingEngine } from 'aurelia-binding';
 
-export let AbpSelectCustomElement = (_dec = inject(Element, UtilService), _dec2 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec3 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec4 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec5 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = (_class2 = class AbpSelectCustomElement {
+export let AbpSelectCustomElement = (_dec = inject(Element, UtilService, BindingEngine), _dec2 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec3 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec4 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec5 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = (_class2 = class AbpSelectCustomElement {
 
-  constructor(elm, utilService) {
+  constructor(elm, utilService, bindingEngine) {
     _initDefineProp(this, 'collection', _descriptor, this);
 
     _initDefineProp(this, 'element', _descriptor2, this);
@@ -98,6 +99,7 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService), _dec2 
 
     this.elm = elm;
     this.util = utilService;
+    this.bindingEngine = bindingEngine;
 
     elm.focus = () => this.input.focus();
   }
@@ -117,6 +119,9 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService), _dec2 
       methods: methods,
       dataMappingStructure: this.dataMappingStructure
     };
+
+    let observer = this.bindingEngine.expressionObserver(this, 'collection');
+    this.collectionSubscription = observer.subscribe((newCollection, oldCollection) => this.collectionChangedObserver(newCollection, oldCollection));
 
     this.watchOnLoadedToRenderPreSelection();
     this.watchOnChangedToUpdateValueAndItemObjects();
@@ -252,14 +257,15 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService), _dec2 
     return methods;
   }
 
-  collectionChanged(newCollection, oldCollection) {
+  collectionChangedObserver(newCollection, oldCollection) {
     setTimeout(() => {
-      this.domElm.selectpicker('render').selectpicker('refresh');
+      this.domElm.selectpicker('refresh');
     });
   }
 
   detached() {
     this.domElm.selectpicker('destroy');
+    this.collectionSubscription.dispose();
   }
 
   getGroupedCollection() {
@@ -340,18 +346,13 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService), _dec2 
     return selection.items.length > 0 && selection.indexes.length > 0;
   }
 
-  isSelected(option) {
-    if (option === this._originalSelectedIndexes || option === this._originalSelectedObjects) {
-      return true;
-    }
-    return false;
-  }
-
   renderSelection(selection) {
-    if (selection.indexes.length > 0) {
-      this.domElm.selectpicker('val', selection.indexes);
-    } else if (this.util.parseBool(this.emptyOnNull) && this.isEmptySelection(selection)) {
-      this.domElm.selectpicker('val', null);
+    if (this.domElm) {
+      if (selection.indexes.length > 0) {
+        this.domElm.selectpicker('val', selection.indexes);
+      } else if (this.util.parseBool(this.emptyOnNull) && this.isEmptySelection(selection)) {
+        this.domElm.selectpicker('val', null);
+      }
     }
   }
 

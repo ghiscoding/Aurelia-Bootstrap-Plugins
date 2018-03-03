@@ -1,9 +1,9 @@
 'use strict';
 
-System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-select', './picker-global-options'], function (_export, _context) {
+System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-select', './picker-global-options', 'aurelia-binding'], function (_export, _context) {
   "use strict";
 
-  var inject, bindable, bindingMode, DOM, UtilService, $, globalExtraOptions, globalPickerOptions, _dec, _dec2, _dec3, _dec4, _dec5, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, _descriptor17, _descriptor18, _descriptor19, _descriptor20, _descriptor21, _descriptor22, AbpSelectCustomElement, OptionalBindingBehavior;
+  var inject, bindable, bindingMode, DOM, UtilService, $, globalExtraOptions, globalPickerOptions, BindingEngine, _dec, _dec2, _dec3, _dec4, _dec5, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, _descriptor17, _descriptor18, _descriptor19, _descriptor20, _descriptor21, _descriptor22, AbpSelectCustomElement, OptionalBindingBehavior;
 
   function _initDefineProp(target, property, descriptor, context) {
     if (!descriptor) return;
@@ -67,10 +67,12 @@ System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-sel
     }, function (_bootstrapSelect) {}, function (_pickerGlobalOptions) {
       globalExtraOptions = _pickerGlobalOptions.globalExtraOptions;
       globalPickerOptions = _pickerGlobalOptions.globalPickerOptions;
+    }, function (_aureliaBinding) {
+      BindingEngine = _aureliaBinding.BindingEngine;
     }],
     execute: function () {
-      _export('AbpSelectCustomElement', AbpSelectCustomElement = (_dec = inject(Element, UtilService), _dec2 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec3 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec4 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec5 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = (_class2 = function () {
-        function AbpSelectCustomElement(elm, utilService) {
+      _export('AbpSelectCustomElement', AbpSelectCustomElement = (_dec = inject(Element, UtilService, BindingEngine), _dec2 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec3 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec4 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec5 = bindable({ defaultBindingMode: bindingMode.twoWay }), _dec(_class = (_class2 = function () {
+        function AbpSelectCustomElement(elm, utilService, bindingEngine) {
           var _this = this;
 
           _classCallCheck(this, AbpSelectCustomElement);
@@ -121,6 +123,7 @@ System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-sel
 
           this.elm = elm;
           this.util = utilService;
+          this.bindingEngine = bindingEngine;
 
           elm.focus = function () {
             return _this.input.focus();
@@ -128,6 +131,8 @@ System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-sel
         }
 
         AbpSelectCustomElement.prototype.attached = function attached() {
+          var _this2 = this;
+
           this.domElm = $(this.pickerRef);
 
           var events = this.applyExposeEvents();
@@ -142,6 +147,11 @@ System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-sel
             methods: methods,
             dataMappingStructure: this.dataMappingStructure
           };
+
+          var observer = this.bindingEngine.expressionObserver(this, 'collection');
+          this.collectionSubscription = observer.subscribe(function (newCollection, oldCollection) {
+            return _this2.collectionChangedObserver(newCollection, oldCollection);
+          });
 
           this.watchOnLoadedToRenderPreSelection();
           this.watchOnChangedToUpdateValueAndItemObjects();
@@ -163,13 +173,13 @@ System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-sel
         };
 
         AbpSelectCustomElement.prototype.applyExposeEvents = function applyExposeEvents() {
-          var _this2 = this;
+          var _this3 = this;
 
           var events = {};
 
           this.domElm.on('show.bs.select', function (e) {
-            if (typeof _this2.onShow === 'function') {
-              _this2.onShow(e);
+            if (typeof _this3.onShow === 'function') {
+              _this3.onShow(e);
             }
             if (typeof events.onShow === 'function') {
               events.onShow(e);
@@ -177,8 +187,8 @@ System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-sel
           });
 
           this.domElm.on('shown.bs.select', function (e) {
-            if (typeof _this2.onShown === 'function') {
-              _this2.onShown(e);
+            if (typeof _this3.onShown === 'function') {
+              _this3.onShown(e);
             }
             if (typeof events.onShown === 'function') {
               events.onShown(e);
@@ -186,8 +196,8 @@ System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-sel
           });
 
           this.domElm.on('hide.bs.select', function (e) {
-            if (typeof _this2.onHide === 'function') {
-              _this2.onHide(e);
+            if (typeof _this3.onHide === 'function') {
+              _this3.onHide(e);
             }
             if (typeof events.onHide === 'function') {
               events.onHide(e);
@@ -195,8 +205,8 @@ System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-sel
           });
 
           this.domElm.on('hidden.bs.select', function (e) {
-            if (typeof _this2.onHidden === 'function') {
-              _this2.onHidden(e);
+            if (typeof _this3.onHidden === 'function') {
+              _this3.onHidden(e);
             }
             if (typeof events.onHidden === 'function') {
               events.onHidden(e);
@@ -204,8 +214,8 @@ System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-sel
           });
 
           this.domElm.on('loaded.bs.select', function (e) {
-            if (typeof _this2.onLoaded === 'function') {
-              _this2.onLoaded(e);
+            if (typeof _this3.onLoaded === 'function') {
+              _this3.onLoaded(e);
             }
             if (typeof events.onLoaded === 'function') {
               events.onLoaded(e);
@@ -213,8 +223,8 @@ System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-sel
           });
 
           this.domElm.on('rendered.bs.select', function (e) {
-            if (typeof _this2.onRendered === 'function') {
-              _this2.onRendered(e);
+            if (typeof _this3.onRendered === 'function') {
+              _this3.onRendered(e);
             }
             if (typeof events.onRendered === 'function') {
               events.onRendered(e);
@@ -222,8 +232,8 @@ System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-sel
           });
 
           this.domElm.on('refreshed.bs.select', function (e) {
-            if (typeof _this2.onRefreshed === 'function') {
-              _this2.onRefreshed(e);
+            if (typeof _this3.onRefreshed === 'function') {
+              _this3.onRefreshed(e);
             }
             if (typeof events.onRefreshed === 'function') {
               events.onRefreshed(e);
@@ -231,8 +241,8 @@ System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-sel
           });
 
           this.domElm.on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
-            if (typeof _this2.onChanged === 'function') {
-              _this2.onChanged(e);
+            if (typeof _this3.onChanged === 'function') {
+              _this3.onChanged(e);
             }
             if (typeof events.onChanged === 'function') {
               events.onChanged(e);
@@ -248,52 +258,52 @@ System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-sel
         };
 
         AbpSelectCustomElement.prototype.exposeMethods = function exposeMethods() {
-          var _this3 = this;
+          var _this4 = this;
 
           var methods = {
             deselectAll: function deselectAll() {
-              return _this3.domElm.selectpicker('deselectAll');
+              return _this4.domElm.selectpicker('deselectAll');
             },
             destroy: function destroy() {
-              return _this3.domElm.selectpicker('destroy');
+              return _this4.domElm.selectpicker('destroy');
             },
             disableOptgroupByIndex: function disableOptgroupByIndex(index) {
               var isDisable = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
-              if (_this3.domElm.find('optgroup')[index]) {
-                _this3.domElm.find('optgroup')[index].prop('disabled', isDisable);
-                _this3.domElm.selectpicker('refresh');
+              if (_this4.domElm.find('optgroup')[index]) {
+                _this4.domElm.find('optgroup')[index].prop('disabled', isDisable);
+                _this4.domElm.selectpicker('refresh');
               }
             },
             disableOptgroupByLabel: function disableOptgroupByLabel(label) {
               var isDisable = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
-              _this3.domElm.find('optgroup[label=' + label + ']').prop('disabled', isDisable);
-              _this3.domElm.selectpicker('refresh');
+              _this4.domElm.find('optgroup[label=' + label + ']').prop('disabled', isDisable);
+              _this4.domElm.selectpicker('refresh');
             },
             mobile: function mobile() {
-              return _this3.domElm.selectpicker('mobile');
+              return _this4.domElm.selectpicker('mobile');
             },
             refresh: function refresh() {
-              return _this3.domElm.selectpicker('refresh');
+              return _this4.domElm.selectpicker('refresh');
             },
             render: function render() {
-              return _this3.domElm.selectpicker('render');
+              return _this4.domElm.selectpicker('render');
             },
             val: function val(value) {
-              return _this3.domElm.selectpicker('val', value);
+              return _this4.domElm.selectpicker('val', value);
             },
             selectAll: function selectAll() {
-              return _this3.domElm.selectpicker('selectAll');
+              return _this4.domElm.selectpicker('selectAll');
             },
             setStyle: function setStyle(style) {
               var isAddingTheClass = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
               if (style.includes('btn')) {
                 var action = isAddingTheClass ? 'add' : 'remove';
-                _this3.domElm.selectpicker('setStyle', style, action);
+                _this4.domElm.selectpicker('setStyle', style, action);
               } else {
-                _this3.domElm.addClass(style).selectpicker('setStyle');
+                _this4.domElm.addClass(style).selectpicker('setStyle');
               }
             }
           };
@@ -301,16 +311,17 @@ System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-sel
           return methods;
         };
 
-        AbpSelectCustomElement.prototype.collectionChanged = function collectionChanged(newCollection, oldCollection) {
-          var _this4 = this;
+        AbpSelectCustomElement.prototype.collectionChangedObserver = function collectionChangedObserver(newCollection, oldCollection) {
+          var _this5 = this;
 
           setTimeout(function () {
-            _this4.domElm.selectpicker('render').selectpicker('refresh');
+            _this5.domElm.selectpicker('refresh');
           });
         };
 
         AbpSelectCustomElement.prototype.detached = function detached() {
           this.domElm.selectpicker('destroy');
+          this.collectionSubscription.dispose();
         };
 
         AbpSelectCustomElement.prototype.getGroupedCollection = function getGroupedCollection() {
@@ -348,7 +359,7 @@ System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-sel
         };
 
         AbpSelectCustomElement.prototype.findItems = function findItems(collection, newValue, objectKey) {
-          var _this5 = this;
+          var _this6 = this;
 
           var foundItems = [];
           var searchingItems = [];
@@ -378,12 +389,12 @@ System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-sel
 
             var searchItem = _ref;
 
-            var searchFilter = _this5.util.isObject(searchItem) ? searchItem[objectKey] : searchItem;
+            var searchFilter = _this6.util.isObject(searchItem) ? searchItem[objectKey] : searchItem;
             var foundItem = collection.find(function (item) {
-              return _this5.util.isObject(item) ? item[objectKey] == searchFilter : item == searchFilter;
+              return _this6.util.isObject(item) ? item[objectKey] == searchFilter : item == searchFilter;
             });
             if (foundItem) {
-              selection.indexes.push(_this5.util.isObject(foundItem) ? foundItem[objectKey] : foundItem);
+              selection.indexes.push(_this6.util.isObject(foundItem) ? foundItem[objectKey] : foundItem);
               selection.items.push(foundItem);
               foundItems.push(foundItem);
             }
@@ -414,18 +425,13 @@ System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-sel
           return selection.items.length > 0 && selection.indexes.length > 0;
         };
 
-        AbpSelectCustomElement.prototype.isSelected = function isSelected(option) {
-          if (option === this._originalSelectedIndexes || option === this._originalSelectedObjects) {
-            return true;
-          }
-          return false;
-        };
-
         AbpSelectCustomElement.prototype.renderSelection = function renderSelection(selection) {
-          if (selection.indexes.length > 0) {
-            this.domElm.selectpicker('val', selection.indexes);
-          } else if (this.util.parseBool(this.emptyOnNull) && this.isEmptySelection(selection)) {
-            this.domElm.selectpicker('val', null);
+          if (this.domElm) {
+            if (selection.indexes.length > 0) {
+              this.domElm.selectpicker('val', selection.indexes);
+            } else if (this.util.parseBool(this.emptyOnNull) && this.isEmptySelection(selection)) {
+              this.domElm.selectpicker('val', null);
+            }
           }
         };
 
@@ -463,33 +469,33 @@ System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-sel
         };
 
         AbpSelectCustomElement.prototype.watchOnLoadedToRenderPreSelection = function watchOnLoadedToRenderPreSelection() {
-          var _this6 = this;
+          var _this7 = this;
 
           this.domElm.on('loaded.bs.select', function (e) {
-            var newValue = _this6._originalSelectedIndexes || _this6._originalSelectedObjects;
-            var selection = _this6.findItems(_this6.collection, newValue, _this6.objectKey);
+            var newValue = _this7._originalSelectedIndexes || _this7._originalSelectedObjects;
+            var selection = _this7.findItems(_this7.collection, newValue, _this7.objectKey);
             if (selection.indexes) {
-              _this6.selectedValue = selection.indexes;
+              _this7.selectedValue = selection.indexes;
             } else {
-              _this6.selectedValue = _this6.util.isObject(_this6.collection[0]) ? _this6.collection[0][_this6.objectKey] : _this6.collection[0];
+              _this7.selectedValue = _this7.util.isObject(_this7.collection[0]) ? _this7.collection[0][_this7.objectKey] : _this7.collection[0];
             }
-            _this6.selectedItem = selection.items ? selection.items : _this6.collection[0];
-            _this6.renderSelection(selection);
+            _this7.selectedItem = selection.items ? selection.items : _this7.collection[0];
+            _this7.renderSelection(selection);
           });
         };
 
         AbpSelectCustomElement.prototype.watchOnChangedToUpdateValueAndItemObjects = function watchOnChangedToUpdateValueAndItemObjects() {
-          var _this7 = this;
+          var _this8 = this;
 
           this.domElm.on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
-            _this7.selectedValue = _this7.domElm.selectpicker('val');
-            var selection = _this7.findItems(_this7.collection, _this7.selectedValue, _this7.objectKey);
+            _this8.selectedValue = _this8.domElm.selectpicker('val');
+            var selection = _this8.findItems(_this8.collection, _this8.selectedValue, _this8.objectKey);
             if (selection.indexes) {
-              _this7.domElm.selectpicker('val', selection.indexes);
+              _this8.domElm.selectpicker('val', selection.indexes);
             }
 
-            _this7.selectedValue = selection.indexes;
-            _this7.selectedItem = selection.items;
+            _this8.selectedValue = selection.indexes;
+            _this8.selectedItem = selection.items;
           });
         };
 

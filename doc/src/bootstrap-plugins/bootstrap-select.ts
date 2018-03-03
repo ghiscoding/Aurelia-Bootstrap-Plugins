@@ -82,7 +82,7 @@ export class SelectEdit {
   changeSelectCollection() {
     // change collection of a select
     this.allCampingStuff = ['Heater', 'Marshmallow'];
-    
+    /*
     this.allSelectionWithGroups = [
       { id: 1, option: 'Cheedar', company: 'Kraft', group: 'Cheese' },
       { id: 12, option: 'Steam', group: 'Breads' },
@@ -90,7 +90,7 @@ export class SelectEdit {
       { id: 4, option: 'Cream Cheese', company: 'Philadelphia', group: 'Condiments' },
       { id: 13, option: 'Grilled', group: 'Breads', disabled: true }
     ];
-    
+
     this.allCondiments = [
       { id: 1, option: 'Cheedar', company: 'Krafty' },
       { id: 2, option: 'Cream Cheese', company: 'Philadelphia' }
@@ -99,7 +99,7 @@ export class SelectEdit {
       { id: 1, option: 'Cheedar', company: 'Kraft', content: '<span class="label label-warning">Cheedar</span>' },
       { id: 2, option: 'Cream Cheese', company: 'Philadelphia', content: '<span class="label label-info">Cream Cheese</span>' }
     ];
-    
+    */
   }
 
   firstPickerChanged() {
