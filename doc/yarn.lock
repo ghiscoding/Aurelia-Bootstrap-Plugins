@@ -364,9 +364,9 @@ aurelia-bootstrap-datetimepicker@^1.0.11:
     jquery "^3.1.1"
     moment "^2.18.1"
 
-aurelia-bootstrap-select@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/aurelia-bootstrap-select/-/aurelia-bootstrap-select-1.1.0.tgz#71ceabc2e8c1c7ab57a7d7bb79b62fb63e2f48ad"
+aurelia-bootstrap-select@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/aurelia-bootstrap-select/-/aurelia-bootstrap-select-1.1.2.tgz#6af9c620b634df898bd0c62791e6c786775f0e5c"
   dependencies:
     bootstrap "^3.3.7"
     bootstrap-select "^1.12.2"
