@@ -70,7 +70,7 @@ export class AbpSelectCustomElement {
       dataMappingStructure: this.dataMappingStructure
     };
 
-    var observer = this.bindingEngine.expressionObserver(this, 'collection');
+    let observer = this.bindingEngine.expressionObserver(this, 'collection');
     this.collectionSubscription = observer.subscribe((newCollection, oldCollection) => this.collectionChangedObserver(newCollection, oldCollection));
 
     this.watchOnLoadedToRenderPreSelection();
@@ -225,7 +225,9 @@ export class AbpSelectCustomElement {
   }
 
   collectionChangedObserver(newCollection, oldCollection) {
-    this.domElm.selectpicker('refresh');
+    setTimeout(() => {
+      this.domElm.selectpicker('refresh');
+    });
   }
 
   detached() {
@@ -370,11 +372,11 @@ export class AbpSelectCustomElement {
    */
   renderSelection(selection) {
     if (this.domElm) {
-        if (selection.indexes.length > 0) {
-          this.domElm.selectpicker('val', selection.indexes);
-        } else if (this.util.parseBool(this.emptyOnNull) && this.isEmptySelection(selection)) {
-          this.domElm.selectpicker('val', null);
-        }
+      if (selection.indexes.length > 0) {
+        this.domElm.selectpicker('val', selection.indexes);
+      } else if (this.util.parseBool(this.emptyOnNull) && this.isEmptySelection(selection)) {
+        this.domElm.selectpicker('val', null);
+      }
     }
   }
 
