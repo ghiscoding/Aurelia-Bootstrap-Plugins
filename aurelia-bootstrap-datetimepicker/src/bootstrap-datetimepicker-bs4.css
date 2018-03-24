@@ -1,4 +1,8 @@
 /* bootstrap-datetimepicker adjustment for BS4 */
+.bootstrap-datetimepicker-widget .collapse.in {
+  display: block;
+  visibility: visible;
+}
 .bootstrap-datetimepicker-widget.dropdown-menu {
   width: 266px;
   height: 289px;
