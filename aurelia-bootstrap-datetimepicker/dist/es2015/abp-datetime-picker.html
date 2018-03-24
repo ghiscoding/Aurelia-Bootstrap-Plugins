@@ -6,6 +6,7 @@
                model.bind="model"
                blur.trigger="blur()"
                placeholder.bind="placeholder"
+               readonly.bind="readonly"
                element.bind="element">
         <span if.bind="parseBool(withDateIcon)" class="input-group-addon" data-target="#datetimepicker" data-toggle="datetimepicker">
             <span class.bind="iconBase === 'glyphicon' ? 'glyphicon glyphicon-calendar' : 'fa fa-calendar'"></span>
@@ -19,6 +20,7 @@
                model.bind="model"
                blur.trigger="blur()"
                placeholder.bind="placeholder"
+               readonly.bind="readonly"
                element.bind="element">
                <span if.bind="parseBool(withDateIcon)" class="input-group-append" data-target="#datetimepicker" data-toggle="datetimepicker">
                   <button class.bind="buttonClass" type="button" click.delegate="showCalendar()">

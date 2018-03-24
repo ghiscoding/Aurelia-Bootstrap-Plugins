@@ -16,6 +16,7 @@ export class AbpDatetimePickerCustomElement {
   @bindable withDateIcon = globalExtraOptions.withDateIcon;
   @bindable bootstrapVersion = globalExtraOptions.bootstrapVersion;
   @bindable buttonClass = globalExtraOptions.buttonClass;
+  @bindable readonly = false;
 
   // picker options
   @bindable options = {};
