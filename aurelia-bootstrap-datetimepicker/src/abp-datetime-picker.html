@@ -9,7 +9,7 @@
                readonly.bind="readonly"
                element.bind="element">
         <span if.bind="parseBool(withDateIcon)" class="input-group-addon" data-target="#datetimepicker" data-toggle="datetimepicker">
-            <span class.bind="iconBase === 'glyphicon' ? 'glyphicon glyphicon-calendar' : 'fa fa-calendar'"></span>
+            <span class.bind="iconBase === 'glyphicon' ? 'glyphicon glyphicon-calendar' : iconBase === 'font-awesome' ? 'fa fa-calendar' : 'fas fa-calendar-alt'"></span>
         </span>
     </div>
 
@@ -24,7 +24,7 @@
                element.bind="element">
                <span if.bind="parseBool(withDateIcon)" class="input-group-append" data-target="#datetimepicker" data-toggle="datetimepicker">
                   <button class.bind="buttonClass" type="button" click.delegate="showCalendar()">
-                    <span class.bind="iconBase === 'glyphicon' ? 'glyphicon glyphicon-calendar' : 'fa fa-calendar'"></span>
+                    <span class.bind="iconBase === 'glyphicon' ? 'glyphicon glyphicon-calendar' : iconBase === 'font-awesome' ? 'fa fa-calendar' : 'fas fa-calendar-alt'"></span>
                   </button>
               </span>
     </div>
