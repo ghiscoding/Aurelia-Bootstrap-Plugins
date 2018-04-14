@@ -96,7 +96,7 @@ export class AbpDatetimePickerCustomElement {
         clear: 'fa fa-trash',
         close: 'fa fa-window-close'
       };
-    else if (this.iconBase === 'font-awesome-5') {
+    } else if (this.iconBase === 'font-awesome-5') {
       icons = {
         time: 'far fa-clock',
         date: 'fas fa-calendar-alt',

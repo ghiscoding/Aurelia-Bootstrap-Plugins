@@ -136,6 +136,18 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
         clear: 'fa fa-trash',
         close: 'fa fa-window-close'
       };
+    } else if (this.iconBase === 'font-awesome-5') {
+      icons = {
+        time: 'far fa-clock',
+        date: 'fas fa-calendar-alt',
+        up: 'fas fa-arrow-up',
+        down: 'fas fa-arrow-down',
+        previous: 'fas fa-chevron-left',
+        next: 'fas fa-chevron-right',
+        today: 'far fa-calendar-check',
+        clear: 'fas fa-trash',
+        close: 'fas fa-window-close'
+      };
     } else {
       icons = {
         time: 'glyphicon glyphicon-time',
