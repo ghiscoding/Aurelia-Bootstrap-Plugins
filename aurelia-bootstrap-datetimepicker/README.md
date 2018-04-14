@@ -69,7 +69,7 @@ export class Example {
 
 ### Extra Attributes (bindable)
 Some extra bindable attributes were added to the Custom Element to add extra flexibility. The way to call them is through an attribute call in the View. The list of these extras is the following
-* iconBase: provide different set of icons (`font-awesome` or `glyphicon`), (default: `'glyphicon'`)
+* iconBase: provide different set of icons (`glyphicon`, `font-awesome` or `font-awesome-5`), (default: `'glyphicon'`)
 * withDateIcon: add a Bootstrap `input group` with a Calendar icon on the right of the input (default: `true`)
 
 Example

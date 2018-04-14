@@ -9,7 +9,7 @@
   "license": "MIT",
   "dependencies": {
     "aurelia-animator-css": "^1.0.2",
-    "aurelia-bootstrap-datetimepicker": "^1.0.11",
+    "aurelia-bootstrap-datetimepicker": "^1.2.0",
     "aurelia-bootstrap-select": "^1.1.2",
     "aurelia-bootstrap-tagsinput": "^1.1.2",
     "aurelia-bootstrapper": "^2.1.1",

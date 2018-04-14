@@ -355,9 +355,9 @@ aurelia-binding@^1.0.0, aurelia-binding@^1.0.9, aurelia-binding@^1.1.0, aurelia-
     aurelia-pal "^1.0.0"
     aurelia-task-queue "^1.0.0"
 
-aurelia-bootstrap-datetimepicker@^1.0.11:
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/aurelia-bootstrap-datetimepicker/-/aurelia-bootstrap-datetimepicker-1.0.11.tgz#95c996460902309c387294b44f1b4fb4fd745c8f"
+aurelia-bootstrap-datetimepicker@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/aurelia-bootstrap-datetimepicker/-/aurelia-bootstrap-datetimepicker-1.2.0.tgz#708bb2c80532fc0b5ade57248316c02b3502b471"
   dependencies:
     bootstrap "^3.3.7"
     eonasdan-bootstrap-datetimepicker "^4.17.47"
