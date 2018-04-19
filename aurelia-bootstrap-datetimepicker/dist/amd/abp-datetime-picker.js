@@ -65,7 +65,7 @@ define(['exports', 'aurelia-framework', 'moment', 'jquery', './picker-global-opt
     throw new Error('Decorating class property failed. Please ensure that transform-class-properties is enabled.');
   }
 
-  var _dec, _dec2, _dec3, _dec4, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15;
+  var _dec, _dec2, _dec3, _dec4, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16;
 
   var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_dec = (0, _aureliaFramework.inject)(Element), _dec2 = (0, _aureliaFramework.bindable)({ defaultBindingMode: _aureliaFramework.bindingMode.twoWay }), _dec3 = (0, _aureliaFramework.bindable)({ defaultBindingMode: _aureliaFramework.bindingMode.twoWay }), _dec4 = (0, _aureliaFramework.bindable)({ defaultBindingMode: _aureliaFramework.bindingMode.twoWay }), _dec(_class = (_class2 = function () {
     function AbpDatetimePickerCustomElement(elm) {
@@ -91,17 +91,19 @@ define(['exports', 'aurelia-framework', 'moment', 'jquery', './picker-global-opt
 
       _initDefineProp(this, 'readonly', _descriptor9, this);
 
-      _initDefineProp(this, 'options', _descriptor10, this);
+      _initDefineProp(this, 'format', _descriptor10, this);
 
-      _initDefineProp(this, 'onHide', _descriptor11, this);
+      _initDefineProp(this, 'options', _descriptor11, this);
 
-      _initDefineProp(this, 'onShow', _descriptor12, this);
+      _initDefineProp(this, 'onHide', _descriptor12, this);
 
-      _initDefineProp(this, 'onChange', _descriptor13, this);
+      _initDefineProp(this, 'onShow', _descriptor13, this);
 
-      _initDefineProp(this, 'onError', _descriptor14, this);
+      _initDefineProp(this, 'onChange', _descriptor14, this);
 
-      _initDefineProp(this, 'onUpdate', _descriptor15, this);
+      _initDefineProp(this, 'onError', _descriptor15, this);
+
+      _initDefineProp(this, 'onUpdate', _descriptor16, this);
 
       this._events = {};
       this._methods = {};
@@ -130,9 +132,9 @@ define(['exports', 'aurelia-framework', 'moment', 'jquery', './picker-global-opt
       this.domElm.datetimepicker(this.options);
 
       this.domElm.on('dp.change', function (e) {
-        if ((0, _moment2.default)(e.date, _this2._format, true).isValid()) {
-          _this2.model = (0, _moment2.default)(e.date, _this2._format, true).toDate();
-          _this2.value = (0, _moment2.default)(e.date, _this2._format, true);
+        if ((0, _moment2.default)(e.date, _this2.format, true).isValid()) {
+          _this2.model = (0, _moment2.default)(e.date, _this2.format, true).toDate();
+          _this2.value = (0, _moment2.default)(e.date, _this2.format, true);
         } else if (!e.date) {
           _this2.model = null;
           _this2.value = null;
@@ -194,17 +196,17 @@ define(['exports', 'aurelia-framework', 'moment', 'jquery', './picker-global-opt
       this.options = Object.assign({}, _pickerGlobalOptions.globalPickerOptions, pickerOptions);
 
       if (this.options) {
-        this._format = this._originalDateFormat = this.options.hasOwnProperty('format') ? this.options.format : 'YYYY-MM-DD';
+        this.format = this._originalDateFormat = this.options.hasOwnProperty('format') ? this.options.format : 'YYYY-MM-DD';
       }
       if (this.model) {
-        this._originalDateObject = (0, _moment2.default)(this.model, this._format, true).toDate() || this.elm.getAttribute('model');
+        this._originalDateObject = (0, _moment2.default)(this.model, this.format, true).toDate() || this.elm.getAttribute('model');
       }
       this._originalValue = this.value || this.elm.getAttribute('value');
       var value = this._originalValue || this._originalDateObject;
 
-      if (value && (0, _moment2.default)(value, this._format, true).isValid()) {
-        this.model = (0, _moment2.default)(value, this._format, true).toDate();
-        this.value = (0, _moment2.default)(value, this._format, true);
+      if (value && (0, _moment2.default)(value, this.format, true).isValid()) {
+        this.model = (0, _moment2.default)(value, this.format, true).toDate();
+        this.value = (0, _moment2.default)(value, this.format, true);
       }
     };
 
@@ -313,16 +315,26 @@ define(['exports', 'aurelia-framework', 'moment', 'jquery', './picker-global-opt
         throw new Error('Datetimepicker, model.bind must be of type Date');
       }
       if (newValue !== oldValue && newValue) {
-        if ((0, _moment2.default)(newValue, this._format, true).isValid()) {
-          this.value = (0, _moment2.default)(newValue, this._format, true).format(this._format);
+        if ((0, _moment2.default)(newValue, this.format, true).isValid()) {
+          this.value = (0, _moment2.default)(newValue, this.format, true).format(this.format);
+        }
+      }
+    };
+
+    AbpDatetimePickerCustomElement.prototype.formatChanged = function formatChanged(newValue, oldValue) {
+      if (newValue !== oldValue && newValue && this.element) {
+        if ((0, _moment2.default)(this.value, newValue).isValid()) {
+          this.value = (0, _moment2.default)(this.value, newValue).format(newValue);
+          this.options.format = newValue;
+          this.element.methods.format(newValue);
         }
       }
     };
 
     AbpDatetimePickerCustomElement.prototype.valueChanged = function valueChanged(newValue, oldValue) {
       if (newValue !== oldValue && newValue) {
-        if ((0, _moment2.default)(newValue, this._format, true).isValid()) {
-          this.model = (0, _moment2.default)(newValue, this._format, true).toDate();
+        if ((0, _moment2.default)(newValue, this.format, true).isValid()) {
+          this.model = (0, _moment2.default)(newValue, this.format, true).toDate();
         }
       }
     };
@@ -376,24 +388,27 @@ define(['exports', 'aurelia-framework', 'moment', 'jquery', './picker-global-opt
     initializer: function initializer() {
       return false;
     }
-  }), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, 'options', [_aureliaFramework.bindable], {
+  }), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, 'format', [_aureliaFramework.bindable], {
+    enumerable: true,
+    initializer: null
+  }), _descriptor11 = _applyDecoratedDescriptor(_class2.prototype, 'options', [_aureliaFramework.bindable], {
     enumerable: true,
     initializer: function initializer() {
       return {};
     }
-  }), _descriptor11 = _applyDecoratedDescriptor(_class2.prototype, 'onHide', [_aureliaFramework.bindable], {
+  }), _descriptor12 = _applyDecoratedDescriptor(_class2.prototype, 'onHide', [_aureliaFramework.bindable], {
     enumerable: true,
     initializer: null
-  }), _descriptor12 = _applyDecoratedDescriptor(_class2.prototype, 'onShow', [_aureliaFramework.bindable], {
+  }), _descriptor13 = _applyDecoratedDescriptor(_class2.prototype, 'onShow', [_aureliaFramework.bindable], {
     enumerable: true,
     initializer: null
-  }), _descriptor13 = _applyDecoratedDescriptor(_class2.prototype, 'onChange', [_aureliaFramework.bindable], {
+  }), _descriptor14 = _applyDecoratedDescriptor(_class2.prototype, 'onChange', [_aureliaFramework.bindable], {
     enumerable: true,
     initializer: null
-  }), _descriptor14 = _applyDecoratedDescriptor(_class2.prototype, 'onError', [_aureliaFramework.bindable], {
+  }), _descriptor15 = _applyDecoratedDescriptor(_class2.prototype, 'onError', [_aureliaFramework.bindable], {
     enumerable: true,
     initializer: null
-  }), _descriptor15 = _applyDecoratedDescriptor(_class2.prototype, 'onUpdate', [_aureliaFramework.bindable], {
+  }), _descriptor16 = _applyDecoratedDescriptor(_class2.prototype, 'onUpdate', [_aureliaFramework.bindable], {
     enumerable: true,
     initializer: null
   })), _class2)) || _class);

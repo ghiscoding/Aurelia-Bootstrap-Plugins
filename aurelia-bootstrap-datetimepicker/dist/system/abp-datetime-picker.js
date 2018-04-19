@@ -3,7 +3,7 @@
 System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-datetimepicker', './picker-global-options'], function (_export, _context) {
   "use strict";
 
-  var inject, bindable, bindingMode, DOM, moment, $, globalExtraOptions, globalPickerOptions, _dec, _dec2, _dec3, _dec4, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, AbpDatetimePickerCustomElement;
+  var inject, bindable, bindingMode, DOM, moment, $, globalExtraOptions, globalPickerOptions, _dec, _dec2, _dec3, _dec4, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16, AbpDatetimePickerCustomElement;
 
   function _initDefineProp(target, property, descriptor, context) {
     if (!descriptor) return;
@@ -93,17 +93,19 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
 
           _initDefineProp(this, 'readonly', _descriptor9, this);
 
-          _initDefineProp(this, 'options', _descriptor10, this);
+          _initDefineProp(this, 'format', _descriptor10, this);
 
-          _initDefineProp(this, 'onHide', _descriptor11, this);
+          _initDefineProp(this, 'options', _descriptor11, this);
 
-          _initDefineProp(this, 'onShow', _descriptor12, this);
+          _initDefineProp(this, 'onHide', _descriptor12, this);
 
-          _initDefineProp(this, 'onChange', _descriptor13, this);
+          _initDefineProp(this, 'onShow', _descriptor13, this);
 
-          _initDefineProp(this, 'onError', _descriptor14, this);
+          _initDefineProp(this, 'onChange', _descriptor14, this);
 
-          _initDefineProp(this, 'onUpdate', _descriptor15, this);
+          _initDefineProp(this, 'onError', _descriptor15, this);
+
+          _initDefineProp(this, 'onUpdate', _descriptor16, this);
 
           this._events = {};
           this._methods = {};
@@ -132,9 +134,9 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
           this.domElm.datetimepicker(this.options);
 
           this.domElm.on('dp.change', function (e) {
-            if (moment(e.date, _this2._format, true).isValid()) {
-              _this2.model = moment(e.date, _this2._format, true).toDate();
-              _this2.value = moment(e.date, _this2._format, true);
+            if (moment(e.date, _this2.format, true).isValid()) {
+              _this2.model = moment(e.date, _this2.format, true).toDate();
+              _this2.value = moment(e.date, _this2.format, true);
             } else if (!e.date) {
               _this2.model = null;
               _this2.value = null;
@@ -196,17 +198,17 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
           this.options = Object.assign({}, globalPickerOptions, pickerOptions);
 
           if (this.options) {
-            this._format = this._originalDateFormat = this.options.hasOwnProperty('format') ? this.options.format : 'YYYY-MM-DD';
+            this.format = this._originalDateFormat = this.options.hasOwnProperty('format') ? this.options.format : 'YYYY-MM-DD';
           }
           if (this.model) {
-            this._originalDateObject = moment(this.model, this._format, true).toDate() || this.elm.getAttribute('model');
+            this._originalDateObject = moment(this.model, this.format, true).toDate() || this.elm.getAttribute('model');
           }
           this._originalValue = this.value || this.elm.getAttribute('value');
           var value = this._originalValue || this._originalDateObject;
 
-          if (value && moment(value, this._format, true).isValid()) {
-            this.model = moment(value, this._format, true).toDate();
-            this.value = moment(value, this._format, true);
+          if (value && moment(value, this.format, true).isValid()) {
+            this.model = moment(value, this.format, true).toDate();
+            this.value = moment(value, this.format, true);
           }
         };
 
@@ -315,16 +317,26 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
             throw new Error('Datetimepicker, model.bind must be of type Date');
           }
           if (newValue !== oldValue && newValue) {
-            if (moment(newValue, this._format, true).isValid()) {
-              this.value = moment(newValue, this._format, true).format(this._format);
+            if (moment(newValue, this.format, true).isValid()) {
+              this.value = moment(newValue, this.format, true).format(this.format);
+            }
+          }
+        };
+
+        AbpDatetimePickerCustomElement.prototype.formatChanged = function formatChanged(newValue, oldValue) {
+          if (newValue !== oldValue && newValue && this.element) {
+            if (moment(this.value, newValue).isValid()) {
+              this.value = moment(this.value, newValue).format(newValue);
+              this.options.format = newValue;
+              this.element.methods.format(newValue);
             }
           }
         };
 
         AbpDatetimePickerCustomElement.prototype.valueChanged = function valueChanged(newValue, oldValue) {
           if (newValue !== oldValue && newValue) {
-            if (moment(newValue, this._format, true).isValid()) {
-              this.model = moment(newValue, this._format, true).toDate();
+            if (moment(newValue, this.format, true).isValid()) {
+              this.model = moment(newValue, this.format, true).toDate();
             }
           }
         };
@@ -378,24 +390,27 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
         initializer: function initializer() {
           return false;
         }
-      }), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, 'options', [bindable], {
+      }), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, 'format', [bindable], {
+        enumerable: true,
+        initializer: null
+      }), _descriptor11 = _applyDecoratedDescriptor(_class2.prototype, 'options', [bindable], {
         enumerable: true,
         initializer: function initializer() {
           return {};
         }
-      }), _descriptor11 = _applyDecoratedDescriptor(_class2.prototype, 'onHide', [bindable], {
+      }), _descriptor12 = _applyDecoratedDescriptor(_class2.prototype, 'onHide', [bindable], {
         enumerable: true,
         initializer: null
-      }), _descriptor12 = _applyDecoratedDescriptor(_class2.prototype, 'onShow', [bindable], {
+      }), _descriptor13 = _applyDecoratedDescriptor(_class2.prototype, 'onShow', [bindable], {
         enumerable: true,
         initializer: null
-      }), _descriptor13 = _applyDecoratedDescriptor(_class2.prototype, 'onChange', [bindable], {
+      }), _descriptor14 = _applyDecoratedDescriptor(_class2.prototype, 'onChange', [bindable], {
         enumerable: true,
         initializer: null
-      }), _descriptor14 = _applyDecoratedDescriptor(_class2.prototype, 'onError', [bindable], {
+      }), _descriptor15 = _applyDecoratedDescriptor(_class2.prototype, 'onError', [bindable], {
         enumerable: true,
         initializer: null
-      }), _descriptor15 = _applyDecoratedDescriptor(_class2.prototype, 'onUpdate', [bindable], {
+      }), _descriptor16 = _applyDecoratedDescriptor(_class2.prototype, 'onUpdate', [bindable], {
         enumerable: true,
         initializer: null
       })), _class2)) || _class));
