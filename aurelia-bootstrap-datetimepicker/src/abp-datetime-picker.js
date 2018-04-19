@@ -17,6 +17,7 @@ export class AbpDatetimePickerCustomElement {
   @bindable bootstrapVersion = globalExtraOptions.bootstrapVersion;
   @bindable buttonClass = globalExtraOptions.buttonClass;
   @bindable readonly = false;
+  @bindable format;
 
   // picker options
   @bindable options = {};
@@ -34,7 +35,6 @@ export class AbpDatetimePickerCustomElement {
   _originalDateObject;
   _events = {};
   _methods = {};
-  _format;
 
   constructor(elm) {
     this.elm = elm;
@@ -63,9 +63,9 @@ export class AbpDatetimePickerCustomElement {
 
     // update Value & Model binding on a Date picker changed (watch)
     this.domElm.on('dp.change', (e) => {
-      if (moment(e.date, this._format, true).isValid()) {
-        this.model = moment(e.date, this._format, true).toDate();
-        this.value = moment(e.date, this._format, true);
+      if (moment(e.date, this.format, true).isValid()) {
+        this.model = moment(e.date, this.format, true).toDate();
+        this.value = moment(e.date, this.format, true);
       } else if (!e.date) {
         this.model = null;
         this.value = null;
@@ -133,17 +133,17 @@ export class AbpDatetimePickerCustomElement {
     this.options = Object.assign({}, globalPickerOptions, pickerOptions);
 
     if (this.options) {
-      this._format = this._originalDateFormat = this.options.hasOwnProperty('format') ? this.options.format : 'YYYY-MM-DD';
+      this.format = this._originalDateFormat = this.options.hasOwnProperty('format') ? this.options.format : 'YYYY-MM-DD';
     }
     if (this.model) {
-      this._originalDateObject = moment(this.model, this._format, true).toDate() || this.elm.getAttribute('model');
+      this._originalDateObject = moment(this.model, this.format, true).toDate() || this.elm.getAttribute('model');
     }
     this._originalValue = this.value || this.elm.getAttribute('value');
     let value = this._originalValue || this._originalDateObject;
 
-    if (value && moment(value, this._format, true).isValid()) {
-      this.model = moment(value, this._format, true).toDate();
-      this.value = moment(value, this._format, true);
+    if (value && moment(value, this.format, true).isValid()) {
+      this.model = moment(value, this.format, true).toDate();
+      this.value = moment(value, this.format, true);
     }
   }
 
@@ -308,16 +308,26 @@ export class AbpDatetimePickerCustomElement {
       throw new Error('Datetimepicker, model.bind must be of type Date');
     }
     if (newValue !== oldValue && newValue) {
-      if (moment(newValue, this._format, true).isValid()) {
-        this.value = moment(newValue, this._format, true).format(this._format);
+      if (moment(newValue, this.format, true).isValid()) {
+        this.value = moment(newValue, this.format, true).format(this.format);
+      }
+    }
+  }
+
+  formatChanged(newValue, oldValue) {
+    if (newValue !== oldValue && newValue && this.element) {
+      if (moment(this.value, newValue).isValid()) {
+        this.value = moment(this.value, newValue).format(newValue);
+        this.options.format = newValue;
+        this.element.methods.format(newValue);
       }
     }
   }
 
   valueChanged(newValue, oldValue) {
     if (newValue !== oldValue && newValue) {
-      if (moment(newValue, this._format, true).isValid()) {
-        this.model = moment(newValue, this._format, true).toDate();
+      if (moment(newValue, this.format, true).isValid()) {
+        this.model = moment(newValue, this.format, true).toDate();
       }
     }
   }
