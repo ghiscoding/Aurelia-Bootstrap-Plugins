@@ -1,4 +1,4 @@
-var _dec, _dec2, _dec3, _dec4, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15, _descriptor16;
+var _dec, _dec2, _dec3, _dec4, _class, _desc, _value, _class2, _descriptor, _descriptor2, _descriptor3, _descriptor4, _descriptor5, _descriptor6, _descriptor7, _descriptor8, _descriptor9, _descriptor10, _descriptor11, _descriptor12, _descriptor13, _descriptor14, _descriptor15;
 
 function _initDefineProp(target, property, descriptor, context) {
   if (!descriptor) return;
@@ -70,19 +70,17 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
 
     _initDefineProp(this, 'readonly', _descriptor9, this);
 
-    _initDefineProp(this, 'format', _descriptor10, this);
+    _initDefineProp(this, 'options', _descriptor10, this);
 
-    _initDefineProp(this, 'options', _descriptor11, this);
+    _initDefineProp(this, 'onHide', _descriptor11, this);
 
-    _initDefineProp(this, 'onHide', _descriptor12, this);
+    _initDefineProp(this, 'onShow', _descriptor12, this);
 
-    _initDefineProp(this, 'onShow', _descriptor13, this);
+    _initDefineProp(this, 'onChange', _descriptor13, this);
 
-    _initDefineProp(this, 'onChange', _descriptor14, this);
+    _initDefineProp(this, 'onError', _descriptor14, this);
 
-    _initDefineProp(this, 'onError', _descriptor15, this);
-
-    _initDefineProp(this, 'onUpdate', _descriptor16, this);
+    _initDefineProp(this, 'onUpdate', _descriptor15, this);
 
     this._events = {};
     this._methods = {};
@@ -107,9 +105,9 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
     this.domElm.datetimepicker(this.options);
 
     this.domElm.on('dp.change', e => {
-      if (moment(e.date, this.format, true).isValid()) {
-        this.model = moment(e.date, this.format, true).toDate();
-        this.value = moment(e.date, this.format, true);
+      if (moment(e.date, this._format, true).isValid()) {
+        this.model = moment(e.date, this._format, true).toDate();
+        this.value = moment(e.date, this._format, true);
       } else if (!e.date) {
         this.model = null;
         this.value = null;
@@ -171,17 +169,17 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
     this.options = Object.assign({}, globalPickerOptions, pickerOptions);
 
     if (this.options) {
-      this.format = this._originalDateFormat = this.options.hasOwnProperty('format') ? this.options.format : 'YYYY-MM-DD';
+      this._format = this._originalDateFormat = this.options.hasOwnProperty('format') ? this.options.format : 'YYYY-MM-DD';
     }
     if (this.model) {
-      this._originalDateObject = moment(this.model, this.format, true).toDate() || this.elm.getAttribute('model');
+      this._originalDateObject = moment(this.model, this._format, true).toDate() || this.elm.getAttribute('model');
     }
     this._originalValue = this.value || this.elm.getAttribute('value');
     let value = this._originalValue || this._originalDateObject;
 
-    if (value && moment(value, this.format, true).isValid()) {
-      this.model = moment(value, this.format, true).toDate();
-      this.value = moment(value, this.format, true);
+    if (value && moment(value, this._format, true).isValid()) {
+      this.model = moment(value, this._format, true).toDate();
+      this.value = moment(value, this._format, true);
     }
   }
 
@@ -284,26 +282,16 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
       throw new Error('Datetimepicker, model.bind must be of type Date');
     }
     if (newValue !== oldValue && newValue) {
-      if (moment(newValue, this.format, true).isValid()) {
-        this.value = moment(newValue, this.format, true).format(this.format);
-      }
-    }
-  }
-
-  formatChanged(newValue, oldValue) {
-    if (newValue !== oldValue && newValue && this.element) {
-      if (moment(this.value, newValue).isValid()) {
-        this.value = moment(this.value, newValue).format(newValue);
-        this.options.format = newValue;
-        this.element.methods.format(newValue);
+      if (moment(newValue, this._format, true).isValid()) {
+        this.value = moment(newValue, this._format, true).format(this._format);
       }
     }
   }
 
   valueChanged(newValue, oldValue) {
     if (newValue !== oldValue && newValue) {
-      if (moment(newValue, this.format, true).isValid()) {
-        this.model = moment(newValue, this.format, true).toDate();
+      if (moment(newValue, this._format, true).isValid()) {
+        this.model = moment(newValue, this._format, true).toDate();
       }
     }
   }
@@ -355,27 +343,24 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
   initializer: function () {
     return false;
   }
-}), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, 'format', [bindable], {
-  enumerable: true,
-  initializer: null
-}), _descriptor11 = _applyDecoratedDescriptor(_class2.prototype, 'options', [bindable], {
+}), _descriptor10 = _applyDecoratedDescriptor(_class2.prototype, 'options', [bindable], {
   enumerable: true,
   initializer: function () {
     return {};
   }
-}), _descriptor12 = _applyDecoratedDescriptor(_class2.prototype, 'onHide', [bindable], {
+}), _descriptor11 = _applyDecoratedDescriptor(_class2.prototype, 'onHide', [bindable], {
   enumerable: true,
   initializer: null
-}), _descriptor13 = _applyDecoratedDescriptor(_class2.prototype, 'onShow', [bindable], {
+}), _descriptor12 = _applyDecoratedDescriptor(_class2.prototype, 'onShow', [bindable], {
   enumerable: true,
   initializer: null
-}), _descriptor14 = _applyDecoratedDescriptor(_class2.prototype, 'onChange', [bindable], {
+}), _descriptor13 = _applyDecoratedDescriptor(_class2.prototype, 'onChange', [bindable], {
   enumerable: true,
   initializer: null
-}), _descriptor15 = _applyDecoratedDescriptor(_class2.prototype, 'onError', [bindable], {
+}), _descriptor14 = _applyDecoratedDescriptor(_class2.prototype, 'onError', [bindable], {
   enumerable: true,
   initializer: null
-}), _descriptor16 = _applyDecoratedDescriptor(_class2.prototype, 'onUpdate', [bindable], {
+}), _descriptor15 = _applyDecoratedDescriptor(_class2.prototype, 'onUpdate', [bindable], {
   enumerable: true,
   initializer: null
 })), _class2)) || _class);
