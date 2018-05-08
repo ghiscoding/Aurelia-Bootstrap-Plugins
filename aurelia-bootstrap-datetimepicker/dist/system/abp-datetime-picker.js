@@ -321,6 +321,17 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
           }
         };
 
+        AbpDatetimePickerCustomElement.prototype.optionsChanged = function optionsChanged(newValue, oldValue) {
+          if (newValue !== oldValue && newValue) {
+            var newFormat = newValue.format;
+            if (newFormat && this._format !== newFormat && moment(this.model, newFormat).isValid()) {
+              this._format = newFormat;
+              this.model = moment(this.model, this._format).toDate();
+              this.element.methods.format(this._format);
+            }
+          }
+        };
+
         AbpDatetimePickerCustomElement.prototype.valueChanged = function valueChanged(newValue, oldValue) {
           if (newValue !== oldValue && newValue) {
             if (moment(newValue, this._format, true).isValid()) {

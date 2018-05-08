@@ -314,6 +314,17 @@ export class AbpDatetimePickerCustomElement {
     }
   }
 
+  optionsChanged(newValue, oldValue) {
+    if (newValue !== oldValue && newValue) {
+      let newFormat = newValue.format;
+      if (newFormat && this._format !== newFormat && moment(this.model, newFormat).isValid()) {
+        this._format = newFormat;
+        this.model = moment(this.model, this._format).toDate();
+        this.element.methods.format(this._format);
+      }
+    }
+  }
+
   valueChanged(newValue, oldValue) {
     if (newValue !== oldValue && newValue) {
       if (moment(newValue, this._format, true).isValid()) {

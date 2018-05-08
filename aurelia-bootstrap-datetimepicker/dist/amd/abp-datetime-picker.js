@@ -319,6 +319,17 @@ define(['exports', 'aurelia-framework', 'moment', 'jquery', './picker-global-opt
       }
     };
 
+    AbpDatetimePickerCustomElement.prototype.optionsChanged = function optionsChanged(newValue, oldValue) {
+      if (newValue !== oldValue && newValue) {
+        var newFormat = newValue.format;
+        if (newFormat && this._format !== newFormat && (0, _moment2.default)(this.model, newFormat).isValid()) {
+          this._format = newFormat;
+          this.model = (0, _moment2.default)(this.model, this._format).toDate();
+          this.element.methods.format(this._format);
+        }
+      }
+    };
+
     AbpDatetimePickerCustomElement.prototype.valueChanged = function valueChanged(newValue, oldValue) {
       if (newValue !== oldValue && newValue) {
         if ((0, _moment2.default)(newValue, this._format, true).isValid()) {
