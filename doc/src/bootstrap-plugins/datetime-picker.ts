@@ -10,7 +10,6 @@ export class DateTimeEdit {
   @bindable picker;
   activeDate: Date;
   awesomeDate: Moment.Moment;
-  formatDate: Moment.Moment;
   dueDate: string = '30.06.2017';
   myDateObject: Date;
   myDateObject2: Moment.Moment;
@@ -23,7 +22,6 @@ export class DateTimeEdit {
     this.myDateObject2 = Moment();
     this.activeDate = null;
     this.awesomeDate = Moment();
-    this.formatDate = Moment();
   }
 
   pickerChanged() {

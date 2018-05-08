@@ -7,8 +7,7 @@
                blur.trigger="blur()"
                placeholder.bind="placeholder"
                readonly.bind="readonly"
-               element.bind="element"
-               format.bind="format">
+               element.bind="element">
         <span if.bind="parseBool(withDateIcon)" class="input-group-addon" data-target="#datetimepicker" data-toggle="datetimepicker">
             <span class.bind="iconBase === 'glyphicon' ? 'glyphicon glyphicon-calendar' : iconBase === 'font-awesome' ? 'fa fa-calendar' : 'fas fa-calendar-alt'"></span>
         </span>
@@ -22,8 +21,7 @@
                blur.trigger="blur()"
                placeholder.bind="placeholder"
                readonly.bind="readonly"
-               element.bind="element"
-               format.bind="format">
+               element.bind="element">
                <span if.bind="parseBool(withDateIcon)" class="input-group-append" data-target="#datetimepicker" data-toggle="datetimepicker">
                   <button class.bind="buttonClass" type="button" click.delegate="showCalendar()">
                     <span class.bind="iconBase === 'glyphicon' ? 'glyphicon glyphicon-calendar' : iconBase === 'font-awesome' ? 'fa fa-calendar' : 'fas fa-calendar-alt'"></span>
