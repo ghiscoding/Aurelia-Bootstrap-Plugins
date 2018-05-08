@@ -322,13 +322,13 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
         };
 
         AbpDatetimePickerCustomElement.prototype.optionsChanged = function optionsChanged(newValue, oldValue) {
-          if (newValue !== oldValue && newValue) {
+          if (newValue !== oldValue && newValue && this.domElm) {
             var newFormat = newValue.format;
             if (newFormat && this._format !== newFormat && moment(this.model, newFormat).isValid()) {
               this._format = newFormat;
               this.model = moment(this.model, this._format).toDate();
-              this.element.methods.format(this._format);
             }
+            this.domElm.data('DateTimePicker').options(newValue);
           }
         };
 

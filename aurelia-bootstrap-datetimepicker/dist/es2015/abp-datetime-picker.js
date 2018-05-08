@@ -289,13 +289,13 @@ export let AbpDatetimePickerCustomElement = (_dec = inject(Element), _dec2 = bin
   }
 
   optionsChanged(newValue, oldValue) {
-    if (newValue !== oldValue && newValue) {
+    if (newValue !== oldValue && newValue && this.domElm) {
       let newFormat = newValue.format;
       if (newFormat && this._format !== newFormat && moment(this.model, newFormat).isValid()) {
         this._format = newFormat;
         this.model = moment(this.model, this._format).toDate();
-        this.element.methods.format(this._format);
       }
+      this.domElm.data('DateTimePicker').options(newValue);
     }
   }
 

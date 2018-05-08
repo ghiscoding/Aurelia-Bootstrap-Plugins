@@ -320,13 +320,13 @@ define(['exports', 'aurelia-framework', 'moment', 'jquery', './picker-global-opt
     };
 
     AbpDatetimePickerCustomElement.prototype.optionsChanged = function optionsChanged(newValue, oldValue) {
-      if (newValue !== oldValue && newValue) {
+      if (newValue !== oldValue && newValue && this.domElm) {
         var newFormat = newValue.format;
         if (newFormat && this._format !== newFormat && (0, _moment2.default)(this.model, newFormat).isValid()) {
           this._format = newFormat;
           this.model = (0, _moment2.default)(this.model, this._format).toDate();
-          this.element.methods.format(this._format);
         }
+        this.domElm.data('DateTimePicker').options(newValue);
       }
     };
 

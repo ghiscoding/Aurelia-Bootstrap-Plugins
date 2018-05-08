@@ -66,14 +66,16 @@
         <hr/>
 
         <div class="form-group">
-          <label class="control-label">Editable format</label>
-          <abp-datetime-picker value.bind="formatDate" options.bind="{ showClear: true, showTodayButton: true, format: format }"></abp-datetime-picker>
+          <label class="control-label">Editable Options</label>
+          <abp-datetime-picker value.bind="editableDate" options.bind="{ showClear: true, showTodayButton: true, format: format, minDate: editableDateMinDate }"></abp-datetime-picker>
           <span class="text-danger">Format: </span><br>
           <select class="form-control" value.bind="format">
             <option>MM/DD/YYYY</option>
             <option>MM/DD/YYYY HH:mm:ss</option>
             <option>MM/DD/YYYY HH:mm:ss a</option>
           </select>
+          <span class="text-danger">Min Date: </span><br>
+          <abp-datetime-picker value.bind="editableDateMinDate" options.bind="{ showClear: true, showTodayButton: true, format: format, maxDate: editableDate }"></abp-datetime-picker>
         </div>
       </div>
 
