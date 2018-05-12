@@ -10,6 +10,9 @@ export class DateTimeEdit {
   @bindable picker;
   activeDate: Date;
   awesomeDate: Moment.Moment;
+  editableDate: Moment.Moment;
+  editableDateMinDate: Moment.Moment;
+  format: string = 'MM/DD/YYYY';
   dueDate: string = '30.06.2017';
   myDateObject: Date;
   myDateObject2: Moment.Moment;
@@ -22,6 +25,8 @@ export class DateTimeEdit {
     this.myDateObject2 = Moment();
     this.activeDate = null;
     this.awesomeDate = Moment();
+    this.editableDate = Moment();
+    this.editableDateMinDate = Moment();
   }
 
   pickerChanged() {

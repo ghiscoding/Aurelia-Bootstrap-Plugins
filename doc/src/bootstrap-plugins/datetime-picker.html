@@ -62,6 +62,21 @@
           <label class="control-label">Font-Awesome icons</label>
           <abp-datetime-picker value.bind="awesomeDate" icon-base="font-awesome" options.bind="{ showClear: true, showTodayButton: true, format: 'YYYY-MM-DD' }"></abp-datetime-picker>
         </div>
+
+        <hr/>
+
+        <div class="form-group">
+          <label class="control-label">Editable Options</label>
+          <abp-datetime-picker value.bind="editableDate" options.bind="{ showClear: true, showTodayButton: true, format: format, minDate: editableDateMinDate }"></abp-datetime-picker>
+          <span class="text-danger">Format: </span><br>
+          <select class="form-control" value.bind="format">
+            <option>MM/DD/YYYY</option>
+            <option>MM/DD/YYYY HH:mm:ss</option>
+            <option>MM/DD/YYYY HH:mm:ss a</option>
+          </select>
+          <span class="text-danger">Min Date: </span><br>
+          <abp-datetime-picker value.bind="editableDateMinDate" options.bind="{ showClear: true, showTodayButton: true, format: format, maxDate: editableDate }"></abp-datetime-picker>
+        </div>
       </div>
 
       <div class="col-md-12">
