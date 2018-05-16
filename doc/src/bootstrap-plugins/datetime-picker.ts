@@ -19,6 +19,20 @@ export class DateTimeEdit {
   post: {
     dateEntered: Date
   };
+  multipleDateValues = [
+    {
+      id: 1,
+      date: "2018-01-11T00:00:00",
+      timeStart: "2018-01-11T07:30:00",
+      timEnd: "2018-01-11T22:00:00"
+    },
+    {
+      id: 2,
+      date: "2018-01-11T00:00:00",
+      timeStart: "2018-01-24T08:30:00",
+      timEnd: "2018-01-24T22:00:00"
+    }
+  ];
 
   constructor() {
     this.myDateObject = new Date(2017, 1, 1, 2, 30);

@@ -315,7 +315,7 @@ export class AbpDatetimePickerCustomElement {
   }
 
   optionsChanged(newValue, oldValue) {
-    if (newValue !== oldValue && newValue && this.domElm) {
+    if (newValue !== oldValue && newValue && this.domElm && this.domElm.data('DateTimePicker')) {
       let newFormat = newValue.format;
       if (newFormat && this._format !== newFormat && moment(this.model, newFormat).isValid()) {
         this._format = newFormat;

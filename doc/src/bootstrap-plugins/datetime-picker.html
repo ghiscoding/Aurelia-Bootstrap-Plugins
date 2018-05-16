@@ -77,6 +77,20 @@
           <span class="text-danger">Min Date: </span><br>
           <abp-datetime-picker value.bind="editableDateMinDate" options.bind="{ showClear: true, showTodayButton: true, format: format, maxDate: editableDate }"></abp-datetime-picker>
         </div>
+
+        <hr />
+
+        <div class="form-group">
+            <label class="control-label">With a Repeater</label>
+        </div>
+        <table>
+          <tr repeat.for="line of multipleDateValues">
+            <td>
+                <label class="control-label">Loop Option # ${line.id}</label>
+                <abp-datetime-picker value.bind="line.timeStart" options.bind="{ format: 'YYYY-MM-DD HH:mm' }"></abp-datetime-picker>
+              </td>
+          </tr>
+        </table>
       </div>
 
       <div class="col-md-12">
