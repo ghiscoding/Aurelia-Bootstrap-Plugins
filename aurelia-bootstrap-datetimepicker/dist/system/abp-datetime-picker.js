@@ -311,18 +311,16 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
         };
 
         AbpDatetimePickerCustomElement.prototype.modelChanged = function modelChanged(newValue, oldValue) {
-          if (isNaN(Date.parse(newValue)) && newValue !== null) {
+          if (!moment(newValue, this._format, true).isValid() && newValue !== null) {
             throw new Error('Datetimepicker, model.bind must be of type Date');
           }
           if (newValue !== oldValue && newValue) {
-            if (moment(newValue, this._format, true).isValid()) {
-              this.value = moment(newValue, this._format, true).format(this._format);
-            }
+            this.value = moment(newValue, this._format, true).format(this._format);
           }
         };
 
         AbpDatetimePickerCustomElement.prototype.optionsChanged = function optionsChanged(newValue, oldValue) {
-          if (newValue !== oldValue && newValue && this.domElm) {
+          if (newValue !== oldValue && newValue && this.domElm && this.domElm.data('DateTimePicker')) {
             var newFormat = newValue.format;
             if (newFormat && this._format !== newFormat && moment(this.model, newFormat).isValid()) {
               this._format = newFormat;
