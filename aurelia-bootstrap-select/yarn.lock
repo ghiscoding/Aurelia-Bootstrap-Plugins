@@ -960,11 +960,9 @@ boom@2.x.x:
   dependencies:
     hoek "2.x.x"
 
-bootstrap-select@~1.12.2:
-  version "1.12.4"
-  resolved "https://registry.yarnpkg.com/bootstrap-select/-/bootstrap-select-1.12.4.tgz#7f15d3c0ce978868d9c09c70f96624f55fa02ee1"
-  dependencies:
-    jquery ">=1.8"
+bootstrap-select@^1.13.1:
+  version "1.13.1"
+  resolved "https://registry.yarnpkg.com/bootstrap-select/-/bootstrap-select-1.13.1.tgz#f59c02926fb5ac6356b9d1cdbc5384c2f013d9ba"
 
 bootstrap@^3.3.7:
   version "3.3.7"
@@ -3034,7 +3032,7 @@ jasmine-core@^2.4.1:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/jasmine-core/-/jasmine-core-2.7.0.tgz#50ff8c4f92d8ef5c0b2c1b846dd263ed85152091"
 
-jquery@>=1.8, jquery@^3.1.1:
+jquery@^3.1.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.2.1.tgz#5c4d9de652af6cd0a770154a631bba12b015c787"
 
