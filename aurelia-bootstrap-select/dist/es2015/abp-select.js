@@ -407,11 +407,6 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService, Binding
     this.domElm.on('changed.bs.select', (e, clickedIndex, newValue, oldValue) => {
       this.selectedValue = this.domElm.selectpicker('val');
       let selection = this.findItems(this.collection, this.selectedValue, this.objectKey);
-      if (selection.indexes) {
-        this.domElm.selectpicker('val', selection.indexes);
-      }
-
-      this.selectedValue = selection.indexes;
       this.selectedItem = selection.items;
     });
   }

@@ -490,11 +490,6 @@ System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-sel
           this.domElm.on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
             _this8.selectedValue = _this8.domElm.selectpicker('val');
             var selection = _this8.findItems(_this8.collection, _this8.selectedValue, _this8.objectKey);
-            if (selection.indexes) {
-              _this8.domElm.selectpicker('val', selection.indexes);
-            }
-
-            _this8.selectedValue = selection.indexes;
             _this8.selectedItem = selection.items;
           });
         };
