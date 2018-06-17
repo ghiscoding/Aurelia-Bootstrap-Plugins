@@ -358,11 +358,10 @@ var AbpSelectCustomElement = exports.AbpSelectCustomElement = (_dec = (0, _aurel
   AbpSelectCustomElement.prototype.findItems = function findItems(collection, newValue, objectKey) {
     var _this6 = this;
 
-    var foundItems = [];
     var searchingItems = [];
     var selection = {
-      indexes: [],
-      items: []
+      index: this.multiple ? [] : undefined,
+      item: this.multiple ? [] : undefined
     };
     if (newValue === null || newValue === undefined) {
       return selection;
@@ -391,9 +390,15 @@ var AbpSelectCustomElement = exports.AbpSelectCustomElement = (_dec = (0, _aurel
         return _this6.util.isObject(item) ? item[objectKey] == searchFilter : item == searchFilter;
       });
       if (foundItem) {
-        selection.indexes.push(_this6.util.isObject(foundItem) ? foundItem[objectKey] : foundItem);
-        selection.items.push(foundItem);
-        foundItems.push(foundItem);
+        var foundItemIndex = _this6.util.isObject(foundItem) ? foundItem[objectKey] : foundItem;
+        if (_this6.multiple) {
+          selection.index.push(foundItemIndex);
+          selection.item.push(foundItem);
+        } else {
+          selection.index = foundItemIndex;
+          selection.item = foundItem;
+          return 'break';
+        }
       }
     };
 
@@ -412,22 +417,19 @@ var AbpSelectCustomElement = exports.AbpSelectCustomElement = (_dec = (0, _aurel
     if (!selection) {
       return true;
     }
-    return selection.items.length === 0 && selection.indexes.length === 0;
-  };
-
-  AbpSelectCustomElement.prototype.isNotEmptySelection = function isNotEmptySelection(selection) {
-    if (!selection) {
-      return true;
+    if (this.multiple) {
+      return selection.item.length === 0;
+    } else {
+      return selection.item ? false : true;
     }
-    return selection.items.length > 0 && selection.indexes.length > 0;
   };
 
   AbpSelectCustomElement.prototype.renderSelection = function renderSelection(selection) {
     if (this.domElm) {
-      if (selection.indexes.length > 0) {
-        this.domElm.selectpicker('val', selection.indexes);
-      } else if (this.util.parseBool(this.emptyOnNull) && this.isEmptySelection(selection)) {
+      if (this.isEmptySelection(selection) && this.util.parseBool(this.emptyOnNull)) {
         this.domElm.selectpicker('val', null);
+      } else if (!this.isEmptySelection(selection)) {
+        this.domElm.selectpicker('val', selection.index);
       }
     }
   };
@@ -436,14 +438,10 @@ var AbpSelectCustomElement = exports.AbpSelectCustomElement = (_dec = (0, _aurel
     if (!this.util.isEqual(newValue, oldValue)) {
       var selection = this.findItems(this.collection, newValue || this._originalSelectedIndexes, this.objectKey);
 
-      if (!this.util.parseBool(this.emptyOnNull) && !this.multiple || this.isNotEmptySelection(selection)) {
-        if (selection.indexes.length > 0) {
-          var selectedValue = selection.indexes;
-          this.selectedValue = !this.multiple && Array.isArray(selectedValue) ? selectedValue[0] : selectedValue;
-        } else {
-          var _selectedValue = this.util.isObject(this.collection[0]) ? this.collection[0][this.objectKey] : this.collection[0];
-          this.selectedValue = !this.multiple && Array.isArray(_selectedValue) ? _selectedValue[0] : _selectedValue;
-        }
+      if (this.isEmptySelection(selection) && !this.util.parseBool(this.emptyOnNull) && !this.multiple) {
+        this.selectedValue = this.util.isObject(this.collection[0]) ? this.collection[0][this.objectKey] : this.collection[0];
+      } else if (!this.isEmptySelection(selection)) {
+        this.selectedValue = selection.index;
       }
 
       this.renderSelection(selection);
@@ -453,15 +451,7 @@ var AbpSelectCustomElement = exports.AbpSelectCustomElement = (_dec = (0, _aurel
   AbpSelectCustomElement.prototype.selectedValueChanged = function selectedValueChanged(newValue, oldValue) {
     if (!this.util.isEqual(newValue, oldValue)) {
       var selection = this.findItems(this.collection, newValue || this._originalSelectedObjects, this.objectKey);
-
-      if (!this.util.parseBool(this.emptyOnNull) && !this.multiple || this.isNotEmptySelection(selection)) {
-        var selectedItem = selection.items.length > 0 ? selection.items : this.collection[0];
-        this.selectedItem = !this.multiple && Array.isArray(selectedItem) ? selectedItem[0] : selectedItem;
-      } else if (this.util.parseBool(this.emptyOnNull) && !this.multiple) {
-        this.selectedItem = undefined;
-      }
-
-      this.renderSelection(selection);
+      this.selectedItem = selection.item;
     }
   };
 
@@ -471,12 +461,13 @@ var AbpSelectCustomElement = exports.AbpSelectCustomElement = (_dec = (0, _aurel
     this.domElm.on('loaded.bs.select', function (e) {
       var newValue = _this7._originalSelectedIndexes || _this7._originalSelectedObjects;
       var selection = _this7.findItems(_this7.collection, newValue, _this7.objectKey);
-      if (selection.indexes) {
-        _this7.selectedValue = selection.indexes;
-      } else {
+      if (_this7.isEmptySelection(selection)) {
         _this7.selectedValue = _this7.util.isObject(_this7.collection[0]) ? _this7.collection[0][_this7.objectKey] : _this7.collection[0];
+        _this7.selectedItem = _this7.collection[0];
+      } else {
+        _this7.selectedValue = selection.index;
+        _this7.selectedItem = selection.item;
       }
-      _this7.selectedItem = selection.items ? selection.items : _this7.collection[0];
       _this7.renderSelection(selection);
     });
   };
@@ -485,9 +476,9 @@ var AbpSelectCustomElement = exports.AbpSelectCustomElement = (_dec = (0, _aurel
     var _this8 = this;
 
     this.domElm.on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
-      _this8.selectedValue = _this8.domElm.selectpicker('val');
-      var selection = _this8.findItems(_this8.collection, _this8.selectedValue, _this8.objectKey);
-      _this8.selectedItem = selection.items;
+      var val = _this8.domElm.selectpicker('val');
+      var selection = _this8.findItems(_this8.collection, val, _this8.objectKey);
+      _this8.selectedValue = selection.index;
     });
   };
 

@@ -301,11 +301,10 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService, Binding
   }
 
   findItems(collection, newValue, objectKey) {
-    let foundItems = [];
     let searchingItems = [];
     let selection = {
-      indexes: [],
-      items: []
+      index: this.multiple ? [] : undefined,
+      item: this.multiple ? [] : undefined
     };
     if (newValue === null || newValue === undefined) {
       return selection;
@@ -323,9 +322,15 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService, Binding
         return this.util.isObject(item) ? item[objectKey] == searchFilter : item == searchFilter;
       });
       if (foundItem) {
-        selection.indexes.push(this.util.isObject(foundItem) ? foundItem[objectKey] : foundItem);
-        selection.items.push(foundItem);
-        foundItems.push(foundItem);
+        const foundItemIndex = this.util.isObject(foundItem) ? foundItem[objectKey] : foundItem;
+        if (this.multiple) {
+          selection.index.push(foundItemIndex);
+          selection.item.push(foundItem);
+        } else {
+          selection.index = foundItemIndex;
+          selection.item = foundItem;
+          break;
+        }
       }
     }
 
@@ -336,22 +341,19 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService, Binding
     if (!selection) {
       return true;
     }
-    return selection.items.length === 0 && selection.indexes.length === 0;
-  }
-
-  isNotEmptySelection(selection) {
-    if (!selection) {
-      return true;
+    if (this.multiple) {
+      return selection.item.length === 0;
+    } else {
+      return selection.item ? false : true;
     }
-    return selection.items.length > 0 && selection.indexes.length > 0;
   }
 
   renderSelection(selection) {
     if (this.domElm) {
-      if (selection.indexes.length > 0) {
-        this.domElm.selectpicker('val', selection.indexes);
-      } else if (this.util.parseBool(this.emptyOnNull) && this.isEmptySelection(selection)) {
+      if (this.isEmptySelection(selection) && this.util.parseBool(this.emptyOnNull)) {
         this.domElm.selectpicker('val', null);
+      } else if (!this.isEmptySelection(selection)) {
+        this.domElm.selectpicker('val', selection.index);
       }
     }
   }
@@ -360,14 +362,10 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService, Binding
     if (!this.util.isEqual(newValue, oldValue)) {
       let selection = this.findItems(this.collection, newValue || this._originalSelectedIndexes, this.objectKey);
 
-      if (!this.util.parseBool(this.emptyOnNull) && !this.multiple || this.isNotEmptySelection(selection)) {
-        if (selection.indexes.length > 0) {
-          const selectedValue = selection.indexes;
-          this.selectedValue = !this.multiple && Array.isArray(selectedValue) ? selectedValue[0] : selectedValue;
-        } else {
-          const selectedValue = this.util.isObject(this.collection[0]) ? this.collection[0][this.objectKey] : this.collection[0];
-          this.selectedValue = !this.multiple && Array.isArray(selectedValue) ? selectedValue[0] : selectedValue;
-        }
+      if (this.isEmptySelection(selection) && !this.util.parseBool(this.emptyOnNull) && !this.multiple) {
+        this.selectedValue = this.util.isObject(this.collection[0]) ? this.collection[0][this.objectKey] : this.collection[0];
+      } else if (!this.isEmptySelection(selection)) {
+        this.selectedValue = selection.index;
       }
 
       this.renderSelection(selection);
@@ -377,15 +375,7 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService, Binding
   selectedValueChanged(newValue, oldValue) {
     if (!this.util.isEqual(newValue, oldValue)) {
       let selection = this.findItems(this.collection, newValue || this._originalSelectedObjects, this.objectKey);
-
-      if (!this.util.parseBool(this.emptyOnNull) && !this.multiple || this.isNotEmptySelection(selection)) {
-        const selectedItem = selection.items.length > 0 ? selection.items : this.collection[0];
-        this.selectedItem = !this.multiple && Array.isArray(selectedItem) ? selectedItem[0] : selectedItem;
-      } else if (this.util.parseBool(this.emptyOnNull) && !this.multiple) {
-        this.selectedItem = undefined;
-      }
-
-      this.renderSelection(selection);
+      this.selectedItem = selection.item;
     }
   }
 
@@ -393,21 +383,22 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService, Binding
     this.domElm.on('loaded.bs.select', e => {
       let newValue = this._originalSelectedIndexes || this._originalSelectedObjects;
       let selection = this.findItems(this.collection, newValue, this.objectKey);
-      if (selection.indexes) {
-        this.selectedValue = selection.indexes;
-      } else {
+      if (this.isEmptySelection(selection)) {
         this.selectedValue = this.util.isObject(this.collection[0]) ? this.collection[0][this.objectKey] : this.collection[0];
+        this.selectedItem = this.collection[0];
+      } else {
+        this.selectedValue = selection.index;
+        this.selectedItem = selection.item;
       }
-      this.selectedItem = selection.items ? selection.items : this.collection[0];
       this.renderSelection(selection);
     });
   }
 
   watchOnChangedToUpdateValueAndItemObjects() {
     this.domElm.on('changed.bs.select', (e, clickedIndex, newValue, oldValue) => {
-      this.selectedValue = this.domElm.selectpicker('val');
-      let selection = this.findItems(this.collection, this.selectedValue, this.objectKey);
-      this.selectedItem = selection.items;
+      const val = this.domElm.selectpicker('val');
+      let selection = this.findItems(this.collection, val, this.objectKey);
+      this.selectedValue = selection.index;
     });
   }
 }, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'collection', [_dec2], {
