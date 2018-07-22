@@ -21,6 +21,8 @@ export class AbpSelectCustomElement {
   @bindable objectKey = 'id';
   @bindable pickerOptions;
   @bindable placeholder;
+  @bindable readonly = false;
+  @bindable required = false;
   @bindable selected;
 
   // events (from the View)
