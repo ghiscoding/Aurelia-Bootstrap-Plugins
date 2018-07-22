@@ -6,6 +6,8 @@
             element.bind="element"
             multiple.bind="util.parseBoolOrTrueOnEmpty(multiple) & optional"
             blur.trigger="blur()"
+            readonly.bind="readonly"
+            required.bind="required"
             placeholder.bind="placeholder">
 
         <optgroup if.bind="util.parseBool(hasOptgroup)" repeat.for="group of getGroupedCollection()"

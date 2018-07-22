@@ -7,7 +7,16 @@ https://github.com/silviomoreto/bootstrap-select/issues/1135
   background-color: #fff;
   border-color: #ccc;
 }
-
+.bootstrap-select {
+  width: 100% !important;
+  .btn-light {
+    background-color: #fff;
+    border: 1px solid rgb(206, 212, 218);
+  }
+  .bs-ok-default {
+    border-style: inline-block !important;
+  }
+}
 .bootstrap-select.show > .dropdown-menu > .dropdown-menu,
 .bootstrap-select > .dropdown-menu > .dropdown-menu li.hidden {
   display: block;
@@ -31,7 +40,7 @@ https://github.com/silviomoreto/bootstrap-select/issues/1135
 }
 
 .bootstrap-select > .dropdown-toggle {
-  width: auto;
+  width: 100%;
 }
 
 .dropdown-menu > li.active > a {
@@ -44,7 +53,7 @@ https://github.com/silviomoreto/bootstrap-select/issues/1135
 }
 .bootstrap-select .check-mark::after {
   font-family: "FontAwesome";
-  content: "\f00c";
+  content: "";
 }
 
 .bootstrap-select button {
