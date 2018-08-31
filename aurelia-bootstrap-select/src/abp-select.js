@@ -228,6 +228,7 @@ export class AbpSelectCustomElement {
   collectionChangedObserver(newCollection, oldCollection) {
     setTimeout(() => {
       this.domElm.selectpicker('refresh');
+      this.renderPreSelection();
     });
   }
 
@@ -375,6 +376,19 @@ export class AbpSelectCustomElement {
       }
     }
   }
+  
+  renderPreSelection() {
+    let newValue = this._originalSelectedIndexes || this._originalSelectedObjects;
+    let selection = this.findItems(this.collection, newValue, this.objectKey);
+    if (this.isEmptySelection(selection)) {
+      this.selectedValue = (this.util.isObject(this.collection[0]) ? this.collection[0][this.objectKey] : this.collection[0]);
+      this.selectedItem = this.collection[0];
+    } else {
+      this.selectedValue = selection.index;
+      this.selectedItem = selection.item;
+    }
+    this.renderSelection(selection);
+  }
 
   /**
    * On selected item (ids) changed, we will update the selectedValue(s) unless user chose emptyOnNull on first pass.
@@ -418,16 +432,7 @@ export class AbpSelectCustomElement {
    */
   watchOnLoadedToRenderPreSelection() {
     this.domElm.on('loaded.bs.select', (e) => {
-      let newValue = this._originalSelectedIndexes || this._originalSelectedObjects;
-      let selection = this.findItems(this.collection, newValue, this.objectKey);
-      if (this.isEmptySelection(selection)) {
-        this.selectedValue = (this.util.isObject(this.collection[0]) ? this.collection[0][this.objectKey] : this.collection[0]);
-        this.selectedItem = this.collection[0];
-      } else {
-        this.selectedValue = selection.index;
-        this.selectedItem = selection.item;
-      }
-      this.renderSelection(selection);
+      this.renderPreSelection();
     });
   }
 
