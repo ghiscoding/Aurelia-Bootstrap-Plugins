@@ -327,7 +327,8 @@ export class AbpSelectCustomElement {
       let searchFilter = this.util.isObject(searchItem) ? searchItem[objectKey] : searchItem;
       let foundItem = collection.find(item => {
         // for comparison, we're using == mostly because indexes are passed as string because of html
-        return this.util.isObject(item) ? item[objectKey] == searchFilter : item == searchFilter;
+        const itemInput = this.util.isObject(item) ? item[objectKey] : item;
+        return itemInput.toString() === searchFilter.toString();
       });
       if (foundItem) {
         const foundItemIndex = this.util.isObject(foundItem) ? foundItem[objectKey] : foundItem;
@@ -356,9 +357,8 @@ export class AbpSelectCustomElement {
     }
     if (this.multiple) {
       return selection.item.length === 0;
-    } else {
-      return selection.item ? false : true;
     }
+    return selection.item ? false : true;
   }
 
   /**
