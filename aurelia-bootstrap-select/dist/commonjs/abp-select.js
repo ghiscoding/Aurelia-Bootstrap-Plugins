@@ -315,6 +315,7 @@ var AbpSelectCustomElement = exports.AbpSelectCustomElement = (_dec = (0, _aurel
 
     setTimeout(function () {
       _this5.domElm.selectpicker('refresh');
+      _this5.renderPreSelection();
     });
   };
 
@@ -436,6 +437,19 @@ var AbpSelectCustomElement = exports.AbpSelectCustomElement = (_dec = (0, _aurel
     }
   };
 
+  AbpSelectCustomElement.prototype.renderPreSelection = function renderPreSelection() {
+    var newValue = this._originalSelectedIndexes || this._originalSelectedObjects;
+    var selection = this.findItems(this.collection, newValue, this.objectKey);
+    if (this.isEmptySelection(selection)) {
+      this.selectedValue = this.util.isObject(this.collection[0]) ? this.collection[0][this.objectKey] : this.collection[0];
+      this.selectedItem = this.collection[0];
+    } else {
+      this.selectedValue = selection.index;
+      this.selectedItem = selection.item;
+    }
+    this.renderSelection(selection);
+  };
+
   AbpSelectCustomElement.prototype.selectedItemChanged = function selectedItemChanged(newValue, oldValue) {
     if (!this.util.isEqual(newValue, oldValue)) {
       var selection = this.findItems(this.collection, newValue || this._originalSelectedIndexes, this.objectKey);
@@ -461,16 +475,7 @@ var AbpSelectCustomElement = exports.AbpSelectCustomElement = (_dec = (0, _aurel
     var _this7 = this;
 
     this.domElm.on('loaded.bs.select', function (e) {
-      var newValue = _this7._originalSelectedIndexes || _this7._originalSelectedObjects;
-      var selection = _this7.findItems(_this7.collection, newValue, _this7.objectKey);
-      if (_this7.isEmptySelection(selection)) {
-        _this7.selectedValue = _this7.util.isObject(_this7.collection[0]) ? _this7.collection[0][_this7.objectKey] : _this7.collection[0];
-        _this7.selectedItem = _this7.collection[0];
-      } else {
-        _this7.selectedValue = selection.index;
-        _this7.selectedItem = selection.item;
-      }
-      _this7.renderSelection(selection);
+      _this7.renderPreSelection();
     });
   };
 
