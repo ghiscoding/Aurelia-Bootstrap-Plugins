@@ -296,7 +296,9 @@ define(['exports', 'aurelia-framework', 'moment', 'jquery', './picker-global-opt
     };
 
     AbpDatetimePickerCustomElement.prototype.detached = function detached() {
-      this.domElm.data('DateTimePicker').destroy();
+      if (this.domElm && this.domElm.data('DateTimePicker') && this.domElm.data('DateTimePicker').destroy) {
+        this.domElm.data('DateTimePicker').destroy();
+      }
     };
 
     AbpDatetimePickerCustomElement.prototype.getOption = function getOption(optionName) {

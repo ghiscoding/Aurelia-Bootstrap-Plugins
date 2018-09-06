@@ -297,7 +297,9 @@ var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_
   };
 
   AbpDatetimePickerCustomElement.prototype.detached = function detached() {
-    this.domElm.data('DateTimePicker').destroy();
+    if (this.domElm && this.domElm.data('DateTimePicker') && this.domElm.data('DateTimePicker').destroy) {
+      this.domElm.data('DateTimePicker').destroy();
+    }
   };
 
   AbpDatetimePickerCustomElement.prototype.getOption = function getOption(optionName) {

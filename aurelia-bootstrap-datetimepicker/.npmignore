@@ -1,7 +1,15 @@
 jspm_packages
 bower_components
 .idea
+build
+doc
+node_modules
+printscreen
 screenshots
+test
 client-cli
 client-wp
 npm-debug.log
+karma.conf.js
+gulpfile.js
+yarn.lock
