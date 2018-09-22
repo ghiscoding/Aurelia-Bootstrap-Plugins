@@ -16,7 +16,7 @@
 
 ### Planned plugins
 * `Aurelia-Bootstrap-Typeahead` / source [Typeahead.js](http://twitter.github.io/typeahead.js/examples/)
-  * will be available soon, got a working proof of concept with remote/prefetch.
+  * got no time to work on this, it is **not coming anytime soon**, however I do have a working proof of concept with remote/prefetch, just no time to finish it.
 
 
 ## Samples
