@@ -269,15 +269,15 @@ export class AbpSelectCustomElement {
   }
 
   /**
-   * From an input array, find the mapping property value by an index provided
-   * Example: getMappingPropertyValueFromIndex(option, 2, 'groupLabel') => 'groupLabel' or the user custom group
+   * From an input array, find the mapping property of the first element
+   * Example: getMappingPropertyValueFromGroup(option, 'groupLabel') => 'groupLabel' or the user custom group
    * @param {array} input array
    * @param {string} search property name
    * @return {any} found item (stringo/object)
    */
-  getMappingPropertyValueFromIndex(inputArray, arrayIndex, searchPropName) {
+  getMappingPropertyValueFromGroup(inputArray, searchPropName) {
     let propertyName = this.getMappingProperty(searchPropName);
-    return (inputArray[arrayIndex] && inputArray[arrayIndex].hasOwnProperty(propertyName)) ? inputArray[arrayIndex][propertyName] : '';
+    return (inputArray[0] && inputArray[0].hasOwnProperty(propertyName)) ? inputArray[0][propertyName] : '';
   }
 
   /**
@@ -376,7 +376,7 @@ export class AbpSelectCustomElement {
       }
     }
   }
-  
+
   renderPreSelection() {
     let newValue = this._originalSelectedIndexes || this._originalSelectedObjects;
     let selection = this.findItems(this.collection, newValue, this.objectKey);
