@@ -277,7 +277,7 @@ export class AbpSelectCustomElement {
    */
   getMappingPropertyValueFromGroup(inputArray, searchPropName) {
     let propertyName = this.getMappingProperty(searchPropName);
-    return (inputArray[0] && inputArray[0].hasOwnProperty(propertyName)) ? inputArray[0][propertyName] : '';
+    return (Array.isArray(inputArray) && inputArray[0] && inputArray[0].hasOwnProperty(propertyName)) ? inputArray[0][propertyName] : '';
   }
 
   /**
