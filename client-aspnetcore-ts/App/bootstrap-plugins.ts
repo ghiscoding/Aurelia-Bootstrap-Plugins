@@ -43,7 +43,8 @@ export class Edit {
     { id: 4, option: 'Mayonnaise', company: 'Miracle Whip', group: 'Condiments' },
     { id: 3, option: 'Ketchup',  company: 'Heinz', group: 'Condiments' },
     { id: 2, option: 'Mustard',  company: 'French\'s', group: 'Condiments' },
-    { id: 13, option: 'Toasted', group: 'Breads', disabled: true }
+    { id: 13, option: 'Toasted', group: 'Breads', disabled: true },
+    { id: 20, option: 'Cucumber', group: 'Vegetables' }
   ];
   allCondiments = [
     { id: 1, option: 'Ketchup', company: 'Heinz' },
