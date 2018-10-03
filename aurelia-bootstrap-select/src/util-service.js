@@ -26,8 +26,8 @@ export class UtilService {
    * @return {bool} is eual
    */
   isEqual(a, b) {
-    if (Array.isArray(a)) {
-      return this.isArrayEqual(a, b);
+    if (Array.isArray(a) && Array.isArray(b)) {
+      return this.isArrayEqual(a.sort(), b.sort());
     }
     return a === b;
   }
