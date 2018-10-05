@@ -273,7 +273,14 @@ System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-sel
               var isDisable = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
               if (_this4.domElm.find('optgroup')[index]) {
-                _this4.domElm.find('optgroup')[index].prop('disabled', isDisable);
+                var optgroup = _this4.domElm.find('optgroup').eq(index);
+                var label = optgroup.prop('label');
+                optgroup.prop('disabled', isDisable);
+                _this4.collection.forEach(function (item) {
+                  if (item.group === label) {
+                    item.disabled = isDisable;
+                  }
+                });
                 _this4.domElm.selectpicker('refresh');
               }
             },
@@ -281,6 +288,11 @@ System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-sel
               var isDisable = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
 
               _this4.domElm.find('optgroup[label=' + label + ']').prop('disabled', isDisable);
+              _this4.collection.forEach(function (item) {
+                if (item.group === label) {
+                  item.disabled = isDisable;
+                }
+              });
               _this4.domElm.selectpicker('refresh');
             },
             mobile: function mobile() {
@@ -323,7 +335,9 @@ System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-sel
         };
 
         AbpSelectCustomElement.prototype.detached = function detached() {
-          this.domElm.selectpicker('destroy');
+          if (this.domElm && this.domElm.selectpicker) {
+            this.domElm.selectpicker('destroy');
+          }
           this.collectionSubscription.dispose();
         };
 
@@ -346,9 +360,9 @@ System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-sel
           return dataMappingStructure[type];
         };
 
-        AbpSelectCustomElement.prototype.getMappingPropertyValueFromIndex = function getMappingPropertyValueFromIndex(inputArray, arrayIndex, searchPropName) {
+        AbpSelectCustomElement.prototype.getMappingPropertyValueFromGroup = function getMappingPropertyValueFromGroup(inputArray, searchPropName) {
           var propertyName = this.getMappingProperty(searchPropName);
-          return inputArray[arrayIndex] && inputArray[arrayIndex].hasOwnProperty(propertyName) ? inputArray[arrayIndex][propertyName] : '';
+          return Array.isArray(inputArray) && inputArray[0] && inputArray[0].hasOwnProperty(propertyName) ? inputArray[0][propertyName] : '';
         };
 
         AbpSelectCustomElement.prototype.getMappingPropertyValue = function getMappingPropertyValue(inputArray, searchPropName) {
@@ -394,7 +408,7 @@ System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-sel
             var searchFilter = _this6.util.isObject(searchItem) ? searchItem[objectKey] : searchItem;
             var foundItem = collection.find(function (item) {
               var itemInput = _this6.util.isObject(item) ? item[objectKey] : item;
-              return itemInput.toString() === searchFilter.toString();
+              return !item.disabled && itemInput.toString() === searchFilter.toString();
             });
             if (foundItem) {
               var foundItemIndex = _this6.util.isObject(foundItem) ? foundItem[objectKey] : foundItem;
@@ -486,9 +500,11 @@ System.register(['aurelia-framework', './util-service', 'jquery', 'bootstrap-sel
           var _this8 = this;
 
           this.domElm.on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
-            var val = _this8.domElm.selectpicker('val');
-            var selection = _this8.findItems(_this8.collection, val, _this8.objectKey);
-            _this8.selectedValue = selection.index;
+            if (clickedIndex) {
+              var val = _this8.domElm.selectpicker('val');
+              var selection = _this8.findItems(_this8.collection, val, _this8.objectKey);
+              _this8.selectedValue = selection.index;
+            }
           });
         };
 

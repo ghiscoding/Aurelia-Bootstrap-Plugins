@@ -27,7 +27,7 @@ System.register([], function (_export, _context) {
 
         UtilService.prototype.isArrayEqual = function isArrayEqual(a, b) {
           if (a === b) return true;
-          if (a == null || b == null) return false;
+          if (a === null || b === null) return false;
           if (a.length !== b.length) return false;
 
           for (var i = 0; i < a.length; ++i) {
@@ -37,8 +37,8 @@ System.register([], function (_export, _context) {
         };
 
         UtilService.prototype.isEqual = function isEqual(a, b) {
-          if (Array.isArray(a)) {
-            return this.isArrayEqual(a, b);
+          if (Array.isArray(a) && Array.isArray(b)) {
+            return this.isArrayEqual(a.sort(), b.sort());
           }
           return a === b;
         };

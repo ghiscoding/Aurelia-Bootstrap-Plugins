@@ -233,12 +233,24 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService, Binding
       destroy: () => this.domElm.selectpicker('destroy'),
       disableOptgroupByIndex: (index, isDisable = true) => {
         if (this.domElm.find('optgroup')[index]) {
-          this.domElm.find('optgroup')[index].prop('disabled', isDisable);
+          const optgroup = this.domElm.find('optgroup').eq(index);
+          const label = optgroup.prop('label');
+          optgroup.prop('disabled', isDisable);
+          this.collection.forEach(item => {
+            if (item.group === label) {
+              item.disabled = isDisable;
+            }
+          });
           this.domElm.selectpicker('refresh');
         }
       },
       disableOptgroupByLabel: (label, isDisable = true) => {
         this.domElm.find(`optgroup[label=${label}]`).prop('disabled', isDisable);
+        this.collection.forEach(item => {
+          if (item.group === label) {
+            item.disabled = isDisable;
+          }
+        });
         this.domElm.selectpicker('refresh');
       },
       mobile: () => this.domElm.selectpicker('mobile'),
@@ -267,7 +279,9 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService, Binding
   }
 
   detached() {
-    this.domElm.selectpicker('destroy');
+    if (this.domElm && this.domElm.selectpicker) {
+      this.domElm.selectpicker('destroy');
+    }
     this.collectionSubscription.dispose();
   }
 
@@ -288,9 +302,9 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService, Binding
     return dataMappingStructure[type];
   }
 
-  getMappingPropertyValueFromIndex(inputArray, arrayIndex, searchPropName) {
+  getMappingPropertyValueFromGroup(inputArray, searchPropName) {
     let propertyName = this.getMappingProperty(searchPropName);
-    return inputArray[arrayIndex] && inputArray[arrayIndex].hasOwnProperty(propertyName) ? inputArray[arrayIndex][propertyName] : '';
+    return Array.isArray(inputArray) && inputArray[0] && inputArray[0].hasOwnProperty(propertyName) ? inputArray[0][propertyName] : '';
   }
 
   getMappingPropertyValue(inputArray, searchPropName) {
@@ -323,7 +337,7 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService, Binding
       let searchFilter = this.util.isObject(searchItem) ? searchItem[objectKey] : searchItem;
       let foundItem = collection.find(item => {
         const itemInput = this.util.isObject(item) ? item[objectKey] : item;
-        return itemInput.toString() === searchFilter.toString();
+        return !item.disabled && itemInput.toString() === searchFilter.toString();
       });
       if (foundItem) {
         const foundItemIndex = this.util.isObject(foundItem) ? foundItem[objectKey] : foundItem;
@@ -403,9 +417,11 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService, Binding
 
   watchOnChangedToUpdateValueAndItemObjects() {
     this.domElm.on('changed.bs.select', (e, clickedIndex, newValue, oldValue) => {
-      const val = this.domElm.selectpicker('val');
-      let selection = this.findItems(this.collection, val, this.objectKey);
-      this.selectedValue = selection.index;
+      if (clickedIndex) {
+        const val = this.domElm.selectpicker('val');
+        let selection = this.findItems(this.collection, val, this.objectKey);
+        this.selectedValue = selection.index;
+      }
     });
   }
 }, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, 'collection', [_dec2], {

@@ -10,9 +10,9 @@
             placeholder.bind="placeholder">
 
         <optgroup if.bind="util.parseBool(hasOptgroup)" repeat.for="group of getGroupedCollection()"
-                  label.bind="getMappingPropertyValueFromIndex(group, $index, 'groupLabel')"
-                  data-max-options.bind="getMappingPropertyValueFromIndex(group, $index, 'maxOptions') & optional"
-                  disabled.bind="getMappingPropertyValueFromIndex(group, $index, 'groupDisabled') & optional">
+                  label.bind="getMappingPropertyValueFromGroup(group, 'groupLabel')"
+                  data-max-options.bind="getMappingPropertyValueFromGroup(group, 'maxOptions') & optional"
+                  disabled.bind="getMappingPropertyValueFromGroup(group, 'groupDisabled') & optional">
             <option repeat.for="opt of group"
                 value.bind="util.isObject(opt) ? opt[objectKey] : opt"
                 data-content.bind="getMappingPropertyValue(opt, 'content') & optional"
