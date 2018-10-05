@@ -199,24 +199,24 @@ export class AbpSelectCustomElement {
       destroy: () => this.domElm.selectpicker('destroy'),
       disableOptgroupByIndex: (index, isDisable = true) => {
         if (this.domElm.find('optgroup')[index]) {
-          const optgroup = this.domElm.find('optgroup').eq(index)
-          const label = optgroup.prop('label')
+          const optgroup = this.domElm.find('optgroup').eq(index);
+          const label = optgroup.prop('label');
           optgroup.prop('disabled', isDisable);
           this.collection.forEach((item) => {
-            if(item.group === label) {
-              item.disabled = isDisable
+            if (item.group === label) {
+              item.disabled = isDisable;
             }
-          })
+          });
           this.domElm.selectpicker('refresh');
         }
       },
       disableOptgroupByLabel: (label, isDisable = true) => {
         this.domElm.find(`optgroup[label=${label}]`).prop('disabled', isDisable);
         this.collection.forEach((item) => {
-          if(item.group === label) {
-            item.disabled = isDisable
+          if (item.group === label) {
+            item.disabled = isDisable;
           }
-        })
+        });
         this.domElm.selectpicker('refresh');
       },
       mobile: () => this.domElm.selectpicker('mobile'),
