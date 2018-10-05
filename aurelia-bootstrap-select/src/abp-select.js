@@ -199,12 +199,24 @@ export class AbpSelectCustomElement {
       destroy: () => this.domElm.selectpicker('destroy'),
       disableOptgroupByIndex: (index, isDisable = true) => {
         if (this.domElm.find('optgroup')[index]) {
-          this.domElm.find('optgroup')[index].prop('disabled', isDisable);
+          const optgroup = this.domElm.find('optgroup').eq(index)
+          const label = optgroup.prop('label')
+          optgroup.prop('disabled', isDisable);
+          this.collection.forEach((item) => {
+            if(item.group === label) {
+              item.disabled = isDisable
+            }
+          })
           this.domElm.selectpicker('refresh');
         }
       },
       disableOptgroupByLabel: (label, isDisable = true) => {
         this.domElm.find(`optgroup[label=${label}]`).prop('disabled', isDisable);
+        this.collection.forEach((item) => {
+          if(item.group === label) {
+            item.disabled = isDisable
+          }
+        })
         this.domElm.selectpicker('refresh');
       },
       mobile: () => this.domElm.selectpicker('mobile'),
@@ -269,15 +281,15 @@ export class AbpSelectCustomElement {
   }
 
   /**
-   * From an input array, find the mapping property value by an index provided
-   * Example: getMappingPropertyValueFromIndex(option, 2, 'groupLabel') => 'groupLabel' or the user custom group
+   * From an input array, find the mapping property of the first element
+   * Example: getMappingPropertyValueFromGroup(option, 'groupLabel') => 'groupLabel' or the user custom group
    * @param {array} input array
    * @param {string} search property name
    * @return {any} found item (stringo/object)
    */
-  getMappingPropertyValueFromIndex(inputArray, arrayIndex, searchPropName) {
+  getMappingPropertyValueFromGroup(inputArray, searchPropName) {
     let propertyName = this.getMappingProperty(searchPropName);
-    return (inputArray[arrayIndex] && inputArray[arrayIndex].hasOwnProperty(propertyName)) ? inputArray[arrayIndex][propertyName] : '';
+    return (Array.isArray(inputArray) && inputArray[0] && inputArray[0].hasOwnProperty(propertyName)) ? inputArray[0][propertyName] : '';
   }
 
   /**
@@ -329,7 +341,7 @@ export class AbpSelectCustomElement {
       let foundItem = collection.find(item => {
         // for comparison, we're using == mostly because indexes are passed as string because of html
         const itemInput = this.util.isObject(item) ? item[objectKey] : item;
-        return itemInput.toString() === searchFilter.toString();
+        return !item.disabled && itemInput.toString() === searchFilter.toString();
       });
       if (foundItem) {
         const foundItemIndex = this.util.isObject(foundItem) ? foundItem[objectKey] : foundItem;
@@ -376,7 +388,7 @@ export class AbpSelectCustomElement {
       }
     }
   }
-  
+
   renderPreSelection() {
     let newValue = this._originalSelectedIndexes || this._originalSelectedObjects;
     let selection = this.findItems(this.collection, newValue, this.objectKey);
@@ -441,9 +453,11 @@ export class AbpSelectCustomElement {
    */
   watchOnChangedToUpdateValueAndItemObjects() {
     this.domElm.on('changed.bs.select', (e, clickedIndex, newValue, oldValue) => {
-      const val = this.domElm.selectpicker('val');
-      let selection = this.findItems(this.collection, val, this.objectKey);
-      this.selectedValue = selection.index;
+      if (clickedIndex) {
+        const val = this.domElm.selectpicker('val');
+        let selection = this.findItems(this.collection, val, this.objectKey);
+        this.selectedValue = selection.index;
+      }
     });
   }
 } // class > end
