@@ -233,7 +233,9 @@ export class AbpSelectCustomElement {
   }
 
   detached() {
-    this.domElm.selectpicker('destroy');
+    if (this.domElm && this.domElm.selectpicker) {
+      this.domElm.selectpicker('destroy');
+    }
     this.collectionSubscription.dispose();
   }
 
