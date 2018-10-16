@@ -383,7 +383,7 @@ export class AbpSelectCustomElement {
    */
   renderSelection(selection) {
     if (this.domElm) {
-      if (this.isEmptySelection(selection) && this.util.parseBool(this.emptyOnNull)) {
+      if (this.isEmptySelection(selection) && this.util.parseBool(this.emptyOnNull) && !this.multiple) {
         this.domElm.selectpicker('val', null);
       } else if (!this.isEmptySelection(selection)) {
         this.domElm.selectpicker('val', selection.index);
@@ -394,10 +394,10 @@ export class AbpSelectCustomElement {
   renderPreSelection() {
     let newValue = this._originalSelectedIndexes || this._originalSelectedObjects;
     let selection = this.findItems(this.collection, newValue, this.objectKey);
-    if (this.isEmptySelection(selection)) {
+    if (this.isEmptySelection(selection) && !this.util.parseBool(this.emptyOnNull) && !this.multiple) {
       this.selectedValue = (this.util.isObject(this.collection[0]) ? this.collection[0][this.objectKey] : this.collection[0]);
       this.selectedItem = this.collection[0];
-    } else {
+    } else if (!this.isEmptySelection(selection)) {
       this.selectedValue = selection.index;
       this.selectedItem = selection.item;
     }
