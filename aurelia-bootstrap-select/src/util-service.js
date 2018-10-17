@@ -12,13 +12,13 @@ export class UtilService {
 
     for (let i = 0; i < a.length; i++) {
       let aExistsInb = false;
-        for (let j = 0; j < b.length && !aExistsInb; j++) {
-          if (a[i] === b[j]) {
-            aExistsInb = true;
-          }
+      for (let j = 0; j < b.length && !aExistsInb; j++) {
+        if (a[i] === b[j]) {
+          aExistsInb = true;
         }
-        if (!aExistsInb) {
-          return false;
+      }
+      if (!aExistsInb) {
+        return false;
       }
     }
     return true;
