@@ -455,7 +455,7 @@ export class AbpSelectCustomElement {
    */
   watchOnChangedToUpdateValueAndItemObjects() {
     this.domElm.on('changed.bs.select', (e, clickedIndex, newValue, oldValue) => {
-      if (clickedIndex) {
+      if (clickedIndex !== undefined) {
         const val = this.domElm.selectpicker('val');
         let selection = this.findItems(this.collection, val, this.objectKey);
         this.selectedValue = selection.index;
