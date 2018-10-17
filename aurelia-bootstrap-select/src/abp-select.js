@@ -240,7 +240,11 @@ export class AbpSelectCustomElement {
   collectionChangedObserver(newCollection, oldCollection) {
     setTimeout(() => {
       this.domElm.selectpicker('refresh');
-      this.renderPreSelection();
+      const currentValue = this.selectedValue || this.selectedItem;
+      const selection = this.findItems(this.collection, currentValue, this.objectKey);
+      if (this.isEmptySelection(selection)) {
+        this.renderPreSelection();
+      }
     });
   }
 
