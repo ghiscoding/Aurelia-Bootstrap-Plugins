@@ -10,15 +10,16 @@ export class UtilService {
     if (a === null || b === null) return false;
     if (a.length !== b.length) return false;
 
-    //return a.every(_a => b.includes(_a));
     for (let i = 0; i < a.length; i++) {
-        let aExistsInb = false;
+      let aExistsInb = false;
         for (let j = 0; j < b.length && !aExistsInb; j++) {
-            if (a[i] == b[j])
-                aExistsInb = true;
+          if (a[i] === b[j]) {
+            aExistsInb = true;
+          }
         }
-        if (!aExistsInb)
-            return false;
+        if (!aExistsInb) {
+          return false;
+      }
     }
     return true;
   }
