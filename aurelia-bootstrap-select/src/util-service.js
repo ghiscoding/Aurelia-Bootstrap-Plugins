@@ -10,11 +10,16 @@ export class UtilService {
     if (a === null || b === null) return false;
     if (a.length !== b.length) return false;
 
-    // If you don't care about the order of the elements inside
-    // the array, you should sort both arrays here.
-
-    for (let i = 0; i < a.length; ++i) {
-      if (a[i] !== b[i]) return false;
+    for (let i = 0; i < a.length; i++) {
+      let aExistsInb = false;
+      for (let j = 0; j < b.length && !aExistsInb; j++) {
+        if (a[i] === b[j]) {
+          aExistsInb = true;
+        }
+      }
+      if (!aExistsInb) {
+        return false;
+      }
     }
     return true;
   }
