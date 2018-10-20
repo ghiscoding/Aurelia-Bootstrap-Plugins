@@ -30,8 +30,7 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "bootstrap-select": "^1.13.1",
-    "jquery": "^3.1.1",
-    "randomatic": "^1.1.6"
+    "jquery": "^3.1.1"
   },
   "devDependencies": {
     "aurelia-tools": "^1.0.0",
