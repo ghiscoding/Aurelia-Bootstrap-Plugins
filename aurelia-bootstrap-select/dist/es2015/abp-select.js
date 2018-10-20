@@ -274,7 +274,11 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService, Binding
   collectionChangedObserver(newCollection, oldCollection) {
     setTimeout(() => {
       this.domElm.selectpicker('refresh');
-      this.renderPreSelection();
+      const currentValue = this.selectedValue || this.selectedItem;
+      const selection = this.findItems(this.collection, currentValue, this.objectKey);
+      if (this.isEmptySelection(selection)) {
+        this.renderPreSelection();
+      }
     });
   }
 
@@ -367,7 +371,7 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService, Binding
 
   renderSelection(selection) {
     if (this.domElm) {
-      if (this.isEmptySelection(selection) && this.util.parseBool(this.emptyOnNull)) {
+      if (this.isEmptySelection(selection)) {
         this.domElm.selectpicker('val', null);
       } else if (!this.isEmptySelection(selection)) {
         this.domElm.selectpicker('val', selection.index);
@@ -378,9 +382,9 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService, Binding
   renderPreSelection() {
     let newValue = this._originalSelectedIndexes || this._originalSelectedObjects;
     let selection = this.findItems(this.collection, newValue, this.objectKey);
-    if (this.isEmptySelection(selection)) {
-      this.selectedValue = this.util.isObject(this.collection[0]) ? this.collection[0][this.objectKey] : this.collection[0];
-      this.selectedItem = this.collection[0];
+    if (this.isEmptySelection(selection) && !this.util.parseBool(this.emptyOnNull)) {
+      this.selectedValue = selection.index = this.util.isObject(this.collection[0]) ? this.collection[0][this.objectKey] : this.collection[0];
+      this.selectedItem = selection.item = this.collection[0];
     } else {
       this.selectedValue = selection.index;
       this.selectedItem = selection.item;
@@ -390,7 +394,8 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService, Binding
 
   selectedItemChanged(newValue, oldValue) {
     if (!this.util.isEqual(newValue, oldValue)) {
-      let selection = this.findItems(this.collection, newValue || this._originalSelectedIndexes, this.objectKey);
+      let value = newValue !== null && newValue !== undefined ? newValue : this._originalSelectedIndexes;
+      let selection = this.findItems(this.collection, value, this.objectKey);
 
       if (this.isEmptySelection(selection) && !this.util.parseBool(this.emptyOnNull) && !this.multiple) {
         this.selectedValue = this.util.isObject(this.collection[0]) ? this.collection[0][this.objectKey] : this.collection[0];
@@ -404,7 +409,8 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService, Binding
 
   selectedValueChanged(newValue, oldValue) {
     if (!this.util.isEqual(newValue, oldValue)) {
-      let selection = this.findItems(this.collection, newValue || this._originalSelectedObjects, this.objectKey);
+      let value = newValue !== null && newValue !== undefined ? newValue : this._originalSelectedObjects;
+      let selection = this.findItems(this.collection, value, this.objectKey);
       this.selectedItem = selection.item;
     }
   }
@@ -417,7 +423,7 @@ export let AbpSelectCustomElement = (_dec = inject(Element, UtilService, Binding
 
   watchOnChangedToUpdateValueAndItemObjects() {
     this.domElm.on('changed.bs.select', (e, clickedIndex, newValue, oldValue) => {
-      if (clickedIndex) {
+      if (clickedIndex !== undefined) {
         const val = this.domElm.selectpicker('val');
         let selection = this.findItems(this.collection, val, this.objectKey);
         this.selectedValue = selection.index;

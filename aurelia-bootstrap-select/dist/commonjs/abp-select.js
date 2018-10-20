@@ -327,7 +327,11 @@ var AbpSelectCustomElement = exports.AbpSelectCustomElement = (_dec = (0, _aurel
 
     setTimeout(function () {
       _this5.domElm.selectpicker('refresh');
-      _this5.renderPreSelection();
+      var currentValue = _this5.selectedValue || _this5.selectedItem;
+      var selection = _this5.findItems(_this5.collection, currentValue, _this5.objectKey);
+      if (_this5.isEmptySelection(selection)) {
+        _this5.renderPreSelection();
+      }
     });
   };
 
@@ -443,7 +447,7 @@ var AbpSelectCustomElement = exports.AbpSelectCustomElement = (_dec = (0, _aurel
 
   AbpSelectCustomElement.prototype.renderSelection = function renderSelection(selection) {
     if (this.domElm) {
-      if (this.isEmptySelection(selection) && this.util.parseBool(this.emptyOnNull)) {
+      if (this.isEmptySelection(selection)) {
         this.domElm.selectpicker('val', null);
       } else if (!this.isEmptySelection(selection)) {
         this.domElm.selectpicker('val', selection.index);
@@ -454,9 +458,9 @@ var AbpSelectCustomElement = exports.AbpSelectCustomElement = (_dec = (0, _aurel
   AbpSelectCustomElement.prototype.renderPreSelection = function renderPreSelection() {
     var newValue = this._originalSelectedIndexes || this._originalSelectedObjects;
     var selection = this.findItems(this.collection, newValue, this.objectKey);
-    if (this.isEmptySelection(selection)) {
-      this.selectedValue = this.util.isObject(this.collection[0]) ? this.collection[0][this.objectKey] : this.collection[0];
-      this.selectedItem = this.collection[0];
+    if (this.isEmptySelection(selection) && !this.util.parseBool(this.emptyOnNull)) {
+      this.selectedValue = selection.index = this.util.isObject(this.collection[0]) ? this.collection[0][this.objectKey] : this.collection[0];
+      this.selectedItem = selection.item = this.collection[0];
     } else {
       this.selectedValue = selection.index;
       this.selectedItem = selection.item;
@@ -466,7 +470,8 @@ var AbpSelectCustomElement = exports.AbpSelectCustomElement = (_dec = (0, _aurel
 
   AbpSelectCustomElement.prototype.selectedItemChanged = function selectedItemChanged(newValue, oldValue) {
     if (!this.util.isEqual(newValue, oldValue)) {
-      var selection = this.findItems(this.collection, newValue || this._originalSelectedIndexes, this.objectKey);
+      var value = newValue !== null && newValue !== undefined ? newValue : this._originalSelectedIndexes;
+      var selection = this.findItems(this.collection, value, this.objectKey);
 
       if (this.isEmptySelection(selection) && !this.util.parseBool(this.emptyOnNull) && !this.multiple) {
         this.selectedValue = this.util.isObject(this.collection[0]) ? this.collection[0][this.objectKey] : this.collection[0];
@@ -480,7 +485,8 @@ var AbpSelectCustomElement = exports.AbpSelectCustomElement = (_dec = (0, _aurel
 
   AbpSelectCustomElement.prototype.selectedValueChanged = function selectedValueChanged(newValue, oldValue) {
     if (!this.util.isEqual(newValue, oldValue)) {
-      var selection = this.findItems(this.collection, newValue || this._originalSelectedObjects, this.objectKey);
+      var value = newValue !== null && newValue !== undefined ? newValue : this._originalSelectedObjects;
+      var selection = this.findItems(this.collection, value, this.objectKey);
       this.selectedItem = selection.item;
     }
   };
@@ -497,7 +503,7 @@ var AbpSelectCustomElement = exports.AbpSelectCustomElement = (_dec = (0, _aurel
     var _this8 = this;
 
     this.domElm.on('changed.bs.select', function (e, clickedIndex, newValue, oldValue) {
-      if (clickedIndex) {
+      if (clickedIndex !== undefined) {
         var val = _this8.domElm.selectpicker('val');
         var selection = _this8.findItems(_this8.collection, val, _this8.objectKey);
         _this8.selectedValue = selection.index;

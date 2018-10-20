@@ -18,8 +18,16 @@ var UtilService = exports.UtilService = function () {
     if (a === null || b === null) return false;
     if (a.length !== b.length) return false;
 
-    for (var i = 0; i < a.length; ++i) {
-      if (a[i] !== b[i]) return false;
+    for (var i = 0; i < a.length; i++) {
+      var aExistsInb = false;
+      for (var j = 0; j < b.length && !aExistsInb; j++) {
+        if (a[i] === b[j]) {
+          aExistsInb = true;
+        }
+      }
+      if (!aExistsInb) {
+        return false;
+      }
     }
     return true;
   };
