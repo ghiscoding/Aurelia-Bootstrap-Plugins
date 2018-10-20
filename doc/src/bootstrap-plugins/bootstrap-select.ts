@@ -38,25 +38,26 @@ export class SelectEdit {
   };
   allCampingStuff = ['Tent', 'Flashlight', 'Sleeping Bag'];
   allSelectionWithGroups = [
-    { id: 1, option: 'Relish', company: 'Sweet', group: 'Condiments' },
+    { id: 0, option: 'Relish', company: 'Sweet', group: 'Condiments' },
     { id: 12, option: 'Steam', group: 'Breads' },
     { id: 11, option: 'Plain', disabled: false, group: 'Breads' },
-    { id: 4, option: 'Mayonnaise', company: 'Miracle Whip', group: 'Condiments' },
-    { id: 3, option: 'Ketchup',  company: 'Heinz', group: 'Condiments' },
-    { id: 2, option: 'Mustard',  company: 'French\'s', group: 'Condiments' },
-    { id: 13, option: 'Toasted', group: 'Breads', disabled: true }
+    { id: 3, option: 'Mayonnaise', company: 'Miracle Whip', group: 'Condiments' },
+    { id: 2, option: 'Ketchup',  company: 'Heinz', group: 'Condiments' },
+    { id: 1, option: 'Mustard',  company: 'French\'s', group: 'Condiments' },
+    { id: 13, option: 'Toasted', group: 'Breads', disabled: true },
+    { id: 20, option: 'Cucumber', group: 'Vegetables' }
   ];
   allCondiments = [
-    { id: 1, option: 'Ketchup', company: 'Heinz' },
-    { id: 2, option: 'Mustard', company: 'French\'s' },
-    { id: 3, option: 'Relish', company: 'Sweet', style: 'background: #5cb85c; color: #fff;', title: 'Alternate Title' },
-    { id: 4, option: 'Mayonnaise', company: 'Miracle Whip', icon: 'glyphicon-heart' }
+    { id: 0, option: 'Ketchup', company: 'Heinz' },
+    { id: 1, option: 'Mustard', company: 'French\'s' },
+    { id: 2, option: 'Relish', company: 'Sweet', style: 'background: #5cb85c; color: #fff;', title: 'Alternate Title' },
+    { id: 3, option: 'Mayonnaise', company: 'Miracle Whip', icon: 'glyphicon-heart' }
   ];
   allStyledCondiments = [
-    { id: 1, option: 'Mustard', company: 'French\'s', content: '<span class="label label-warning">Mustard</span>' },
-    { id: 2, option: 'Ketchup', company: 'Heinz', content: '<span class="label label-danger">Ketchup</span>' },
-    { id: 3, option: 'Relish', company: 'Sweet', content: '<span class="label label-success">Relish</span>' },
-    { id: 4, option: 'Mayonnaise', company: 'Miracle Whip', disabled: true, content: '<span class="label label-info">Mayonnaise</span>' }
+    { id: 0, option: 'Mustard', company: 'French\'s', content: '<span class="label label-warning">Mustard</span>' },
+    { id: 1, option: 'Ketchup', company: 'Heinz', content: '<span class="label label-danger">Ketchup</span>' },
+    { id: 2, option: 'Relish', company: 'Sweet', content: '<span class="label label-success">Relish</span>' },
+    { id: 3, option: 'Mayonnaise', company: 'Miracle Whip', disabled: true, content: '<span class="label label-info">Mayonnaise</span>' }
   ];
   selectOptions = {
     liveSearch: true,
@@ -82,24 +83,6 @@ export class SelectEdit {
   changeSelectCollection() {
     // change collection of a select
     this.allCampingStuff = ['Heater', 'Marshmallow'];
-    /*
-    this.allSelectionWithGroups = [
-      { id: 1, option: 'Cheedar', company: 'Kraft', group: 'Cheese' },
-      { id: 12, option: 'Steam', group: 'Breads' },
-      { id: 11, option: 'Plain', disabled: false, group: 'Breads' },
-      { id: 4, option: 'Cream Cheese', company: 'Philadelphia', group: 'Condiments' },
-      { id: 13, option: 'Grilled', group: 'Breads', disabled: true }
-    ];
-
-    this.allCondiments = [
-      { id: 1, option: 'Cheedar', company: 'Krafty' },
-      { id: 2, option: 'Cream Cheese', company: 'Philadelphia' }
-    ];
-    this.allStyledCondiments = [
-      { id: 1, option: 'Cheedar', company: 'Kraft', content: '<span class="label label-warning">Cheedar</span>' },
-      { id: 2, option: 'Cream Cheese', company: 'Philadelphia', content: '<span class="label label-info">Cream Cheese</span>' }
-    ];
-    */
   }
 
   firstPickerChanged() {
@@ -126,15 +109,15 @@ export class SelectEdit {
   preSelectFirstOptions() {
     // Change selection by item (object/string)
     this.camping = 'Tent';
-    this.picnic = [ { 'id': 2, 'option': 'Mustard', 'company': 'French\'s' } ];
-    this.condiment = { id: 4, option: 'Mayonnaise', company: 'Miracle Whip', icon: 'glyphicon-heart' };
-    this.condimentStyled = { id: 4, option: 'Mayonnaise', company: 'Miracle Whip', disabled: true, content: '<span class="label label-info">Mayonnaise</span>' };
+    this.picnic = [ { 'id': 1, 'option': 'Mustard', 'company': 'French\'s' } ];
+    this.condiment = { id: 0, option: 'Ketchup', company: 'Heinz' };
+    this.condimentStyled = { id: 1, option: 'Ketchup', company: 'Heinz', content: '<span class="label label-danger">Ketchup</span>' };
   }
   preSelectSecondOptions() {
     // Change selection by value (id)
     this.campingValue = 'Sleeping Bag';
-    this.picnicValue = [1, 3, 4, 12];
-    this.condimentValue = 3;
-    this.condimentStyledValue = 3;
+    this.picnicValue = [0, 2, 3, 12];
+    this.condimentValue = 2;
+    this.condimentStyledValue = 2;
   }
 }

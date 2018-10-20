@@ -416,7 +416,8 @@ export class AbpSelectCustomElement {
    */
   selectedItemChanged(newValue, oldValue) {
     if (!this.util.isEqual(newValue, oldValue)) {
-      let selection = this.findItems(this.collection, newValue || this._originalSelectedIndexes, this.objectKey);
+      let value = (newValue !== null && newValue !== undefined) ? newValue : this._originalSelectedIndexes;
+      let selection = this.findItems(this.collection, value, this.objectKey);
 
       // get selected indexes (ids), unless user chose to emptyOnNull on first pass
       if (this.isEmptySelection(selection) && !this.util.parseBool(this.emptyOnNull) && !this.multiple) {
@@ -438,7 +439,8 @@ export class AbpSelectCustomElement {
    */
   selectedValueChanged(newValue, oldValue) {
     if (!this.util.isEqual(newValue, oldValue)) {
-      let selection = this.findItems(this.collection, newValue || this._originalSelectedObjects, this.objectKey);
+      let value = (newValue !== null && newValue !== undefined) ? newValue : this._originalSelectedObjects;
+      let selection = this.findItems(this.collection, value, this.objectKey);
       this.selectedItem = selection.item;
     }
   }
