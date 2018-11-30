@@ -65,7 +65,7 @@ export class AbpDatetimePickerCustomElement {
     this.domElm.on('dp.change', (e) => {
       if (moment(e.date, this._format, true).isValid()) {
         this.model = moment(e.date, this._format, true).toDate();
-        this.value = moment(e.date, this._format, true);
+        this.setValue(e.date);
       } else if (!e.date) {
         this.model = null;
         this.value = null;
@@ -143,7 +143,7 @@ export class AbpDatetimePickerCustomElement {
 
     if (value && moment(value, this._format, true).isValid()) {
       this.model = moment(value, this._format, true).toDate();
-      this.value = moment(value, this._format, true);
+      this.setValue(value);
     }
   }
 
@@ -310,7 +310,7 @@ export class AbpDatetimePickerCustomElement {
       throw new Error('Datetimepicker, model.bind must be of type Date');
     }
     if (newValue !== oldValue && newValue) {
-      this.value = moment(newValue, this._format, true).format(this._format);
+      this.setValue(newValue);
     }
   }
 
@@ -339,5 +339,9 @@ export class AbpDatetimePickerCustomElement {
 
   showCalendar() {
     this.domElm.data('DateTimePicker').show();
+  }
+
+  setValue(value) {
+    this.value = moment(value, this._format, true).format(this._format);
   }
 }
