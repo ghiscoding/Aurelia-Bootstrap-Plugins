@@ -134,7 +134,7 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
           this.domElm.on('dp.change', function (e) {
             if (moment(e.date, _this2._format, true).isValid()) {
               _this2.model = moment(e.date, _this2._format, true).toDate();
-              _this2.value = moment(e.date, _this2._format, true);
+              _this2.setValue(e.date);
             } else if (!e.date) {
               _this2.model = null;
               _this2.value = null;
@@ -206,7 +206,7 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
 
           if (value && moment(value, this._format, true).isValid()) {
             this.model = moment(value, this._format, true).toDate();
-            this.value = moment(value, this._format, true);
+            this.setValue(value);
           }
         };
 
@@ -317,7 +317,7 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
             throw new Error('Datetimepicker, model.bind must be of type Date');
           }
           if (newValue !== oldValue && newValue) {
-            this.value = moment(newValue, this._format, true).format(this._format);
+            this.setValue(newValue);
           }
         };
 
@@ -347,6 +347,10 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
 
         AbpDatetimePickerCustomElement.prototype.showCalendar = function showCalendar() {
           this.domElm.data('DateTimePicker').show();
+        };
+
+        AbpDatetimePickerCustomElement.prototype.setValue = function setValue(value) {
+          this.value = moment(value, this._format, true).format(this._format);
         };
 
         return AbpDatetimePickerCustomElement;

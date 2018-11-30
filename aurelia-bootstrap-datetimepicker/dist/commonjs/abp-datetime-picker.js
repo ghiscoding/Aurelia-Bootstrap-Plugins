@@ -133,7 +133,7 @@ var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_
     this.domElm.on('dp.change', function (e) {
       if ((0, _moment2.default)(e.date, _this2._format, true).isValid()) {
         _this2.model = (0, _moment2.default)(e.date, _this2._format, true).toDate();
-        _this2.value = (0, _moment2.default)(e.date, _this2._format, true);
+        _this2.setValue(e.date);
       } else if (!e.date) {
         _this2.model = null;
         _this2.value = null;
@@ -205,7 +205,7 @@ var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_
 
     if (value && (0, _moment2.default)(value, this._format, true).isValid()) {
       this.model = (0, _moment2.default)(value, this._format, true).toDate();
-      this.value = (0, _moment2.default)(value, this._format, true);
+      this.setValue(value);
     }
   };
 
@@ -316,7 +316,7 @@ var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_
       throw new Error('Datetimepicker, model.bind must be of type Date');
     }
     if (newValue !== oldValue && newValue) {
-      this.value = (0, _moment2.default)(newValue, this._format, true).format(this._format);
+      this.setValue(newValue);
     }
   };
 
@@ -346,6 +346,10 @@ var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_
 
   AbpDatetimePickerCustomElement.prototype.showCalendar = function showCalendar() {
     this.domElm.data('DateTimePicker').show();
+  };
+
+  AbpDatetimePickerCustomElement.prototype.setValue = function setValue(value) {
+    this.value = (0, _moment2.default)(value, this._format, true).format(this._format);
   };
 
   return AbpDatetimePickerCustomElement;
