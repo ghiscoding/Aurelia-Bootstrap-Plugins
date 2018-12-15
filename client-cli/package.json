@@ -28,7 +28,7 @@
     "aurelia-http-client": "^1.0.4",
     "aurelia-validation": "^1.1.1",
     "bluebird": "^3.4.1",
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^3.4.0",
     "bootstrap-select": "^1.12.2",
     "bootstrap-tagsinput": "^0.7.1",
     "eonasdan-bootstrap-datetimepicker": "^4.17.46",

@@ -27,7 +27,7 @@
     "url": "https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/aurelia-bootstrap-tagsinput"
   },
   "dependencies": {
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^3.4.0",
     "jquery": "^3.1.1",
     "bootstrap-tagsinput": "^0.7.1"
   },
