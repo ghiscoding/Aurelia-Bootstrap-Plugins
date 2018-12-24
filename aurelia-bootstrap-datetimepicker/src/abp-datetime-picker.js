@@ -349,7 +349,7 @@ export class AbpDatetimePickerCustomElement {
   showCalendar() {
     this.domElm.data('DateTimePicker').show();
   }
-  
+
   /** Pass a possible date value and if it's valid and not as previous date then return it */
   getDateWhenValid(newValue, oldValue) {
     if (moment(newValue, this._format, true).isValid()) {
