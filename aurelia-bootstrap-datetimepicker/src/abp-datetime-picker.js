@@ -64,11 +64,8 @@ export class AbpDatetimePickerCustomElement {
     // update Value & Model binding on a Date picker changed (watch)
     this.domElm.on('dp.change', (e) => {
       if (moment(e.date, this._format, true).isValid()) {
-        const date = this.getDateWhenValid(e.date, this.value);
-        if (date) {
-          this.model = date.toDate();
-          this.value = date;
-        }
+        this.model = moment(e.date, this._format, true).toDate();
+        this.value = moment(e.date, this._format, true).format(this._format);
       } else if (!e.date) {
         this.model = null;
         this.value = null;
@@ -145,11 +142,8 @@ export class AbpDatetimePickerCustomElement {
     let value = this._originalValue || this._originalDateObject;
 
     if (value && moment(value, this._format, true).isValid()) {
-      const date = this.getDateWhenValid(value, this.value);
-      if (date) {
-        this.model = date.toDate();
-        this.value = date;
-      }
+      this.model = moment(value, this._format, true).toDate();
+      this.value = moment(value, this._format, true).format(this._format);
     }
   }
 
@@ -312,13 +306,12 @@ export class AbpDatetimePickerCustomElement {
   }
 
   modelChanged(newValue, oldValue) {
-    if (!moment(newValue, this._format, true).isValid() && newValue !== null) {
+    if (!moment(newValue).isValid() && newValue !== null) {
       throw new Error('Datetimepicker, model.bind must be of type Date');
     }
     if (newValue !== oldValue && newValue) {
-      const date = this.getDateWhenValid(newValue, oldValue);
-      if (date) {
-        this.value = date;
+      if (!oldValue || (moment(oldValue).isValid() && !moment(oldValue).isSame())) {
+        this.value = moment(newValue).format(this._format);
       }
     }
   }
@@ -337,7 +330,9 @@ export class AbpDatetimePickerCustomElement {
   valueChanged(newValue, oldValue) {
     if (newValue !== oldValue && newValue) {
       if (moment(newValue, this._format, true).isValid()) {
-        this.model = moment(newValue, this._format, true).toDate();
+        if (!oldValue || (moment(oldValue, this._format, true).isValid() && !moment(oldValue, this._format, true).isSame())) {
+          this.model = moment(newValue, this._format, true).toDate();
+        }
       }
     }
   }
@@ -348,17 +343,5 @@ export class AbpDatetimePickerCustomElement {
 
   showCalendar() {
     this.domElm.data('DateTimePicker').show();
-  }
-
-  /** Pass a possible date value and if it's valid and not as previous date then return it */
-  getDateWhenValid(newValue, oldValue) {
-    if (moment(newValue, this._format, true).isValid()) {
-      const newDate = moment(newValue, this._format, true);
-
-      if (!oldValue || (moment(this.value, this._format, true).isValid() && !newDate.isSame(this.value))) {
-        return newDate;
-      }
-    }
-    return null;
   }
 }
