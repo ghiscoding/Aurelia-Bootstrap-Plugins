@@ -132,11 +132,8 @@ var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_
 
     this.domElm.on('dp.change', function (e) {
       if ((0, _moment2.default)(e.date, _this2._format, true).isValid()) {
-        var date = _this2.getDateWhenValid(e.date, _this2.value);
-        if (date) {
-          _this2.model = date.toDate();
-          _this2.value = date;
-        }
+        _this2.model = (0, _moment2.default)(e.date, _this2._format, true).toDate();
+        _this2.value = (0, _moment2.default)(e.date, _this2._format, true).format(_this2._format);
       } else if (!e.date) {
         _this2.model = null;
         _this2.value = null;
@@ -207,11 +204,8 @@ var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_
     var value = this._originalValue || this._originalDateObject;
 
     if (value && (0, _moment2.default)(value, this._format, true).isValid()) {
-      var date = this.getDateWhenValid(value, this.value);
-      if (date) {
-        this.model = date.toDate();
-        this.value = date;
-      }
+      this.model = (0, _moment2.default)(value, this._format, true).toDate();
+      this.value = (0, _moment2.default)(value, this._format, true).format(this._format);
     }
   };
 
@@ -318,13 +312,12 @@ var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_
   };
 
   AbpDatetimePickerCustomElement.prototype.modelChanged = function modelChanged(newValue, oldValue) {
-    if (!(0, _moment2.default)(newValue, this._format, true).isValid() && newValue !== null) {
+    if (!(0, _moment2.default)(newValue).isValid() && newValue !== null) {
       throw new Error('Datetimepicker, model.bind must be of type Date');
     }
     if (newValue !== oldValue && newValue) {
-      var date = this.getDateWhenValid(newValue, oldValue);
-      if (date) {
-        this.value = date;
+      if (!oldValue || (0, _moment2.default)(oldValue).isValid() && !(0, _moment2.default)(oldValue).isSame()) {
+        this.value = (0, _moment2.default)(newValue).format(this._format);
       }
     }
   };
@@ -343,7 +336,9 @@ var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_
   AbpDatetimePickerCustomElement.prototype.valueChanged = function valueChanged(newValue, oldValue) {
     if (newValue !== oldValue && newValue) {
       if ((0, _moment2.default)(newValue, this._format, true).isValid()) {
-        this.model = (0, _moment2.default)(newValue, this._format, true).toDate();
+        if (!oldValue || (0, _moment2.default)(oldValue, this._format, true).isValid() && !(0, _moment2.default)(oldValue, this._format, true).isSame()) {
+          this.model = (0, _moment2.default)(newValue, this._format, true).toDate();
+        }
       }
     }
   };
@@ -355,17 +350,6 @@ var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_
 
   AbpDatetimePickerCustomElement.prototype.showCalendar = function showCalendar() {
     this.domElm.data('DateTimePicker').show();
-  };
-
-  AbpDatetimePickerCustomElement.prototype.getDateWhenValid = function getDateWhenValid(newValue, oldValue) {
-    if ((0, _moment2.default)(newValue, this._format, true).isValid()) {
-      var newDate = (0, _moment2.default)(newValue, this._format, true);
-
-      if (!oldValue || (0, _moment2.default)(this.value, this._format, true).isValid() && !newDate.isSame(this.value)) {
-        return newDate;
-      }
-    }
-    return null;
   };
 
   return AbpDatetimePickerCustomElement;
