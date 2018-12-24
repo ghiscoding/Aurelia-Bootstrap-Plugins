@@ -64,8 +64,11 @@ export class AbpDatetimePickerCustomElement {
     // update Value & Model binding on a Date picker changed (watch)
     this.domElm.on('dp.change', (e) => {
       if (moment(e.date, this._format, true).isValid()) {
-        this.model = moment(e.date, this._format, true).toDate();
-        this.setValue(e.date);
+        const date = this.getDateWhenValid(e.date, this.value);
+        if (date) {
+          this.model = date.toDate();
+          this.value = date;
+        }
       } else if (!e.date) {
         this.model = null;
         this.value = null;
@@ -142,8 +145,11 @@ export class AbpDatetimePickerCustomElement {
     let value = this._originalValue || this._originalDateObject;
 
     if (value && moment(value, this._format, true).isValid()) {
-      this.model = moment(value, this._format, true).toDate();
-      this.setValue(value);
+      const date = this.getDateWhenValid(value, this.value);
+      if (date) {
+        this.model = date.toDate();
+        this.value = date;
+      }
     }
   }
 
@@ -310,7 +316,10 @@ export class AbpDatetimePickerCustomElement {
       throw new Error('Datetimepicker, model.bind must be of type Date');
     }
     if (newValue !== oldValue && newValue) {
-      this.setValue(newValue);
+      const date = this.getDateWhenValid(newValue, oldValue);
+      if (date) {
+        this.value = date;
+      }
     }
   }
 
@@ -340,8 +349,16 @@ export class AbpDatetimePickerCustomElement {
   showCalendar() {
     this.domElm.data('DateTimePicker').show();
   }
+  
+  /** Pass a possible date value and if it's valid and not as previous date then return it */
+  getDateWhenValid(newValue, oldValue) {
+    if (moment(newValue, this._format, true).isValid()) {
+      const newDate = moment(newValue, this._format, true);
 
-  setValue(value) {
-    this.value = moment(value, this._format, true).format(this._format);
+      if (!oldValue || (moment(this.value, this._format, true).isValid() && !newDate.isSame(this.value))) {
+        return newDate;
+      }
+    }
+    return null;
   }
 }
