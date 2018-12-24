@@ -205,8 +205,12 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
           var value = this._originalValue || this._originalDateObject;
 
           if (value && moment(value, this._format, true).isValid()) {
-            this.model = moment(value, this._format, true).toDate();
-            this.value = moment(value, this._format, true).format(this._format);
+            if (!this.model) {
+              this.model = moment(value, this._format, true).toDate();
+            }
+            if (!this.value) {
+              this.value = moment(value, this._format, true);
+            }
           }
         };
 
@@ -313,12 +317,12 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
         };
 
         AbpDatetimePickerCustomElement.prototype.modelChanged = function modelChanged(newValue, oldValue) {
-          if (!moment(newValue).isValid() && newValue !== null) {
+          if (!moment(newValue, this._format, true).isValid() && newValue !== null) {
             throw new Error('Datetimepicker, model.bind must be of type Date');
           }
           if (newValue !== oldValue && newValue) {
-            if (!oldValue || moment(oldValue).isValid() && !moment(oldValue).isSame()) {
-              this.value = moment(newValue).format(this._format);
+            if (!oldValue || !moment(newValue).isSame(oldValue)) {
+              this.value = moment(newValue, this._format, true).format(this._format);
             }
           }
         };
@@ -337,7 +341,7 @@ System.register(['aurelia-framework', 'moment', 'jquery', 'eonasdan-bootstrap-da
         AbpDatetimePickerCustomElement.prototype.valueChanged = function valueChanged(newValue, oldValue) {
           if (newValue !== oldValue && newValue) {
             if (moment(newValue, this._format, true).isValid()) {
-              if (!oldValue || moment(oldValue, this._format, true).isValid() && !moment(oldValue, this._format, true).isSame()) {
+              if (!oldValue || !moment(newValue, this._format, true).isSame(oldValue)) {
                 this.model = moment(newValue, this._format, true).toDate();
               }
             }

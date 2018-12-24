@@ -203,8 +203,12 @@ define(['exports', 'aurelia-framework', 'moment', 'jquery', './picker-global-opt
       var value = this._originalValue || this._originalDateObject;
 
       if (value && (0, _moment2.default)(value, this._format, true).isValid()) {
-        this.model = (0, _moment2.default)(value, this._format, true).toDate();
-        this.value = (0, _moment2.default)(value, this._format, true).format(this._format);
+        if (!this.model) {
+          this.model = (0, _moment2.default)(value, this._format, true).toDate();
+        }
+        if (!this.value) {
+          this.value = (0, _moment2.default)(value, this._format, true);
+        }
       }
     };
 
@@ -311,12 +315,12 @@ define(['exports', 'aurelia-framework', 'moment', 'jquery', './picker-global-opt
     };
 
     AbpDatetimePickerCustomElement.prototype.modelChanged = function modelChanged(newValue, oldValue) {
-      if (!(0, _moment2.default)(newValue).isValid() && newValue !== null) {
+      if (!(0, _moment2.default)(newValue, this._format, true).isValid() && newValue !== null) {
         throw new Error('Datetimepicker, model.bind must be of type Date');
       }
       if (newValue !== oldValue && newValue) {
-        if (!oldValue || (0, _moment2.default)(oldValue).isValid() && !(0, _moment2.default)(oldValue).isSame()) {
-          this.value = (0, _moment2.default)(newValue).format(this._format);
+        if (!oldValue || !(0, _moment2.default)(newValue).isSame(oldValue)) {
+          this.value = (0, _moment2.default)(newValue, this._format, true).format(this._format);
         }
       }
     };
@@ -335,7 +339,7 @@ define(['exports', 'aurelia-framework', 'moment', 'jquery', './picker-global-opt
     AbpDatetimePickerCustomElement.prototype.valueChanged = function valueChanged(newValue, oldValue) {
       if (newValue !== oldValue && newValue) {
         if ((0, _moment2.default)(newValue, this._format, true).isValid()) {
-          if (!oldValue || (0, _moment2.default)(oldValue, this._format, true).isValid() && !(0, _moment2.default)(oldValue, this._format, true).isSame()) {
+          if (!oldValue || !(0, _moment2.default)(newValue, this._format, true).isSame(oldValue)) {
             this.model = (0, _moment2.default)(newValue, this._format, true).toDate();
           }
         }
