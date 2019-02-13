@@ -2,7 +2,7 @@
   <!-- Bootstrap version 3 -->
     <div if.bind="bootstrapVersion == 3" class.bind="parseBool(withDateIcon) ? 'input-group date' : 'date'">
         <input type="text" class="form-control datetimepicker"
-               value.bind="value"
+               value.two-way="value & updateTrigger:'blur'"
                model.bind="model"
                blur.trigger="blur()"
                placeholder.bind="placeholder"
@@ -16,7 +16,7 @@
     <!-- Bootstrap version 4 -->
     <div if.bind="bootstrapVersion == 4" class.bind="parseBool(withDateIcon) ? 'input-group' : 'date'">
         <input type="text" class="form-control date datetimepicker"
-               value.bind="value"
+               value.two-way="value & updateTrigger:'blur'"
                model.bind="model"
                blur.trigger="blur()"
                placeholder.bind="placeholder"

@@ -208,7 +208,7 @@ var AbpDatetimePickerCustomElement = exports.AbpDatetimePickerCustomElement = (_
         this.model = (0, _moment2.default)(value, this._format, true).toDate();
       }
       if (!this.value) {
-        this.value = (0, _moment2.default)(value, this._format, true);
+        this.value = (0, _moment2.default)(value, this._format, true).format(this._format);
       }
     }
   };
