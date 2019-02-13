@@ -146,7 +146,7 @@ export class AbpDatetimePickerCustomElement {
         this.model = moment(value, this._format, true).toDate();
       }
       if (!this.value) {
-        this.value = moment(value, this._format, true);
+        this.value = moment(value, this._format, true).format(this._format);
       }
     }
   }
