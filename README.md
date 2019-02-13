@@ -7,9 +7,9 @@
 [https://ghiscoding.github.io/Aurelia-Bootstrap-Plugins/](https://ghiscoding.github.io/Aurelia-Bootstrap-Plugins/)
 
 ### Available plugins
-* [Aurelia-Bootstrap-Datetimepicker](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/tree/master/aurelia-bootstrap-datetimepicker) on [NPM](https://www.npmjs.com/package/aurelia-bootstrap-datetimepicker) / source [Eonasdan Bootstrap Datepicker](https://eonasdan.github.io/bootstrap-datetimepicker/)
-* [Aurelia-Bootstrap-Tagsinput](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/tree/master/aurelia-bootstrap-tagsinput) on [NPM](https://www.npmjs.com/package/aurelia-bootstrap-tagsinput) / source [Bootstrap Tags Input](http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/)
-* [Aurelia-Bootstrap-Select](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/tree/master/aurelia-bootstrap-select) on [NPM](https://www.npmjs.com/package/aurelia-bootstrap-select) / source [Bootstrap-Select](http://silviomoreto.github.io/bootstrap-select/)
+* [![NPM downloads](https://img.shields.io/npm/dt/aurelia-bootstrap-datetimepicker.svg)](https://npmjs.org/package/aurelia-bootstrap-datetimepicker) [Aurelia-Bootstrap-Datetimepicker](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/tree/master/aurelia-bootstrap-datetimepicker) on [NPM](https://www.npmjs.com/package/aurelia-bootstrap-datetimepicker) / source [Eonasdan Bootstrap Datepicker](https://eonasdan.github.io/bootstrap-datetimepicker/)
+* [![NPM downloads](https://img.shields.io/npm/dt/aurelia-bootstrap-tagsinput.svg)](https://npmjs.org/package/aurelia-bootstrap-tagsinput) [Aurelia-Bootstrap-Tagsinput](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/tree/master/aurelia-bootstrap-tagsinput) on [NPM](https://www.npmjs.com/package/aurelia-bootstrap-tagsinput) / source [Bootstrap Tags Input](http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/)
+* [![NPM downloads](https://img.shields.io/npm/dt/aurelia-bootstrap-select.svg)](https://npmjs.org/package/aurelia-bootstrap-select) [Aurelia-Bootstrap-Select](https://github.com/ghiscoding/Aurelia-Bootstrap-Plugins/tree/master/aurelia-bootstrap-select) on [NPM](https://www.npmjs.com/package/aurelia-bootstrap-select) / source [Bootstrap-Select](http://silviomoreto.github.io/bootstrap-select/)
 
 ### Available plugins (separate module)
 * [Aurelia-Slickgrid](https://github.com/ghiscoding/aurelia-slickgrid) on [NPM](https://www.npmjs.com/package/aurelia-slickgrid) / source [Slickgrid](https://github.com/mleibman/SlickGrid)
