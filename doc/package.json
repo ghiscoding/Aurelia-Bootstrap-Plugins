@@ -58,7 +58,7 @@
     "uglify-js": "^3.0.19",
     "url-loader": "0.5.8",
     "vinyl-fs": "^2.4.3",
-    "webpack": "3.5.5",
+    "webpack": "5.94.0",
     "webpack-dev-server": "2.7.1"
   },
   "engines": {
