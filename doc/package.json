@@ -59,7 +59,7 @@
     "url-loader": "0.5.8",
     "vinyl-fs": "^2.4.3",
     "webpack": "3.5.5",
-    "webpack-dev-server": "2.7.1"
+    "webpack-dev-server": "5.2.1"
   },
   "engines": {
     "node": ">= 6.0.0"
